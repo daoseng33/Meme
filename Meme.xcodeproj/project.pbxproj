@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		11B8AAD86A50C90C70782969 /* Pods_Meme_MemeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64A31108B8C9FBC9BE918229 /* Pods_Meme_MemeUITests.framework */; };
+		1C248C402C81B3E20015A7F1 /* MemeTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C248C3F2C81B3E20015A7F1 /* MemeTargetType.swift */; };
+		1C248C422C81B3ED0015A7F1 /* MemeWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C248C412C81B3ED0015A7F1 /* MemeWebService.swift */; };
+		1C248C472C81B5460015A7F1 /* JSONDecoderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C248C462C81B5460015A7F1 /* JSONDecoderExtension.swift */; };
 		1CDA35342C81AB6C001FF654 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA35332C81AB6C001FF654 /* AppDelegate.swift */; };
 		1CDA35362C81AB6C001FF654 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA35352C81AB6C001FF654 /* SceneDelegate.swift */; };
 		1CDA35382C81AB6C001FF654 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA35372C81AB6C001FF654 /* HomePageViewController.swift */; };
@@ -41,6 +44,9 @@
 /* Begin PBXFileReference section */
 		0060843A7244797F76ACDA3D /* Pods-Meme.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meme.debug.xcconfig"; path = "Target Support Files/Pods-Meme/Pods-Meme.debug.xcconfig"; sourceTree = "<group>"; };
 		059F1BB875FE8BB7563C8F3B /* Pods_Meme.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Meme.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C248C3F2C81B3E20015A7F1 /* MemeTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeTargetType.swift; sourceTree = "<group>"; };
+		1C248C412C81B3ED0015A7F1 /* MemeWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeWebService.swift; sourceTree = "<group>"; };
+		1C248C462C81B5460015A7F1 /* JSONDecoderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoderExtension.swift; sourceTree = "<group>"; };
 		1CDA35302C81AB6C001FF654 /* Meme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meme.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CDA35332C81AB6C001FF654 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1CDA35352C81AB6C001FF654 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +114,31 @@
 			path = Scenes;
 			sourceTree = "<group>";
 		};
+		1C248C432C81B4B10015A7F1 /* WebService */ = {
+			isa = PBXGroup;
+			children = (
+				1C248C442C81B4BF0015A7F1 /* Base */,
+			);
+			path = WebService;
+			sourceTree = "<group>";
+		};
+		1C248C442C81B4BF0015A7F1 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				1C248C3F2C81B3E20015A7F1 /* MemeTargetType.swift */,
+				1C248C412C81B3ED0015A7F1 /* MemeWebService.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		1C248C452C81B52D0015A7F1 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1C248C462C81B5460015A7F1 /* JSONDecoderExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		1CDA35272C81AB6C001FF654 = {
 			isa = PBXGroup;
 			children = (
@@ -133,8 +164,10 @@
 		1CDA35322C81AB6C001FF654 /* Meme */ = {
 			isa = PBXGroup;
 			children = (
+				1C248C452C81B52D0015A7F1 /* Extensions */,
 				1C248C3D2C81B2E40015A7F1 /* AppDelegate */,
 				1C248C3E2C81B2EC0015A7F1 /* Scenes */,
+				1C248C432C81B4B10015A7F1 /* WebService */,
 				1CDA353F2C81AB6F001FF654 /* Assets.xcassets */,
 				1CDA35412C81AB6F001FF654 /* LaunchScreen.storyboard */,
 				1CDA35442C81AB6F001FF654 /* Info.plist */,
@@ -421,10 +454,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C248C422C81B3ED0015A7F1 /* MemeWebService.swift in Sources */,
 				1CDA35382C81AB6C001FF654 /* HomePageViewController.swift in Sources */,
 				1CDA353E2C81AB6C001FF654 /* Meme.xcdatamodeld in Sources */,
 				1CDA35342C81AB6C001FF654 /* AppDelegate.swift in Sources */,
+				1C248C402C81B3E20015A7F1 /* MemeTargetType.swift in Sources */,
 				1CDA35362C81AB6C001FF654 /* SceneDelegate.swift in Sources */,
+				1C248C472C81B5460015A7F1 /* JSONDecoderExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,6 +631,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0060843A7244797F76ACDA3D /* Pods-Meme.debug.xcconfig */;
 			buildSettings = {
+				API_KEY = c699117cbef449239496978726d4a1e3;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -626,6 +663,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 593CC4848F6AE93C35C7F1C5 /* Pods-Meme.release.xcconfig */;
 			buildSettings = {
+				API_KEY = c699117cbef449239496978726d4a1e3;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
