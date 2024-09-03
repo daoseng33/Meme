@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1C223B602C87040100032854 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C223B5F2C87040100032854 /* Utility.swift */; };
 		1C223B632C8709DA00032854 /* MemeAPIServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C223B622C8709DA00032854 /* MemeAPIServiceProtocol.swift */; };
+		1C223B662C870C1C00032854 /* APIConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C223B652C870C1C00032854 /* APIConfig.plist */; };
 		1C248C672C81D0090015A7F1 /* WebAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C248C5E2C81D0090015A7F1 /* WebAPI.framework */; };
 		1C248C6C2C81D0090015A7F1 /* WebAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C248C6B2C81D0090015A7F1 /* WebAPITests.swift */; };
 		1C248C6D2C81D0090015A7F1 /* WebAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C248C612C81D0090015A7F1 /* WebAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -52,6 +53,7 @@
 /* Begin PBXFileReference section */
 		1C223B5F2C87040100032854 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		1C223B622C8709DA00032854 /* MemeAPIServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeAPIServiceProtocol.swift; sourceTree = "<group>"; };
+		1C223B652C870C1C00032854 /* APIConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIConfig.plist; sourceTree = "<group>"; };
 		1C248C5E2C81D0090015A7F1 /* WebAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WebAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C248C612C81D0090015A7F1 /* WebAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebAPI.h; sourceTree = "<group>"; };
 		1C248C662C81D0090015A7F1 /* WebAPITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WebAPITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -170,6 +172,7 @@
 				1CC9DCA12C81D7BF00A1EEC6 /* JSONDecoderExtension.swift */,
 				1CD9F5222C85B6A6009DDABD /* ErrorHandlingPlugin.swift */,
 				1CD9F5242C85B9F8009DDABD /* APIErrorHandleManager.swift */,
+				1C223B652C870C1C00032854 /* APIConfig.plist */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CC9DCC22C82F71300A1EEC6 /* memes_random.json in Resources */,
+				1C223B662C870C1C00032854 /* APIConfig.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,7 +472,6 @@
 		1C248C712C81D0090015A7F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				API_KEY = c699117cbef449239496978726d4a1e3;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -503,7 +506,6 @@
 		1C248C722C81D0090015A7F1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				API_KEY = c699117cbef449239496978726d4a1e3;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

@@ -13,12 +13,18 @@ protocol MemeTargetType: TargetType {}
 extension MemeTargetType {
     public var baseURL: URL {
         var urlComponents = URLComponents(string: "https://api.humorapi.com")!
-        //TODO: use local env var
-        let apiKey = "c699117cbef449239496978726d4a1e3"
-        let queryItems = [
-            URLQueryItem(name: "api-key", value: apiKey)
-        ]
-        urlComponents.queryItems = queryItems
+        
+        // warning: you can replace your own humor api key here
+        // https://humorapi.com/?ref=public_apis
+        if let path = Bundle(identifier: "com.likeabossapp.WebAPI")?.path(forResource: "APIConfig", ofType: "plist"),
+           let dict = NSDictionary(contentsOfFile: path) as? [String: Any],
+           let apiKey = dict["API_KEY"] as? String {
+            let queryItems = [
+                URLQueryItem(name: "api-key", value: apiKey)
+            ]
+            urlComponents.queryItems = queryItems
+        }
+        
         let url = urlComponents.url!
         
         return url
