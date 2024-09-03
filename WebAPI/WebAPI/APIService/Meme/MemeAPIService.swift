@@ -12,7 +12,7 @@ import RxMoya
 import Moya
 
 public class MemeAPIService: MemeAPIServiceProtocol {
-    private let provider = MoyaProvider<MemeAPI>.default
+    var provider = MoyaProvider<MemeAPI>.default
     
     public init() {}
     
