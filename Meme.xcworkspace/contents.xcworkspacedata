@@ -5,6 +5,9 @@
       location = "group:Meme.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Pods/Pods.xcodeproj">
+      location = "group:WebAPI/WebAPI.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:MemeData/MemeData.xcodeproj">
    </FileRef>
 </Workspace>

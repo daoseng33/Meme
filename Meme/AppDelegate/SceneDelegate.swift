@@ -10,6 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    let globalErrorHandler = GlobalErrorHandler()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
@@ -22,6 +23,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = initialViewController
         
         window?.makeKeyAndVisible()
+        
+        globalErrorHandler.handleError()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
