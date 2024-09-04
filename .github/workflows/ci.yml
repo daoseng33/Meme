@@ -15,11 +15,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd Meme
           xcodebuild -resolvePackageDependencies
 
       - name: Run tests
         run: |
-          cd Meme
           xcodebuild test -scheme Meme -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest'
           xcodebuild test -scheme WebAPI -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest'
