@@ -6,12 +6,17 @@ on:
   pull_request:
     branches: [ "main" ]
 jobs:
-  build:
+  test_meme:
     runs-on: macos-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Set up Xcode 15.4
+        uses: actions/setup-xcode@v2
+        with:
+          xcode-version: '15.4'
 
       - name: Install dependencies
         run: |
@@ -20,4 +25,25 @@ jobs:
       - name: Run tests
         run: |
           xcodebuild test -scheme Meme -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest'
+          xcodebuild test -scheme WebAPI -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest'
+  test_WebAPI:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Xcode 15.4
+        uses: actions/setup-xcode@v2
+        with:
+          xcode-version: '15.4'
+
+      - name: Install dependencies
+        run: |
+          cd WebAPI
+          xcodebuild -resolvePackageDependencies
+
+      - name: Run tests
+        run: |
+          cd WebAPI
           xcodebuild test -scheme WebAPI -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest'
