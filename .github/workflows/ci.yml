@@ -24,7 +24,7 @@ jobs:
           echo '<plist version="1.0">' >> WebAPI/WebAPI/Base/APIConfig.plist
           echo '<dict>' >> WebAPI/WebAPI/Base/APIConfig.plist
           echo '  <key>API_KEY</key>' >> WebAPI/WebAPI/Base/APIConfig.plist
-          echo "  <string>${{ testAPIKey }}</string>" >> WebAPI/WebAPI/Base/APIConfig.plist
+          echo "  <string>testAPIKey</string>" >> WebAPI/WebAPI/Base/APIConfig.plist
           echo '</dict>' >> WebAPI/WebAPI/Base/APIConfig.plist
           echo '</plist>' >> WebAPI/WebAPI/Base/APIConfig.plist
 
