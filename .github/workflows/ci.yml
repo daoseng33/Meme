@@ -17,6 +17,17 @@ jobs:
         run: |
           xcodebuild -resolvePackageDependencies
 
+      - name: Create plist file with sensitive data
+        run: |
+          echo '<?xml version="1.0" encoding="UTF-8"?>' > WebAPI/WebAPI/Base/APIConfig.plist
+          echo '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">' >> WebAPI/WebAPI/Base/APIConfig.plist
+          echo '<plist version="1.0">' >> WebAPI/WebAPI/Base/APIConfig.plist
+          echo '<dict>' >> WebAPI/WebAPI/Base/APIConfig.plist
+          echo '  <key>API_KEY</key>' >> WebAPI/WebAPI/Base/APIConfig.plist
+          echo "  <string>${{ testAPIKey }}</string>" >> WebAPI/WebAPI/Base/APIConfig.plist
+          echo '</dict>' >> WebAPI/WebAPI/Base/APIConfig.plist
+          echo '</plist>' >> WebAPI/WebAPI/Base/APIConfig.plist
+
       - name: Run Meme tests
         run: |
           xcodebuild test -workspace Meme.xcworkspace -scheme Meme -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest'
