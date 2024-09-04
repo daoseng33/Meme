@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1C783E022C83067100E6C4BE /* WebAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */; };
 		1C783E032C83067100E6C4BE /* WebAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1C811F0B2C8849A8005B4D5D /* NSObject+rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C811F0A2C8849A8005B4D5D /* NSObject+rx.swift */; };
 		1CD9F5172C8316BC009DDABD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1CD9F5162C8316BC009DDABD /* SnapKit */; };
 		1CDA35342C81AB6C001FF654 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA35332C81AB6C001FF654 /* AppDelegate.swift */; };
 		1CDA35362C81AB6C001FF654 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA35352C81AB6C001FF654 /* SceneDelegate.swift */; };
@@ -57,6 +58,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1C811F0A2C8849A8005B4D5D /* NSObject+rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+rx.swift"; sourceTree = "<group>"; };
 		1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WebAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CC9DCCB2C82FDFA00A1EEC6 /* MemeModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MemeModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CDA35302C81AB6C001FF654 /* Meme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meme.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,6 +131,14 @@
 			path = Scenes;
 			sourceTree = "<group>";
 		};
+		1C811F092C884996005B4D5D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1C811F0A2C8849A8005B4D5D /* NSObject+rx.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		1CDA35272C81AB6C001FF654 = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				1C248C3D2C81B2E40015A7F1 /* AppDelegate */,
+				1C811F092C884996005B4D5D /* Extensions */,
 				1C223B5D2C86FD7400032854 /* Global */,
 				1C248C3E2C81B2EC0015A7F1 /* Scenes */,
 				1CDA353F2C81AB6F001FF654 /* Assets.xcassets */,
@@ -334,6 +345,7 @@
 				1CE608F72C86F422004844B7 /* GlobalErrorHandler.swift in Sources */,
 				1CDA35382C81AB6C001FF654 /* HomePageViewController.swift in Sources */,
 				1CDA353E2C81AB6C001FF654 /* Meme.xcdatamodeld in Sources */,
+				1C811F0B2C8849A8005B4D5D /* NSObject+rx.swift in Sources */,
 				1CDA35362C81AB6C001FF654 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
