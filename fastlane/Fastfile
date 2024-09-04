@@ -1,0 +1,11 @@
+update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  lane :sort_files do
+    sh("perl ../sortXcodeProject.pl ../Meme.xcodeproj/project.pbxproj")
+    sh("perl ../sortXcodeProject.pl ../WebAPI/WebAPI.xcodeproj/project.pbxproj")
+    sh("perl ../sortXcodeProject.pl ../MemeData/MemeData.xcodeproj/project.pbxproj")
+  end
+end

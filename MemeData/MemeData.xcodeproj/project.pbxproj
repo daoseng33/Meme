@@ -47,8 +47,8 @@
 		1CD9F5362C85CACA009DDABD /* MemeData */ = {
 			isa = PBXGroup;
 			children = (
-				1CE608EB2C85CB0F004844B7 /* RandomMeme.swift */,
 				1CD9F5372C85CACA009DDABD /* MemeData.h */,
+				1CE608EB2C85CB0F004844B7 /* RandomMeme.swift */,
 			);
 			path = MemeData;
 			sourceTree = "<group>";

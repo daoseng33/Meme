@@ -81,9 +81,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CE608F22C85CB4C004844B7 /* MemeData.framework in Frameworks */,
 				1CD9F5172C8316BC009DDABD /* SnapKit in Frameworks */,
 				1C783E022C83067100E6C4BE /* WebAPI.framework in Frameworks */,
-				1CE608F22C85CB4C004844B7 /* MemeData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,11 +132,11 @@
 		1CDA35272C81AB6C001FF654 = {
 			isa = PBXGroup;
 			children = (
+				8477AEB0E5C9C8C4395126A3 /* Frameworks */,
 				1CDA35322C81AB6C001FF654 /* Meme */,
 				1CDA354C2C81AB6F001FF654 /* MemeTests */,
 				1CDA35562C81AB6F001FF654 /* MemeUITests */,
 				1CDA35312C81AB6C001FF654 /* Products */,
-				8477AEB0E5C9C8C4395126A3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -157,8 +157,8 @@
 				1C223B5D2C86FD7400032854 /* Global */,
 				1C248C3E2C81B2EC0015A7F1 /* Scenes */,
 				1CDA353F2C81AB6F001FF654 /* Assets.xcassets */,
-				1CDA35412C81AB6F001FF654 /* LaunchScreen.storyboard */,
 				1CDA35442C81AB6F001FF654 /* Info.plist */,
+				1CDA35412C81AB6F001FF654 /* LaunchScreen.storyboard */,
 				1CDA353C2C81AB6C001FF654 /* Meme.xcdatamodeld */,
 			);
 			path = Meme;
@@ -330,10 +330,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CDA35342C81AB6C001FF654 /* AppDelegate.swift in Sources */,
+				1CE608F72C86F422004844B7 /* GlobalErrorHandler.swift in Sources */,
 				1CDA35382C81AB6C001FF654 /* HomePageViewController.swift in Sources */,
 				1CDA353E2C81AB6C001FF654 /* Meme.xcdatamodeld in Sources */,
-				1CE608F72C86F422004844B7 /* GlobalErrorHandler.swift in Sources */,
-				1CDA35342C81AB6C001FF654 /* AppDelegate.swift in Sources */,
 				1CDA35362C81AB6C001FF654 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,8 +350,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1CDA355A2C81AB6F001FF654 /* MemeUITestsLaunchTests.swift in Sources */,
 				1CDA35582C81AB6F001FF654 /* MemeUITests.swift in Sources */,
+				1CDA355A2C81AB6F001FF654 /* MemeUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
