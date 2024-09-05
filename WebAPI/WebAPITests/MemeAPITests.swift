@@ -13,7 +13,7 @@ import RxBlocking
 final class MemeAPITests: XCTestCase {
     
     let sut: MemeAPIService = {
-        let sut = MemeAPIService()
+        var sut = MemeAPIService()
         sut.provider = MoyaProvider<MemeAPI>.stub
         
         return sut
@@ -29,7 +29,7 @@ final class MemeAPITests: XCTestCase {
     }
 
     func testFetchRandomMeme() throws {
-        let random = try sut.fetchRandomMeme(with: "", mediaType: .image).toBlocking().single()
+        let random = try sut.fetchRandomMeme(with: "", mediaType: .image, number: 1).toBlocking().single()
         XCTAssertEqual(random.id, 831819)
     }
 

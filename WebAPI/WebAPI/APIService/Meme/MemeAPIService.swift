@@ -11,14 +11,14 @@ import MemeData
 import RxMoya
 import Moya
 
-public class MemeAPIService: MemeAPIServiceProtocol {
+public struct MemeAPIService: MemeAPIServiceProtocol {
     var provider = MoyaProvider<MemeAPI>.default
     
     public init() {}
     
-    public func fetchRandomMeme(with keyword: String, mediaType: MemeMediaType) -> Single<RandomMeme> {
+    public func fetchRandomMeme(with keyword: String, mediaType: MemeMediaType, number: Int) -> Single<RandomMeme> {
         return provider.rx
-            .request(.randomMeme(keyword: keyword, mediaType: .image))
+            .request(.randomMeme(keyword: keyword, mediaType: .image, number: number))
             .map(RandomMeme.self, using: JSONDecoder.default)
     }
 }
