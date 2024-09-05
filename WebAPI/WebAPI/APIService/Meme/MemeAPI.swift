@@ -14,7 +14,7 @@ public enum MemeMediaType: String {
 }
 
 public enum MemeAPI {
-    case randomMeme(keyword: String, mediaType: MemeMediaType, number: Int)
+    case randomMeme(keyword: String, mediaType: MemeMediaType, minRating: Int)
 }
 
 extension MemeAPI: MemeTargetType {
@@ -34,12 +34,11 @@ extension MemeAPI: MemeTargetType {
     
     public var task: Moya.Task {
         switch self {
-        case .randomMeme(let keyword, let mediaType, let number):
+        case .randomMeme(let keyword, let mediaType, let minRating):
             return .requestParameters(parameters: [
                 "keywords": keyword,
                 "media-type": mediaType.rawValue,
-                "number": number,
-                "rating": 8
+                "min-rating": minRating
             ], encoding: URLEncoding.queryString)
         }
     }

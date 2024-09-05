@@ -29,7 +29,7 @@ final class MemeAPITests: XCTestCase {
     }
 
     func testFetchRandomMeme() throws {
-        let random = try sut.fetchRandomMeme(with: "", mediaType: .image, number: 1).toBlocking().single()
+        let random = try sut.fetchRandomMeme(with: "", mediaType: .image, minRating: 8).toBlocking().single()
         XCTAssertEqual(random.id, 831819)
     }
 

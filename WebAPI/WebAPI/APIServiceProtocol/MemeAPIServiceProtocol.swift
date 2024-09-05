@@ -10,5 +10,5 @@ import RxSwift
 import MemeData
 
 public protocol MemeAPIServiceProtocol {
-    func fetchRandomMeme(with keyword: String, mediaType: MemeMediaType, number: Int) -> Single<RandomMeme>
+    func fetchRandomMeme(with keyword: String, mediaType: MemeMediaType, minRating: Int) -> Single<RandomMeme>
 }
