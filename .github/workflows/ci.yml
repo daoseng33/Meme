@@ -27,6 +27,10 @@ jobs:
           echo "  <string>testAPIKey</string>" >> WebAPI/WebAPI/Base/APIConfig.plist
           echo '</dict>' >> WebAPI/WebAPI/Base/APIConfig.plist
           echo '</plist>' >> WebAPI/WebAPI/Base/APIConfig.plist
+          
+      - name: Xcode Clean
+        run: |
+          xcodebuild clean -workspace Meme.xcworkspace -scheme Meme -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest'
 
       - name: Run Meme tests
         run: |
