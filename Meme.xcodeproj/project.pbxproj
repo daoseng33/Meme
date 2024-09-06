@@ -16,6 +16,7 @@
 		1C811F282C8AECEB005B4D5D /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C811F272C8AECEB005B4D5D /* HistoryViewController.swift */; };
 		1C811F2B2C8AECF8005B4D5D /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C811F2A2C8AECF8005B4D5D /* FavoriteViewController.swift */; };
 		1C811F2D2C8AED01005B4D5D /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C811F2C2C8AED01005B4D5D /* SettingViewController.swift */; };
+		1C9FEE362C8B109700D7B17A /* SwiftyGif in Frameworks */ = {isa = PBXBuildFile; productRef = 1C9FEE352C8B109700D7B17A /* SwiftyGif */; };
 		1CD9F5172C8316BC009DDABD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1CD9F5162C8316BC009DDABD /* SnapKit */; };
 		1CDA35342C81AB6C001FF654 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA35332C81AB6C001FF654 /* AppDelegate.swift */; };
 		1CDA35362C81AB6C001FF654 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA35352C81AB6C001FF654 /* SceneDelegate.swift */; };
@@ -98,6 +99,7 @@
 				1C811F212C8AE421005B4D5D /* RswiftLibrary in Frameworks */,
 				1CD9F5172C8316BC009DDABD /* SnapKit in Frameworks */,
 				1C783E022C83067100E6C4BE /* WebAPI.framework in Frameworks */,
+				1C9FEE362C8B109700D7B17A /* SwiftyGif in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +274,7 @@
 			packageProductDependencies = (
 				1CD9F5162C8316BC009DDABD /* SnapKit */,
 				1C811F202C8AE421005B4D5D /* RswiftLibrary */,
+				1C9FEE352C8B109700D7B17A /* SwiftyGif */,
 			);
 			productName = Meme;
 			productReference = 1CDA35302C81AB6C001FF654 /* Meme.app */;
@@ -350,6 +353,7 @@
 			packageReferences = (
 				1CD9F5152C8316BC009DDABD /* XCRemoteSwiftPackageReference "SnapKit" */,
 				1C811F1F2C8AE421005B4D5D /* XCRemoteSwiftPackageReference "R" */,
+				1C9FEE342C8B109700D7B17A /* XCRemoteSwiftPackageReference "SwiftyGif" */,
 			);
 			productRefGroup = 1CDA35312C81AB6C001FF654 /* Products */;
 			projectDirPath = "";
@@ -752,6 +756,14 @@
 				minimumVersion = 7.5.0;
 			};
 		};
+		1C9FEE342C8B109700D7B17A /* XCRemoteSwiftPackageReference "SwiftyGif" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kirualex/SwiftyGif.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.5;
+			};
+		};
 		1CD9F5152C8316BC009DDABD /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -772,6 +784,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1C811F1F2C8AE421005B4D5D /* XCRemoteSwiftPackageReference "R" */;
 			productName = "plugin:RswiftGenerateInternalResources";
+		};
+		1C9FEE352C8B109700D7B17A /* SwiftyGif */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C9FEE342C8B109700D7B17A /* XCRemoteSwiftPackageReference "SwiftyGif" */;
+			productName = SwiftyGif;
 		};
 		1CD9F5162C8316BC009DDABD /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
