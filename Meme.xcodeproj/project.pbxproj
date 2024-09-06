@@ -10,6 +10,12 @@
 		1C783E022C83067100E6C4BE /* WebAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */; };
 		1C783E032C83067100E6C4BE /* WebAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1C811F0B2C8849A8005B4D5D /* NSObject+rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C811F0A2C8849A8005B4D5D /* NSObject+rx.swift */; };
+		1C811F0D2C899ABC005B4D5D /* HomePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C811F0C2C899ABC005B4D5D /* HomePageViewModel.swift */; };
+		1C811F1E2C8AE2BD005B4D5D /* MemeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C811F1D2C8AE2BD005B4D5D /* MemeTabBarController.swift */; };
+		1C811F212C8AE421005B4D5D /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 1C811F202C8AE421005B4D5D /* RswiftLibrary */; };
+		1C811F282C8AECEB005B4D5D /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C811F272C8AECEB005B4D5D /* HistoryViewController.swift */; };
+		1C811F2B2C8AECF8005B4D5D /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C811F2A2C8AECF8005B4D5D /* FavoriteViewController.swift */; };
+		1C811F2D2C8AED01005B4D5D /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C811F2C2C8AED01005B4D5D /* SettingViewController.swift */; };
 		1CD9F5172C8316BC009DDABD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1CD9F5162C8316BC009DDABD /* SnapKit */; };
 		1CDA35342C81AB6C001FF654 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA35332C81AB6C001FF654 /* AppDelegate.swift */; };
 		1CDA35362C81AB6C001FF654 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA35352C81AB6C001FF654 /* SceneDelegate.swift */; };
@@ -59,6 +65,11 @@
 
 /* Begin PBXFileReference section */
 		1C811F0A2C8849A8005B4D5D /* NSObject+rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+rx.swift"; sourceTree = "<group>"; };
+		1C811F0C2C899ABC005B4D5D /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
+		1C811F1D2C8AE2BD005B4D5D /* MemeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeTabBarController.swift; sourceTree = "<group>"; };
+		1C811F272C8AECEB005B4D5D /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		1C811F2A2C8AECF8005B4D5D /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		1C811F2C2C8AED01005B4D5D /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WebAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CC9DCCB2C82FDFA00A1EEC6 /* MemeModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MemeModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CDA35302C81AB6C001FF654 /* Meme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meme.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +95,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CE608F22C85CB4C004844B7 /* MemeData.framework in Frameworks */,
+				1C811F212C8AE421005B4D5D /* RswiftLibrary in Frameworks */,
 				1CD9F5172C8316BC009DDABD /* SnapKit in Frameworks */,
 				1C783E022C83067100E6C4BE /* WebAPI.framework in Frameworks */,
 			);
@@ -126,7 +138,11 @@
 		1C248C3E2C81B2EC0015A7F1 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				1CDA35372C81AB6C001FF654 /* HomePageViewController.swift */,
+				1C811F2F2C8AED10005B4D5D /* Favorite */,
+				1C811F2E2C8AED08005B4D5D /* History */,
+				1C811F0E2C899AC0005B4D5D /* Home */,
+				1C811F302C8AED16005B4D5D /* Setting */,
+				1C811F1D2C8AE2BD005B4D5D /* MemeTabBarController.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -137,6 +153,39 @@
 				1C811F0A2C8849A8005B4D5D /* NSObject+rx.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1C811F0E2C899AC0005B4D5D /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				1CDA35372C81AB6C001FF654 /* HomePageViewController.swift */,
+				1C811F0C2C899ABC005B4D5D /* HomePageViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		1C811F2E2C8AED08005B4D5D /* History */ = {
+			isa = PBXGroup;
+			children = (
+				1C811F272C8AECEB005B4D5D /* HistoryViewController.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		1C811F2F2C8AED10005B4D5D /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				1C811F2A2C8AECF8005B4D5D /* FavoriteViewController.swift */,
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
+		1C811F302C8AED16005B4D5D /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				1C811F2C2C8AED01005B4D5D /* SettingViewController.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		1CDA35272C81AB6C001FF654 = {
@@ -217,10 +266,12 @@
 			buildRules = (
 			);
 			dependencies = (
+				1C811F242C8AE55B005B4D5D /* PBXTargetDependency */,
 			);
 			name = Meme;
 			packageProductDependencies = (
 				1CD9F5162C8316BC009DDABD /* SnapKit */,
+				1C811F202C8AE421005B4D5D /* RswiftLibrary */,
 			);
 			productName = Meme;
 			productReference = 1CDA35302C81AB6C001FF654 /* Meme.app */;
@@ -298,6 +349,7 @@
 			mainGroup = 1CDA35272C81AB6C001FF654;
 			packageReferences = (
 				1CD9F5152C8316BC009DDABD /* XCRemoteSwiftPackageReference "SnapKit" */,
+				1C811F1F2C8AE421005B4D5D /* XCRemoteSwiftPackageReference "R" */,
 			);
 			productRefGroup = 1CDA35312C81AB6C001FF654 /* Products */;
 			projectDirPath = "";
@@ -342,11 +394,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CDA35342C81AB6C001FF654 /* AppDelegate.swift in Sources */,
+				1C811F2B2C8AECF8005B4D5D /* FavoriteViewController.swift in Sources */,
 				1CE608F72C86F422004844B7 /* GlobalErrorHandler.swift in Sources */,
+				1C811F282C8AECEB005B4D5D /* HistoryViewController.swift in Sources */,
 				1CDA35382C81AB6C001FF654 /* HomePageViewController.swift in Sources */,
+				1C811F0D2C899ABC005B4D5D /* HomePageViewModel.swift in Sources */,
 				1CDA353E2C81AB6C001FF654 /* Meme.xcdatamodeld in Sources */,
+				1C811F1E2C8AE2BD005B4D5D /* MemeTabBarController.swift in Sources */,
 				1C811F0B2C8849A8005B4D5D /* NSObject+rx.swift in Sources */,
 				1CDA35362C81AB6C001FF654 /* SceneDelegate.swift in Sources */,
+				1C811F2D2C8AED01005B4D5D /* SettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,6 +427,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1C811F242C8AE55B005B4D5D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 1C811F232C8AE55B005B4D5D /* RswiftGenerateInternalResources */;
+		};
 		1CDA354B2C81AB6F001FF654 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1CDA352F2C81AB6C001FF654 /* Meme */;
@@ -683,6 +744,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1C811F1F2C8AE421005B4D5D /* XCRemoteSwiftPackageReference "R" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mac-cain13/R.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.5.0;
+			};
+		};
 		1CD9F5152C8316BC009DDABD /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -694,6 +763,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1C811F202C8AE421005B4D5D /* RswiftLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C811F1F2C8AE421005B4D5D /* XCRemoteSwiftPackageReference "R" */;
+			productName = RswiftLibrary;
+		};
+		1C811F232C8AE55B005B4D5D /* RswiftGenerateInternalResources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C811F1F2C8AE421005B4D5D /* XCRemoteSwiftPackageReference "R" */;
+			productName = "plugin:RswiftGenerateInternalResources";
+		};
 		1CD9F5162C8316BC009DDABD /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1CD9F5152C8316BC009DDABD /* XCRemoteSwiftPackageReference "SnapKit" */;

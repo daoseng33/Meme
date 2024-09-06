@@ -1,19 +1,18 @@
 //
-//  HomePageViewController.swift
+//  FavoriteViewController.swift
 //  Meme
 //
-//  Created by DAO on 2024/8/30.
+//  Created by DAO on 2024/9/6.
 //
 
 import UIKit
 
-class HomePageViewController: UIViewController {
+final class FavoriteViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // Do any additional setup after loading the view.
     }
-
-
+    
 }
-
