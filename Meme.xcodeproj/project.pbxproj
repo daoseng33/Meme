@@ -98,8 +98,8 @@
 				1CE608F22C85CB4C004844B7 /* MemeData.framework in Frameworks */,
 				1C811F212C8AE421005B4D5D /* RswiftLibrary in Frameworks */,
 				1CD9F5172C8316BC009DDABD /* SnapKit in Frameworks */,
-				1C783E022C83067100E6C4BE /* WebAPI.framework in Frameworks */,
 				1C9FEE362C8B109700D7B17A /* SwiftyGif in Frameworks */,
+				1C783E022C83067100E6C4BE /* WebAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
