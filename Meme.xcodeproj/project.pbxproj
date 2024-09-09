@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C01D3EA2C8ED28C007E93A9 /* GridCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C01D3E92C8ED28C007E93A9 /* GridCollectionViewCell.swift */; };
+		1C01D3ED2C8ED355007E93A9 /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C01D3EC2C8ED355007E93A9 /* UICollectionViewExtension.swift */; };
+		1C01D3EF2C8ED3A1007E93A9 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C01D3EE2C8ED3A1007E93A9 /* UITableViewExtension.swift */; };
+		1C01D3F12C8EDBAE007E93A9 /* GridCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C01D3F02C8EDBAE007E93A9 /* GridCollectionViewCellViewModel.swift */; };
+		1C01D3F52C8EE02B007E93A9 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 1C01D3F42C8EE02B007E93A9 /* RxCocoa */; };
+		1C01D3F72C8EE02B007E93A9 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 1C01D3F62C8EE02B007E93A9 /* RxRelay */; };
 		1C783E022C83067100E6C4BE /* WebAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */; };
 		1C783E032C83067100E6C4BE /* WebAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1C811F0B2C8849A8005B4D5D /* NSObject+rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C811F0A2C8849A8005B4D5D /* NSObject+rx.swift */; };
@@ -65,6 +71,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1C01D3E92C8ED28C007E93A9 /* GridCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionViewCell.swift; sourceTree = "<group>"; };
+		1C01D3EC2C8ED355007E93A9 /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
+		1C01D3EE2C8ED3A1007E93A9 /* UITableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
+		1C01D3F02C8EDBAE007E93A9 /* GridCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		1C811F0A2C8849A8005B4D5D /* NSObject+rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+rx.swift"; sourceTree = "<group>"; };
 		1C811F0C2C899ABC005B4D5D /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
 		1C811F1D2C8AE2BD005B4D5D /* MemeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeTabBarController.swift; sourceTree = "<group>"; };
@@ -95,7 +105,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C01D3F52C8EE02B007E93A9 /* RxCocoa in Frameworks */,
 				1CE608F22C85CB4C004844B7 /* MemeData.framework in Frameworks */,
+				1C01D3F72C8EE02B007E93A9 /* RxRelay in Frameworks */,
 				1C811F212C8AE421005B4D5D /* RswiftLibrary in Frameworks */,
 				1CD9F5172C8316BC009DDABD /* SnapKit in Frameworks */,
 				1C9FEE362C8B109700D7B17A /* SwiftyGif in Frameworks */,
@@ -120,6 +132,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C01D3E72C8ED263007E93A9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1C01D3E82C8ED26B007E93A9 /* GridCollectionView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1C01D3E82C8ED26B007E93A9 /* GridCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				1C01D3E92C8ED28C007E93A9 /* GridCollectionViewCell.swift */,
+				1C01D3F02C8EDBAE007E93A9 /* GridCollectionViewCellViewModel.swift */,
+			);
+			path = GridCollectionView;
+			sourceTree = "<group>";
+		};
 		1C223B5D2C86FD7400032854 /* Global */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +182,8 @@
 			isa = PBXGroup;
 			children = (
 				1C811F0A2C8849A8005B4D5D /* NSObject+rx.swift */,
+				1C01D3EC2C8ED355007E93A9 /* UICollectionViewExtension.swift */,
+				1C01D3EE2C8ED3A1007E93A9 /* UITableViewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -214,6 +245,7 @@
 		1CDA35322C81AB6C001FF654 /* Meme */ = {
 			isa = PBXGroup;
 			children = (
+				1C01D3E72C8ED263007E93A9 /* View */,
 				1C248C3D2C81B2E40015A7F1 /* AppDelegate */,
 				1C811F092C884996005B4D5D /* Extensions */,
 				1C223B5D2C86FD7400032854 /* Global */,
@@ -275,6 +307,8 @@
 				1CD9F5162C8316BC009DDABD /* SnapKit */,
 				1C811F202C8AE421005B4D5D /* RswiftLibrary */,
 				1C9FEE352C8B109700D7B17A /* SwiftyGif */,
+				1C01D3F42C8EE02B007E93A9 /* RxCocoa */,
+				1C01D3F62C8EE02B007E93A9 /* RxRelay */,
 			);
 			productName = Meme;
 			productReference = 1CDA35302C81AB6C001FF654 /* Meme.app */;
@@ -354,6 +388,7 @@
 				1CD9F5152C8316BC009DDABD /* XCRemoteSwiftPackageReference "SnapKit" */,
 				1C811F1F2C8AE421005B4D5D /* XCRemoteSwiftPackageReference "R" */,
 				1C9FEE342C8B109700D7B17A /* XCRemoteSwiftPackageReference "SwiftyGif" */,
+				1C01D3F32C8EE02B007E93A9 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = 1CDA35312C81AB6C001FF654 /* Products */;
 			projectDirPath = "";
@@ -397,8 +432,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C01D3EA2C8ED28C007E93A9 /* GridCollectionViewCell.swift in Sources */,
 				1CDA35342C81AB6C001FF654 /* AppDelegate.swift in Sources */,
 				1C811F2B2C8AECF8005B4D5D /* FavoriteViewController.swift in Sources */,
+				1C01D3ED2C8ED355007E93A9 /* UICollectionViewExtension.swift in Sources */,
+				1C01D3F12C8EDBAE007E93A9 /* GridCollectionViewCellViewModel.swift in Sources */,
 				1CE608F72C86F422004844B7 /* GlobalErrorHandler.swift in Sources */,
 				1C811F282C8AECEB005B4D5D /* HistoryViewController.swift in Sources */,
 				1CDA35382C81AB6C001FF654 /* HomePageViewController.swift in Sources */,
@@ -408,6 +446,7 @@
 				1C811F0B2C8849A8005B4D5D /* NSObject+rx.swift in Sources */,
 				1CDA35362C81AB6C001FF654 /* SceneDelegate.swift in Sources */,
 				1C811F2D2C8AED01005B4D5D /* SettingViewController.swift in Sources */,
+				1C01D3EF2C8ED3A1007E93A9 /* UITableViewExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -748,6 +787,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1C01D3F32C8EE02B007E93A9 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.7.1;
+			};
+		};
 		1C811F1F2C8AE421005B4D5D /* XCRemoteSwiftPackageReference "R" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mac-cain13/R.swift";
@@ -775,6 +822,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1C01D3F42C8EE02B007E93A9 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C01D3F32C8EE02B007E93A9 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		1C01D3F62C8EE02B007E93A9 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C01D3F32C8EE02B007E93A9 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
 		1C811F202C8AE421005B4D5D /* RswiftLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1C811F1F2C8AE421005B4D5D /* XCRemoteSwiftPackageReference "R" */;
