@@ -15,6 +15,7 @@ final class GridCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        
         return imageView
     }()
     
@@ -23,6 +24,7 @@ final class GridCollectionViewCell: UICollectionViewCell {
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         label.numberOfLines = 2
+        
         return label
     }()
     
