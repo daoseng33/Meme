@@ -105,10 +105,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C01D3F52C8EE02B007E93A9 /* RxCocoa in Frameworks */,
 				1CE608F22C85CB4C004844B7 /* MemeData.framework in Frameworks */,
-				1C01D3F72C8EE02B007E93A9 /* RxRelay in Frameworks */,
 				1C811F212C8AE421005B4D5D /* RswiftLibrary in Frameworks */,
+				1C01D3F52C8EE02B007E93A9 /* RxCocoa in Frameworks */,
+				1C01D3F72C8EE02B007E93A9 /* RxRelay in Frameworks */,
 				1CD9F5172C8316BC009DDABD /* SnapKit in Frameworks */,
 				1C9FEE362C8B109700D7B17A /* SwiftyGif in Frameworks */,
 				1C783E022C83067100E6C4BE /* WebAPI.framework in Frameworks */,
@@ -245,11 +245,11 @@
 		1CDA35322C81AB6C001FF654 /* Meme */ = {
 			isa = PBXGroup;
 			children = (
-				1C01D3E72C8ED263007E93A9 /* View */,
 				1C248C3D2C81B2E40015A7F1 /* AppDelegate */,
 				1C811F092C884996005B4D5D /* Extensions */,
 				1C223B5D2C86FD7400032854 /* Global */,
 				1C248C3E2C81B2EC0015A7F1 /* Scenes */,
+				1C01D3E72C8ED263007E93A9 /* View */,
 				1CDA353F2C81AB6F001FF654 /* Assets.xcassets */,
 				1CDA35442C81AB6F001FF654 /* Info.plist */,
 				1CDA35412C81AB6F001FF654 /* LaunchScreen.storyboard */,
@@ -432,12 +432,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C01D3EA2C8ED28C007E93A9 /* GridCollectionViewCell.swift in Sources */,
 				1CDA35342C81AB6C001FF654 /* AppDelegate.swift in Sources */,
 				1C811F2B2C8AECF8005B4D5D /* FavoriteViewController.swift in Sources */,
-				1C01D3ED2C8ED355007E93A9 /* UICollectionViewExtension.swift in Sources */,
-				1C01D3F12C8EDBAE007E93A9 /* GridCollectionViewCellViewModel.swift in Sources */,
 				1CE608F72C86F422004844B7 /* GlobalErrorHandler.swift in Sources */,
+				1C01D3EA2C8ED28C007E93A9 /* GridCollectionViewCell.swift in Sources */,
+				1C01D3F12C8EDBAE007E93A9 /* GridCollectionViewCellViewModel.swift in Sources */,
 				1C811F282C8AECEB005B4D5D /* HistoryViewController.swift in Sources */,
 				1CDA35382C81AB6C001FF654 /* HomePageViewController.swift in Sources */,
 				1C811F0D2C899ABC005B4D5D /* HomePageViewModel.swift in Sources */,
@@ -446,6 +445,7 @@
 				1C811F0B2C8849A8005B4D5D /* NSObject+rx.swift in Sources */,
 				1CDA35362C81AB6C001FF654 /* SceneDelegate.swift in Sources */,
 				1C811F2D2C8AED01005B4D5D /* SettingViewController.swift in Sources */,
+				1C01D3ED2C8ED355007E93A9 /* UICollectionViewExtension.swift in Sources */,
 				1C01D3EF2C8ED3A1007E93A9 /* UITableViewExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
