@@ -10,4 +10,10 @@ import UIKit
 struct GridData {
     let title: String
     let image: UIImage
+    let imageType: GridImageType
+}
+
+enum GridImageType {
+    case `static`
+    case gif
 }

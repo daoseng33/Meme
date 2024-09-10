@@ -16,6 +16,7 @@
 		1C01D3FA2C8EE785007E93A9 /* GridCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C01D3F92C8EE785007E93A9 /* GridCollectionView.swift */; };
 		1C01D3FD2C8EEB0A007E93A9 /* GridCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C01D3FC2C8EEB0A007E93A9 /* GridCollectionViewModel.swift */; };
 		1C01D3FF2C8EF906007E93A9 /* GridData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C01D3FE2C8EF906007E93A9 /* GridData.swift */; };
+		1C01D4082C90183F007E93A9 /* banana-cheerer.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1C01D4072C90183F007E93A9 /* banana-cheerer.gif */; };
 		1C783E022C83067100E6C4BE /* WebAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */; };
 		1C783E032C83067100E6C4BE /* WebAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1C811F0B2C8849A8005B4D5D /* NSObject+rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C811F0A2C8849A8005B4D5D /* NSObject+rx.swift */; };
@@ -81,6 +82,7 @@
 		1C01D3F92C8EE785007E93A9 /* GridCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionView.swift; sourceTree = "<group>"; };
 		1C01D3FC2C8EEB0A007E93A9 /* GridCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionViewModel.swift; sourceTree = "<group>"; };
 		1C01D3FE2C8EF906007E93A9 /* GridData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridData.swift; sourceTree = "<group>"; };
+		1C01D4072C90183F007E93A9 /* banana-cheerer.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "banana-cheerer.gif"; sourceTree = "<group>"; };
 		1C811F0A2C8849A8005B4D5D /* NSObject+rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+rx.swift"; sourceTree = "<group>"; };
 		1C811F0C2C899ABC005B4D5D /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
 		1C811F1D2C8AE2BD005B4D5D /* MemeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeTabBarController.swift; sourceTree = "<group>"; };
@@ -164,6 +166,23 @@
 				1C01D3F02C8EDBAE007E93A9 /* GridCollectionViewCellViewModel.swift */,
 			);
 			path = GridCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		1C01D4022C90178F007E93A9 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				1C01D4062C9017D9007E93A9 /* GIF */,
+				1CDA353F2C81AB6F001FF654 /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		1C01D4062C9017D9007E93A9 /* GIF */ = {
+			isa = PBXGroup;
+			children = (
+				1C01D4072C90183F007E93A9 /* banana-cheerer.gif */,
+			);
+			path = GIF;
 			sourceTree = "<group>";
 		};
 		1C223B5D2C86FD7400032854 /* Global */ = {
@@ -262,12 +281,12 @@
 		1CDA35322C81AB6C001FF654 /* Meme */ = {
 			isa = PBXGroup;
 			children = (
+				1C01D4022C90178F007E93A9 /* Assets */,
 				1C248C3D2C81B2E40015A7F1 /* AppDelegate */,
 				1C811F092C884996005B4D5D /* Extensions */,
 				1C223B5D2C86FD7400032854 /* Global */,
 				1C248C3E2C81B2EC0015A7F1 /* Scenes */,
 				1C01D3E72C8ED263007E93A9 /* View */,
-				1CDA353F2C81AB6F001FF654 /* Assets.xcassets */,
 				1CDA35442C81AB6F001FF654 /* Info.plist */,
 				1CDA35412C81AB6F001FF654 /* LaunchScreen.storyboard */,
 				1CDA353C2C81AB6C001FF654 /* Meme.xcdatamodeld */,
@@ -424,6 +443,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CDA35402C81AB6F001FF654 /* Assets.xcassets in Resources */,
+				1C01D4082C90183F007E93A9 /* banana-cheerer.gif in Resources */,
 				1CDA35432C81AB6F001FF654 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -31,7 +31,7 @@ final class GridCollectionViewModel {
     // MARK: - Configures
     func gridCellViewModel(with index: Int) -> GridCollectionViewCellViewModel {
         let gridData = gridDatasRelay.value[index]
-        let cellViewModel = GridCollectionViewCellViewModel(title: gridData.title, image: gridData.image)
+        let cellViewModel = GridCollectionViewCellViewModel(gridData: gridData)
         return cellViewModel
     }
 }

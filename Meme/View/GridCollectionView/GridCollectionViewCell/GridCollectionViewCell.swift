@@ -9,8 +9,10 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import SwiftyGif
 
 final class GridCollectionViewCell: UICollectionViewCell {
+    // MARK: - UI
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -59,13 +61,22 @@ final class GridCollectionViewCell: UICollectionViewCell {
             .bind(to: titleLabel.rx.text)
             .disposed(by: rx.disposeBag)
         
-        viewModel.image
-            .bind(to: imageView.rx.image)
+        viewModel.imageData
+            .withUnretained(self)
+            .subscribe(onNext: {  (self, imageData) in
+                switch imageData.type {
+                case .static:
+                    self.imageView.image = imageData.image
+                case .gif:
+                    self.imageView.setGifImage(imageData.image)
+                }
+            })
             .disposed(by: rx.disposeBag)
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        imageView.clear()
         var mutableSelf = self
         mutableSelf.rx.disposeBag = DisposeBag()
     }
