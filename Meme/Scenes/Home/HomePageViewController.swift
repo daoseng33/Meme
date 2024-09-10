@@ -6,21 +6,39 @@
 //
 
 import UIKit
+import SnapKit
 
 final class HomePageViewController: UIViewController {
     // MARK: - Properties
     let viewModel = HomePageViewModel()
+    private lazy var homePageCollectionView: GridCollectionView = {
+        let gridCollectionViewModel = GridCollectionViewModel(gridDatas: viewModel.gridDatas)
+        let collectionView = GridCollectionView(viewModel: gridCollectionViewModel)
+        
+        return collectionView
+    }()
     
     // MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        viewModel.fetchRandomMeme()
+        
+        setupUI()
     }
 
     // MARK: - Setup
-    private func setup() {
-//        view.backgroundColor = .white
+    private func setupUI() {
+        homePageCollectionView.delegate = self
+
+        view.addSubview(homePageCollectionView)
+        homePageCollectionView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
 }
 
+// MARK: - GridCollectionViewDelegate
+extension HomePageViewController: GridCollectionViewDelegate {
+    func gridCollectionView(_ gridCollectionView: GridCollectionView, didSelectItemAt index: Int) {
+        
+    }
+}
