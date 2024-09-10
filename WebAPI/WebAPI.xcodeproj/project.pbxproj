@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C01D41B2C905AB0007E93A9 /* memes_random_video.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C01D41A2C905AB0007E93A9 /* memes_random_video.json */; };
 		1C223B602C87040100032854 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C223B5F2C87040100032854 /* Utility.swift */; };
 		1C223B632C8709DA00032854 /* MemeAPIServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C223B622C8709DA00032854 /* MemeAPIServiceProtocol.swift */; };
 		1C223B662C870C1C00032854 /* APIConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C223B652C870C1C00032854 /* APIConfig.plist */; };
@@ -19,7 +20,7 @@
 		1CC9DC9E2C81D76500A1EEC6 /* MemeTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9DC982C81D76500A1EEC6 /* MemeTargetType.swift */; };
 		1CC9DCA02C81D76500A1EEC6 /* MoyaProviderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9DC9A2C81D76500A1EEC6 /* MoyaProviderExtension.swift */; };
 		1CC9DCA22C81D7BF00A1EEC6 /* JSONDecoderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9DCA12C81D7BF00A1EEC6 /* JSONDecoderExtension.swift */; };
-		1CC9DCC22C82F71300A1EEC6 /* memes_random.json in Resources */ = {isa = PBXBuildFile; fileRef = 1CC9DCC12C82F71300A1EEC6 /* memes_random.json */; };
+		1CC9DCC22C82F71300A1EEC6 /* memes_random_image.json in Resources */ = {isa = PBXBuildFile; fileRef = 1CC9DCC12C82F71300A1EEC6 /* memes_random_image.json */; };
 		1CD9F5232C85B6A6009DDABD /* ErrorHandlingPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD9F5222C85B6A6009DDABD /* ErrorHandlingPlugin.swift */; };
 		1CD9F5252C85B9F8009DDABD /* APIErrorHandleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD9F5242C85B9F8009DDABD /* APIErrorHandleManager.swift */; };
 		1CD9F5272C85BFC0009DDABD /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 1CD9F5262C85BFC0009DDABD /* RxMoya */; };
@@ -52,6 +53,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1C01D41A2C905AB0007E93A9 /* memes_random_video.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = memes_random_video.json; sourceTree = "<group>"; };
 		1C223B5F2C87040100032854 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		1C223B622C8709DA00032854 /* MemeAPIServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeAPIServiceProtocol.swift; sourceTree = "<group>"; };
 		1C223B652C870C1C00032854 /* APIConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIConfig.plist; sourceTree = "<group>"; };
@@ -64,7 +66,7 @@
 		1CC9DC982C81D76500A1EEC6 /* MemeTargetType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeTargetType.swift; sourceTree = "<group>"; };
 		1CC9DC9A2C81D76500A1EEC6 /* MoyaProviderExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoyaProviderExtension.swift; sourceTree = "<group>"; };
 		1CC9DCA12C81D7BF00A1EEC6 /* JSONDecoderExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONDecoderExtension.swift; sourceTree = "<group>"; };
-		1CC9DCC12C82F71300A1EEC6 /* memes_random.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = memes_random.json; sourceTree = "<group>"; };
+		1CC9DCC12C82F71300A1EEC6 /* memes_random_image.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = memes_random_image.json; sourceTree = "<group>"; };
 		1CC9DCC32C82FA1200A1EEC6 /* MemeModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MemeModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CD9F5222C85B6A6009DDABD /* ErrorHandlingPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandlingPlugin.swift; sourceTree = "<group>"; };
 		1CD9F5242C85B9F8009DDABD /* APIErrorHandleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrorHandleManager.swift; sourceTree = "<group>"; };
@@ -182,7 +184,8 @@
 		1CC9DCC02C82F6A300A1EEC6 /* SampleData */ = {
 			isa = PBXGroup;
 			children = (
-				1CC9DCC12C82F71300A1EEC6 /* memes_random.json */,
+				1CC9DCC12C82F71300A1EEC6 /* memes_random_image.json */,
+				1C01D41A2C905AB0007E93A9 /* memes_random_video.json */,
 			);
 			path = SampleData;
 			sourceTree = "<group>";
@@ -300,8 +303,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C01D41B2C905AB0007E93A9 /* memes_random_video.json in Resources */,
 				1C223B662C870C1C00032854 /* APIConfig.plist in Resources */,
-				1CC9DCC22C82F71300A1EEC6 /* memes_random.json in Resources */,
+				1CC9DCC22C82F71300A1EEC6 /* memes_random_image.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

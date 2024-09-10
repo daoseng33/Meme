@@ -52,8 +52,14 @@ extension MemeAPI: MemeTargetType {
     
     public var sampleData: Data {
         switch self {
-        case .randomMeme:
-            return Utility.loadJSON(filename: "memes_random")
+        case .randomMeme(_, let mediaType, _):
+            switch mediaType {
+            case .image:
+                return Utility.loadJSON(filename: "memes_random_image")
+            case .video:
+                return Utility.loadJSON(filename: "memes_random_video")
+            }
+            
         }
     }
 }
