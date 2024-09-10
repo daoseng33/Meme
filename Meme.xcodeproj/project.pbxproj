@@ -17,6 +17,7 @@
 		1C01D3FD2C8EEB0A007E93A9 /* GridCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C01D3FC2C8EEB0A007E93A9 /* GridCollectionViewModel.swift */; };
 		1C01D3FF2C8EF906007E93A9 /* GridData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C01D3FE2C8EF906007E93A9 /* GridData.swift */; };
 		1C01D4082C90183F007E93A9 /* banana-cheerer.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1C01D4072C90183F007E93A9 /* banana-cheerer.gif */; };
+		1C01D4142C90464D007E93A9 /* RoundedRectangleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C01D4132C90464D007E93A9 /* RoundedRectangleButton.swift */; };
 		1C783E022C83067100E6C4BE /* WebAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */; };
 		1C783E032C83067100E6C4BE /* WebAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1C811F0B2C8849A8005B4D5D /* NSObject+rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C811F0A2C8849A8005B4D5D /* NSObject+rx.swift */; };
@@ -83,6 +84,7 @@
 		1C01D3FC2C8EEB0A007E93A9 /* GridCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionViewModel.swift; sourceTree = "<group>"; };
 		1C01D3FE2C8EF906007E93A9 /* GridData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridData.swift; sourceTree = "<group>"; };
 		1C01D4072C90183F007E93A9 /* banana-cheerer.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "banana-cheerer.gif"; sourceTree = "<group>"; };
+		1C01D4132C90464D007E93A9 /* RoundedRectangleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedRectangleButton.swift; sourceTree = "<group>"; };
 		1C811F0A2C8849A8005B4D5D /* NSObject+rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+rx.swift"; sourceTree = "<group>"; };
 		1C811F0C2C899ABC005B4D5D /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
 		1C811F1D2C8AE2BD005B4D5D /* MemeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeTabBarController.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				1C01D3E82C8ED26B007E93A9 /* GridCollectionView */,
+				1C01D4132C90464D007E93A9 /* RoundedRectangleButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -281,8 +284,8 @@
 		1CDA35322C81AB6C001FF654 /* Meme */ = {
 			isa = PBXGroup;
 			children = (
-				1C01D4022C90178F007E93A9 /* Assets */,
 				1C248C3D2C81B2E40015A7F1 /* AppDelegate */,
+				1C01D4022C90178F007E93A9 /* Assets */,
 				1C811F092C884996005B4D5D /* Extensions */,
 				1C223B5D2C86FD7400032854 /* Global */,
 				1C248C3E2C81B2EC0015A7F1 /* Scenes */,
@@ -469,20 +472,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C01D3FA2C8EE785007E93A9 /* GridCollectionView.swift in Sources */,
-				1C01D3FF2C8EF906007E93A9 /* GridData.swift in Sources */,
 				1CDA35342C81AB6C001FF654 /* AppDelegate.swift in Sources */,
 				1C811F2B2C8AECF8005B4D5D /* FavoriteViewController.swift in Sources */,
 				1CE608F72C86F422004844B7 /* GlobalErrorHandler.swift in Sources */,
+				1C01D3FA2C8EE785007E93A9 /* GridCollectionView.swift in Sources */,
 				1C01D3EA2C8ED28C007E93A9 /* GridCollectionViewCell.swift in Sources */,
 				1C01D3F12C8EDBAE007E93A9 /* GridCollectionViewCellViewModel.swift in Sources */,
-				1C811F282C8AECEB005B4D5D /* HistoryViewController.swift in Sources */,
 				1C01D3FD2C8EEB0A007E93A9 /* GridCollectionViewModel.swift in Sources */,
+				1C01D3FF2C8EF906007E93A9 /* GridData.swift in Sources */,
+				1C811F282C8AECEB005B4D5D /* HistoryViewController.swift in Sources */,
 				1CDA35382C81AB6C001FF654 /* HomePageViewController.swift in Sources */,
 				1C811F0D2C899ABC005B4D5D /* HomePageViewModel.swift in Sources */,
 				1CDA353E2C81AB6C001FF654 /* Meme.xcdatamodeld in Sources */,
 				1C811F1E2C8AE2BD005B4D5D /* MemeTabBarController.swift in Sources */,
 				1C811F0B2C8849A8005B4D5D /* NSObject+rx.swift in Sources */,
+				1C01D4142C90464D007E93A9 /* RoundedRectangleButton.swift in Sources */,
 				1CDA35362C81AB6C001FF654 /* SceneDelegate.swift in Sources */,
 				1C811F2D2C8AED01005B4D5D /* SettingViewController.swift in Sources */,
 				1C01D3ED2C8ED355007E93A9 /* UICollectionViewExtension.swift in Sources */,
