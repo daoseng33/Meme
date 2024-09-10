@@ -18,7 +18,7 @@ public struct MemeAPIService: MemeAPIServiceProtocol {
     
     public func fetchRandomMeme(with keyword: String, mediaType: MemeMediaType, minRating: Int) -> Single<RandomMeme> {
         return provider.rx
-            .request(.randomMeme(keyword: keyword, mediaType: .image, minRating: minRating))
+            .request(.randomMeme(keyword: keyword, mediaType: mediaType, minRating: minRating))
             .map(RandomMeme.self, using: JSONDecoder.default)
     }
 }
