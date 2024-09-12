@@ -1,5 +1,5 @@
 {
-  "originHash" : "85bf48ac0eaf768b33cdf0e62846b3b864d6a3658f5ce0d79b44fccaa6794dfb",
+  "originHash" : "96053c94934e146a6fbb13143f8e32f317fcaa921770c2bfd11703308cd41922",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "f455c2975872ccd2d9c81594c658af65716e9b9a",
         "version" : "5.9.1"
+      }
+    },
+    {
+      "identity" : "kingfisher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onevcat/Kingfisher",
+      "state" : {
+        "revision" : "2ef543ee21d63734e1c004ad6c870255e8716c50",
+        "version" : "7.12.0"
       }
     },
     {
@@ -62,15 +71,6 @@
       "state" : {
         "revision" : "41982a3656a71c768319979febd796c6fd111d5c",
         "version" : "1.5.0"
-      }
-    },
-    {
-      "identity" : "swiftygif",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/kirualex/SwiftyGif.git",
-      "state" : {
-        "revision" : "4430cbc148baa3907651d40562d96325426f409a",
-        "version" : "5.4.5"
       }
     },
     {

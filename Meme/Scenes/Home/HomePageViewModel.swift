@@ -11,13 +11,13 @@ final class HomePageViewModel {
     // MARK: - Properties
     let gridDatas: [GridData] = {
         var datas = [
-            GridData(title: "Random Meme", image: R.image.memeApi()!, imageType: .static),
-            GridData(title: "Random Joke", image: R.image.jokeApi()!, imageType: .static),
+            GridData(title: "Random Meme", imageType: .static(image: R.image.memeApi()!)),
+            GridData(title: "Random Joke", imageType: .static(image: R.image.jokeApi()!)),
+            GridData(title: "GIFs", imageType: .gif(fileName: "banana-cheerer")),
         ]
-        if let memesGIF = try? UIImage(gifName: "banana-cheerer.gif") {
-            datas.append(GridData(title: "Memes", image: memesGIF, imageType: .gif))
-        }
         
         return datas
     }()
+    
+    let randomMemeViewModel: RandomMemeViewModelProtocol = RandomMemeViewModel()
 }

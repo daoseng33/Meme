@@ -9,19 +9,19 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
-import SwiftyGif
+import Kingfisher
 
 final class GridCollectionViewCell: UICollectionViewCell {
     // MARK: - UI
-    private let imageView: UIImageView = {
-        let imageView = UIImageView()
+    private let gridImageView: AnimatedImageView = {
+        let imageView = AnimatedImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         
         return imageView
     }()
     
-    private let titleLabel: UILabel = {
+    private let gridTitleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.textColor = .darkText
@@ -42,34 +42,39 @@ final class GridCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupViews() {
-        contentView.addSubview(imageView)
-        contentView.addSubview(titleLabel)
+        contentView.addSubview(gridImageView)
+        contentView.addSubview(gridTitleLabel)
         
-        imageView.snp.makeConstraints {
+        gridImageView.snp.makeConstraints {
             $0.top.left.right.equalToSuperview()
             $0.height.equalTo(150)
         }
         
-        titleLabel.snp.makeConstraints {
-            $0.top.equalTo(imageView.snp.bottom).offset(8)
-            $0.left.right.equalTo(imageView)
+        gridTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(gridImageView.snp.bottom).offset(8)
+            $0.left.right.equalTo(gridImageView)
             $0.bottom.lessThanOrEqualToSuperview().offset(-8).priority(.high)
         }
     }
     
     func configure(viewModel: GridCollectionViewCellViewModel) {
         viewModel.title
-            .bind(to: titleLabel.rx.text)
+            .bind(to: gridTitleLabel.rx.text)
             .disposed(by: rx.disposeBag)
         
         viewModel.imageData
             .withUnretained(self)
             .subscribe(onNext: {  (self, imageData) in
-                switch imageData.type {
-                case .static:
-                    self.imageView.image = imageData.image
-                case .gif:
-                    self.imageView.setGifImage(imageData.image)
+                switch imageData {
+                case .static(let image):
+                    self.gridImageView.image = image
+                    
+                case .gif(let fileName):
+                    if let path = Bundle.main.path(forResource: fileName, ofType: "gif") {
+                        let url = URL(fileURLWithPath: path)
+                        let provider = LocalFileImageDataProvider(fileURL: url)
+                        self.gridImageView.kf.setImage(with: provider, options: [.cacheOriginalImage])
+                    }
                 }
             })
             .disposed(by: rx.disposeBag)
@@ -77,7 +82,8 @@ final class GridCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        imageView.clear()
+        gridImageView.kf.cancelDownloadTask()
+        gridImageView.image = nil
         var mutableSelf = self
         mutableSelf.rx.disposeBag = DisposeBag()
     }

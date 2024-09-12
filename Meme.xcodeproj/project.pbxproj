@@ -16,8 +16,13 @@
 		1C01D3FA2C8EE785007E93A9 /* GridCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C01D3F92C8EE785007E93A9 /* GridCollectionView.swift */; };
 		1C01D3FD2C8EEB0A007E93A9 /* GridCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C01D3FC2C8EEB0A007E93A9 /* GridCollectionViewModel.swift */; };
 		1C01D3FF2C8EF906007E93A9 /* GridData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C01D3FE2C8EF906007E93A9 /* GridData.swift */; };
-		1C01D4082C90183F007E93A9 /* banana-cheerer.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1C01D4072C90183F007E93A9 /* banana-cheerer.gif */; };
+		1C01D40C2C902D0B007E93A9 /* RandomMemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C01D40B2C902D0B007E93A9 /* RandomMemeViewController.swift */; };
+		1C01D40F2C902D1A007E93A9 /* RandomMemeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C01D40E2C902D19007E93A9 /* RandomMemeViewModel.swift */; };
+		1C01D4112C903186007E93A9 /* RandomMemeViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C01D4102C903186007E93A9 /* RandomMemeViewModelProtocol.swift */; };
 		1C01D4142C90464D007E93A9 /* RoundedRectangleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C01D4132C90464D007E93A9 /* RoundedRectangleButton.swift */; };
+		1C01D4182C904DE9007E93A9 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1C01D4172C904DE9007E93A9 /* Kingfisher */; };
+		1C020EB42C92BBF90028CAE0 /* banana-cheerer.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1C020EB22C92BBF90028CAE0 /* banana-cheerer.gif */; };
+		1C020EB62C92C14D0028CAE0 /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C020EB52C92C14D0028CAE0 /* VideoPlayer.swift */; };
 		1C783E022C83067100E6C4BE /* WebAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */; };
 		1C783E032C83067100E6C4BE /* WebAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1C811F0B2C8849A8005B4D5D /* NSObject+rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C811F0A2C8849A8005B4D5D /* NSObject+rx.swift */; };
@@ -27,7 +32,6 @@
 		1C811F282C8AECEB005B4D5D /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C811F272C8AECEB005B4D5D /* HistoryViewController.swift */; };
 		1C811F2B2C8AECF8005B4D5D /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C811F2A2C8AECF8005B4D5D /* FavoriteViewController.swift */; };
 		1C811F2D2C8AED01005B4D5D /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C811F2C2C8AED01005B4D5D /* SettingViewController.swift */; };
-		1C9FEE362C8B109700D7B17A /* SwiftyGif in Frameworks */ = {isa = PBXBuildFile; productRef = 1C9FEE352C8B109700D7B17A /* SwiftyGif */; };
 		1CD9F5172C8316BC009DDABD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1CD9F5162C8316BC009DDABD /* SnapKit */; };
 		1CDA35342C81AB6C001FF654 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA35332C81AB6C001FF654 /* AppDelegate.swift */; };
 		1CDA35362C81AB6C001FF654 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA35352C81AB6C001FF654 /* SceneDelegate.swift */; };
@@ -83,8 +87,12 @@
 		1C01D3F92C8EE785007E93A9 /* GridCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionView.swift; sourceTree = "<group>"; };
 		1C01D3FC2C8EEB0A007E93A9 /* GridCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionViewModel.swift; sourceTree = "<group>"; };
 		1C01D3FE2C8EF906007E93A9 /* GridData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridData.swift; sourceTree = "<group>"; };
-		1C01D4072C90183F007E93A9 /* banana-cheerer.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "banana-cheerer.gif"; sourceTree = "<group>"; };
+		1C01D40B2C902D0B007E93A9 /* RandomMemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomMemeViewController.swift; sourceTree = "<group>"; };
+		1C01D40E2C902D19007E93A9 /* RandomMemeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomMemeViewModel.swift; sourceTree = "<group>"; };
+		1C01D4102C903186007E93A9 /* RandomMemeViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomMemeViewModelProtocol.swift; sourceTree = "<group>"; };
 		1C01D4132C90464D007E93A9 /* RoundedRectangleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedRectangleButton.swift; sourceTree = "<group>"; };
+		1C020EB22C92BBF90028CAE0 /* banana-cheerer.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "banana-cheerer.gif"; sourceTree = "<group>"; };
+		1C020EB52C92C14D0028CAE0 /* VideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
 		1C811F0A2C8849A8005B4D5D /* NSObject+rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+rx.swift"; sourceTree = "<group>"; };
 		1C811F0C2C899ABC005B4D5D /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
 		1C811F1D2C8AE2BD005B4D5D /* MemeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeTabBarController.swift; sourceTree = "<group>"; };
@@ -119,8 +127,8 @@
 				1C811F212C8AE421005B4D5D /* RswiftLibrary in Frameworks */,
 				1C01D3F52C8EE02B007E93A9 /* RxCocoa in Frameworks */,
 				1C01D3F72C8EE02B007E93A9 /* RxRelay in Frameworks */,
+				1C01D4182C904DE9007E93A9 /* Kingfisher in Frameworks */,
 				1CD9F5172C8316BC009DDABD /* SnapKit in Frameworks */,
-				1C9FEE362C8B109700D7B17A /* SwiftyGif in Frameworks */,
 				1C783E022C83067100E6C4BE /* WebAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,6 +155,7 @@
 			children = (
 				1C01D3E82C8ED26B007E93A9 /* GridCollectionView */,
 				1C01D4132C90464D007E93A9 /* RoundedRectangleButton.swift */,
+				1C020EB52C92C14D0028CAE0 /* VideoPlayer.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -174,16 +183,26 @@
 		1C01D4022C90178F007E93A9 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				1C01D4062C9017D9007E93A9 /* GIF */,
+				1C020EB32C92BBF90028CAE0 /* GIF */,
 				1CDA353F2C81AB6F001FF654 /* Assets.xcassets */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
 		};
-		1C01D4062C9017D9007E93A9 /* GIF */ = {
+		1C01D40A2C902CE4007E93A9 /* RandomMeme */ = {
 			isa = PBXGroup;
 			children = (
-				1C01D4072C90183F007E93A9 /* banana-cheerer.gif */,
+				1C01D40B2C902D0B007E93A9 /* RandomMemeViewController.swift */,
+				1C01D40E2C902D19007E93A9 /* RandomMemeViewModel.swift */,
+				1C01D4102C903186007E93A9 /* RandomMemeViewModelProtocol.swift */,
+			);
+			path = RandomMeme;
+			sourceTree = "<group>";
+		};
+		1C020EB32C92BBF90028CAE0 /* GIF */ = {
+			isa = PBXGroup;
+			children = (
+				1C020EB22C92BBF90028CAE0 /* banana-cheerer.gif */,
 			);
 			path = GIF;
 			sourceTree = "<group>";
@@ -230,6 +249,7 @@
 		1C811F0E2C899AC0005B4D5D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				1C01D40A2C902CE4007E93A9 /* RandomMeme */,
 				1CDA35372C81AB6C001FF654 /* HomePageViewController.swift */,
 				1C811F0C2C899ABC005B4D5D /* HomePageViewModel.swift */,
 			);
@@ -345,9 +365,9 @@
 			packageProductDependencies = (
 				1CD9F5162C8316BC009DDABD /* SnapKit */,
 				1C811F202C8AE421005B4D5D /* RswiftLibrary */,
-				1C9FEE352C8B109700D7B17A /* SwiftyGif */,
 				1C01D3F42C8EE02B007E93A9 /* RxCocoa */,
 				1C01D3F62C8EE02B007E93A9 /* RxRelay */,
+				1C01D4172C904DE9007E93A9 /* Kingfisher */,
 			);
 			productName = Meme;
 			productReference = 1CDA35302C81AB6C001FF654 /* Meme.app */;
@@ -426,8 +446,8 @@
 			packageReferences = (
 				1CD9F5152C8316BC009DDABD /* XCRemoteSwiftPackageReference "SnapKit" */,
 				1C811F1F2C8AE421005B4D5D /* XCRemoteSwiftPackageReference "R" */,
-				1C9FEE342C8B109700D7B17A /* XCRemoteSwiftPackageReference "SwiftyGif" */,
 				1C01D3F32C8EE02B007E93A9 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				1C01D4162C904DE9007E93A9 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 1CDA35312C81AB6C001FF654 /* Products */;
 			projectDirPath = "";
@@ -446,7 +466,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CDA35402C81AB6F001FF654 /* Assets.xcassets in Resources */,
-				1C01D4082C90183F007E93A9 /* banana-cheerer.gif in Resources */,
+				1C020EB42C92BBF90028CAE0 /* banana-cheerer.gif in Resources */,
 				1CDA35432C81AB6F001FF654 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -473,18 +493,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CDA35342C81AB6C001FF654 /* AppDelegate.swift in Sources */,
+				1C01D40C2C902D0B007E93A9 /* RandomMemeViewController.swift in Sources */,
 				1C811F2B2C8AECF8005B4D5D /* FavoriteViewController.swift in Sources */,
 				1CE608F72C86F422004844B7 /* GlobalErrorHandler.swift in Sources */,
 				1C01D3FA2C8EE785007E93A9 /* GridCollectionView.swift in Sources */,
 				1C01D3EA2C8ED28C007E93A9 /* GridCollectionViewCell.swift in Sources */,
 				1C01D3F12C8EDBAE007E93A9 /* GridCollectionViewCellViewModel.swift in Sources */,
 				1C01D3FD2C8EEB0A007E93A9 /* GridCollectionViewModel.swift in Sources */,
+				1C020EB62C92C14D0028CAE0 /* VideoPlayer.swift in Sources */,
 				1C01D3FF2C8EF906007E93A9 /* GridData.swift in Sources */,
 				1C811F282C8AECEB005B4D5D /* HistoryViewController.swift in Sources */,
 				1CDA35382C81AB6C001FF654 /* HomePageViewController.swift in Sources */,
 				1C811F0D2C899ABC005B4D5D /* HomePageViewModel.swift in Sources */,
 				1CDA353E2C81AB6C001FF654 /* Meme.xcdatamodeld in Sources */,
+				1C01D40F2C902D1A007E93A9 /* RandomMemeViewModel.swift in Sources */,
 				1C811F1E2C8AE2BD005B4D5D /* MemeTabBarController.swift in Sources */,
+				1C01D4112C903186007E93A9 /* RandomMemeViewModelProtocol.swift in Sources */,
 				1C811F0B2C8849A8005B4D5D /* NSObject+rx.swift in Sources */,
 				1C01D4142C90464D007E93A9 /* RoundedRectangleButton.swift in Sources */,
 				1CDA35362C81AB6C001FF654 /* SceneDelegate.swift in Sources */,
@@ -839,20 +863,20 @@
 				minimumVersion = 6.7.1;
 			};
 		};
+		1C01D4162C904DE9007E93A9 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
 		1C811F1F2C8AE421005B4D5D /* XCRemoteSwiftPackageReference "R" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mac-cain13/R.swift";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 7.5.0;
-			};
-		};
-		1C9FEE342C8B109700D7B17A /* XCRemoteSwiftPackageReference "SwiftyGif" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kirualex/SwiftyGif.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.4.5;
 			};
 		};
 		1CD9F5152C8316BC009DDABD /* XCRemoteSwiftPackageReference "SnapKit" */ = {
@@ -876,6 +900,11 @@
 			package = 1C01D3F32C8EE02B007E93A9 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxRelay;
 		};
+		1C01D4172C904DE9007E93A9 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C01D4162C904DE9007E93A9 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		1C811F202C8AE421005B4D5D /* RswiftLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1C811F1F2C8AE421005B4D5D /* XCRemoteSwiftPackageReference "R" */;
@@ -885,11 +914,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1C811F1F2C8AE421005B4D5D /* XCRemoteSwiftPackageReference "R" */;
 			productName = "plugin:RswiftGenerateInternalResources";
-		};
-		1C9FEE352C8B109700D7B17A /* SwiftyGif */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1C9FEE342C8B109700D7B17A /* XCRemoteSwiftPackageReference "SwiftyGif" */;
-			productName = SwiftyGif;
 		};
 		1CD9F5162C8316BC009DDABD /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

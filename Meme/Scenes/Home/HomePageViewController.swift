@@ -39,6 +39,28 @@ final class HomePageViewController: UIViewController {
 // MARK: - GridCollectionViewDelegate
 extension HomePageViewController: GridCollectionViewDelegate {
     func gridCollectionView(_ gridCollectionView: GridCollectionView, didSelectItemAt index: Int) {
-        
+        let category = Category(rawValue: index)
+        switch category {
+        case .meme:
+            let vc = RandomMemeViewController(viewModel: viewModel.randomMemeViewModel)
+            show(vc, sender: self)
+            
+        case .joke:
+            return
+            
+        case .gifs:
+            return
+            
+        case nil:
+            return
+        }
+    }
+}
+
+extension HomePageViewController {
+    enum Category: Int {
+        case meme
+        case joke
+        case gifs
     }
 }

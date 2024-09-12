@@ -8,7 +8,7 @@
 import Foundation
 import Moya
 
-public enum MemeMediaType: String {
+public enum MemeMediaType: String, CaseIterable {
     case image
     case video
 }
