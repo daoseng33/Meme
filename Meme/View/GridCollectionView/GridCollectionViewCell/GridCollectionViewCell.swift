@@ -24,7 +24,7 @@ final class GridCollectionViewCell: UICollectionViewCell {
     private let gridTitleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.textColor = .darkText
+        label.textColor = .label
         label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         label.numberOfLines = 2
         

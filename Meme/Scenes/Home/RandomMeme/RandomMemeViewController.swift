@@ -29,9 +29,9 @@ final class RandomMemeViewController: UIViewController {
     private let descriptionTextView: UITextView = {
         let padding = 8.0
         let textView = UITextView()
-        textView.backgroundColor = .white
+        textView.backgroundColor = .systemBackground
         textView.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        textView.textColor = .darkText
+        textView.textColor = .label
         textView.contentInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
         
         return textView
@@ -84,7 +84,7 @@ final class RandomMemeViewController: UIViewController {
     
     // MARK: - Setup
     private func setupUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         
         view.addSubview(imageView)
         imageView.snp.makeConstraints {

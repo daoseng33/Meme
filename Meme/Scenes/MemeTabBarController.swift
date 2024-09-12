@@ -21,8 +21,8 @@ final class MemeTabBarController: UITabBarController {
 
     //MARK: - Setup
     private func setup() {
-        view.backgroundColor = .white
-        tabBar.tintColor = .black
+        view.backgroundColor = .systemBackground
+        tabBar.tintColor = .label
         
         let homeViewController = HomePageViewController()
         homeViewController.tabBarItem = UITabBarItem(title: "Home".localized(), image: R.image.home(), tag: 0)
