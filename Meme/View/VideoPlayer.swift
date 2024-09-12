@@ -7,6 +7,9 @@
 
 import AVFoundation
 import UIKit
+import RxSwift
+import RxRelay
+import SnapKit
 
 class VideoPlayerView: UIView {
     // MARK: - Properties
@@ -14,8 +17,9 @@ class VideoPlayerView: UIView {
     private var playerLooper: AVPlayerLooper?
     private let player = AVQueuePlayer()
     
+    private let statusRelay = BehaviorRelay<AVPlayer.TimeControlStatus>(value: .paused)
     var status: AVPlayer.TimeControlStatus {
-        return player.timeControlStatus
+        return statusRelay.value
     }
     
     // MARK: - UI
@@ -30,15 +34,13 @@ class VideoPlayerView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        setupBindings()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupView()
-    }
-    
-    deinit {
-        player.currentItem?.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.status))
+        setupBindings()
     }
     
     // MARK: - Setup
@@ -48,10 +50,16 @@ class VideoPlayerView: UIView {
         layer.addSublayer(playerLayer!)
         
         addSubview(activityIndicator)
-        NSLayoutConstraint.activate([
-            activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor)
-        ])
+        activityIndicator.snp.makeConstraints {
+            $0.centerX.centerY.equalToSuperview()
+        }
+    }
+    
+    private func setupBindings() {
+        player.rx.observe(AVPlayer.TimeControlStatus.self, #keyPath(AVPlayer.timeControlStatus))
+            .compactMap { $0 }
+            .bind(to: statusRelay)
+            .disposed(by: rx.disposeBag)
     }
     
     override func layoutSubviews() {
@@ -66,13 +74,40 @@ class VideoPlayerView: UIView {
         let asset = AVAsset(url: url)
         let item = AVPlayerItem(asset: asset)
         
-        item.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.status), options: [.old, .new], context: nil)
+        observePlayerItemStatus(item)
         
         player.replaceCurrentItem(with: item)
         
         playerLooper = AVPlayerLooper(player: player, templateItem: item)
         
         player.play()
+    }
+    
+    private func observePlayerItemStatus(_ item: AVPlayerItem) {
+        item.rx.observe(AVPlayerItem.Status.self, #keyPath(AVPlayerItem.status))
+            .compactMap { $0 }
+            .withUnretained(self)
+            .subscribe(onNext: { (self, status) in
+                self.handlePlayerItemStatus(status)
+            })
+            .disposed(by: rx.disposeBag)
+    }
+    
+    private func handlePlayerItemStatus(_ status: AVPlayerItem.Status) {
+        switch status {
+        case .readyToPlay:
+            hideLoading()
+            
+        case .failed:
+            hideLoading()
+            print("Video failed to load")
+            
+        case .unknown:
+            break
+            
+        @unknown default:
+            break
+        }
     }
     
     func play() {
@@ -96,33 +131,6 @@ class VideoPlayerView: UIView {
     private func hideLoading() {
         DispatchQueue.main.async {
             self.activityIndicator.stopAnimating()
-        }
-    }
-    
-    // MARK: - KVO
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == #keyPath(AVPlayerItem.status) {
-            let status: AVPlayerItem.Status
-            if let statusNumber = change?[.newKey] as? NSNumber {
-                status = AVPlayerItem.Status(rawValue: statusNumber.intValue)!
-            } else {
-                status = .unknown
-            }
-            
-            switch status {
-            case .readyToPlay:
-                hideLoading()
-                
-            case .failed:
-                hideLoading()
-                print("Video failed to load")
-                
-            case .unknown:
-                break
-                
-            @unknown default:
-                break
-            }
         }
     }
 }
