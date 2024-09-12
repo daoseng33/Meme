@@ -14,5 +14,5 @@ struct GridData {
 
 enum GridImageType {
     case `static`(image: UIImage)
-    case gif(fileName: String)
+    case gif(url: URL)
 }

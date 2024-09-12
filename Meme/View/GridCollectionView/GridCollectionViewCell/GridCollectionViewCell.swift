@@ -69,12 +69,9 @@ final class GridCollectionViewCell: UICollectionViewCell {
                 case .static(let image):
                     self.gridImageView.image = image
                     
-                case .gif(let fileName):
-                    if let path = Bundle.main.path(forResource: fileName, ofType: "gif") {
-                        let url = URL(fileURLWithPath: path)
-                        let provider = LocalFileImageDataProvider(fileURL: url)
-                        self.gridImageView.kf.setImage(with: provider, options: [.cacheOriginalImage])
-                    }
+                case .gif(let url):
+                    let provider = LocalFileImageDataProvider(fileURL: url)
+                    self.gridImageView.kf.setImage(with: provider, options: [.cacheOriginalImage])
                 }
             })
             .disposed(by: rx.disposeBag)

@@ -13,8 +13,11 @@ final class HomePageViewModel {
         var datas = [
             GridData(title: "Random Meme".localized(), imageType: .static(image: R.image.memeApi()!)),
             GridData(title: "Random Joke".localized(), imageType: .static(image: R.image.jokeApi()!)),
-            GridData(title: "GIFs".localized(), imageType: .gif(fileName: "banana-cheerer")),
         ]
+        
+        if let gifUrl = R.file.bananaCheererGif() {
+            datas.append(GridData(title: "GIFs".localized(), imageType: .gif(url: gifUrl)))
+        }
         
         return datas
     }()
