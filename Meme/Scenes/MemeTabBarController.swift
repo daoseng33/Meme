@@ -25,16 +25,16 @@ final class MemeTabBarController: UITabBarController {
         tabBar.tintColor = .black
         
         let homeViewController = HomePageViewController()
-        homeViewController.tabBarItem = UITabBarItem(title: "Home", image: R.image.home(), tag: 0)
+        homeViewController.tabBarItem = UITabBarItem(title: "Home".localized(), image: R.image.home(), tag: 0)
         
         let historyViewController = HistoryViewController()
-        historyViewController.tabBarItem = UITabBarItem(title: "History", image: R.image.history(), tag: 1)
+        historyViewController.tabBarItem = UITabBarItem(title: "History".localized(), image: R.image.history(), tag: 1)
         
         let favoriteViewController = FavoriteViewController()
-        favoriteViewController.tabBarItem = UITabBarItem(title: "Favorite", image: R.image.favorite(), tag: 2)
+        favoriteViewController.tabBarItem = UITabBarItem(title: "Favorite".localized(), image: R.image.favorite(), tag: 2)
         
         let settingViewController = SettingViewController()
-        settingViewController.tabBarItem = UITabBarItem(title: "Setting", image: R.image.settings(), tag: 3)
+        settingViewController.tabBarItem = UITabBarItem(title: "Setting".localized(), image: R.image.settings(), tag: 3)
         
         viewControllers = [homeViewController, historyViewController, favoriteViewController, settingViewController]
     }

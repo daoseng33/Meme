@@ -11,9 +11,9 @@ final class HomePageViewModel {
     // MARK: - Properties
     let gridDatas: [GridData] = {
         var datas = [
-            GridData(title: "Random Meme", imageType: .static(image: R.image.memeApi()!)),
-            GridData(title: "Random Joke", imageType: .static(image: R.image.jokeApi()!)),
-            GridData(title: "GIFs", imageType: .gif(fileName: "banana-cheerer")),
+            GridData(title: "Random Meme".localized(), imageType: .static(image: R.image.memeApi()!)),
+            GridData(title: "Random Joke".localized(), imageType: .static(image: R.image.jokeApi()!)),
+            GridData(title: "GIFs".localized(), imageType: .gif(fileName: "banana-cheerer")),
         ]
         
         return datas

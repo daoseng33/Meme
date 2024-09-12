@@ -23,6 +23,8 @@
 		1C01D4182C904DE9007E93A9 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1C01D4172C904DE9007E93A9 /* Kingfisher */; };
 		1C020EB42C92BBF90028CAE0 /* banana-cheerer.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1C020EB22C92BBF90028CAE0 /* banana-cheerer.gif */; };
 		1C020EB62C92C14D0028CAE0 /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C020EB52C92C14D0028CAE0 /* VideoPlayer.swift */; };
+		1C020EC72C92DAC00028CAE0 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 1C020EC62C92DAC00028CAE0 /* Localizable.xcstrings */; };
+		1C020ECA2C92DB680028CAE0 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C020EC92C92DB680028CAE0 /* StringExtension.swift */; };
 		1C783E022C83067100E6C4BE /* WebAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */; };
 		1C783E032C83067100E6C4BE /* WebAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1C811F0B2C8849A8005B4D5D /* NSObject+rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C811F0A2C8849A8005B4D5D /* NSObject+rx.swift */; };
@@ -93,6 +95,8 @@
 		1C01D4132C90464D007E93A9 /* RoundedRectangleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedRectangleButton.swift; sourceTree = "<group>"; };
 		1C020EB22C92BBF90028CAE0 /* banana-cheerer.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "banana-cheerer.gif"; sourceTree = "<group>"; };
 		1C020EB52C92C14D0028CAE0 /* VideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
+		1C020EC62C92DAC00028CAE0 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		1C020EC92C92DB680028CAE0 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		1C811F0A2C8849A8005B4D5D /* NSObject+rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+rx.swift"; sourceTree = "<group>"; };
 		1C811F0C2C899ABC005B4D5D /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
 		1C811F1D2C8AE2BD005B4D5D /* MemeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeTabBarController.swift; sourceTree = "<group>"; };
@@ -242,6 +246,7 @@
 				1C811F0A2C8849A8005B4D5D /* NSObject+rx.swift */,
 				1C01D3EC2C8ED355007E93A9 /* UICollectionViewExtension.swift */,
 				1C01D3EE2C8ED3A1007E93A9 /* UITableViewExtension.swift */,
+				1C020EC92C92DB680028CAE0 /* StringExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -313,6 +318,7 @@
 				1CDA35442C81AB6F001FF654 /* Info.plist */,
 				1CDA35412C81AB6F001FF654 /* LaunchScreen.storyboard */,
 				1CDA353C2C81AB6C001FF654 /* Meme.xcdatamodeld */,
+				1C020EC62C92DAC00028CAE0 /* Localizable.xcstrings */,
 			);
 			path = Meme;
 			sourceTree = "<group>";
@@ -441,6 +447,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hant",
 			);
 			mainGroup = 1CDA35272C81AB6C001FF654;
 			packageReferences = (
@@ -467,6 +474,7 @@
 			files = (
 				1CDA35402C81AB6F001FF654 /* Assets.xcassets in Resources */,
 				1C020EB42C92BBF90028CAE0 /* banana-cheerer.gif in Resources */,
+				1C020EC72C92DAC00028CAE0 /* Localizable.xcstrings in Resources */,
 				1CDA35432C81AB6F001FF654 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -512,6 +520,7 @@
 				1C811F0B2C8849A8005B4D5D /* NSObject+rx.swift in Sources */,
 				1C01D4142C90464D007E93A9 /* RoundedRectangleButton.swift in Sources */,
 				1CDA35362C81AB6C001FF654 /* SceneDelegate.swift in Sources */,
+				1C020ECA2C92DB680028CAE0 /* StringExtension.swift in Sources */,
 				1C811F2D2C8AED01005B4D5D /* SettingViewController.swift in Sources */,
 				1C01D3ED2C8ED355007E93A9 /* UICollectionViewExtension.swift in Sources */,
 				1C01D3EF2C8ED3A1007E93A9 /* UITableViewExtension.swift in Sources */,
