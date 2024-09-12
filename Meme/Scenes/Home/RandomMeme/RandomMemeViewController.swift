@@ -33,6 +33,7 @@ final class RandomMemeViewController: UIViewController {
         textView.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         textView.textColor = .label
         textView.contentInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
+        textView.isEditable = false
         
         return textView
     }()
