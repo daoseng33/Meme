@@ -47,7 +47,7 @@ final class RandomMemeViewController: UIViewController {
         textField.clipsToBounds = true
         textField.returnKeyType = .done
         textField.clearButtonMode = .whileEditing
-        textField.setInsets(left: 8, right: 8)
+        textField.setInsets(left: 8, right: nil)
         
         return textField
     }()
