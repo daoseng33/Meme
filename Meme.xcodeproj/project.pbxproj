@@ -127,11 +127,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C01D4182C904DE9007E93A9 /* Kingfisher in Frameworks */,
 				1CE608F22C85CB4C004844B7 /* MemeData.framework in Frameworks */,
 				1C811F212C8AE421005B4D5D /* RswiftLibrary in Frameworks */,
 				1C01D3F52C8EE02B007E93A9 /* RxCocoa in Frameworks */,
 				1C01D3F72C8EE02B007E93A9 /* RxRelay in Frameworks */,
-				1C01D4182C904DE9007E93A9 /* Kingfisher in Frameworks */,
 				1CD9F5172C8316BC009DDABD /* SnapKit in Frameworks */,
 				1C783E022C83067100E6C4BE /* WebAPI.framework in Frameworks */,
 			);
@@ -244,9 +244,9 @@
 			isa = PBXGroup;
 			children = (
 				1C811F0A2C8849A8005B4D5D /* NSObject+rx.swift */,
+				1C020EC92C92DB680028CAE0 /* StringExtension.swift */,
 				1C01D3EC2C8ED355007E93A9 /* UICollectionViewExtension.swift */,
 				1C01D3EE2C8ED3A1007E93A9 /* UITableViewExtension.swift */,
-				1C020EC92C92DB680028CAE0 /* StringExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -317,8 +317,8 @@
 				1C01D3E72C8ED263007E93A9 /* View */,
 				1CDA35442C81AB6F001FF654 /* Info.plist */,
 				1CDA35412C81AB6F001FF654 /* LaunchScreen.storyboard */,
-				1CDA353C2C81AB6C001FF654 /* Meme.xcdatamodeld */,
 				1C020EC62C92DAC00028CAE0 /* Localizable.xcstrings */,
+				1CDA353C2C81AB6C001FF654 /* Meme.xcdatamodeld */,
 			);
 			path = Meme;
 			sourceTree = "<group>";
@@ -474,8 +474,8 @@
 			files = (
 				1CDA35402C81AB6F001FF654 /* Assets.xcassets in Resources */,
 				1C020EB42C92BBF90028CAE0 /* banana-cheerer.gif in Resources */,
-				1C020EC72C92DAC00028CAE0 /* Localizable.xcstrings in Resources */,
 				1CDA35432C81AB6F001FF654 /* Base in Resources */,
+				1C020EC72C92DAC00028CAE0 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,29 +501,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CDA35342C81AB6C001FF654 /* AppDelegate.swift in Sources */,
-				1C01D40C2C902D0B007E93A9 /* RandomMemeViewController.swift in Sources */,
 				1C811F2B2C8AECF8005B4D5D /* FavoriteViewController.swift in Sources */,
 				1CE608F72C86F422004844B7 /* GlobalErrorHandler.swift in Sources */,
 				1C01D3FA2C8EE785007E93A9 /* GridCollectionView.swift in Sources */,
 				1C01D3EA2C8ED28C007E93A9 /* GridCollectionViewCell.swift in Sources */,
 				1C01D3F12C8EDBAE007E93A9 /* GridCollectionViewCellViewModel.swift in Sources */,
 				1C01D3FD2C8EEB0A007E93A9 /* GridCollectionViewModel.swift in Sources */,
-				1C020EB62C92C14D0028CAE0 /* VideoPlayer.swift in Sources */,
 				1C01D3FF2C8EF906007E93A9 /* GridData.swift in Sources */,
 				1C811F282C8AECEB005B4D5D /* HistoryViewController.swift in Sources */,
 				1CDA35382C81AB6C001FF654 /* HomePageViewController.swift in Sources */,
 				1C811F0D2C899ABC005B4D5D /* HomePageViewModel.swift in Sources */,
 				1CDA353E2C81AB6C001FF654 /* Meme.xcdatamodeld in Sources */,
-				1C01D40F2C902D1A007E93A9 /* RandomMemeViewModel.swift in Sources */,
 				1C811F1E2C8AE2BD005B4D5D /* MemeTabBarController.swift in Sources */,
-				1C01D4112C903186007E93A9 /* RandomMemeViewModelProtocol.swift in Sources */,
 				1C811F0B2C8849A8005B4D5D /* NSObject+rx.swift in Sources */,
+				1C01D40C2C902D0B007E93A9 /* RandomMemeViewController.swift in Sources */,
+				1C01D40F2C902D1A007E93A9 /* RandomMemeViewModel.swift in Sources */,
+				1C01D4112C903186007E93A9 /* RandomMemeViewModelProtocol.swift in Sources */,
 				1C01D4142C90464D007E93A9 /* RoundedRectangleButton.swift in Sources */,
 				1CDA35362C81AB6C001FF654 /* SceneDelegate.swift in Sources */,
-				1C020ECA2C92DB680028CAE0 /* StringExtension.swift in Sources */,
 				1C811F2D2C8AED01005B4D5D /* SettingViewController.swift in Sources */,
+				1C020ECA2C92DB680028CAE0 /* StringExtension.swift in Sources */,
 				1C01D3ED2C8ED355007E93A9 /* UICollectionViewExtension.swift in Sources */,
 				1C01D3EF2C8ED3A1007E93A9 /* UITableViewExtension.swift in Sources */,
+				1C020EB62C92C14D0028CAE0 /* VideoPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
