@@ -184,13 +184,14 @@
 			path = GridCollectionViewCell;
 			sourceTree = "<group>";
 		};
-		1C01D4022C90178F007E93A9 /* Assets */ = {
+		1C01D4022C90178F007E93A9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				1C020EB32C92BBF90028CAE0 /* GIF */,
 				1CDA353F2C81AB6F001FF654 /* Assets.xcassets */,
+				1C020EC62C92DAC00028CAE0 /* Localizable.xcstrings */,
 			);
-			path = Assets;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		1C01D40A2C902CE4007E93A9 /* RandomMeme */ = {
@@ -310,14 +311,13 @@
 			isa = PBXGroup;
 			children = (
 				1C248C3D2C81B2E40015A7F1 /* AppDelegate */,
-				1C01D4022C90178F007E93A9 /* Assets */,
 				1C811F092C884996005B4D5D /* Extensions */,
 				1C223B5D2C86FD7400032854 /* Global */,
+				1C01D4022C90178F007E93A9 /* Resources */,
 				1C248C3E2C81B2EC0015A7F1 /* Scenes */,
 				1C01D3E72C8ED263007E93A9 /* View */,
 				1CDA35442C81AB6F001FF654 /* Info.plist */,
 				1CDA35412C81AB6F001FF654 /* LaunchScreen.storyboard */,
-				1C020EC62C92DAC00028CAE0 /* Localizable.xcstrings */,
 				1CDA353C2C81AB6C001FF654 /* Meme.xcdatamodeld */,
 			);
 			path = Meme;
