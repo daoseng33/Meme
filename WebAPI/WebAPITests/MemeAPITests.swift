@@ -12,15 +12,10 @@ import RxBlocking
 
 final class MemeAPITests: XCTestCase {
     
-    let sut: MemeAPIService = {
-        var sut = MemeAPIService()
-        sut.provider = MoyaProvider<MemeAPI>.stub
-        
-        return sut
-    }()
+    var sut: MemeAPIService!
     
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        sut = MemeAPIService()
         
     }
 
