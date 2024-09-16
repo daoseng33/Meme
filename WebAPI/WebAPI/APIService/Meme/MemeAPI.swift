@@ -52,14 +52,17 @@ extension MemeAPI: MemeTargetType {
     
     public var sampleData: Data {
         switch self {
-        case .randomMeme(_, let mediaType, _):
-            switch mediaType {
-            case .image:
-                return Utility.loadJSON(filename: "memes_random_image")
-            case .video:
-                return Utility.loadJSON(filename: "memes_random_video")
+        case .randomMeme(let keyword, let mediaType, _):
+            if keyword == "Boobs" {
+                return Utility.loadJSON(filename: "memes_random_error")
+            } else {
+                switch mediaType {
+                case .image:
+                    return Utility.loadJSON(filename: "memes_random_image")
+                case .video:
+                    return Utility.loadJSON(filename: "memes_random_video")
+                }
             }
-            
         }
     }
 }

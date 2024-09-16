@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import RxCocoa
+import IQKeyboardManagerSwift
 
 final class RoundedRectangleButton: UIView {
     // MARK: - Properties
@@ -29,7 +30,14 @@ final class RoundedRectangleButton: UIView {
         }
     }
     
-    lazy var tapEvent = button.rx.tap
+    lazy var tapEvent: ControlEvent<Void> = {
+        let tapObservable = button.rx.tap
+            .do(onNext: { _ in
+                IQKeyboardManager.shared.resignFirstResponder()
+            })
+        
+        return ControlEvent(events: tapObservable)
+    }()
     
     var isEnabled: Bool = true {
         didSet {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1C01D41B2C905AB0007E93A9 /* memes_random_video.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C01D41A2C905AB0007E93A9 /* memes_random_video.json */; };
+		1C020F002C9829CB0028CAE0 /* memes_random_error.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C020EFF2C9829CB0028CAE0 /* memes_random_error.json */; };
 		1C223B602C87040100032854 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C223B5F2C87040100032854 /* Utility.swift */; };
 		1C223B632C8709DA00032854 /* MemeAPIServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C223B622C8709DA00032854 /* MemeAPIServiceProtocol.swift */; };
 		1C223B662C870C1C00032854 /* APIConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C223B652C870C1C00032854 /* APIConfig.plist */; };
@@ -54,6 +55,7 @@
 
 /* Begin PBXFileReference section */
 		1C01D41A2C905AB0007E93A9 /* memes_random_video.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = memes_random_video.json; sourceTree = "<group>"; };
+		1C020EFF2C9829CB0028CAE0 /* memes_random_error.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = memes_random_error.json; sourceTree = "<group>"; };
 		1C223B5F2C87040100032854 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		1C223B622C8709DA00032854 /* MemeAPIServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeAPIServiceProtocol.swift; sourceTree = "<group>"; };
 		1C223B652C870C1C00032854 /* APIConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIConfig.plist; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			children = (
 				1CC9DCC12C82F71300A1EEC6 /* memes_random_image.json */,
 				1C01D41A2C905AB0007E93A9 /* memes_random_video.json */,
+				1C020EFF2C9829CB0028CAE0 /* memes_random_error.json */,
 			);
 			path = SampleData;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				1C223B662C870C1C00032854 /* APIConfig.plist in Resources */,
 				1CC9DCC22C82F71300A1EEC6 /* memes_random_image.json in Resources */,
 				1C01D41B2C905AB0007E93A9 /* memes_random_video.json in Resources */,
+				1C020F002C9829CB0028CAE0 /* memes_random_error.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

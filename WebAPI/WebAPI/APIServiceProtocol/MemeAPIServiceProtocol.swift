@@ -9,6 +9,11 @@ import Foundation
 import RxSwift
 import MemeData
 
+public enum MemeAPIResponse<RandomMeme, RandomMemeError> {
+    case success(RandomMeme)
+    case failure(RandomMemeError)
+}
+
 public protocol MemeAPIServiceProtocol {
-    func fetchRandomMeme(with keyword: String, mediaType: MemeMediaType, minRating: Int) -> Single<RandomMeme>
+    func fetchRandomMeme(with keyword: String, mediaType: MemeMediaType, minRating: Int) -> Single<MemeAPIResponse<RandomMeme, RandomMemeError>>
 }

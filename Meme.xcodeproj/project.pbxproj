@@ -25,6 +25,10 @@
 		1C020EB62C92C14D0028CAE0 /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C020EB52C92C14D0028CAE0 /* VideoPlayer.swift */; };
 		1C020EC72C92DAC00028CAE0 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 1C020EC62C92DAC00028CAE0 /* Localizable.xcstrings */; };
 		1C020ECA2C92DB680028CAE0 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C020EC92C92DB680028CAE0 /* StringExtension.swift */; };
+		1C020EF42C981F450028CAE0 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1C020EF32C981F450028CAE0 /* IQKeyboardManagerSwift */; };
+		1C020EF72C981F680028CAE0 /* Launcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C020EF62C981F680028CAE0 /* Launcher.swift */; };
+		1C020EFA2C9821420028CAE0 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C020EF92C9821420028CAE0 /* UITextFieldExtension.swift */; };
+		1C020F022C982FF30028CAE0 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C020F012C982FF30028CAE0 /* Utility.swift */; };
 		1C783E022C83067100E6C4BE /* WebAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */; };
 		1C783E032C83067100E6C4BE /* WebAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1C811F0B2C8849A8005B4D5D /* NSObject+rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C811F0A2C8849A8005B4D5D /* NSObject+rx.swift */; };
@@ -97,6 +101,9 @@
 		1C020EB52C92C14D0028CAE0 /* VideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
 		1C020EC62C92DAC00028CAE0 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		1C020EC92C92DB680028CAE0 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		1C020EF62C981F680028CAE0 /* Launcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launcher.swift; sourceTree = "<group>"; };
+		1C020EF92C9821420028CAE0 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
+		1C020F012C982FF30028CAE0 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		1C811F0A2C8849A8005B4D5D /* NSObject+rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+rx.swift"; sourceTree = "<group>"; };
 		1C811F0C2C899ABC005B4D5D /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
 		1C811F1D2C8AE2BD005B4D5D /* MemeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeTabBarController.swift; sourceTree = "<group>"; };
@@ -128,6 +135,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C01D4182C904DE9007E93A9 /* Kingfisher in Frameworks */,
+				1C020EF42C981F450028CAE0 /* IQKeyboardManagerSwift in Frameworks */,
 				1CE608F22C85CB4C004844B7 /* MemeData.framework in Frameworks */,
 				1C811F212C8AE421005B4D5D /* RswiftLibrary in Frameworks */,
 				1C01D3F52C8EE02B007E93A9 /* RxCocoa in Frameworks */,
@@ -216,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				1CE608F62C86F422004844B7 /* GlobalErrorHandler.swift */,
+				1C020F012C982FF30028CAE0 /* Utility.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -225,6 +234,7 @@
 			children = (
 				1CDA35332C81AB6C001FF654 /* AppDelegate.swift */,
 				1CDA35352C81AB6C001FF654 /* SceneDelegate.swift */,
+				1C020EF62C981F680028CAE0 /* Launcher.swift */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -248,6 +258,7 @@
 				1C020EC92C92DB680028CAE0 /* StringExtension.swift */,
 				1C01D3EC2C8ED355007E93A9 /* UICollectionViewExtension.swift */,
 				1C01D3EE2C8ED3A1007E93A9 /* UITableViewExtension.swift */,
+				1C020EF92C9821420028CAE0 /* UITextFieldExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -374,6 +385,7 @@
 				1C01D3F42C8EE02B007E93A9 /* RxCocoa */,
 				1C01D3F62C8EE02B007E93A9 /* RxRelay */,
 				1C01D4172C904DE9007E93A9 /* Kingfisher */,
+				1C020EF32C981F450028CAE0 /* IQKeyboardManagerSwift */,
 			);
 			productName = Meme;
 			productReference = 1CDA35302C81AB6C001FF654 /* Meme.app */;
@@ -455,6 +467,7 @@
 				1C811F1F2C8AE421005B4D5D /* XCRemoteSwiftPackageReference "R" */,
 				1C01D3F32C8EE02B007E93A9 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				1C01D4162C904DE9007E93A9 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				1C020EF22C981F450028CAE0 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = 1CDA35312C81AB6C001FF654 /* Products */;
 			projectDirPath = "";
@@ -507,17 +520,20 @@
 				1C01D3EA2C8ED28C007E93A9 /* GridCollectionViewCell.swift in Sources */,
 				1C01D3F12C8EDBAE007E93A9 /* GridCollectionViewCellViewModel.swift in Sources */,
 				1C01D3FD2C8EEB0A007E93A9 /* GridCollectionViewModel.swift in Sources */,
+				1C020EFA2C9821420028CAE0 /* UITextFieldExtension.swift in Sources */,
 				1C01D3FF2C8EF906007E93A9 /* GridData.swift in Sources */,
 				1C811F282C8AECEB005B4D5D /* HistoryViewController.swift in Sources */,
 				1CDA35382C81AB6C001FF654 /* HomePageViewController.swift in Sources */,
 				1C811F0D2C899ABC005B4D5D /* HomePageViewModel.swift in Sources */,
 				1CDA353E2C81AB6C001FF654 /* Meme.xcdatamodeld in Sources */,
+				1C020EF72C981F680028CAE0 /* Launcher.swift in Sources */,
 				1C811F1E2C8AE2BD005B4D5D /* MemeTabBarController.swift in Sources */,
 				1C811F0B2C8849A8005B4D5D /* NSObject+rx.swift in Sources */,
 				1C01D40C2C902D0B007E93A9 /* RandomMemeViewController.swift in Sources */,
 				1C01D40F2C902D1A007E93A9 /* RandomMemeViewModel.swift in Sources */,
 				1C01D4112C903186007E93A9 /* RandomMemeViewModelProtocol.swift in Sources */,
 				1C01D4142C90464D007E93A9 /* RoundedRectangleButton.swift in Sources */,
+				1C020F022C982FF30028CAE0 /* Utility.swift in Sources */,
 				1CDA35362C81AB6C001FF654 /* SceneDelegate.swift in Sources */,
 				1C811F2D2C8AED01005B4D5D /* SettingViewController.swift in Sources */,
 				1C020ECA2C92DB680028CAE0 /* StringExtension.swift in Sources */,
@@ -878,6 +894,14 @@
 				minimumVersion = 7.12.0;
 			};
 		};
+		1C020EF22C981F450028CAE0 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.1;
+			};
+		};
 		1C811F1F2C8AE421005B4D5D /* XCRemoteSwiftPackageReference "R" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mac-cain13/R.swift";
@@ -911,6 +935,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1C01D4162C904DE9007E93A9 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		1C020EF32C981F450028CAE0 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C020EF22C981F450028CAE0 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 		1C811F202C8AE421005B4D5D /* RswiftLibrary */ = {
 			isa = XCSwiftPackageProductDependency;

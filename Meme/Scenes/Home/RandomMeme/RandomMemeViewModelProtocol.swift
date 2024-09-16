@@ -12,8 +12,10 @@ import UIKit
 
 protocol RandomMemeViewModelProtocol {
     func loadFirstMemeIfNeeded()
-    func fetchRandomMeme(with keyword: String, mediaType: MemeMediaType)
+    func fetchRandomMeme()
     var media: Observable<(mediaURL: URL?, type: MemeMediaType)> { get }
+    var keyword: Observable<String?> { get }
+    var keywordObserver: AnyObserver<String?> { get }
     var description: Observable<String> { get }
     var randomMediaType: MemeMediaType { get }
 }

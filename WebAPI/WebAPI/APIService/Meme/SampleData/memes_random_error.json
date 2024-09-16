@@ -1,0 +1,5 @@
+{
+  "status" : "failure",
+  "message" : "Could not find a meme with the given keywords.",
+  "code" : 400
+}

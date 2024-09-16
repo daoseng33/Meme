@@ -29,13 +29,27 @@ final class RandomMemeViewController: UIViewController {
     private let descriptionTextView: UITextView = {
         let padding = 8.0
         let textView = UITextView()
-        textView.backgroundColor = .systemBackground
         textView.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         textView.textColor = .label
         textView.contentInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
         textView.isEditable = false
         
         return textView
+    }()
+    
+    private let keywordTextField: UITextField = {
+        let textField = UITextField()
+        textField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        textField.textColor = .label
+        textField.backgroundColor = .systemGray6
+        textField.placeholder = "\("Key in keyword".localized())(\("Optional".localized()))"
+        textField.layer.cornerRadius = 4
+        textField.clipsToBounds = true
+        textField.returnKeyType = .done
+        textField.clearButtonMode = .whileEditing
+        textField.setInsets(left: 8, right: 8)
+        
+        return textField
     }()
     
     private let generateMemeButton: RoundedRectangleButton = {
@@ -78,7 +92,7 @@ final class RandomMemeViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
-        dataBinding()
+        setupBinding()
         setupActions()
         viewModel.loadFirstMemeIfNeeded()
     }
@@ -106,11 +120,18 @@ final class RandomMemeViewController: UIViewController {
             $0.height.equalTo(50)
         }
         
+        view.addSubview(keywordTextField)
+        keywordTextField.snp.makeConstraints {
+            $0.left.right.equalTo(generateMemeButton)
+            $0.bottom.equalTo(generateMemeButton.snp.top).offset(-8)
+            $0.height.equalTo(35)
+        }
+        
         view.addSubview(descriptionTextView)
         descriptionTextView.snp.makeConstraints {
             $0.top.equalTo(imageView.snp.bottom)
             $0.left.right.equalToSuperview()
-            $0.bottom.equalTo(generateMemeButton.snp.top).offset(-8)
+            $0.bottom.equalTo(keywordTextField.snp.top).offset(-8)
         }
     }
     
@@ -119,12 +140,12 @@ final class RandomMemeViewController: UIViewController {
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
                 self.generateMemeButton.isEnabled = false
-                self.viewModel.fetchRandomMeme(with: "", mediaType: self.viewModel.randomMediaType)
+                self.viewModel.fetchRandomMeme()
             })
             .disposed(by: rx.disposeBag)
     }
     
-    private func dataBinding() {
+    private func setupBinding() {
         viewModel.media
             .asDriver(onErrorJustReturn: (nil, .image))
             .drive(with: self) { (self, mediaData) in
@@ -149,6 +170,14 @@ final class RandomMemeViewController: UIViewController {
             
         viewModel.description
             .bind(to: descriptionTextView.rx.text)
+            .disposed(by: rx.disposeBag)
+        
+        viewModel.keyword
+            .bind(to: keywordTextField.rx.text)
+            .disposed(by: rx.disposeBag)
+        
+        keywordTextField.rx.text
+            .bind(to: viewModel.keywordObserver)
             .disposed(by: rx.disposeBag)
     }
 }

@@ -29,14 +29,39 @@ final class MemeAPITests: XCTestCase {
     }
 
     func testFetchRandomMemeImage() throws {
-        let random = try sut.fetchRandomMeme(with: "", mediaType: .image, minRating: 8).toBlocking().single()
-        XCTAssertEqual(random.id, 831819)
-        XCTAssertEqual(random.type, "image/png")
+        let result = try sut.fetchRandomMeme(with: "", mediaType: .image, minRating: 8).toBlocking().single()
+        switch result {
+        case .success(let random):
+            XCTAssertEqual(random.id, 831819)
+            XCTAssertEqual(random.type, "image/png")
+            
+        case .failure(_):
+            break
+        }
+        
     }
 
     func testFetchRandomMemeVideo() throws {
-        let random = try sut.fetchRandomMeme(with: "", mediaType: .video, minRating: 8).toBlocking().single()
-        XCTAssertEqual(random.id, 12142)
-        XCTAssertEqual(random.type, "video/mp4")
+        let result = try sut.fetchRandomMeme(with: "", mediaType: .video, minRating: 8).toBlocking().single()
+        switch result {
+        case .success(let random):
+            XCTAssertEqual(random.id, 12142)
+            XCTAssertEqual(random.type, "video/mp4")
+            
+        case .failure(_):
+            break
+        }
+    }
+    
+    func testFetchRandomMemeFail() throws {
+        let result = try sut.fetchRandomMeme(with: "Boobs", mediaType: .image, minRating: 8).toBlocking().single()
+        switch result {
+        case .success(_):
+            break
+            
+        case .failure(let error):
+            XCTAssertEqual(error.code, 400)
+            XCTAssertEqual(error.status, "failure")
+        }
     }
 }

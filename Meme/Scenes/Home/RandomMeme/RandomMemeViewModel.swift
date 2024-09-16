@@ -16,29 +16,51 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
         mediaRelay.asObservable()
     }
     
+    var keyword: Observable<String?> {
+        keywordSubject.asObservable()
+    }
+    
+    var keywordObserver: AnyObserver<String?> {
+        keywordSubject.asObserver()
+    }
+    
     var description: Observable<String> {
         descriptionRelay.asObservable()
     }
     
     private let randomMemeWebAPI = MemeAPIService()
     private let mediaRelay = BehaviorRelay<(mediaURL: URL?, type: MemeMediaType)>(value: (nil, .image))
+    private let keywordSubject = BehaviorSubject<String?>(value: nil)
     private let descriptionRelay = BehaviorRelay<String>(value: "")
     private let disposeBag = DisposeBag()
     
     // MARK: - Get data
     func loadFirstMemeIfNeeded() {
         if descriptionRelay.value.isEmpty {
-            fetchRandomMeme(mediaType: randomMediaType)
+            fetchRandomMeme()
         }
     }
-    
-    func fetchRandomMeme(with keyword: String = "", mediaType: MemeMediaType = .image) {
-        randomMemeWebAPI.fetchRandomMeme(with: keyword, mediaType: mediaType, minRating: 8)
-            .subscribe(onSuccess: { [weak self] randomMeme in
+
+    func fetchRandomMeme() {
+        var keyword: String = ""
+        if let value: String = try? keywordSubject.value() {
+            keyword = value
+        }
+        randomMemeWebAPI.fetchRandomMeme(with: keyword, mediaType: randomMediaType, minRating: 8)
+            .subscribe(onSuccess: { [weak self] result in
                 guard let self = self else { return }
-                let mediaType = getMediaType(with: randomMeme.type)
-                mediaRelay.accept((randomMeme.url, mediaType))
-                descriptionRelay.accept(randomMeme.description)
+                
+                switch result {
+                case .success(let randomMeme):
+                    let mediaType = getMediaType(with: randomMeme.type)
+                    mediaRelay.accept((randomMeme.url, mediaType))
+                    descriptionRelay.accept(randomMeme.description)
+                    
+                case .failure(let error):
+                    let noResultImageURL = Utility.getImageURL(named: R.image.no_result.name)
+                    mediaRelay.accept((noResultImageURL, .image))
+                    descriptionRelay.accept(error.message)
+                }
             })
             .disposed(by: disposeBag)
     }

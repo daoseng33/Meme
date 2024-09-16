@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C020EFC2C9829500028CAE0 /* RandomMemeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C020EFB2C9829500028CAE0 /* RandomMemeError.swift */; };
 		1CD9F5382C85CACA009DDABD /* MemeData.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CD9F5372C85CACA009DDABD /* MemeData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1CE608EC2C85CB0F004844B7 /* RandomMeme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE608EB2C85CB0F004844B7 /* RandomMeme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C020EFB2C9829500028CAE0 /* RandomMemeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomMemeError.swift; sourceTree = "<group>"; };
 		1CD9F5342C85CACA009DDABD /* MemeData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MemeData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CD9F5372C85CACA009DDABD /* MemeData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MemeData.h; sourceTree = "<group>"; };
 		1CE608EB2C85CB0F004844B7 /* RandomMeme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomMeme.swift; sourceTree = "<group>"; };
@@ -49,6 +51,7 @@
 			children = (
 				1CD9F5372C85CACA009DDABD /* MemeData.h */,
 				1CE608EB2C85CB0F004844B7 /* RandomMeme.swift */,
+				1C020EFB2C9829500028CAE0 /* RandomMemeError.swift */,
 			);
 			path = MemeData;
 			sourceTree = "<group>";
@@ -134,6 +137,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CE608EC2C85CB0F004844B7 /* RandomMeme.swift in Sources */,
+				1C020EFC2C9829500028CAE0 /* RandomMemeError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
