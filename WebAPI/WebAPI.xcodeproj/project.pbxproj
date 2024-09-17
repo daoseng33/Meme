@@ -109,15 +109,6 @@
 			path = General;
 			sourceTree = "<group>";
 		};
-		1C223B612C8709B900032854 /* APIServiceProtocol */ = {
-			isa = PBXGroup;
-			children = (
-				1CAD90252C99529B00BB4DFC /* BaseAPIServiceProtocol.swift */,
-				1C223B622C8709DA00032854 /* MemeAPIServiceProtocol.swift */,
-			);
-			path = APIServiceProtocol;
-			sourceTree = "<group>";
-		};
 		1C223B642C870A3800032854 /* APIService */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,7 +140,6 @@
 			isa = PBXGroup;
 			children = (
 				1C223B642C870A3800032854 /* APIService */,
-				1C223B612C8709B900032854 /* APIServiceProtocol */,
 				1CC9DC9B2C81D76500A1EEC6 /* Base */,
 				1C223B5E2C8703EC00032854 /* General */,
 				1C248C612C81D0090015A7F1 /* WebAPI.h */,
@@ -171,6 +161,7 @@
 				1CC9DCC02C82F6A300A1EEC6 /* SampleData */,
 				1CC9DC952C81D76500A1EEC6 /* MemeAPI.swift */,
 				1CC9DC962C81D76500A1EEC6 /* MemeAPIService.swift */,
+				1C223B622C8709DA00032854 /* MemeAPIServiceProtocol.swift */,
 			);
 			path = Meme;
 			sourceTree = "<group>";
@@ -180,6 +171,7 @@
 			children = (
 				1C223B652C870C1C00032854 /* APIConfig.plist */,
 				1CD9F5242C85B9F8009DDABD /* APIErrorHandleManager.swift */,
+				1CAD90252C99529B00BB4DFC /* BaseAPIServiceProtocol.swift */,
 				1CD9F5222C85B6A6009DDABD /* ErrorHandlingPlugin.swift */,
 				1CC9DCA12C81D7BF00A1EEC6 /* JSONDecoderExtension.swift */,
 				1CC9DC982C81D76500A1EEC6 /* MemeTargetType.swift */,
