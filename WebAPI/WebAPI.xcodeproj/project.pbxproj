@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1C01D41B2C905AB0007E93A9 /* memes_random_video.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C01D41A2C905AB0007E93A9 /* memes_random_video.json */; };
 		1C020F002C9829CB0028CAE0 /* memes_random_error.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C020EFF2C9829CB0028CAE0 /* memes_random_error.json */; };
+		1C020F0C2C99466C0028CAE0 /* WebAPIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C020F0B2C99466C0028CAE0 /* WebAPIConfig.swift */; };
 		1C223B602C87040100032854 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C223B5F2C87040100032854 /* Utility.swift */; };
 		1C223B632C8709DA00032854 /* MemeAPIServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C223B622C8709DA00032854 /* MemeAPIServiceProtocol.swift */; };
 		1C223B662C870C1C00032854 /* APIConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C223B652C870C1C00032854 /* APIConfig.plist */; };
@@ -56,6 +57,7 @@
 /* Begin PBXFileReference section */
 		1C01D41A2C905AB0007E93A9 /* memes_random_video.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = memes_random_video.json; sourceTree = "<group>"; };
 		1C020EFF2C9829CB0028CAE0 /* memes_random_error.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = memes_random_error.json; sourceTree = "<group>"; };
+		1C020F0B2C99466C0028CAE0 /* WebAPIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAPIConfig.swift; sourceTree = "<group>"; };
 		1C223B5F2C87040100032854 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		1C223B622C8709DA00032854 /* MemeAPIServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeAPIServiceProtocol.swift; sourceTree = "<group>"; };
 		1C223B652C870C1C00032854 /* APIConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIConfig.plist; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				1CC9DCA12C81D7BF00A1EEC6 /* JSONDecoderExtension.swift */,
 				1CC9DC982C81D76500A1EEC6 /* MemeTargetType.swift */,
 				1CC9DC9A2C81D76500A1EEC6 /* MoyaProviderExtension.swift */,
+				1C020F0B2C99466C0028CAE0 /* WebAPIConfig.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CD9F5252C85B9F8009DDABD /* APIErrorHandleManager.swift in Sources */,
+				1C020F0C2C99466C0028CAE0 /* WebAPIConfig.swift in Sources */,
 				1CD9F5232C85B6A6009DDABD /* ErrorHandlingPlugin.swift in Sources */,
 				1CC9DCA22C81D7BF00A1EEC6 /* JSONDecoderExtension.swift in Sources */,
 				1CC9DC9C2C81D76500A1EEC6 /* MemeAPI.swift in Sources */,
