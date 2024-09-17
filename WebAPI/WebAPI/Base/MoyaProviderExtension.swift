@@ -22,19 +22,13 @@ private func JSONResponseDataFormatter(_ data: Data) -> String {
 
 extension MoyaProvider {
     public static var `default`: MoyaProvider {
-        let isWebAPITesting = ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
+        let formatter: NetworkLoggerPlugin.Configuration.Formatter = .init(responseData: JSONResponseDataFormatter)
+        let configuration: NetworkLoggerPlugin.Configuration = .init(formatter: formatter, logOptions: .verbose)
+        let netWorkPlugin: NetworkLoggerPlugin = NetworkLoggerPlugin(configuration: configuration)
+        let errorHandlingPlugin: ErrorHandlingPlugin = ErrorHandlingPlugin()
         
-        if WebAPIConfig.shouldUseMockData || isWebAPITesting {
-            return MoyaProvider.stub
-        } else {
-            let formatter: NetworkLoggerPlugin.Configuration.Formatter = .init(responseData: JSONResponseDataFormatter)
-            let configuration: NetworkLoggerPlugin.Configuration = .init(formatter: formatter, logOptions: .verbose)
-            let netWorkPlugin: NetworkLoggerPlugin = NetworkLoggerPlugin(configuration: configuration)
-            let errorHandlingPlugin: ErrorHandlingPlugin = ErrorHandlingPlugin()
-            
-            return MoyaProvider<Target>(callbackQueue: .global(),
-                                        plugins: [netWorkPlugin, errorHandlingPlugin])
-        }
+        return MoyaProvider<Target>(callbackQueue: .global(),
+                                    plugins: [netWorkPlugin, errorHandlingPlugin])
     }
     
     public static var stub: MoyaProvider {

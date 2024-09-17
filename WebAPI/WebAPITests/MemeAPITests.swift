@@ -15,7 +15,7 @@ final class MemeAPITests: XCTestCase {
     var sut: MemeAPIService!
     
     override func setUpWithError() throws {
-        sut = MemeAPIService()
+        sut = MemeAPIService(useMockData: true)
         
     }
 

@@ -14,6 +14,6 @@ public enum MemeAPIResponse<RandomMeme, RandomMemeError> {
     case failure(RandomMemeError)
 }
 
-public protocol MemeAPIServiceProtocol {
+public protocol MemeAPIServiceProtocol: BaseAPIServiceProtocol {
     func fetchRandomMeme(with keyword: String, mediaType: MemeMediaType, minRating: Int) -> Single<MemeAPIResponse<RandomMeme, RandomMemeError>>
 }

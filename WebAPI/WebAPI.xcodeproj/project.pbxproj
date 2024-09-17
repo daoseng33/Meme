@@ -9,14 +9,15 @@
 /* Begin PBXBuildFile section */
 		1C01D41B2C905AB0007E93A9 /* memes_random_video.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C01D41A2C905AB0007E93A9 /* memes_random_video.json */; };
 		1C020F002C9829CB0028CAE0 /* memes_random_error.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C020EFF2C9829CB0028CAE0 /* memes_random_error.json */; };
-		1C020F0C2C99466C0028CAE0 /* WebAPIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C020F0B2C99466C0028CAE0 /* WebAPIConfig.swift */; };
 		1C223B602C87040100032854 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C223B5F2C87040100032854 /* Utility.swift */; };
 		1C223B632C8709DA00032854 /* MemeAPIServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C223B622C8709DA00032854 /* MemeAPIServiceProtocol.swift */; };
 		1C223B662C870C1C00032854 /* APIConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C223B652C870C1C00032854 /* APIConfig.plist */; };
-		1C223B692C870FA400032854 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 1C223B682C870FA400032854 /* RxBlocking */; };
 		1C248C672C81D0090015A7F1 /* WebAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C248C5E2C81D0090015A7F1 /* WebAPI.framework */; };
 		1C248C6C2C81D0090015A7F1 /* MemeAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C248C6B2C81D0090015A7F1 /* MemeAPITests.swift */; };
 		1C248C6D2C81D0090015A7F1 /* WebAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C248C612C81D0090015A7F1 /* WebAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1C87C3592C9963FF00A63581 /* RxBlocking-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C3582C9963FF00A63581 /* RxBlocking-Dynamic */; };
+		1C87C35C2C99642100A63581 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C35B2C99642100A63581 /* RxMoya */; };
+		1CAD90262C99529B00BB4DFC /* BaseAPIServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD90252C99529B00BB4DFC /* BaseAPIServiceProtocol.swift */; };
 		1CC9DC9C2C81D76500A1EEC6 /* MemeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9DC952C81D76500A1EEC6 /* MemeAPI.swift */; };
 		1CC9DC9D2C81D76500A1EEC6 /* MemeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9DC962C81D76500A1EEC6 /* MemeAPIService.swift */; };
 		1CC9DC9E2C81D76500A1EEC6 /* MemeTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9DC982C81D76500A1EEC6 /* MemeTargetType.swift */; };
@@ -25,7 +26,6 @@
 		1CC9DCC22C82F71300A1EEC6 /* memes_random_image.json in Resources */ = {isa = PBXBuildFile; fileRef = 1CC9DCC12C82F71300A1EEC6 /* memes_random_image.json */; };
 		1CD9F5232C85B6A6009DDABD /* ErrorHandlingPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD9F5222C85B6A6009DDABD /* ErrorHandlingPlugin.swift */; };
 		1CD9F5252C85B9F8009DDABD /* APIErrorHandleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD9F5242C85B9F8009DDABD /* APIErrorHandleManager.swift */; };
-		1CD9F5272C85BFC0009DDABD /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 1CD9F5262C85BFC0009DDABD /* RxMoya */; };
 		1CE608EE2C85CB40004844B7 /* MemeData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CE608ED2C85CB40004844B7 /* MemeData.framework */; };
 		1CE608EF2C85CB40004844B7 /* MemeData.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1CE608ED2C85CB40004844B7 /* MemeData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -57,7 +57,6 @@
 /* Begin PBXFileReference section */
 		1C01D41A2C905AB0007E93A9 /* memes_random_video.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = memes_random_video.json; sourceTree = "<group>"; };
 		1C020EFF2C9829CB0028CAE0 /* memes_random_error.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = memes_random_error.json; sourceTree = "<group>"; };
-		1C020F0B2C99466C0028CAE0 /* WebAPIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAPIConfig.swift; sourceTree = "<group>"; };
 		1C223B5F2C87040100032854 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		1C223B622C8709DA00032854 /* MemeAPIServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeAPIServiceProtocol.swift; sourceTree = "<group>"; };
 		1C223B652C870C1C00032854 /* APIConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIConfig.plist; sourceTree = "<group>"; };
@@ -65,6 +64,7 @@
 		1C248C612C81D0090015A7F1 /* WebAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebAPI.h; sourceTree = "<group>"; };
 		1C248C662C81D0090015A7F1 /* WebAPITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WebAPITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C248C6B2C81D0090015A7F1 /* MemeAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeAPITests.swift; sourceTree = "<group>"; };
+		1CAD90252C99529B00BB4DFC /* BaseAPIServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPIServiceProtocol.swift; sourceTree = "<group>"; };
 		1CC9DC952C81D76500A1EEC6 /* MemeAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeAPI.swift; sourceTree = "<group>"; };
 		1CC9DC962C81D76500A1EEC6 /* MemeAPIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeAPIService.swift; sourceTree = "<group>"; };
 		1CC9DC982C81D76500A1EEC6 /* MemeTargetType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeTargetType.swift; sourceTree = "<group>"; };
@@ -82,8 +82,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C87C35C2C99642100A63581 /* RxMoya in Frameworks */,
 				1CE608EE2C85CB40004844B7 /* MemeData.framework in Frameworks */,
-				1CD9F5272C85BFC0009DDABD /* RxMoya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,8 +91,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C223B692C870FA400032854 /* RxBlocking in Frameworks */,
 				1C248C672C81D0090015A7F1 /* WebAPI.framework in Frameworks */,
+				1C87C3592C9963FF00A63581 /* RxBlocking-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				1C223B622C8709DA00032854 /* MemeAPIServiceProtocol.swift */,
+				1CAD90252C99529B00BB4DFC /* BaseAPIServiceProtocol.swift */,
 			);
 			path = APIServiceProtocol;
 			sourceTree = "<group>";
@@ -181,7 +182,6 @@
 				1CC9DCA12C81D7BF00A1EEC6 /* JSONDecoderExtension.swift */,
 				1CC9DC982C81D76500A1EEC6 /* MemeTargetType.swift */,
 				1CC9DC9A2C81D76500A1EEC6 /* MoyaProviderExtension.swift */,
-				1C020F0B2C99466C0028CAE0 /* WebAPIConfig.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -235,7 +235,7 @@
 			);
 			name = WebAPI;
 			packageProductDependencies = (
-				1CD9F5262C85BFC0009DDABD /* RxMoya */,
+				1C87C35B2C99642100A63581 /* RxMoya */,
 			);
 			productName = WebAPI;
 			productReference = 1C248C5E2C81D0090015A7F1 /* WebAPI.framework */;
@@ -256,7 +256,7 @@
 			);
 			name = WebAPITests;
 			packageProductDependencies = (
-				1C223B682C870FA400032854 /* RxBlocking */,
+				1C87C3582C9963FF00A63581 /* RxBlocking-Dynamic */,
 			);
 			productName = WebAPITests;
 			productReference = 1C248C662C81D0090015A7F1 /* WebAPITests.xctest */;
@@ -291,8 +291,8 @@
 			);
 			mainGroup = 1C248C542C81D0090015A7F1;
 			packageReferences = (
-				1CD9F5182C83174F009DDABD /* XCRemoteSwiftPackageReference "Moya" */,
-				1C223B672C870FA400032854 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				1C87C3572C9963FF00A63581 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				1C87C35A2C99642100A63581 /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			productRefGroup = 1C248C5F2C81D0090015A7F1 /* Products */;
 			projectDirPath = "";
@@ -331,7 +331,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CD9F5252C85B9F8009DDABD /* APIErrorHandleManager.swift in Sources */,
-				1C020F0C2C99466C0028CAE0 /* WebAPIConfig.swift in Sources */,
 				1CD9F5232C85B6A6009DDABD /* ErrorHandlingPlugin.swift in Sources */,
 				1CC9DCA22C81D7BF00A1EEC6 /* JSONDecoderExtension.swift in Sources */,
 				1CC9DC9C2C81D76500A1EEC6 /* MemeAPI.swift in Sources */,
@@ -339,6 +338,7 @@
 				1C223B632C8709DA00032854 /* MemeAPIServiceProtocol.swift in Sources */,
 				1CC9DC9E2C81D76500A1EEC6 /* MemeTargetType.swift in Sources */,
 				1CC9DCA02C81D76500A1EEC6 /* MoyaProviderExtension.swift in Sources */,
+				1CAD90262C99529B00BB4DFC /* BaseAPIServiceProtocol.swift in Sources */,
 				1C223B602C87040100032854 /* Utility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -619,7 +619,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1C223B672C870FA400032854 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+		1C87C3572C9963FF00A63581 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift";
 			requirement = {
@@ -627,7 +627,7 @@
 				minimumVersion = 6.7.1;
 			};
 		};
-		1CD9F5182C83174F009DDABD /* XCRemoteSwiftPackageReference "Moya" */ = {
+		1C87C35A2C99642100A63581 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya";
 			requirement = {
@@ -638,14 +638,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1C223B682C870FA400032854 /* RxBlocking */ = {
+		1C87C3582C9963FF00A63581 /* RxBlocking-Dynamic */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1C223B672C870FA400032854 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxBlocking;
+			package = 1C87C3572C9963FF00A63581 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = "RxBlocking-Dynamic";
 		};
-		1CD9F5262C85BFC0009DDABD /* RxMoya */ = {
+		1C87C35B2C99642100A63581 /* RxMoya */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1CD9F5182C83174F009DDABD /* XCRemoteSwiftPackageReference "Moya" */;
+			package = 1C87C35A2C99642100A63581 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = RxMoya;
 		};
 /* End XCSwiftPackageProductDependency section */

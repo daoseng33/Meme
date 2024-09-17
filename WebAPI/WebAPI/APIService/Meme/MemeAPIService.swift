@@ -12,9 +12,13 @@ import RxMoya
 import Moya
 
 public struct MemeAPIService: MemeAPIServiceProtocol {
-    let provider = MoyaProvider<MemeAPI>.default
+    public let useMockData: Bool
+    let provider: MoyaProvider<MemeAPI>
     
-    public init() {}
+    public init(useMockData: Bool = false) {
+        self.useMockData = useMockData
+        provider = useMockData ? MoyaProvider<MemeAPI>.stub : MoyaProvider.default
+    }
     
     public func fetchRandomMeme(with keyword: String, mediaType: MemeMediaType, minRating: Int) -> Single<MemeAPIResponse<RandomMeme, RandomMemeError>> {
         return provider.rx
