@@ -17,6 +17,7 @@
 		1C248C6D2C81D0090015A7F1 /* WebAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C248C612C81D0090015A7F1 /* WebAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C87C3592C9963FF00A63581 /* RxBlocking-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C3582C9963FF00A63581 /* RxBlocking-Dynamic */; };
 		1C87C35C2C99642100A63581 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C35B2C99642100A63581 /* RxMoya */; };
+		1C87C3652C9974B600A63581 /* memes_random_keyword.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C87C3642C9974B600A63581 /* memes_random_keyword.json */; };
 		1CAD90262C99529B00BB4DFC /* BaseAPIServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD90252C99529B00BB4DFC /* BaseAPIServiceProtocol.swift */; };
 		1CC9DC9C2C81D76500A1EEC6 /* MemeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9DC952C81D76500A1EEC6 /* MemeAPI.swift */; };
 		1CC9DC9D2C81D76500A1EEC6 /* MemeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9DC962C81D76500A1EEC6 /* MemeAPIService.swift */; };
@@ -64,6 +65,7 @@
 		1C248C612C81D0090015A7F1 /* WebAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebAPI.h; sourceTree = "<group>"; };
 		1C248C662C81D0090015A7F1 /* WebAPITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WebAPITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C248C6B2C81D0090015A7F1 /* MemeAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeAPITests.swift; sourceTree = "<group>"; };
+		1C87C3642C9974B600A63581 /* memes_random_keyword.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = memes_random_keyword.json; sourceTree = "<group>"; };
 		1CAD90252C99529B00BB4DFC /* BaseAPIServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPIServiceProtocol.swift; sourceTree = "<group>"; };
 		1CC9DC952C81D76500A1EEC6 /* MemeAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeAPI.swift; sourceTree = "<group>"; };
 		1CC9DC962C81D76500A1EEC6 /* MemeAPIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeAPIService.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				1CC9DCC12C82F71300A1EEC6 /* memes_random_image.json */,
 				1C01D41A2C905AB0007E93A9 /* memes_random_video.json */,
 				1C020EFF2C9829CB0028CAE0 /* memes_random_error.json */,
+				1C87C3642C9974B600A63581 /* memes_random_keyword.json */,
 			);
 			path = SampleData;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				1CC9DCC22C82F71300A1EEC6 /* memes_random_image.json in Resources */,
 				1C01D41B2C905AB0007E93A9 /* memes_random_video.json in Resources */,
 				1C020F002C9829CB0028CAE0 /* memes_random_error.json in Resources */,
+				1C87C3652C9974B600A63581 /* memes_random_keyword.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -38,6 +38,7 @@
 		1C811F2D2C8AED01005B4D5D /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C811F2C2C8AED01005B4D5D /* SettingViewController.swift */; };
 		1C87C34E2C9961FB00A63581 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C34D2C9961FB00A63581 /* RxCocoa */; };
 		1C87C3502C9961FB00A63581 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C34F2C9961FB00A63581 /* RxRelay */; };
+		1C87C3622C996A5E00A63581 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C3612C996A5E00A63581 /* RxBlocking */; };
 		1CD9F5172C8316BC009DDABD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1CD9F5162C8316BC009DDABD /* SnapKit */; };
 		1CDA35342C81AB6C001FF654 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA35332C81AB6C001FF654 /* AppDelegate.swift */; };
 		1CDA35362C81AB6C001FF654 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA35352C81AB6C001FF654 /* SceneDelegate.swift */; };
@@ -45,7 +46,7 @@
 		1CDA353E2C81AB6C001FF654 /* Meme.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA353C2C81AB6C001FF654 /* Meme.xcdatamodeld */; };
 		1CDA35402C81AB6F001FF654 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CDA353F2C81AB6F001FF654 /* Assets.xcassets */; };
 		1CDA35432C81AB6F001FF654 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 1CDA35422C81AB6F001FF654 /* Base */; };
-		1CDA354E2C81AB6F001FF654 /* MemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA354D2C81AB6F001FF654 /* MemeTests.swift */; };
+		1CDA354E2C81AB6F001FF654 /* RandomMemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA354D2C81AB6F001FF654 /* RandomMemeTests.swift */; };
 		1CDA35582C81AB6F001FF654 /* MemeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA35572C81AB6F001FF654 /* MemeUITests.swift */; };
 		1CDA355A2C81AB6F001FF654 /* MemeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA35592C81AB6F001FF654 /* MemeUITestsLaunchTests.swift */; };
 		1CE608F22C85CB4C004844B7 /* MemeData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CE608F12C85CB4C004844B7 /* MemeData.framework */; };
@@ -121,7 +122,7 @@
 		1CDA35422C81AB6F001FF654 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1CDA35442C81AB6F001FF654 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1CDA35492C81AB6F001FF654 /* MemeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1CDA354D2C81AB6F001FF654 /* MemeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeTests.swift; sourceTree = "<group>"; };
+		1CDA354D2C81AB6F001FF654 /* RandomMemeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomMemeTests.swift; sourceTree = "<group>"; };
 		1CDA35532C81AB6F001FF654 /* MemeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CDA35572C81AB6F001FF654 /* MemeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeUITests.swift; sourceTree = "<group>"; };
 		1CDA35592C81AB6F001FF654 /* MemeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -149,6 +150,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C87C3622C996A5E00A63581 /* RxBlocking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,7 +339,7 @@
 		1CDA354C2C81AB6F001FF654 /* MemeTests */ = {
 			isa = PBXGroup;
 			children = (
-				1CDA354D2C81AB6F001FF654 /* MemeTests.swift */,
+				1CDA354D2C81AB6F001FF654 /* RandomMemeTests.swift */,
 			);
 			path = MemeTests;
 			sourceTree = "<group>";
@@ -406,6 +408,7 @@
 			);
 			name = MemeTests;
 			packageProductDependencies = (
+				1C87C3612C996A5E00A63581 /* RxBlocking */,
 			);
 			productName = MemeTests;
 			productReference = 1CDA35492C81AB6F001FF654 /* MemeTests.xctest */;
@@ -547,7 +550,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1CDA354E2C81AB6F001FF654 /* MemeTests.swift in Sources */,
+				1CDA354E2C81AB6F001FF654 /* RandomMemeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -951,6 +954,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1C87C34C2C9961FB00A63581 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxRelay;
+		};
+		1C87C3612C996A5E00A63581 /* RxBlocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C87C34C2C9961FB00A63581 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxBlocking;
 		};
 		1CD9F5162C8316BC009DDABD /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

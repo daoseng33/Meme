@@ -53,9 +53,15 @@ extension MemeAPI: MemeTargetType {
     public var sampleData: Data {
         switch self {
         case .randomMeme(let keyword, let mediaType, _):
-            if keyword == "Boobs" {
+            
+            switch keyword {
+            case "Boobs":
                 return Utility.loadJSON(filename: "memes_random_error")
-            } else {
+                
+            case "your mom":
+                return Utility.loadJSON(filename: "memes_random_keyword")
+                
+            default:
                 switch mediaType {
                 case .image:
                     return Utility.loadJSON(filename: "memes_random_image")

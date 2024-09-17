@@ -28,11 +28,16 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
         descriptionRelay.asObservable()
     }
     
-    private let randomMemeWebAPI = MemeAPIService()
+    private let randomMemeWebAPI: MemeAPIServiceProtocol
     private let mediaRelay = BehaviorRelay<(mediaURL: URL?, type: MemeMediaType)>(value: (nil, .image))
     private let keywordSubject = BehaviorSubject<String?>(value: nil)
     private let descriptionRelay = BehaviorRelay<String>(value: "")
     private let disposeBag = DisposeBag()
+    
+    // MARK: - Init
+    init(webService: MemeAPIServiceProtocol = MemeAPIService()) {
+        randomMemeWebAPI = webService
+    }
     
     // MARK: - Get data
     func loadFirstMemeIfNeeded() {
