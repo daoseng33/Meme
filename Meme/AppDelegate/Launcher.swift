@@ -8,7 +8,7 @@
 import Foundation
 import IQKeyboardManagerSwift
 
-class Launcher {
+final class Launcher {
     @MainActor func setup() {
         setupIQKeyboardManager()
     }
