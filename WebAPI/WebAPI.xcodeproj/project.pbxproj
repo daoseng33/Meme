@@ -84,8 +84,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C87C35C2C99642100A63581 /* RxMoya in Frameworks */,
 				1CE608EE2C85CB40004844B7 /* MemeData.framework in Frameworks */,
+				1C87C35C2C99642100A63581 /* RxMoya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,8 +93,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C248C672C81D0090015A7F1 /* WebAPI.framework in Frameworks */,
 				1C87C3592C9963FF00A63581 /* RxBlocking-Dynamic in Frameworks */,
+				1C248C672C81D0090015A7F1 /* WebAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,8 +112,8 @@
 		1C223B612C8709B900032854 /* APIServiceProtocol */ = {
 			isa = PBXGroup;
 			children = (
-				1C223B622C8709DA00032854 /* MemeAPIServiceProtocol.swift */,
 				1CAD90252C99529B00BB4DFC /* BaseAPIServiceProtocol.swift */,
+				1C223B622C8709DA00032854 /* MemeAPIServiceProtocol.swift */,
 			);
 			path = APIServiceProtocol;
 			sourceTree = "<group>";
@@ -191,10 +191,10 @@
 		1CC9DCC02C82F6A300A1EEC6 /* SampleData */ = {
 			isa = PBXGroup;
 			children = (
-				1CC9DCC12C82F71300A1EEC6 /* memes_random_image.json */,
-				1C01D41A2C905AB0007E93A9 /* memes_random_video.json */,
 				1C020EFF2C9829CB0028CAE0 /* memes_random_error.json */,
+				1CC9DCC12C82F71300A1EEC6 /* memes_random_image.json */,
 				1C87C3642C9974B600A63581 /* memes_random_keyword.json */,
+				1C01D41A2C905AB0007E93A9 /* memes_random_video.json */,
 			);
 			path = SampleData;
 			sourceTree = "<group>";
@@ -313,10 +313,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C223B662C870C1C00032854 /* APIConfig.plist in Resources */,
-				1CC9DCC22C82F71300A1EEC6 /* memes_random_image.json in Resources */,
-				1C01D41B2C905AB0007E93A9 /* memes_random_video.json in Resources */,
 				1C020F002C9829CB0028CAE0 /* memes_random_error.json in Resources */,
+				1CC9DCC22C82F71300A1EEC6 /* memes_random_image.json in Resources */,
 				1C87C3652C9974B600A63581 /* memes_random_keyword.json in Resources */,
+				1C01D41B2C905AB0007E93A9 /* memes_random_video.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CD9F5252C85B9F8009DDABD /* APIErrorHandleManager.swift in Sources */,
+				1CAD90262C99529B00BB4DFC /* BaseAPIServiceProtocol.swift in Sources */,
 				1CD9F5232C85B6A6009DDABD /* ErrorHandlingPlugin.swift in Sources */,
 				1CC9DCA22C81D7BF00A1EEC6 /* JSONDecoderExtension.swift in Sources */,
 				1CC9DC9C2C81D76500A1EEC6 /* MemeAPI.swift in Sources */,
@@ -342,7 +343,6 @@
 				1C223B632C8709DA00032854 /* MemeAPIServiceProtocol.swift in Sources */,
 				1CC9DC9E2C81D76500A1EEC6 /* MemeTargetType.swift in Sources */,
 				1CC9DCA02C81D76500A1EEC6 /* MoyaProviderExtension.swift in Sources */,
-				1CAD90262C99529B00BB4DFC /* BaseAPIServiceProtocol.swift in Sources */,
 				1C223B602C87040100032854 /* Utility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
