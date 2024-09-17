@@ -40,6 +40,7 @@
 		1C87C3502C9961FB00A63581 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C34F2C9961FB00A63581 /* RxRelay */; };
 		1C87C3622C996A5E00A63581 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C3612C996A5E00A63581 /* RxBlocking */; };
 		1C87C3682C997A2C00A63581 /* UIView-Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C3672C997A2C00A63581 /* UIView-Shimmer */; };
+		1C87C36B2C997A6000A63581 /* UIView+Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C87C36A2C997A6000A63581 /* UIView+Shimmer.swift */; };
 		1CD9F5172C8316BC009DDABD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1CD9F5162C8316BC009DDABD /* SnapKit */; };
 		1CDA35342C81AB6C001FF654 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA35332C81AB6C001FF654 /* AppDelegate.swift */; };
 		1CDA35362C81AB6C001FF654 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA35352C81AB6C001FF654 /* SceneDelegate.swift */; };
@@ -112,6 +113,7 @@
 		1C811F272C8AECEB005B4D5D /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		1C811F2A2C8AECF8005B4D5D /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		1C811F2C2C8AED01005B4D5D /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		1C87C36A2C997A6000A63581 /* UIView+Shimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shimmer.swift"; sourceTree = "<group>"; };
 		1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WebAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CC9DCCB2C82FDFA00A1EEC6 /* MemeModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MemeModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CDA35302C81AB6C001FF654 /* Meme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meme.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -263,6 +265,7 @@
 				1C01D3EC2C8ED355007E93A9 /* UICollectionViewExtension.swift */,
 				1C01D3EE2C8ED3A1007E93A9 /* UITableViewExtension.swift */,
 				1C020EF92C9821420028CAE0 /* UITextFieldExtension.swift */,
+				1C87C36A2C997A6000A63581 /* UIView+Shimmer.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 				1CDA35382C81AB6C001FF654 /* HomePageViewController.swift in Sources */,
 				1C811F0D2C899ABC005B4D5D /* HomePageViewModel.swift in Sources */,
 				1C020EF72C981F680028CAE0 /* Launcher.swift in Sources */,
+				1C87C36B2C997A6000A63581 /* UIView+Shimmer.swift in Sources */,
 				1CDA353E2C81AB6C001FF654 /* Meme.xcdatamodeld in Sources */,
 				1C811F1E2C8AE2BD005B4D5D /* MemeTabBarController.swift in Sources */,
 				1C811F0B2C8849A8005B4D5D /* NSObject+rx.swift in Sources */,

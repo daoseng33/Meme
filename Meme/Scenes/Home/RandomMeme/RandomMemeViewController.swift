@@ -10,6 +10,7 @@ import AVFoundation
 import SnapKit
 import RxCocoa
 import Kingfisher
+import UIView_Shimmer
 
 final class RandomMemeViewController: UIViewController {
     // MARK: - Properties
@@ -27,11 +28,9 @@ final class RandomMemeViewController: UIViewController {
     private let videoPlayerView = VideoPlayerView()
     
     private let descriptionTextView: UITextView = {
-        let padding = 8.0
         let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         textView.textColor = .label
-        textView.contentInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
         textView.isEditable = false
         
         return textView
@@ -69,6 +68,20 @@ final class RandomMemeViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - View lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupUI()
+        setupBinding()
+        setupActions()
+        viewModel.loadFirstMemeIfNeeded()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if videoPlayerView.status == .playing, videoPlayerView.isHidden == false {
@@ -83,18 +96,12 @@ final class RandomMemeViewController: UIViewController {
         }
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - View lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        setupUI()
-        setupBinding()
-        setupActions()
-        viewModel.loadFirstMemeIfNeeded()
+        if viewModel.isLoading {
+            view.setTemplateWithSubviews(true)
+        }
     }
     
     // MARK: - Setup
@@ -129,8 +136,8 @@ final class RandomMemeViewController: UIViewController {
         
         view.addSubview(descriptionTextView)
         descriptionTextView.snp.makeConstraints {
-            $0.top.equalTo(imageView.snp.bottom)
-            $0.left.right.equalToSuperview()
+            $0.top.equalTo(imageView.snp.bottom).offset(8)
+            $0.left.right.equalTo(imageView).inset(8)
             $0.bottom.equalTo(keywordTextField.snp.top).offset(-8)
         }
     }
@@ -165,6 +172,7 @@ final class RandomMemeViewController: UIViewController {
                 }
                 
                 self.generateMemeButton.isEnabled = mediaData.mediaURL != nil
+                self.view.setTemplateWithSubviews(false)
             }
             .disposed(by: rx.disposeBag)
             

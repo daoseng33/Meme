@@ -28,10 +28,15 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
         descriptionRelay.asObservable()
     }
     
+    var isLoading: Bool {
+        isLoadingRely.value
+    }
+    
     private let randomMemeWebAPI: MemeAPIServiceProtocol
     private let mediaRelay = BehaviorRelay<(mediaURL: URL?, type: MemeMediaType)>(value: (nil, .image))
     private let keywordSubject = BehaviorSubject<String?>(value: nil)
     private let descriptionRelay = BehaviorRelay<String>(value: "")
+    private let isLoadingRely = BehaviorRelay<Bool>(value: false)
     private let disposeBag = DisposeBag()
     
     // MARK: - Init
@@ -47,6 +52,8 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
     }
 
     func fetchRandomMeme() {
+        isLoadingRely.accept(true)
+        
         var keyword: String = ""
         if let value: String = try? keywordSubject.value() {
             keyword = value
@@ -54,6 +61,8 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
         randomMemeWebAPI.fetchRandomMeme(with: keyword, mediaType: randomMediaType, minRating: 8)
             .subscribe(onSuccess: { [weak self] result in
                 guard let self = self else { return }
+                
+                self.isLoadingRely.accept(false)
                 
                 switch result {
                 case .success(let randomMeme):
@@ -66,6 +75,9 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
                     mediaRelay.accept((noResultImageURL, .image))
                     descriptionRelay.accept(error.message)
                 }
+            }, onFailure: { [weak self] error in
+                guard let self = self else { return }
+                self.isLoadingRely.accept(false)
             })
             .disposed(by: disposeBag)
     }
