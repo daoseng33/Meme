@@ -12,6 +12,17 @@
         }
       }
     },
+    "Generate Joke" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "產生笑話"
+          }
+        }
+      }
+    },
     "Generate Meme" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -52,6 +63,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "首頁"
+          }
+        }
+      }
+    },
+    "Joke" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "笑話"
           }
         }
       }

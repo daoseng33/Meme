@@ -6,3 +6,11 @@
 //
 
 import Foundation
+import RxSwift
+import MemeData
+
+protocol RandomJokeViewModelProtocol: LoadingStateProtocol {
+    func loadFirstMemeIfNeeded()
+    func fetchRandomJoke()
+    var joke: Observable<String> { get }
+}

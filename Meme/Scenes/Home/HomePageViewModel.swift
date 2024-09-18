@@ -23,4 +23,5 @@ final class HomePageViewModel {
     }()
     
     let randomMemeViewModel: RandomMemeViewModelProtocol = RandomMemeViewModel()
+    let randomJokeViewModel: RandomJokeViewModelProtocol = RandomJokeViewModel()
 }

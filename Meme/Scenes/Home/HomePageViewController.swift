@@ -46,7 +46,8 @@ extension HomePageViewController: GridCollectionViewDelegate {
             show(vc, sender: self)
             
         case .joke:
-            return
+            let vc = RandomJokeViewController(viewModel: viewModel.randomJokeViewModel)
+            show(vc, sender: self)
             
         case .gifs:
             return

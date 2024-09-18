@@ -21,7 +21,7 @@ struct JokeAPITests {
         
         switch result {
         case .success(let joke):
-            #expect(joke.id == 199)
+            assert(joke.id == 199)
             
         case .failure:
             Issue.record("Should be success")
@@ -36,8 +36,8 @@ struct JokeAPITests {
             Issue.record("Should be failure")
             
         case .failure(let error):
-            #expect(error.code == 400)
-            #expect(error.message == "Joke tag 'cat' does not exist.")
+            assert(error.code == 400)
+            assert(error.message == "Joke tag 'cat' does not exist.")
         }
     }
 
