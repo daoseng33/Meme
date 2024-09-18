@@ -89,25 +89,32 @@ final class RandomMemeViewController: UIViewController {
             $0.height.equalTo(view.snp.width)
         }
         
-        view.addSubview(generateMemeButton)
+        let stackView: UIStackView = {
+            let stackView = UIStackView(arrangedSubviews: [
+                descriptionTextView,
+                keywordTextField,
+                generateMemeButton
+            ])
+            
+            stackView.axis = .vertical
+            stackView.spacing = Constant.spacing2
+            
+            return stackView
+        }()
+        
+        view.addSubview(stackView)
+        
+        stackView.snp.makeConstraints {
+            $0.top.equalTo(imageView.snp.bottom).offset(Constant.spacing2)
+            $0.left.right.bottom.equalTo(view.safeAreaLayoutGuide).inset(Constant.spacing2)
+        }
+        
         generateMemeButton.snp.makeConstraints {
-            $0.left.right.equalToSuperview().inset(8)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(8)
             $0.height.equalTo(50)
         }
         
-        view.addSubview(keywordTextField)
         keywordTextField.snp.makeConstraints {
-            $0.left.right.equalTo(generateMemeButton)
-            $0.bottom.equalTo(generateMemeButton.snp.top).offset(-8)
             $0.height.equalTo(35)
-        }
-        
-        view.addSubview(descriptionTextView)
-        descriptionTextView.snp.makeConstraints {
-            $0.top.equalTo(imageView.snp.bottom).offset(8)
-            $0.left.right.equalTo(imageView).inset(8)
-            $0.bottom.equalTo(keywordTextField.snp.top).offset(-8)
         }
     }
     
