@@ -20,7 +20,7 @@ public struct MemeAPIService: MemeAPIServiceProtocol {
         provider = useMockData ? MoyaProvider<MemeAPI>.stub : MoyaProvider.default
     }
     
-    public func fetchRandomMeme(with keyword: String, mediaType: MemeMediaType, minRating: Int) -> Single<MemeAPIResponse<RandomMeme, RandomMemeError>> {
+    public func fetchRandomMeme(with keyword: String, mediaType: MemeMediaType, minRating: Int) -> Single<MemeAPIResponse<RandomMeme, MemeError>> {
         return provider.rx
             .request(.randomMeme(keyword: keyword, mediaType: mediaType, minRating: minRating))
             .flatMap({ response in
@@ -29,7 +29,7 @@ public struct MemeAPIService: MemeAPIServiceProtocol {
                     return .just(.success(decode))
                 } catch {
                     do {
-                        let decode = try response.map(RandomMemeError.self, using: JSONDecoder.default)
+                        let decode = try response.map(MemeError.self, using: JSONDecoder.default)
                         return .just(.failure(decode))
                     } catch {
                         return .error(error)
