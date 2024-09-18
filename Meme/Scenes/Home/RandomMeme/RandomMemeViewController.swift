@@ -122,7 +122,6 @@ final class RandomMemeViewController: UIViewController {
         generateMemeButton.tapEvent
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
-                self.generateMemeButton.isEnabled = false
                 self.viewModel.fetchRandomMeme()
             })
             .disposed(by: rx.disposeBag)
@@ -146,9 +145,20 @@ final class RandomMemeViewController: UIViewController {
                         self.videoPlayerView.loadVideo(from: url)
                     }
                 }
-                
-                self.generateMemeButton.isEnabled = mediaData.mediaURL != nil
             }
+            .disposed(by: rx.disposeBag)
+        
+        viewModel.loadingStateObservable
+            .asDriver(onErrorJustReturn: .initial)
+            .drive(with: self, onNext: { (self, state) in
+                switch state {
+                case .initial, .loading:
+                    self.generateMemeButton.isEnabled = false
+                    
+                case .success, .failure:
+                    self.generateMemeButton.isEnabled = true
+                }
+            })
             .disposed(by: rx.disposeBag)
             
         viewModel.description

@@ -11,6 +11,14 @@ import RxRelay
 import RxSwift
 
 final class RandomMemeViewModel: RandomMemeViewModelProtocol {
+    var loadingState: LoadingState {
+        return loadingStateRelay.value
+    }
+    
+    var loadingStateObservable: Observable<LoadingState> {
+        return loadingStateRelay.asObservable()
+    }
+    
     // MARK: - Properties
     var media: Observable<(mediaURL: URL?, type: MemeMediaType)> {
         mediaRelay.asObservable()
@@ -32,6 +40,7 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
     private let mediaRelay = BehaviorRelay<(mediaURL: URL?, type: MemeMediaType)>(value: (nil, .image))
     private let keywordSubject = BehaviorSubject<String?>(value: nil)
     private let descriptionRelay = BehaviorRelay<String>(value: "")
+    private let loadingStateRelay = BehaviorRelay<LoadingState>(value: .initial)
     private let disposeBag = DisposeBag()
     
     // MARK: - Init
@@ -47,6 +56,8 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
     }
 
     func fetchRandomMeme() {
+        loadingStateRelay.accept(.loading)
+        
         var keyword: String = ""
         if let value: String = try? keywordSubject.value() {
             keyword = value
@@ -66,6 +77,11 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
                     mediaRelay.accept((noResultImageURL, .image))
                     descriptionRelay.accept(error.message)
                 }
+                
+                self.loadingStateRelay.accept(.success)
+            }, onFailure: { [weak self] error in
+                guard let self = self else { return }
+                self.loadingStateRelay.accept(.failure(error: error))
             })
             .disposed(by: disposeBag)
     }

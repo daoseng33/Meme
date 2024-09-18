@@ -10,7 +10,7 @@ import WebAPI
 import RxSwift
 import UIKit
 
-protocol RandomMemeViewModelProtocol {
+protocol RandomMemeViewModelProtocol: LoadingStateProtocol {
     func loadFirstMemeIfNeeded()
     func fetchRandomMeme()
     var media: Observable<(mediaURL: URL?, type: MemeMediaType)> { get }
