@@ -1,0 +1,5 @@
+{
+    "status": "failure",
+    "code": 400,
+    "message": "Joke tag 'cat' does not exist."
+}

@@ -13,7 +13,7 @@ import Moya
 
 public struct MemeAPIService: MemeAPIServiceProtocol {
     public let useMockData: Bool
-    let provider: MoyaProvider<MemeAPI>
+    private let provider: MoyaProvider<MemeAPI>
     
     public init(useMockData: Bool = false) {
         self.useMockData = useMockData

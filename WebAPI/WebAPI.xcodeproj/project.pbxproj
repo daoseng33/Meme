@@ -27,8 +27,14 @@
 		1CC9DCC22C82F71300A1EEC6 /* memes_random_image.json in Resources */ = {isa = PBXBuildFile; fileRef = 1CC9DCC12C82F71300A1EEC6 /* memes_random_image.json */; };
 		1CD9F5232C85B6A6009DDABD /* ErrorHandlingPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD9F5222C85B6A6009DDABD /* ErrorHandlingPlugin.swift */; };
 		1CD9F5252C85B9F8009DDABD /* APIErrorHandleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD9F5242C85B9F8009DDABD /* APIErrorHandleManager.swift */; };
+		1CE138922C9AAA5500633CFC /* JokeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE138912C9AAA5500633CFC /* JokeAPI.swift */; };
+		1CE138942C9AACD900633CFC /* random_joke.json in Resources */ = {isa = PBXBuildFile; fileRef = 1CE138932C9AACD900633CFC /* random_joke.json */; };
+		1CE1389A2C9AAD8400633CFC /* JokeAPIServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE138992C9AAD8400633CFC /* JokeAPIServiceProtocol.swift */; };
+		1CE1389D2C9AAFA700633CFC /* JokeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE1389C2C9AAFA700633CFC /* JokeAPIService.swift */; };
 		1CE608EE2C85CB40004844B7 /* MemeData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CE608ED2C85CB40004844B7 /* MemeData.framework */; };
 		1CE608EF2C85CB40004844B7 /* MemeData.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1CE608ED2C85CB40004844B7 /* MemeData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1CF80EE92C9ABB4700D18F18 /* random_joke_error.json in Resources */ = {isa = PBXBuildFile; fileRef = 1CF80EE82C9ABB4700D18F18 /* random_joke_error.json */; };
+		1CF80EEB2C9ABB6F00D18F18 /* JokeAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF80EEA2C9ABB6F00D18F18 /* JokeAPITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,7 +82,13 @@
 		1CC9DCC32C82FA1200A1EEC6 /* MemeModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MemeModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CD9F5222C85B6A6009DDABD /* ErrorHandlingPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandlingPlugin.swift; sourceTree = "<group>"; };
 		1CD9F5242C85B9F8009DDABD /* APIErrorHandleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrorHandleManager.swift; sourceTree = "<group>"; };
+		1CE138912C9AAA5500633CFC /* JokeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeAPI.swift; sourceTree = "<group>"; };
+		1CE138932C9AACD900633CFC /* random_joke.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = random_joke.json; sourceTree = "<group>"; };
+		1CE138992C9AAD8400633CFC /* JokeAPIServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeAPIServiceProtocol.swift; sourceTree = "<group>"; };
+		1CE1389C2C9AAFA700633CFC /* JokeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeAPIService.swift; sourceTree = "<group>"; };
 		1CE608ED2C85CB40004844B7 /* MemeData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MemeData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CF80EE82C9ABB4700D18F18 /* random_joke_error.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = random_joke_error.json; sourceTree = "<group>"; };
+		1CF80EEA2C9ABB6F00D18F18 /* JokeAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeAPITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +124,7 @@
 		1C223B642C870A3800032854 /* APIService */ = {
 			isa = PBXGroup;
 			children = (
+				1CE138972C9AACF900633CFC /* Joke */,
 				1CC9DC972C81D76500A1EEC6 /* Meme */,
 			);
 			path = APIService;
@@ -150,6 +163,7 @@
 		1C248C6A2C81D0090015A7F1 /* WebAPITests */ = {
 			isa = PBXGroup;
 			children = (
+				1CF80EEA2C9ABB6F00D18F18 /* JokeAPITests.swift */,
 				1C248C6B2C81D0090015A7F1 /* MemeAPITests.swift */,
 			);
 			path = WebAPITests;
@@ -187,6 +201,26 @@
 				1CC9DCC12C82F71300A1EEC6 /* memes_random_image.json */,
 				1C87C3642C9974B600A63581 /* memes_random_keyword.json */,
 				1C01D41A2C905AB0007E93A9 /* memes_random_video.json */,
+			);
+			path = SampleData;
+			sourceTree = "<group>";
+		};
+		1CE138972C9AACF900633CFC /* Joke */ = {
+			isa = PBXGroup;
+			children = (
+				1CE138982C9AAD6B00633CFC /* SampleData */,
+				1CE138912C9AAA5500633CFC /* JokeAPI.swift */,
+				1CE1389C2C9AAFA700633CFC /* JokeAPIService.swift */,
+				1CE138992C9AAD8400633CFC /* JokeAPIServiceProtocol.swift */,
+			);
+			path = Joke;
+			sourceTree = "<group>";
+		};
+		1CE138982C9AAD6B00633CFC /* SampleData */ = {
+			isa = PBXGroup;
+			children = (
+				1CE138932C9AACD900633CFC /* random_joke.json */,
+				1CF80EE82C9ABB4700D18F18 /* random_joke_error.json */,
 			);
 			path = SampleData;
 			sourceTree = "<group>";
@@ -309,6 +343,8 @@
 				1CC9DCC22C82F71300A1EEC6 /* memes_random_image.json in Resources */,
 				1C87C3652C9974B600A63581 /* memes_random_keyword.json in Resources */,
 				1C01D41B2C905AB0007E93A9 /* memes_random_video.json in Resources */,
+				1CE138942C9AACD900633CFC /* random_joke.json in Resources */,
+				1CF80EE92C9ABB4700D18F18 /* random_joke_error.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +365,9 @@
 				1CD9F5252C85B9F8009DDABD /* APIErrorHandleManager.swift in Sources */,
 				1CAD90262C99529B00BB4DFC /* BaseAPIServiceProtocol.swift in Sources */,
 				1CD9F5232C85B6A6009DDABD /* ErrorHandlingPlugin.swift in Sources */,
+				1CE138922C9AAA5500633CFC /* JokeAPI.swift in Sources */,
+				1CE1389D2C9AAFA700633CFC /* JokeAPIService.swift in Sources */,
+				1CE1389A2C9AAD8400633CFC /* JokeAPIServiceProtocol.swift in Sources */,
 				1CC9DCA22C81D7BF00A1EEC6 /* JSONDecoderExtension.swift in Sources */,
 				1CC9DC9C2C81D76500A1EEC6 /* MemeAPI.swift in Sources */,
 				1CC9DC9D2C81D76500A1EEC6 /* MemeAPIService.swift in Sources */,
@@ -343,6 +382,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CF80EEB2C9ABB6F00D18F18 /* JokeAPITests.swift in Sources */,
 				1C248C6C2C81D0090015A7F1 /* MemeAPITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

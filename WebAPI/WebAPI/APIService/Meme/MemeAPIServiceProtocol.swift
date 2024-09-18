@@ -9,9 +9,9 @@ import Foundation
 import RxSwift
 import MemeData
 
-public enum MemeAPIResponse<RandomMeme, RandomMemeError> {
+public enum MemeAPIResponse<RandomMeme, MemeError> {
     case success(RandomMeme)
-    case failure(RandomMemeError)
+    case failure(MemeError)
 }
 
 public protocol MemeAPIServiceProtocol: BaseAPIServiceProtocol {
