@@ -11,7 +11,6 @@ import RxSwift
 import UIKit
 
 protocol RandomMemeViewModelProtocol {
-    var isLoading: Bool { get }
     func loadFirstMemeIfNeeded()
     func fetchRandomMeme()
     var media: Observable<(mediaURL: URL?, type: MemeMediaType)> { get }

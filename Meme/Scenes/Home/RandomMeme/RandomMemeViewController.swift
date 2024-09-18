@@ -10,7 +10,6 @@ import AVFoundation
 import SnapKit
 import RxCocoa
 import Kingfisher
-import UIView_Shimmer
 
 final class RandomMemeViewController: UIViewController {
     // MARK: - Properties
@@ -71,14 +70,6 @@ final class RandomMemeViewController: UIViewController {
         super.viewWillAppear(animated)
         if videoPlayerView.status == .paused, videoPlayerView.isHidden == false {
             videoPlayerView.play()
-        }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if viewModel.isLoading {
-            view.setTemplateWithSubviews(true)
         }
     }
     
@@ -150,7 +141,6 @@ final class RandomMemeViewController: UIViewController {
                 }
                 
                 self.generateMemeButton.isEnabled = mediaData.mediaURL != nil
-                self.view.setTemplateWithSubviews(false)
             }
             .disposed(by: rx.disposeBag)
             
