@@ -26,30 +26,8 @@ final class RandomMemeViewController: UIViewController {
     }()
     
     private let videoPlayerView = VideoPlayerView()
-    
-    private let descriptionTextView: UITextView = {
-        let textView = UITextView()
-        textView.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        textView.textColor = .label
-        textView.isEditable = false
-        
-        return textView
-    }()
-    
-    private let keywordTextField: UITextField = {
-        let textField = UITextField()
-        textField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        textField.textColor = .label
-        textField.backgroundColor = .systemGray6
-        textField.placeholder = "\("Key in keyword".localized())(\("Optional".localized()))"
-        textField.layer.cornerRadius = 4
-        textField.clipsToBounds = true
-        textField.returnKeyType = .done
-        textField.clearButtonMode = .whileEditing
-        textField.setInsets(left: 8, right: nil)
-        
-        return textField
-    }()
+    private let descriptionTextView = ContentTextView()
+    private let keywordTextField = KeywordTextField()
     
     private let generateMemeButton: RoundedRectangleButton = {
         let button = RoundedRectangleButton()
@@ -177,14 +155,14 @@ final class RandomMemeViewController: UIViewController {
             .disposed(by: rx.disposeBag)
             
         viewModel.description
-            .bind(to: descriptionTextView.rx.text)
+            .bind(to: descriptionTextView.textBinder)
             .disposed(by: rx.disposeBag)
         
         viewModel.keyword
-            .bind(to: keywordTextField.rx.text)
+            .bind(to: keywordTextField.textBinder)
             .disposed(by: rx.disposeBag)
         
-        keywordTextField.rx.text
+        keywordTextField.textBinder
             .bind(to: viewModel.keywordObserver)
             .disposed(by: rx.disposeBag)
     }

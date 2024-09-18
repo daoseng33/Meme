@@ -51,6 +51,8 @@
 		1CDA354E2C81AB6F001FF654 /* RandomMemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA354D2C81AB6F001FF654 /* RandomMemeTests.swift */; };
 		1CDA35582C81AB6F001FF654 /* MemeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA35572C81AB6F001FF654 /* MemeUITests.swift */; };
 		1CDA355A2C81AB6F001FF654 /* MemeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA35592C81AB6F001FF654 /* MemeUITestsLaunchTests.swift */; };
+		1CE1383F2C9A923B00633CFC /* KeywordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE1383E2C9A923B00633CFC /* KeywordTextField.swift */; };
+		1CE138422C9A949E00633CFC /* ContentTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE138412C9A949E00633CFC /* ContentTextView.swift */; };
 		1CE608F22C85CB4C004844B7 /* MemeData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CE608F12C85CB4C004844B7 /* MemeData.framework */; };
 		1CE608F32C85CB4C004844B7 /* MemeData.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1CE608F12C85CB4C004844B7 /* MemeData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1CE608F72C86F422004844B7 /* GlobalErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE608F62C86F422004844B7 /* GlobalErrorHandler.swift */; };
@@ -129,6 +131,8 @@
 		1CDA35532C81AB6F001FF654 /* MemeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CDA35572C81AB6F001FF654 /* MemeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeUITests.swift; sourceTree = "<group>"; };
 		1CDA35592C81AB6F001FF654 /* MemeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1CE1383E2C9A923B00633CFC /* KeywordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordTextField.swift; sourceTree = "<group>"; };
+		1CE138412C9A949E00633CFC /* ContentTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTextView.swift; sourceTree = "<group>"; };
 		1CE608F12C85CB4C004844B7 /* MemeData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MemeData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CE608F62C86F422004844B7 /* GlobalErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalErrorHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -174,6 +178,8 @@
 				1C01D3E82C8ED26B007E93A9 /* GridCollectionView */,
 				1C01D4132C90464D007E93A9 /* RoundedRectangleButton.swift */,
 				1C020EB52C92C14D0028CAE0 /* VideoPlayer.swift */,
+				1CE1383E2C9A923B00633CFC /* KeywordTextField.swift */,
+				1CE138412C9A949E00633CFC /* ContentTextView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -446,7 +452,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					1CDA352F2C81AB6C001FF654 = {
 						CreatedOnToolsVersion = 15.4;
@@ -523,6 +529,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CE1383F2C9A923B00633CFC /* KeywordTextField.swift in Sources */,
 				1CDA35342C81AB6C001FF654 /* AppDelegate.swift in Sources */,
 				1C811F2B2C8AECF8005B4D5D /* FavoriteViewController.swift in Sources */,
 				1CE608F72C86F422004844B7 /* GlobalErrorHandler.swift in Sources */,
@@ -545,6 +552,7 @@
 				1C01D4142C90464D007E93A9 /* RoundedRectangleButton.swift in Sources */,
 				1CDA35362C81AB6C001FF654 /* SceneDelegate.swift in Sources */,
 				1C811F2D2C8AED01005B4D5D /* SettingViewController.swift in Sources */,
+				1CE138422C9A949E00633CFC /* ContentTextView.swift in Sources */,
 				1C020ECA2C92DB680028CAE0 /* StringExtension.swift in Sources */,
 				1C01D3ED2C8ED355007E93A9 /* UICollectionViewExtension.swift in Sources */,
 				1C01D3EF2C8ED3A1007E93A9 /* UITableViewExtension.swift in Sources */,
@@ -607,6 +615,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -670,6 +679,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

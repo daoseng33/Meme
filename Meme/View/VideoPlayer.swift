@@ -11,7 +11,7 @@ import RxSwift
 import RxRelay
 import SnapKit
 
-class VideoPlayerView: UIView {
+final class VideoPlayerView: UIView {
     // MARK: - Properties
     private var playerLayer: AVPlayerLayer?
     private var playerLooper: AVPlayerLooper?
