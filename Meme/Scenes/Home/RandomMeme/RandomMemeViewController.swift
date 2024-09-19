@@ -32,7 +32,7 @@ final class RandomMemeViewController: UIViewController {
         let button = RoundedRectangleButton()
         button.title = "Generate Meme".localized()
         button.titleColor = .white
-        button.buttonBackgroundColor = .systemMint
+        button.buttonBackgroundColor = .systemIndigo
         button.isEnabled = false
         
         return button
