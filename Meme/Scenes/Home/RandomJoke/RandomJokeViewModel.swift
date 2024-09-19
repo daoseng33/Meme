@@ -36,7 +36,7 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
     
     // MARK: - Get data
     func loadFirstMemeIfNeeded() {
-        if jokeRelay.value.isEmpty {
+        if loadingState == .initial {
             fetchRandomJoke()
         }
     }

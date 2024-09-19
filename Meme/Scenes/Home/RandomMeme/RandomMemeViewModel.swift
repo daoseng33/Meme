@@ -50,7 +50,7 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
     
     // MARK: - Get data
     func loadFirstMemeIfNeeded() {
-        if descriptionRelay.value.isEmpty {
+        if loadingState == .initial {
             fetchRandomMeme()
         }
     }
