@@ -28,5 +28,12 @@ struct Utility {
         
         return nil
     }
+    
+    static func getLocalizedString(for key: String, language: String) -> String {
+        let localeIdentifier = Locale.identifier(fromComponents: [NSLocale.Key.languageCode.rawValue: language])
+        let locale = Locale(identifier: localeIdentifier)
+        
+        return String(localized: String.LocalizationValue(key), locale: locale)
+    }
 }
 

@@ -15,6 +15,54 @@ final class RandomJokeViewController: UIViewController {
     
     // MARK: - UI
     private let jokeTextView = ContentTextView()
+    private let categorySelectedView = UIView()
+    
+    private let categorySelectedLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.textColor = .label
+        label.text = "\("Joke category".localized()):"
+        
+        return label
+    }()
+    
+    private lazy var categorySelectedButton: UIButton = {
+        let button = UIButton()
+        
+        var config: UIButton.Configuration = {
+            var config = UIButton.Configuration.filled()
+            config.title = "Random".localized()
+            config.image = R.image.slideUp()
+            config.imagePlacement = .trailing
+            config.imagePadding = Constant.spacing1
+            config.baseForegroundColor = .label
+            config.baseBackgroundColor = .systemBackground
+            config.contentInsets.leading = Constant.spacing2
+            config.contentInsets.trailing = Constant.spacing2
+            config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
+                var outgoing = incoming
+                outgoing.font = .systemFont(ofSize: 16, weight: .medium)
+                return outgoing
+            }
+            
+            return config
+        }()
+        
+        let actions = viewModel.categories.map { [weak viewModel] option in
+            UIAction(title: option.localized()) { [weak button] _ in
+                button?.configuration?.title = option.localized()
+                viewModel?.selectedCategoryObserver.onNext(option)
+            }
+        }
+
+        button.menu = UIMenu(children: actions)
+        button.showsMenuAsPrimaryAction = true
+        
+        button.configuration = config
+        
+        return button
+    }()
+    
     private let generateJokeButton: RoundedRectangleButton = {
         let button = RoundedRectangleButton()
         button.title = "Generate Joke".localized()
@@ -52,6 +100,7 @@ final class RandomJokeViewController: UIViewController {
         let stackView: UIStackView = {
            let stackView = UIStackView(arrangedSubviews: [
             jokeTextView,
+            categorySelectedView,
             generateJokeButton
            ])
             stackView.axis = .vertical
@@ -67,6 +116,22 @@ final class RandomJokeViewController: UIViewController {
         
         generateJokeButton.snp.makeConstraints {
             $0.height.equalTo(50)
+        }
+        
+        categorySelectedView.snp.makeConstraints {
+            $0.height.equalTo(35)
+        }
+        
+        categorySelectedView.addSubview(categorySelectedLabel)
+        categorySelectedLabel.snp.makeConstraints {
+            $0.top.left.bottom.equalToSuperview()
+        }
+        
+        categorySelectedView.addSubview(categorySelectedButton)
+        categorySelectedButton.snp.makeConstraints {
+            $0.left.equalTo(categorySelectedLabel.snp.right).offset(Constant.spacing1)
+            $0.top.bottom.equalToSuperview()
+            $0.right.lessThanOrEqualToSuperview()
         }
     }
 

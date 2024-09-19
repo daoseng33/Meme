@@ -8,9 +8,13 @@
 import Foundation
 import RxSwift
 import MemeData
+import WebAPI
 
-protocol RandomJokeViewModelProtocol: LoadingStateProtocol {
+protocol RandomJokeViewModelProtocol: AnyObject, LoadingStateProtocol {
     func loadFirstMemeIfNeeded()
     func fetchRandomJoke()
     var joke: Observable<String> { get }
+    var selectedCategoryObserver: AnyObserver<String> { get }
+    var selectedCategory: JokeCategory { get }
+    var categories: [String] { get }
 }

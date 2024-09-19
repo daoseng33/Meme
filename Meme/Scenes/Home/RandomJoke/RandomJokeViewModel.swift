@@ -24,8 +24,26 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
         return jokeRelay.asObservable()
     }
     
+    var categories: [String] {
+        return JokeCategory.allCases.map(\.rawValue)
+    }
+    
+    var selectedCategoryObserver: AnyObserver<String> {
+        selectedCategorySubject.asObserver()
+    }
+    
+    var selectedCategory: JokeCategory {
+        guard let string = try? selectedCategorySubject.value(),
+                let category = JokeCategory(rawValue: string) else {
+            return .Random
+        }
+        
+        return category
+    }
+    
     private let webService: JokeAPIServiceProtocol
     private let jokeRelay: BehaviorRelay<String> = .init(value: "")
+    private let selectedCategorySubject = BehaviorSubject<String>(value: "")
     private let loadingStateRelay: BehaviorRelay<LoadingState> = .init(value: .initial)
     private let disposeBag = DisposeBag()
     
@@ -44,7 +62,7 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
     func fetchRandomJoke() {
         loadingStateRelay.accept(.loading)
         
-        webService.fetchRandomJoke(tags: [], excludedTags: [], minRating: 8, maxLength: 999)
+        webService.fetchRandomJoke(tags: [selectedCategory], excludedTags: [], minRating: 8, maxLength: 999)
             .subscribe(onSuccess: { [weak self] result in
                 guard let self = self else { return }
                 

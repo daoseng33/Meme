@@ -8,7 +8,8 @@
 import Foundation
 import Moya
 
-public enum JokeCategory: String {
+public enum JokeCategory: String, CaseIterable {
+    case Random
     case Clean
     case Relationship
     case School
@@ -21,11 +22,11 @@ public enum JokeCategory: String {
     case Sexual
     case OneLiner = "One Liner"
     case Insults
-    case KnockKnock
+    case KnockKnock = "Knock Knock"
     case Political
     case Sexist
     case Sport
-    case ChunkNorris = "Chunk Norris"
+    case ChuckNorris = "Chuck Norris"
     case Holiday
     case Blondes
     case YoMomma = "Yo Momma"
@@ -61,7 +62,9 @@ extension JokeAPI: MemeTargetType {
         switch self {
         case .randomJoke(let tags, let excludeTags, let minRating, let maxLength):
             let tagsParam = tags.map { $0.rawValue }.joined(separator: ",")
+                .replacingOccurrences(of: JokeCategory.Random.rawValue, with: "")
             let excludeTagsParam = excludeTags.map { $0.rawValue }.joined(separator: ",")
+                .replacingOccurrences(of: JokeCategory.Random.rawValue, with: "")
             
             return .requestParameters(parameters: [
                 "include-tags": tagsParam,
