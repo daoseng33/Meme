@@ -15,5 +15,5 @@ public enum JokeAPIResponse<RandomJoke, MemeError> {
 }
 
 public protocol JokeAPIServiceProtocol: BaseAPIServiceProtocol {
-    func fetchRandomJoke(tags: String, excludedTags: String, minRating: Int, maxLength: Int) -> Single<JokeAPIResponse<RandomJoke, MemeError>>
+    func fetchRandomJoke(tags: [JokeCategory], excludedTags: [JokeCategory], minRating: Int, maxLength: Int) -> Single<JokeAPIResponse<RandomJoke, MemeError>>
 }

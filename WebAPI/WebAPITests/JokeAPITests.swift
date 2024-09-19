@@ -17,7 +17,7 @@ struct JokeAPITests {
     }
     
     @Test func testFetchRandomJoke() async throws {
-        let result = try sut.fetchRandomJoke(tags: "", excludedTags: "", minRating: 8, maxLength: 999).toBlocking().single()
+        let result = try sut.fetchRandomJoke(tags: [.Animal], excludedTags: [], minRating: 8, maxLength: 999).toBlocking().single()
         
         switch result {
         case .success(let joke):
@@ -29,7 +29,7 @@ struct JokeAPITests {
     }
     
     @Test func testFetchRandomJokeWithNoResult() async throws {
-        let result = try sut.fetchRandomJoke(tags: "cats", excludedTags: "", minRating: 8, maxLength: 999).toBlocking().single()
+        let result = try sut.fetchRandomJoke(tags: [.Animal, .Sexual], excludedTags: [], minRating: 8, maxLength: 999).toBlocking().single()
         
         switch result {
         case .success:
@@ -37,7 +37,7 @@ struct JokeAPITests {
             
         case .failure(let error):
             assert(error.code == 400)
-            assert(error.message == "Joke tag 'cat' does not exist.")
+            assert(error.message == "Joke tag 'Sexual' does not exist.")
         }
     }
 

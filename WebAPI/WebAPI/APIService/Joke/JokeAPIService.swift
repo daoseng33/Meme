@@ -20,7 +20,7 @@ public struct JokeAPIService: JokeAPIServiceProtocol {
         provider = useMockData ? MoyaProvider<JokeAPI>.stub : MoyaProvider<JokeAPI>.default
     }
     
-    public func fetchRandomJoke(tags: String, excludedTags: String, minRating: Int, maxLength: Int) -> Single<JokeAPIResponse<RandomJoke, MemeError>> {
+    public func fetchRandomJoke(tags: [JokeCategory], excludedTags: [JokeCategory], minRating: Int, maxLength: Int) -> Single<JokeAPIResponse<RandomJoke, MemeError>> {
         return provider.rx
             .request(.randomJoke(tags: tags, excludeTags: excludedTags, minRating: minRating, maxLength: maxLength))
             .flatMap({ response in
