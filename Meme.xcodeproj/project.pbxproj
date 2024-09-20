@@ -27,6 +27,7 @@
 		1C020EF72C981F680028CAE0 /* Launcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C020EF62C981F680028CAE0 /* Launcher.swift */; };
 		1C020EFA2C9821420028CAE0 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C020EF92C9821420028CAE0 /* UITextFieldExtension.swift */; };
 		1C020F022C982FF30028CAE0 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C020F012C982FF30028CAE0 /* Utility.swift */; };
+		1C2D212B2C9D533900589C6A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2D212A2C9D533900589C6A /* BaseViewController.swift */; };
 		1C63E6412C9AC97C00ECCA2D /* LoadingStateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C63E6402C9AC97C00ECCA2D /* LoadingStateProtocol.swift */; };
 		1C63E6442C9ACF5200ECCA2D /* RandomJokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C63E6432C9ACF5200ECCA2D /* RandomJokeTests.swift */; };
 		1C783E022C83067100E6C4BE /* WebAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */; };
@@ -113,6 +114,7 @@
 		1C020EF62C981F680028CAE0 /* Launcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launcher.swift; sourceTree = "<group>"; };
 		1C020EF92C9821420028CAE0 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		1C020F012C982FF30028CAE0 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		1C2D212A2C9D533900589C6A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		1C63E6402C9AC97C00ECCA2D /* LoadingStateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingStateProtocol.swift; sourceTree = "<group>"; };
 		1C63E6432C9ACF5200ECCA2D /* RandomJokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomJokeTests.swift; sourceTree = "<group>"; };
 		1C811F0A2C8849A8005B4D5D /* NSObject+rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+rx.swift"; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				1C811F0E2C899AC0005B4D5D /* Home */,
 				1C811F302C8AED16005B4D5D /* Setting */,
 				1C811F1D2C8AE2BD005B4D5D /* MemeTabBarController.swift */,
+				1C2D212A2C9D533900589C6A /* BaseViewController.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -553,6 +556,7 @@
 				1CE138422C9A949E00633CFC /* ContentTextView.swift in Sources */,
 				1C811F2B2C8AECF8005B4D5D /* FavoriteViewController.swift in Sources */,
 				1CE608F72C86F422004844B7 /* GlobalErrorHandler.swift in Sources */,
+				1C2D212B2C9D533900589C6A /* BaseViewController.swift in Sources */,
 				1C01D3FA2C8EE785007E93A9 /* GridCollectionView.swift in Sources */,
 				1C01D3EA2C8ED28C007E93A9 /* GridCollectionViewCell.swift in Sources */,
 				1C01D3F12C8EDBAE007E93A9 /* GridCollectionViewCellViewModel.swift in Sources */,

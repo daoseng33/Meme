@@ -11,7 +11,7 @@ import SnapKit
 import RxCocoa
 import Kingfisher
 
-final class RandomMemeViewController: UIViewController {
+final class RandomMemeViewController: BaseViewController {
     // MARK: - Properties
     private let viewModel: RandomMemeViewModelProtocol
     
@@ -76,17 +76,18 @@ final class RandomMemeViewController: UIViewController {
     // MARK: - Setup
     private func setupUI() {
         view.backgroundColor = .systemBackground
+        navigationBar.topItem?.title = "Random Meme".localized()
         
         view.addSubview(imageView)
         imageView.snp.makeConstraints {
-            $0.top.left.right.equalToSuperview()
+            $0.top.equalTo(navigationBar.snp.bottom)
+            $0.left.right.equalToSuperview()
             $0.height.equalTo(view.snp.width)
         }
         
         view.addSubview(videoPlayerView)
         videoPlayerView.snp.makeConstraints {
-            $0.top.left.right.equalToSuperview()
-            $0.height.equalTo(view.snp.width)
+            $0.edges.equalTo(imageView)
         }
         
         let stackView: UIStackView = {

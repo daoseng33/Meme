@@ -43,7 +43,7 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
     
     private let webService: JokeAPIServiceProtocol
     private let jokeRelay: BehaviorRelay<String> = .init(value: "")
-    private let selectedCategorySubject = BehaviorSubject<String>(value: "")
+    private let selectedCategorySubject = BehaviorSubject<String>(value: JokeCategory.Random.rawValue)
     private let loadingStateRelay: BehaviorRelay<LoadingState> = .init(value: .initial)
     private let disposeBag = DisposeBag()
     

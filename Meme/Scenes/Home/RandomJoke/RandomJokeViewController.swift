@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import RxCocoa
 
-final class RandomJokeViewController: UIViewController {
+final class RandomJokeViewController: BaseViewController {
     // MARK: - Properties
     private let viewModel: RandomJokeViewModelProtocol
     
@@ -31,7 +31,7 @@ final class RandomJokeViewController: UIViewController {
         
         var config: UIButton.Configuration = {
             var config = UIButton.Configuration.filled()
-            config.title = "Random".localized()
+            config.title = viewModel.selectedCategory.rawValue.localized()
             config.image = R.image.slideUp()
             config.imagePlacement = .trailing
             config.imagePadding = Constant.spacing1
@@ -96,6 +96,7 @@ final class RandomJokeViewController: UIViewController {
     // MARK: - Setup
     private func setupUI() {
         view.backgroundColor = .systemBackground
+        navigationBar.topItem?.title = "Random Joke".localized()
         
         let stackView: UIStackView = {
            let stackView = UIStackView(arrangedSubviews: [
@@ -111,7 +112,8 @@ final class RandomJokeViewController: UIViewController {
         
         view.addSubview(stackView)
         stackView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide).inset(Constant.spacing2)
+            $0.top.equalTo(navigationBar.snp.bottom)
+            $0.left.right.bottom.equalTo(view.safeAreaLayoutGuide).inset(Constant.spacing2)
         }
         
         generateJokeButton.snp.makeConstraints {
