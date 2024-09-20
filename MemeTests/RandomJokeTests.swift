@@ -29,4 +29,16 @@ struct RandomJokeTests {
         let loadedJoke = try sut.joke.take(1).toBlocking().last()
         assert(loadedJoke == "Can you swim? Some times. What do you mean by \"some times\"? Only when I'm in the water.")
     }
+    
+    @Test func testJokeCategories() async throws {
+        assert(sut.categories == JokeCategory.allCases.map { $0.rawValue })
+    }
+    
+    @Test func testSelectedJokeCategory() async throws {
+        assert(sut.selectedCategory == .Random)
+        
+        sut.selectedCategoryObserver.onNext("Clean")
+        
+        assert(sut.selectedCategory == .Clean)
+    }
 }
