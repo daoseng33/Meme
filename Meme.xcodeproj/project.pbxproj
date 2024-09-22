@@ -29,6 +29,8 @@
 		1C020F022C982FF30028CAE0 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C020F012C982FF30028CAE0 /* Utility.swift */; };
 		1C2D212B2C9D533900589C6A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2D212A2C9D533900589C6A /* BaseViewController.swift */; };
 		1C2D212F2C9D61DE00589C6A /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 1C2D212E2C9D61DE00589C6A /* SFSafeSymbols */; };
+		1C2D21332C9FE38600589C6A /* GridCollectionViewCellViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2D21322C9FE38600589C6A /* GridCollectionViewCellViewModelProtocol.swift */; };
+		1C2D21362C9FE4D500589C6A /* GridCollectionViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2D21352C9FE4D500589C6A /* GridCollectionViewModelProtocol.swift */; };
 		1C63E6412C9AC97C00ECCA2D /* LoadingStateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C63E6402C9AC97C00ECCA2D /* LoadingStateProtocol.swift */; };
 		1C63E6442C9ACF5200ECCA2D /* RandomJokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C63E6432C9ACF5200ECCA2D /* RandomJokeTests.swift */; };
 		1C783E022C83067100E6C4BE /* WebAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */; };
@@ -116,6 +118,8 @@
 		1C020EF92C9821420028CAE0 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		1C020F012C982FF30028CAE0 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		1C2D212A2C9D533900589C6A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		1C2D21322C9FE38600589C6A /* GridCollectionViewCellViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionViewCellViewModelProtocol.swift; sourceTree = "<group>"; };
+		1C2D21352C9FE4D500589C6A /* GridCollectionViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionViewModelProtocol.swift; sourceTree = "<group>"; };
 		1C63E6402C9AC97C00ECCA2D /* LoadingStateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingStateProtocol.swift; sourceTree = "<group>"; };
 		1C63E6432C9ACF5200ECCA2D /* RandomJokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomJokeTests.swift; sourceTree = "<group>"; };
 		1C811F0A2C8849A8005B4D5D /* NSObject+rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+rx.swift"; sourceTree = "<group>"; };
@@ -202,6 +206,7 @@
 				1C01D3F82C8EE743007E93A9 /* GridCollectionViewCell */,
 				1C01D3F92C8EE785007E93A9 /* GridCollectionView.swift */,
 				1C01D3FC2C8EEB0A007E93A9 /* GridCollectionViewModel.swift */,
+				1C2D21352C9FE4D500589C6A /* GridCollectionViewModelProtocol.swift */,
 				1C01D3FE2C8EF906007E93A9 /* GridData.swift */,
 			);
 			path = GridCollectionView;
@@ -212,6 +217,7 @@
 			children = (
 				1C01D3E92C8ED28C007E93A9 /* GridCollectionViewCell.swift */,
 				1C01D3F02C8EDBAE007E93A9 /* GridCollectionViewCellViewModel.swift */,
+				1C2D21322C9FE38600589C6A /* GridCollectionViewCellViewModelProtocol.swift */,
 			);
 			path = GridCollectionViewCell;
 			sourceTree = "<group>";
@@ -569,7 +575,9 @@
 				1C811F282C8AECEB005B4D5D /* HistoryViewController.swift in Sources */,
 				1CDA35382C81AB6C001FF654 /* HomePageViewController.swift in Sources */,
 				1C811F0D2C899ABC005B4D5D /* HomePageViewModel.swift in Sources */,
+				1C2D21362C9FE4D500589C6A /* GridCollectionViewModelProtocol.swift in Sources */,
 				1CE1383F2C9A923B00633CFC /* KeywordTextField.swift in Sources */,
+				1C2D21332C9FE38600589C6A /* GridCollectionViewCellViewModelProtocol.swift in Sources */,
 				1C020EF72C981F680028CAE0 /* Launcher.swift in Sources */,
 				1C63E6412C9AC97C00ECCA2D /* LoadingStateProtocol.swift in Sources */,
 				1CDA353E2C81AB6C001FF654 /* Meme.xcdatamodeld in Sources */,

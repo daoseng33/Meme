@@ -9,7 +9,7 @@ import UIKit
 import RxRelay
 import RxSwift
 
-final class GridCollectionViewModel {
+final class GridCollectionViewModel: GridCollectionViewModelProtocol {
     // MARK: - Properties
     private let gridDatasRelay: BehaviorRelay<[GridData]>
     
@@ -29,7 +29,7 @@ final class GridCollectionViewModel {
     }
     
     // MARK: - Configures
-    func gridCellViewModel(with index: Int) -> GridCollectionViewCellViewModel {
+    func gridCellViewModel(with index: Int) -> GridCollectionViewCellViewModelProtocol {
         let gridData = gridDatasRelay.value[index]
         let cellViewModel = GridCollectionViewCellViewModel(gridData: gridData)
         return cellViewModel

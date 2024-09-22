@@ -8,7 +8,7 @@
 import UIKit
 
 struct GridData {
-    let title: String
+    let title: String?
     let imageType: GridImageType
 }
 

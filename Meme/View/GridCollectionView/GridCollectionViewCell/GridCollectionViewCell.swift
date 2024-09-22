@@ -61,8 +61,8 @@ final class GridCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configure(viewModel: GridCollectionViewCellViewModel) {
-        viewModel.title.map { $0.isEmpty }
+    func configure(viewModel: GridCollectionViewCellViewModelProtocol) {
+        viewModel.title.map { $0 == nil }
             .bind(to: gridTitleLabel.rx.isHidden)
             .disposed(by: rx.disposeBag)
         

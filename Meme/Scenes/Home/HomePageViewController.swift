@@ -11,12 +11,7 @@ import SnapKit
 final class HomePageViewController: UIViewController {
     // MARK: - Properties
     let viewModel = HomePageViewModel()
-    private lazy var homePageCollectionView: GridCollectionView = {
-        let gridCollectionViewModel = GridCollectionViewModel(gridDatas: viewModel.gridDatas)
-        let collectionView = GridCollectionView(viewModel: gridCollectionViewModel)
-        
-        return collectionView
-    }()
+    private lazy var homePageCollectionView = GridCollectionView(viewModel: viewModel.gridCollectionViewModel)
     
     // MARK: - View life cycle
     override func viewDidLoad() {

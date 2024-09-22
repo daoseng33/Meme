@@ -9,12 +9,12 @@ import UIKit
 import RxSwift
 import RxRelay
 
-final class GridCollectionViewCellViewModel {
+final class GridCollectionViewCellViewModel: GridCollectionViewCellViewModelProtocol {
     // MARK: - Properties
-    private let titleRelay: BehaviorRelay<String>
+    private let titleRelay: BehaviorRelay<String?>
     private let imageDataRelay: BehaviorRelay<(GridImageType)>
     
-    var title: Observable<String> {
+    var title: Observable<String?> {
         return titleRelay.asObservable()
     }
     
@@ -24,7 +24,7 @@ final class GridCollectionViewCellViewModel {
     
     // MARK: - Init
     init(gridData: GridData) {
-        titleRelay = BehaviorRelay<String>(value: gridData.title)
+        titleRelay = BehaviorRelay<String?>(value: gridData.title)
         imageDataRelay = BehaviorRelay<(GridImageType)>(value: (gridData.imageType))
     }
 }
