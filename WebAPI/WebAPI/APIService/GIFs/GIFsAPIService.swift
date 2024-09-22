@@ -15,7 +15,7 @@ public struct GIFsAPIService: GIFsAPIServiceProtocol {
     private let provider: MoyaProvider<GIFsAPI>
     
     public init(useMockData: Bool = false) {
-        provider = useMockData ? MoyaProvider<GIFsAPI>.default : MoyaProvider<GIFsAPI>.stub
+        provider = useMockData ? MoyaProvider<GIFsAPI>.stub : MoyaProvider<GIFsAPI>.default
     }
     
     public func fetchGifs(query: String, number: Int) -> Single<GIFs> {
