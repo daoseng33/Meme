@@ -8,6 +8,5 @@
 import Foundation
 
 public protocol BaseAPIServiceProtocol {
-    var useMockData: Bool { get }
     init(useMockData: Bool)
 }

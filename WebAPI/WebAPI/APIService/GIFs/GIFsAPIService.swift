@@ -13,10 +13,8 @@ import RxMoya
 
 public struct GIFsAPIService: GIFsAPIServiceProtocol {
     private let provider: MoyaProvider<GIFsAPI>
-    public let useMockData: Bool
     
     public init(useMockData: Bool = false) {
-        self.useMockData = useMockData
         provider = useMockData ? MoyaProvider<GIFsAPI>.default : MoyaProvider<GIFsAPI>.stub
     }
     

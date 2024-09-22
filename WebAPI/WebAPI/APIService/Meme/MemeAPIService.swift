@@ -12,11 +12,9 @@ import RxMoya
 import Moya
 
 public struct MemeAPIService: MemeAPIServiceProtocol {
-    public let useMockData: Bool
     private let provider: MoyaProvider<MemeAPI>
     
     public init(useMockData: Bool = false) {
-        self.useMockData = useMockData
         provider = useMockData ? MoyaProvider<MemeAPI>.stub : MoyaProvider.default
     }
     

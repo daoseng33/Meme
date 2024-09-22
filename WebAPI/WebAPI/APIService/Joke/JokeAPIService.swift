@@ -11,12 +11,9 @@ import MemeData
 import Moya
 
 public struct JokeAPIService: JokeAPIServiceProtocol {
-    public var useMockData: Bool
-    
     private let provider: MoyaProvider<JokeAPI>
     
     public init(useMockData: Bool = false) {
-        self.useMockData = useMockData
         provider = useMockData ? MoyaProvider<JokeAPI>.stub : MoyaProvider<JokeAPI>.default
     }
     
