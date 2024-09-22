@@ -64,6 +64,9 @@
 		1CE608F22C85CB4C004844B7 /* MemeData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CE608F12C85CB4C004844B7 /* MemeData.framework */; };
 		1CE608F32C85CB4C004844B7 /* MemeData.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1CE608F12C85CB4C004844B7 /* MemeData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1CE608F72C86F422004844B7 /* GlobalErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE608F62C86F422004844B7 /* GlobalErrorHandler.swift */; };
+		1CF584D92C9FF0A700175C2D /* GIFsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF584D52C9FF0A700175C2D /* GIFsViewController.swift */; };
+		1CF584DA2C9FF0A700175C2D /* GIFsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF584D62C9FF0A700175C2D /* GIFsViewModel.swift */; };
+		1CF584DB2C9FF0A700175C2D /* GIFsViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF584D72C9FF0A700175C2D /* GIFsViewModelProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +154,9 @@
 		1CE1388A2C9AA81400633CFC /* RandomJokeViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomJokeViewModelProtocol.swift; sourceTree = "<group>"; };
 		1CE608F12C85CB4C004844B7 /* MemeData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MemeData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CE608F62C86F422004844B7 /* GlobalErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalErrorHandler.swift; sourceTree = "<group>"; };
+		1CF584D52C9FF0A700175C2D /* GIFsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFsViewController.swift; sourceTree = "<group>"; };
+		1CF584D62C9FF0A700175C2D /* GIFsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFsViewModel.swift; sourceTree = "<group>"; };
+		1CF584D72C9FF0A700175C2D /* GIFsViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFsViewModelProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,6 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				1C811F2F2C8AED10005B4D5D /* Favorite */,
+				1CF584D82C9FF0A700175C2D /* GIFs */,
 				1C811F2E2C8AED08005B4D5D /* History */,
 				1C811F0E2C899AC0005B4D5D /* Home */,
 				1C811F302C8AED16005B4D5D /* Setting */,
@@ -394,6 +401,16 @@
 				1CE1388A2C9AA81400633CFC /* RandomJokeViewModelProtocol.swift */,
 			);
 			path = RandomJoke;
+			sourceTree = "<group>";
+		};
+		1CF584D82C9FF0A700175C2D /* GIFs */ = {
+			isa = PBXGroup;
+			children = (
+				1CF584D52C9FF0A700175C2D /* GIFsViewController.swift */,
+				1CF584D62C9FF0A700175C2D /* GIFsViewModel.swift */,
+				1CF584D72C9FF0A700175C2D /* GIFsViewModelProtocol.swift */,
+			);
+			path = GIFs;
 			sourceTree = "<group>";
 		};
 		8477AEB0E5C9C8C4395126A3 /* Frameworks */ = {
@@ -590,6 +607,9 @@
 				1C01D40F2C902D1A007E93A9 /* RandomMemeViewModel.swift in Sources */,
 				1C01D4112C903186007E93A9 /* RandomMemeViewModelProtocol.swift in Sources */,
 				1C01D4142C90464D007E93A9 /* RoundedRectangleButton.swift in Sources */,
+				1CF584D92C9FF0A700175C2D /* GIFsViewController.swift in Sources */,
+				1CF584DA2C9FF0A700175C2D /* GIFsViewModel.swift in Sources */,
+				1CF584DB2C9FF0A700175C2D /* GIFsViewModelProtocol.swift in Sources */,
 				1CDA35362C81AB6C001FF654 /* SceneDelegate.swift in Sources */,
 				1C811F2D2C8AED01005B4D5D /* SettingViewController.swift in Sources */,
 				1C020ECA2C92DB680028CAE0 /* StringExtension.swift in Sources */,

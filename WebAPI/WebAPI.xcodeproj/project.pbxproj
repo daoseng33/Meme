@@ -174,9 +174,9 @@
 		1C248C6A2C81D0090015A7F1 /* WebAPITests */ = {
 			isa = PBXGroup;
 			children = (
+				1C2D21492C9FEE6200589C6A /* GIFsAPITests.swift */,
 				1CF80EEA2C9ABB6F00D18F18 /* JokeAPITests.swift */,
 				1C248C6B2C81D0090015A7F1 /* MemeAPITests.swift */,
-				1C2D21492C9FEE6200589C6A /* GIFsAPITests.swift */,
 			);
 			path = WebAPITests;
 			sourceTree = "<group>";
@@ -417,9 +417,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C2D214A2C9FEE6200589C6A /* GIFsAPITests.swift in Sources */,
 				1CF80EEB2C9ABB6F00D18F18 /* JokeAPITests.swift in Sources */,
 				1C248C6C2C81D0090015A7F1 /* MemeAPITests.swift in Sources */,
-				1C2D214A2C9FEE6200589C6A /* GIFsAPITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
