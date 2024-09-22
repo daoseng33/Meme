@@ -24,7 +24,7 @@ struct JokeAPITests {
             assert(joke.id == 199)
             
         case .failure:
-            Issue.record("Should be success")
+            Issue.record("Test should be success")
         }
     }
     
@@ -33,7 +33,7 @@ struct JokeAPITests {
         
         switch result {
         case .success:
-            Issue.record("Should be failure")
+            Issue.record("Test should be failure")
             
         case .failure(let error):
             assert(error.code == 400)

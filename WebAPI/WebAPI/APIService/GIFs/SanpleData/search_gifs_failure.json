@@ -1,0 +1,5 @@
+{
+    "status": "failure",
+    "code": 400,
+    "message": "The parameter 'query' must be given."
+}

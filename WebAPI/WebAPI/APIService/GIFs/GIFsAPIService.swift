@@ -18,8 +18,20 @@ public struct GIFsAPIService: GIFsAPIServiceProtocol {
         provider = useMockData ? MoyaProvider<GIFsAPI>.stub : MoyaProvider<GIFsAPI>.default
     }
     
-    public func fetchGifs(query: String, number: Int) -> Single<GIFs> {
+    public func fetchGifs(query: String, number: Int) -> Single<GIFAPIResponse<GIFs, MemeError>> {
         provider.rx.request(.searchGiFs(query: query, number: number))
-            .map(GIFs.self, using: JSONDecoder.default)
+            .flatMap({ response in
+                do {
+                    let decode = try response.map(GIFs.self, using: JSONDecoder.default)
+                    return .just(.success(decode))
+                } catch {
+                    do {
+                        let decode = try response.map(MemeError.self, using: JSONDecoder.default)
+                        return .just(.failure(decode))
+                    } catch {
+                        return .error(error)
+                    }
+                }
+            })
     }
 }

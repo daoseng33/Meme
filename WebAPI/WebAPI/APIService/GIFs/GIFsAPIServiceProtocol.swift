@@ -9,6 +9,11 @@ import Foundation
 import MemeData
 import RxSwift
 
+public enum GIFAPIResponse<GIFs, MemeError> {
+    case success(GIFs)
+    case failure(MemeError)
+}
+
 public protocol GIFsAPIServiceProtocol: BaseAPIServiceProtocol {
-    func fetchGifs(query: String, number: Int) -> Single<GIFs>
+    func fetchGifs(query: String, number: Int) -> Single<GIFAPIResponse<GIFs, MemeError>>
 }

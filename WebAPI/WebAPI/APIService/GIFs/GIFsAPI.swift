@@ -47,8 +47,13 @@ extension GIFsAPI: MemeTargetType {
     
     var sampleData: Data {
         switch self {
-        case .searchGiFs:
-            return Utility.loadJSON(filename: "search_gifs")
+        case .searchGiFs(let query, _):
+            if query.isEmpty {
+                return Utility.loadJSON(filename: "search_gifs_failure")
+            } else {
+                return Utility.loadJSON(filename: "search_gifs")
+            }
+            
         }
     }
 }

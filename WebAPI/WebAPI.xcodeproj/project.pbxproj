@@ -38,6 +38,7 @@
 		1CE1389D2C9AAFA700633CFC /* JokeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE1389C2C9AAFA700633CFC /* JokeAPIService.swift */; };
 		1CE608EE2C85CB40004844B7 /* MemeData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CE608ED2C85CB40004844B7 /* MemeData.framework */; };
 		1CE608EF2C85CB40004844B7 /* MemeData.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1CE608ED2C85CB40004844B7 /* MemeData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1CF584DF2CA00ACD00175C2D /* search_gifs_failure.json in Resources */ = {isa = PBXBuildFile; fileRef = 1CF584DE2CA00ACD00175C2D /* search_gifs_failure.json */; };
 		1CF80EE92C9ABB4700D18F18 /* random_joke_error.json in Resources */ = {isa = PBXBuildFile; fileRef = 1CF80EE82C9ABB4700D18F18 /* random_joke_error.json */; };
 		1CF80EEB2C9ABB6F00D18F18 /* JokeAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF80EEA2C9ABB6F00D18F18 /* JokeAPITests.swift */; };
 /* End PBXBuildFile section */
@@ -97,6 +98,7 @@
 		1CE138992C9AAD8400633CFC /* JokeAPIServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeAPIServiceProtocol.swift; sourceTree = "<group>"; };
 		1CE1389C2C9AAFA700633CFC /* JokeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeAPIService.swift; sourceTree = "<group>"; };
 		1CE608ED2C85CB40004844B7 /* MemeData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MemeData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CF584DE2CA00ACD00175C2D /* search_gifs_failure.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = search_gifs_failure.json; sourceTree = "<group>"; };
 		1CF80EE82C9ABB4700D18F18 /* random_joke_error.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = random_joke_error.json; sourceTree = "<group>"; };
 		1CF80EEA2C9ABB6F00D18F18 /* JokeAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeAPITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -196,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				1C2D213E2C9FE9CA00589C6A /* search_gifs.json */,
+				1CF584DE2CA00ACD00175C2D /* search_gifs_failure.json */,
 			);
 			path = SanpleData;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				1CC9DCC22C82F71300A1EEC6 /* memes_random_image.json in Resources */,
 				1C87C3652C9974B600A63581 /* memes_random_keyword.json in Resources */,
 				1C01D41B2C905AB0007E93A9 /* memes_random_video.json in Resources */,
+				1CF584DF2CA00ACD00175C2D /* search_gifs_failure.json in Resources */,
 				1CE138942C9AACD900633CFC /* random_joke.json in Resources */,
 				1CF80EE92C9ABB4700D18F18 /* random_joke_error.json in Resources */,
 				1C2D213F2C9FE9CA00589C6A /* search_gifs.json in Resources */,
