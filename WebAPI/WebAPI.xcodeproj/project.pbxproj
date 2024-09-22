@@ -17,6 +17,9 @@
 		1C248C6D2C81D0090015A7F1 /* WebAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C248C612C81D0090015A7F1 /* WebAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C2D213D2C9FE9B600589C6A /* GIFsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2D213B2C9FE9B600589C6A /* GIFsAPI.swift */; };
 		1C2D213F2C9FE9CA00589C6A /* search_gifs.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C2D213E2C9FE9CA00589C6A /* search_gifs.json */; };
+		1C2D21462C9FEB5600589C6A /* GIFsAPIServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2D21452C9FEB5600589C6A /* GIFsAPIServiceProtocol.swift */; };
+		1C2D21482C9FEBBA00589C6A /* GIFsAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2D21472C9FEBBA00589C6A /* GIFsAPIService.swift */; };
+		1C2D214A2C9FEE6200589C6A /* GIFsAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2D21492C9FEE6200589C6A /* GIFsAPITests.swift */; };
 		1C87C3592C9963FF00A63581 /* RxBlocking-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C3582C9963FF00A63581 /* RxBlocking-Dynamic */; };
 		1C87C35C2C99642100A63581 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C35B2C99642100A63581 /* RxMoya */; };
 		1C87C3652C9974B600A63581 /* memes_random_keyword.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C87C3642C9974B600A63581 /* memes_random_keyword.json */; };
@@ -75,6 +78,9 @@
 		1C248C6B2C81D0090015A7F1 /* MemeAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeAPITests.swift; sourceTree = "<group>"; };
 		1C2D213B2C9FE9B600589C6A /* GIFsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFsAPI.swift; sourceTree = "<group>"; };
 		1C2D213E2C9FE9CA00589C6A /* search_gifs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = search_gifs.json; sourceTree = "<group>"; };
+		1C2D21452C9FEB5600589C6A /* GIFsAPIServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFsAPIServiceProtocol.swift; sourceTree = "<group>"; };
+		1C2D21472C9FEBBA00589C6A /* GIFsAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFsAPIService.swift; sourceTree = "<group>"; };
+		1C2D21492C9FEE6200589C6A /* GIFsAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFsAPITests.swift; sourceTree = "<group>"; };
 		1C87C3642C9974B600A63581 /* memes_random_keyword.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = memes_random_keyword.json; sourceTree = "<group>"; };
 		1CAD90252C99529B00BB4DFC /* BaseAPIServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPIServiceProtocol.swift; sourceTree = "<group>"; };
 		1CC9DC952C81D76500A1EEC6 /* MemeAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeAPI.swift; sourceTree = "<group>"; };
@@ -170,6 +176,7 @@
 			children = (
 				1CF80EEA2C9ABB6F00D18F18 /* JokeAPITests.swift */,
 				1C248C6B2C81D0090015A7F1 /* MemeAPITests.swift */,
+				1C2D21492C9FEE6200589C6A /* GIFsAPITests.swift */,
 			);
 			path = WebAPITests;
 			sourceTree = "<group>";
@@ -177,8 +184,10 @@
 		1C2D213C2C9FE9B600589C6A /* GIFs */ = {
 			isa = PBXGroup;
 			children = (
-				1C2D213B2C9FE9B600589C6A /* GIFsAPI.swift */,
 				1C2D21402C9FEA1500589C6A /* SanpleData */,
+				1C2D213B2C9FE9B600589C6A /* GIFsAPI.swift */,
+				1C2D21472C9FEBBA00589C6A /* GIFsAPIService.swift */,
+				1C2D21452C9FEB5600589C6A /* GIFsAPIServiceProtocol.swift */,
 			);
 			path = GIFs;
 			sourceTree = "<group>";
@@ -366,8 +375,8 @@
 				1C87C3652C9974B600A63581 /* memes_random_keyword.json in Resources */,
 				1C01D41B2C905AB0007E93A9 /* memes_random_video.json in Resources */,
 				1CE138942C9AACD900633CFC /* random_joke.json in Resources */,
-				1C2D213F2C9FE9CA00589C6A /* search_gifs.json in Resources */,
 				1CF80EE92C9ABB4700D18F18 /* random_joke_error.json in Resources */,
+				1C2D213F2C9FE9CA00589C6A /* search_gifs.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,9 +397,11 @@
 				1CD9F5252C85B9F8009DDABD /* APIErrorHandleManager.swift in Sources */,
 				1CAD90262C99529B00BB4DFC /* BaseAPIServiceProtocol.swift in Sources */,
 				1CD9F5232C85B6A6009DDABD /* ErrorHandlingPlugin.swift in Sources */,
+				1C2D213D2C9FE9B600589C6A /* GIFsAPI.swift in Sources */,
+				1C2D21482C9FEBBA00589C6A /* GIFsAPIService.swift in Sources */,
+				1C2D21462C9FEB5600589C6A /* GIFsAPIServiceProtocol.swift in Sources */,
 				1CE138922C9AAA5500633CFC /* JokeAPI.swift in Sources */,
 				1CE1389D2C9AAFA700633CFC /* JokeAPIService.swift in Sources */,
-				1C2D213D2C9FE9B600589C6A /* GIFsAPI.swift in Sources */,
 				1CE1389A2C9AAD8400633CFC /* JokeAPIServiceProtocol.swift in Sources */,
 				1CC9DCA22C81D7BF00A1EEC6 /* JSONDecoderExtension.swift in Sources */,
 				1CC9DC9C2C81D76500A1EEC6 /* MemeAPI.swift in Sources */,
@@ -408,6 +419,7 @@
 			files = (
 				1CF80EEB2C9ABB6F00D18F18 /* JokeAPITests.swift in Sources */,
 				1C248C6C2C81D0090015A7F1 /* MemeAPITests.swift in Sources */,
+				1C2D214A2C9FEE6200589C6A /* GIFsAPITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
