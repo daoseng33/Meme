@@ -35,21 +35,23 @@ final class HomePageViewController: UIViewController {
 extension HomePageViewController: GridCollectionViewDelegate {
     func gridCollectionView(_ gridCollectionView: GridCollectionView, didSelectItemAt index: Int) {
         let category = Category(rawValue: index)
+        let vc: BaseViewController
         switch category {
         case .meme:
-            let vc = RandomMemeViewController(viewModel: viewModel.randomMemeViewModel)
+            vc = RandomMemeViewController(viewModel: viewModel.randomMemeViewModel)
             show(vc, sender: self)
             
         case .joke:
-            let vc = RandomJokeViewController(viewModel: viewModel.randomJokeViewModel)
-            show(vc, sender: self)
+            vc = RandomJokeViewController(viewModel: viewModel.randomJokeViewModel)
             
         case .gifs:
-            return
+            vc = GIFsViewController(viewModel: viewModel.gifsViewModel)
             
         case nil:
             return
         }
+        
+        show(vc, sender: self)
     }
 }
 

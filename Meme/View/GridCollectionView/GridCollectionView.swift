@@ -16,7 +16,7 @@ protocol GridCollectionViewDelegate: AnyObject {
 final class GridCollectionView: UIView {
     // MARK: - Properties
     weak var delegate: GridCollectionViewDelegate?
-    private let viewModel: GridCollectionViewModel
+    private let viewModel: GridCollectionViewModelProtocol
     
     // MARK: - UI
     private let collectionViewPadding = 8.0
@@ -25,14 +25,14 @@ final class GridCollectionView: UIView {
         layout.scrollDirection = .vertical
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(GridCollectionViewCell.self)
+        collectionView.register(GridCell.self)
         collectionView.backgroundColor = .systemBackground
         
         return collectionView
     }()
     
     // MARK: - Init
-    init(viewModel: GridCollectionViewModel) {
+    init(viewModel: GridCollectionViewModelProtocol) {
         self.viewModel = viewModel
         
         super.init(frame: .zero)
@@ -73,7 +73,7 @@ extension GridCollectionView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: GridCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        let cell: GridCell = collectionView.dequeueReusableCell(for: indexPath)
         
         let cellViewModel = viewModel.gridCellViewModel(with: indexPath.item)
         cell.configure(viewModel: cellViewModel)

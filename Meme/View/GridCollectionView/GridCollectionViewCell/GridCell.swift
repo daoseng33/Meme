@@ -1,5 +1,5 @@
 //
-//  GridCollectionViewCell.swift
+//  GridCell.swift
 //  Meme
 //
 //  Created by DAO on 2024/9/9.
@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import Kingfisher
 
-final class GridCollectionViewCell: UICollectionViewCell {
+final class GridCell: UICollectionViewCell {
     // MARK: - UI
     private let gridImageView: AnimatedImageView = {
         let imageView = AnimatedImageView()
@@ -61,7 +61,7 @@ final class GridCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configure(viewModel: GridCollectionViewCellViewModelProtocol) {
+    func configure(viewModel: GridCellViewModelProtocol) {
         viewModel.title.map { $0 == nil }
             .bind(to: gridTitleLabel.rx.isHidden)
             .disposed(by: rx.disposeBag)

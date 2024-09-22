@@ -111,6 +111,17 @@
         }
       }
     },
+    "Generate GIFs" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "產生動圖"
+          }
+        }
+      }
+    },
     "Generate Joke" : {
       "extractionState" : "manual",
       "localizations" : {

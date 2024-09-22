@@ -1,5 +1,5 @@
 //
-//  GridCollectionViewCellViewModel.swift
+//  GridCellViewModel.swift
 //  Meme
 //
 //  Created by DAO on 2024/9/9.
@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxRelay
 
-final class GridCollectionViewCellViewModel: GridCollectionViewCellViewModelProtocol {
+final class GridCellViewModel: GridCellViewModelProtocol {
     // MARK: - Properties
     private let titleRelay: BehaviorRelay<String?>
     private let imageDataRelay: BehaviorRelay<(GridImageType)>

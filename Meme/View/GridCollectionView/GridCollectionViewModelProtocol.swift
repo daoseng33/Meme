@@ -10,6 +10,8 @@ import RxSwift
 
 protocol GridCollectionViewModelProtocol {
     var numberOfItems: Int { get }
+    var gridDatasObserver: AnyObserver<[GridData]> { get }
     var shouldReloadData: Observable<Void> { get }
     init(gridDatas: [GridData])
+    func gridCellViewModel(with index: Int) -> GridCellViewModelProtocol
 }

@@ -11,27 +11,35 @@ import RxSwift
 
 final class GridCollectionViewModel: GridCollectionViewModelProtocol {
     // MARK: - Properties
-    private let gridDatasRelay: BehaviorRelay<[GridData]>
+    private let gridDatasSubject: BehaviorSubject<[GridData]>
+    
+    var gridDatasObserver: AnyObserver<[GridData]> {
+        gridDatasSubject.asObserver()
+    }
     
     var numberOfItems: Int {
-        return gridDatasRelay.value.count
+        return (try? gridDatasSubject.value().count) ?? 0
     }
     
     var shouldReloadData: Observable<Void> {
-        return gridDatasRelay
+        return gridDatasSubject
             .map { _ in Void() }
             .asObservable()
     }
     
     // MARK: - Init
     init(gridDatas: [GridData]) {
-        self.gridDatasRelay = BehaviorRelay<[GridData]>(value: gridDatas)
+        gridDatasSubject = BehaviorSubject<[GridData]>(value: gridDatas)
     }
     
     // MARK: - Configures
-    func gridCellViewModel(with index: Int) -> GridCollectionViewCellViewModelProtocol {
-        let gridData = gridDatasRelay.value[index]
-        let cellViewModel = GridCollectionViewCellViewModel(gridData: gridData)
+    func gridCellViewModel(with index: Int) -> GridCellViewModelProtocol {
+        guard let gridDatas = try? gridDatasSubject.value() else {
+            let noResultGridData = GridData(title: nil, imageType: .static(image: R.image.no_result() ?? UIImage()))
+            return GridCellViewModel(gridData: noResultGridData)
+        }
+        let gridData = gridDatas[index]
+        let cellViewModel = GridCellViewModel(gridData: gridData)
         return cellViewModel
     }
 }

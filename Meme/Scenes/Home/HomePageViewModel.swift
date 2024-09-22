@@ -25,4 +25,5 @@ final class HomePageViewModel {
     lazy var gridCollectionViewModel = GridCollectionViewModel(gridDatas: gridDatas)
     let randomMemeViewModel: RandomMemeViewModelProtocol = RandomMemeViewModel()
     let randomJokeViewModel: RandomJokeViewModelProtocol = RandomJokeViewModel()
+    let gifsViewModel: GIFsViewModelProtocol = GIFsViewModel()
 }
