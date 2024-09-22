@@ -42,22 +42,30 @@ final class GridCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupViews() {
-        contentView.addSubview(gridImageView)
-        contentView.addSubview(gridTitleLabel)
+        let stackView: UIStackView = {
+            let stackView = UIStackView(arrangedSubviews: [gridImageView, gridTitleLabel])
+            stackView.axis = .vertical
+            stackView.spacing = Constant.spacing2
+            
+            return stackView
+        }()
         
-        gridImageView.snp.makeConstraints {
-            $0.top.left.right.equalToSuperview()
-            $0.height.equalTo(150)
+        contentView.addSubview(stackView)
+        
+        stackView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
         
-        gridTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(gridImageView.snp.bottom).offset(8)
-            $0.left.right.equalTo(gridImageView)
-            $0.bottom.lessThanOrEqualToSuperview().offset(-8).priority(.high)
+        gridImageView.snp.makeConstraints {
+            $0.height.equalTo(150)
         }
     }
     
     func configure(viewModel: GridCollectionViewCellViewModel) {
+        viewModel.title.map { $0.isEmpty }
+            .bind(to: gridTitleLabel.rx.isHidden)
+            .disposed(by: rx.disposeBag)
+        
         viewModel.title
             .bind(to: gridTitleLabel.rx.text)
             .disposed(by: rx.disposeBag)
