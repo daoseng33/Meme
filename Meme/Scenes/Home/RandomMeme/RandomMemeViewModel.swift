@@ -44,7 +44,7 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
     private let disposeBag = DisposeBag()
     
     // MARK: - Init
-    init(webService: MemeAPIServiceProtocol = MemeAPIService()) {
+    init(webService: MemeAPIServiceProtocol) {
         randomMemeWebAPI = webService
     }
     

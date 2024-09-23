@@ -48,7 +48,7 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
     private let disposeBag = DisposeBag()
     
     // MARK: - Init
-    init(webService: JokeAPIServiceProtocol = JokeAPIService()) {
+    init(webService: JokeAPIServiceProtocol) {
         self.webService = webService
     }
     

@@ -15,7 +15,7 @@ final class GIFsViewModel: GIFsViewModelProtocol {
     private let loadingStateRelay = BehaviorRelay<LoadingState>(value: .initial)
     private lazy var keywordBehaviorSubject = BehaviorSubject<String?>(value: nil)
     private var gridCellViewModels: [GridCellViewModelProtocol] = []
-    private let webService = GIFsAPIService()
+    private let webService: GIFsAPIServiceProtocol
     private let disposeBag = DisposeBag()
     let gridCollectionViewModel: GridCollectionViewModelProtocol = GridCollectionViewModel(gridDatas: [])
     
@@ -33,6 +33,11 @@ final class GIFsViewModel: GIFsViewModelProtocol {
     
     var loadingStateObservable: Observable<LoadingState> {
         loadingStateRelay.asObservable()
+    }
+    
+    // MARK: - Init
+    init(webService: GIFsAPIServiceProtocol) {
+        self.webService = webService
     }
     
     // MARK: - data handler

@@ -70,7 +70,7 @@ final class GridCell: UICollectionViewCell {
             .bind(to: gridTitleLabel.rx.text)
             .disposed(by: rx.disposeBag)
         
-        viewModel.imageData
+        viewModel.imageType
             .withUnretained(self)
             .subscribe(onNext: {  (self, imageData) in
                 switch imageData {

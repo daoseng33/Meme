@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WebAPI
 
 final class HomePageViewModel {
     // MARK: - Properties
@@ -23,7 +24,7 @@ final class HomePageViewModel {
     }()
     
     lazy var gridCollectionViewModel = GridCollectionViewModel(gridDatas: gridDatas)
-    let randomMemeViewModel: RandomMemeViewModelProtocol = RandomMemeViewModel()
-    let randomJokeViewModel: RandomJokeViewModelProtocol = RandomJokeViewModel()
-    let gifsViewModel: GIFsViewModelProtocol = GIFsViewModel()
+    let randomMemeViewModel: RandomMemeViewModelProtocol = RandomMemeViewModel(webService: MemeAPIService())
+    let randomJokeViewModel: RandomJokeViewModelProtocol = RandomJokeViewModel(webService: JokeAPIService())
+    let gifsViewModel: GIFsViewModelProtocol = GIFsViewModel(webService: GIFsAPIService())
 }

@@ -10,6 +10,6 @@ import RxSwift
 
 protocol GridCellViewModelProtocol {
     var title: Observable<String?> { get }
-    var imageData: Observable<(GridImageType)> { get }
+    var imageType: Observable<(GridImageType)> { get }
     init(gridData: GridData)
 }

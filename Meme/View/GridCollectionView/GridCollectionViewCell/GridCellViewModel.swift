@@ -18,7 +18,7 @@ final class GridCellViewModel: GridCellViewModelProtocol {
         return titleRelay.asObservable()
     }
     
-    var imageData: Observable<(GridImageType)> {
+    var imageType: Observable<(GridImageType)> {
         return imageDataRelay.asObservable()
     }
     
