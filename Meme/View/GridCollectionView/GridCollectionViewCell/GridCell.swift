@@ -17,6 +17,7 @@ final class GridCell: UICollectionViewCell {
         let imageView = AnimatedImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        imageView.kf.indicatorType = .activity
         
         return imageView
     }()
