@@ -10,6 +10,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 import Kingfisher
+import SKPhotoBrowser
 
 final class GridCell: UICollectionViewCell {
     // MARK: - UI
@@ -32,6 +33,7 @@ final class GridCell: UICollectionViewCell {
         return label
     }()
     
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -42,6 +44,7 @@ final class GridCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Setup
     private func setupViews() {
         let stackView: UIStackView = {
             let stackView = UIStackView(arrangedSubviews: [gridImageView, gridTitleLabel])

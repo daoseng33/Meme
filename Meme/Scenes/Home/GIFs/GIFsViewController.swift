@@ -8,11 +8,18 @@
 import UIKit
 import SnapKit
 import RxCocoa
+import RxSwift
+import SKPhotoBrowser
 
 final class GIFsViewController: BaseViewController {
     // MARK: - Properties
     private let viewModel: GIFsViewModelProtocol
-    private lazy var gridCollectionView = GridCollectionView(viewModel: viewModel.gridCollectionViewModel)
+    private lazy var gridCollectionView: GridCollectionView = {
+        let collectionView = GridCollectionView(viewModel: viewModel.gridCollectionViewModel)
+        collectionView.delegate = self
+        
+        return collectionView
+    }()
     private let keywordTextField = KeywordTextField()
     private let generateGifsButton: RoundedRectangleButton = {
         let button = RoundedRectangleButton()
@@ -116,5 +123,27 @@ final class GIFsViewController: BaseViewController {
                 self.viewModel.fetchGIFs()
             })
             .disposed(by: rx.disposeBag)
+        
+        
+    }
+}
+
+// MARK: - GridCollectionViewDelegate
+extension GIFsViewController: GridCollectionViewDelegate {
+    func gridCollectionView(_ gridCollectionView: GridCollectionView, didSelectItemAt index: Int) {
+        let cellViewModel = viewModel.gridCollectionViewModel.gridCellViewModel(with: index)
+        let imageType = cellViewModel.currentImageType
+        
+        let images: [SKPhoto]
+        switch imageType {
+        case .gif(let url):
+            images = [SKPhoto.photoWithImageURL(url.absoluteString)]
+            
+        case .static(let image):
+            images = [SKPhoto.photoWithImage(image)]
+        }
+        
+        let browser = SKPhotoBrowser(photos: images)
+        show(browser, sender: nil)
     }
 }

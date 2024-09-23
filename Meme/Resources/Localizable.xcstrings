@@ -485,6 +485,17 @@
         }
       }
     },
+    "We need access to your photo album to save meme photos." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "需要你的相簿權限來儲存迷因照片"
+          }
+        }
+      }
+    },
     "Yo Momma" : {
       "extractionState" : "manual",
       "localizations" : {

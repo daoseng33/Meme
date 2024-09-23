@@ -8,18 +8,24 @@
 import UIKit
 import AVFoundation
 import SnapKit
+//import RxSwift
 import RxCocoa
 import Kingfisher
+//import RxGesture
+import SKPhotoBrowser
 
 final class RandomMemeViewController: BaseViewController {
     // MARK: - Properties
     private let viewModel: RandomMemeViewModelProtocol
     
     // MARK: - UI
-    private let imageView: UIImageView = {
+    private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.kf.indicatorType = .activity
+        imageView.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureAction))
+        imageView.addGestureRecognizer(tapGesture)
         
         return imageView
     }()
@@ -126,6 +132,14 @@ final class RandomMemeViewController: BaseViewController {
                 self.viewModel.fetchRandomMeme()
             })
             .disposed(by: rx.disposeBag)
+    }
+    
+    @objc private func tapGestureAction() {
+        guard let image = self.imageView.image else { return }
+        let images = [SKPhoto.photoWithImage(image)]
+        let browser = SKPhotoBrowser(photos: images)
+        
+        show(browser, sender: nil)
     }
     
     private func setupBinding() {

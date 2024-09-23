@@ -12,19 +12,23 @@ import RxRelay
 final class GridCellViewModel: GridCellViewModelProtocol {
     // MARK: - Properties
     private let titleRelay: BehaviorRelay<String?>
-    private let imageDataRelay: BehaviorRelay<(GridImageType)>
+    private let imageTypeRelay: BehaviorRelay<GridImageType>
+    
+    var currentImageType: GridImageType {
+        imageTypeRelay.value
+    }
     
     var title: Observable<String?> {
-        return titleRelay.asObservable()
+        titleRelay.asObservable()
     }
     
     var imageType: Observable<(GridImageType)> {
-        return imageDataRelay.asObservable()
+        imageTypeRelay.asObservable()
     }
     
     // MARK: - Init
     init(gridData: GridData) {
         titleRelay = BehaviorRelay<String?>(value: gridData.title)
-        imageDataRelay = BehaviorRelay<(GridImageType)>(value: (gridData.imageType))
+        imageTypeRelay = BehaviorRelay<(GridImageType)>(value: (gridData.imageType))
     }
 }
