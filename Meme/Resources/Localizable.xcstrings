@@ -34,6 +34,17 @@
         }
       }
     },
+    "Cancel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
+          }
+        }
+      }
+    },
     "Christmas" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -397,6 +408,17 @@
         }
       }
     },
+    "Retry" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重試"
+          }
+        }
+      }
+    },
     "School" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -437,6 +459,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "性"
+          }
+        }
+      }
+    },
+    "Something went wrong" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "發生錯誤"
           }
         }
       }

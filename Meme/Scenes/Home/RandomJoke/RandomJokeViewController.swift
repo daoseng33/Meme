@@ -158,8 +158,15 @@ final class RandomJokeViewController: BaseViewController {
                 switch state {
                 case .initial, .loading:
                     self.generateJokeButton.isEnabled = false
-                case .success, .failure:
+                case .success:
                     self.generateJokeButton.isEnabled = true
+                    
+                case .failure(let error):
+                    self.generateJokeButton.isEnabled = true
+                    GlobalErrorHandler.shared.popErrorAlert(error: error, presentVC: self) { [weak self] in
+                        guard let self = self else { return }
+                        self.viewModel.fetchRandomJoke()
+                    }
                 }
             })
             .disposed(by: rx.disposeBag)

@@ -8,15 +8,11 @@
 import UIKit
 
 final class MemeTabBarController: UITabBarController {
-    // MARK: - Properties
-    private let globalErrorHandler = GlobalErrorHandler()
-    
     // MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setup()
-        handleGlobalError()
     }
 
     //MARK: - Setup
@@ -37,9 +33,5 @@ final class MemeTabBarController: UITabBarController {
         settingViewController.tabBarItem = UITabBarItem(title: "Setting".localized(), image: R.image.settings(), tag: 3)
         
         viewControllers = [homeViewController, historyViewController, favoriteViewController, settingViewController]
-    }
-    
-    private func handleGlobalError() {
-        globalErrorHandler.handleError()
     }
 }

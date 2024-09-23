@@ -8,11 +8,18 @@
 import Foundation
 import WebAPI
 import RxSwift
+import UIKit
 
 final class GlobalErrorHandler {
+    // MARK: - Properties
+    static let shared = GlobalErrorHandler()
     
     private let disposeBag = DisposeBag()
     
+    // MARK: - Init
+    private init() {}
+    
+    // MARK: - Error handler
     func handleError() {
         APIErrorHandleManager.shared.httpErrorHandler
             .withUnretained(self)
@@ -46,5 +53,20 @@ final class GlobalErrorHandler {
 
     private func handleNetworkRequestError(_ error: Error) {
         print("Network error occurred: \(error.localizedDescription)")
+    }
+    
+    func popErrorAlert(error: Error, presentVC: UIViewController, handler: @escaping (() -> Void)) {
+        let alert = UIAlertController(title: "Something went wrong".localized(), message: error.localizedDescription, preferredStyle: .alert)
+        
+        let retryAction = UIAlertAction(title: "Retry".localized(), style: .default) { _ in
+            handler()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel".localized(), style: .cancel)
+        
+        alert.addAction(cancelAction)
+        alert.addAction(retryAction)
+        
+        presentVC.present(alert, animated: true)
     }
 }

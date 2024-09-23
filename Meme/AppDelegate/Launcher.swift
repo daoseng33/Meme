@@ -11,10 +11,15 @@ import IQKeyboardManagerSwift
 final class Launcher {
     @MainActor func setup() {
         setupIQKeyboardManager()
+        handleGlobalError()
     }
     
     @MainActor private func setupIQKeyboardManager() {
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.resignOnTouchOutside = true
+    }
+    
+    private func handleGlobalError() {
+        GlobalErrorHandler.shared.handleError()
     }
 }
