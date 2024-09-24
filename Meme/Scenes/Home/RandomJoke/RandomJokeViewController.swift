@@ -67,7 +67,7 @@ final class RandomJokeViewController: BaseViewController {
         let button = RoundedRectangleButton()
         button.title = "Generate Joke".localized()
         button.titleColor = .white
-        button.buttonBackgroundColor = .systemIndigo
+        button.buttonBackgroundColor = .accent
         
         return button
     }()

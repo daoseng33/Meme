@@ -25,7 +25,7 @@ final class GIFsViewController: BaseViewController {
         let button = RoundedRectangleButton()
         button.title = "Generate GIFs".localized()
         button.titleColor = .white
-        button.buttonBackgroundColor = .systemIndigo
+        button.buttonBackgroundColor = .accent
         
         return button
     }()
