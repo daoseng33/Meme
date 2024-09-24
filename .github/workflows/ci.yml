@@ -5,6 +5,10 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+
+env:
+  XCODE_DESTINATION: 'platform=iOS Simulator,name=iPhone 16,OS=latest'
+
 jobs:
   test_meme:
     runs-on: self-hosted
@@ -13,9 +17,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Clear Derived Data for specific project
+        run: |
+          find ~/Library/Developer/Xcode/DerivedData -type d -name "Meme-*" -exec rm -rf {} +
+
       - name: Xcode Clean
         run: |
-          xcodebuild clean -workspace Meme.xcworkspace -scheme Meme -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest'
+          xcodebuild clean -workspace Meme.xcworkspace -scheme Meme -destination "${{ env.XCODE_DESTINATION }}"
 
       - name: Install dependencies
         run: |
@@ -34,8 +42,8 @@ jobs:
 
       - name: Run Meme tests
         run: |
-          xcodebuild test -workspace Meme.xcworkspace -scheme Meme -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest'
+          xcodebuild test -workspace Meme.xcworkspace -scheme Meme -destination "${{ env.XCODE_DESTINATION }}"
 
       - name: Run WebAPI tests
         run: |
-          xcodebuild test -workspace Meme.xcworkspace -scheme WebAPI -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest'
+          xcodebuild test -workspace Meme.xcworkspace -scheme WebAPI -destination "${{ env.XCODE_DESTINATION }}"
