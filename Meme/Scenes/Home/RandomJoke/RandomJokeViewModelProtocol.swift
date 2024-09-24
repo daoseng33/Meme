@@ -13,7 +13,8 @@ import WebAPI
 protocol RandomJokeViewModelProtocol: AnyObject, LoadingStateProtocol {
     func loadFirstMemeIfNeeded()
     func fetchRandomJoke()
-    var joke: Observable<String> { get }
+    var jokeObservable: Observable<String> { get }
+    var joke: String { get }
     var selectedCategoryObserver: AnyObserver<String> { get }
     var selectedCategory: JokeCategory { get }
     var categories: [String] { get }

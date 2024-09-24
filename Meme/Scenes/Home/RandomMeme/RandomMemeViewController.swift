@@ -33,6 +33,12 @@ final class RandomMemeViewController: BaseViewController {
     private let videoPlayerView = VideoPlayerView()
     private let descriptionTextView = ContentTextView()
     private let keywordTextField = KeywordTextField()
+    private let shareButton: UIButton = {
+        let button = UIButton()
+        button.setImage(Asset.Global.share.image, for: .normal)
+        
+        return button
+    }()
     
     private let generateMemeButton: RoundedRectangleButton = {
         let button = RoundedRectangleButton()
@@ -96,10 +102,26 @@ final class RandomMemeViewController: BaseViewController {
             $0.edges.equalTo(imageView)
         }
         
+        let interactionStackView: UIStackView = {
+            let stackView = UIStackView(arrangedSubviews: [
+                keywordTextField,
+                shareButton
+            ])
+            
+            stackView.axis = .horizontal
+            stackView.spacing = Constant.spacing1
+            
+            return stackView
+        }()
+        
+        interactionStackView.snp.makeConstraints {
+            $0.height.equalTo(35)
+        }
+        
         let stackView: UIStackView = {
             let stackView = UIStackView(arrangedSubviews: [
                 descriptionTextView,
-                keywordTextField,
+                interactionStackView,
                 generateMemeButton
             ])
             
@@ -120,8 +142,8 @@ final class RandomMemeViewController: BaseViewController {
             $0.height.equalTo(50)
         }
         
-        keywordTextField.snp.makeConstraints {
-            $0.height.equalTo(35)
+        shareButton.snp.makeConstraints {
+            $0.width.equalTo(35)
         }
     }
     
@@ -143,6 +165,25 @@ final class RandomMemeViewController: BaseViewController {
                 self.imageView.image = Asset.Global.noResult.image
             }
             .disposed(by: rx.disposeBag)
+        
+        shareButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { (self, _) in
+                guard let mediaURL = self.viewModel.media.mediaURL else { return }
+                let description = self.viewModel.description
+                
+                KingfisherManager.shared.retrieveImage(with: mediaURL) { [weak self] result in
+                    guard let self = self else { return }
+                    switch result {
+                        case .success(let resource):
+                        Utility.showShareSheet(items: [mediaURL, resource.image, description], parentVC: self)
+                        
+                    case .failure:
+                        Utility.showShareSheet(items: [mediaURL, description], parentVC: self)
+                    }
+                }
+            })
+            .disposed(by: rx.disposeBag)
     }
     
     @objc private func tapGestureAction() {
@@ -154,7 +195,7 @@ final class RandomMemeViewController: BaseViewController {
     }
     
     private func setupBinding() {
-        viewModel.media
+        viewModel.mediaObservable
             .asDriver(onErrorJustReturn: (nil, .image))
             .drive(with: self) { (self, mediaData) in
                 switch mediaData.type {
@@ -193,16 +234,16 @@ final class RandomMemeViewController: BaseViewController {
             })
             .disposed(by: rx.disposeBag)
             
-        viewModel.description
+        viewModel.descriptionObservable
             .bind(to: descriptionTextView.textBinder)
             .disposed(by: rx.disposeBag)
         
-        viewModel.keyword
+        viewModel.keywordRelay
             .bind(to: keywordTextField.textBinder)
             .disposed(by: rx.disposeBag)
         
         keywordTextField.textBinder
-            .bind(to: viewModel.keywordObserver)
+            .bind(to: viewModel.keywordRelay)
             .disposed(by: rx.disposeBag)
     }
 }

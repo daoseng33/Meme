@@ -20,25 +20,29 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
     }
     
     // MARK: - Properties
-    var media: Observable<(mediaURL: URL?, type: MemeMediaType)> {
+    var mediaObservable: Observable<(mediaURL: URL?, type: MemeMediaType)> {
         mediaRelay.asObservable()
     }
     
-    var keyword: Observable<String?> {
-        keywordSubject.asObservable()
+    var media: (mediaURL: URL?, type: MemeMediaType) {
+        mediaRelay.value
     }
     
-    var keywordObserver: AnyObserver<String?> {
-        keywordSubject.asObserver()
-    }
-    
-    var description: Observable<String> {
+    var descriptionObservable: Observable<String> {
         descriptionRelay.asObservable()
     }
     
+    var description: String {
+        descriptionRelay.value
+    }
+    
+    let keywordRelay = BehaviorRelay<String?>(value: nil)
+    
+    private var randomMediaType: MemeMediaType {
+        return MemeMediaType.allCases.randomElement() ?? .image
+    }
     private let randomMemeWebAPI: MemeAPIServiceProtocol
     private let mediaRelay = BehaviorRelay<(mediaURL: URL?, type: MemeMediaType)>(value: (nil, .image))
-    private let keywordSubject = BehaviorSubject<String?>(value: nil)
     private let descriptionRelay = BehaviorRelay<String>(value: "")
     private let loadingStateRelay = BehaviorRelay<LoadingState>(value: .initial)
     private let disposeBag = DisposeBag()
@@ -59,7 +63,7 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
         loadingStateRelay.accept(.loading)
         
         var keyword: String = ""
-        if let value: String = try? keywordSubject.value() {
+        if let value: String = keywordRelay.value {
             keyword = value
         }
         randomMemeWebAPI.fetchRandomMeme(with: keyword, mediaType: randomMediaType, minRating: 8)

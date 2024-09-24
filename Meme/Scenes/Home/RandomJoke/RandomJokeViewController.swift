@@ -15,7 +15,6 @@ final class RandomJokeViewController: BaseViewController {
     
     // MARK: - UI
     private let jokeTextView = ContentTextView()
-    private let categorySelectedView = UIView()
     
     private let categorySelectedLabel: UILabel = {
         let label = UILabel()
@@ -63,6 +62,13 @@ final class RandomJokeViewController: BaseViewController {
         return button
     }()
     
+    private let shareButton: UIButton = {
+        let button = UIButton()
+        button.setImage(Asset.Global.share.image, for: .normal)
+        
+        return button
+    }()
+    
     private let generateJokeButton: RoundedRectangleButton = {
         let button = RoundedRectangleButton()
         button.title = "Generate Joke".localized()
@@ -98,6 +104,8 @@ final class RandomJokeViewController: BaseViewController {
         view.backgroundColor = .systemBackground
         navigationBar.topItem?.title = "Random Joke".localized()
         
+        let categorySelectedView = UIView()
+        
         let stackView: UIStackView = {
            let stackView = UIStackView(arrangedSubviews: [
             jokeTextView,
@@ -124,6 +132,12 @@ final class RandomJokeViewController: BaseViewController {
             $0.height.equalTo(35)
         }
         
+        categorySelectedView.addSubview(shareButton)
+        shareButton.snp.makeConstraints {
+            $0.width.equalTo(35)
+            $0.right.top.bottom.equalToSuperview()
+        }
+        
         categorySelectedView.addSubview(categorySelectedLabel)
         categorySelectedLabel.snp.makeConstraints {
             $0.top.left.bottom.equalToSuperview()
@@ -133,7 +147,7 @@ final class RandomJokeViewController: BaseViewController {
         categorySelectedButton.snp.makeConstraints {
             $0.left.equalTo(categorySelectedLabel.snp.right).offset(Constant.spacing1)
             $0.top.bottom.equalToSuperview()
-            $0.right.lessThanOrEqualToSuperview()
+            $0.right.lessThanOrEqualTo(shareButton.snp.left)
         }
     }
 
@@ -145,10 +159,18 @@ final class RandomJokeViewController: BaseViewController {
                 self.viewModel.fetchRandomJoke()
             })
             .disposed(by: rx.disposeBag)
+        
+        shareButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { (self, _) in
+                let joke = self.viewModel.joke
+                Utility.showShareSheet(items: [joke], parentVC: self)
+            })
+            .disposed(by: rx.disposeBag)
     }
     
     private func setupBinding() {
-        viewModel.joke
+        viewModel.jokeObservable
             .bind(to: jokeTextView.textBinder)
             .disposed(by: rx.disposeBag)
         

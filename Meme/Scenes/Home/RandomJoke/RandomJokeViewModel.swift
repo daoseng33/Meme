@@ -20,12 +20,16 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
     }
     
     // MARK: - Porperties
-    var joke: Observable<String> {
-        return jokeRelay.asObservable()
+    var jokeObservable: Observable<String> {
+        jokeRelay.asObservable()
+    }
+    
+    var joke: String {
+        jokeRelay.value
     }
     
     var categories: [String] {
-        return JokeCategory.allCases.map(\.rawValue)
+        JokeCategory.allCases.map(\.rawValue)
     }
     
     var selectedCategoryObserver: AnyObserver<String> {

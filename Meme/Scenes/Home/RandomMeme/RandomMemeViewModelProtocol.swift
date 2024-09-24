@@ -8,20 +8,15 @@
 import Foundation
 import WebAPI
 import RxSwift
+import RxRelay
 import UIKit
 
 protocol RandomMemeViewModelProtocol: LoadingStateProtocol {
     func loadFirstMemeIfNeeded()
     func fetchRandomMeme()
-    var media: Observable<(mediaURL: URL?, type: MemeMediaType)> { get }
-    var keyword: Observable<String?> { get }
-    var keywordObserver: AnyObserver<String?> { get }
-    var description: Observable<String> { get }
-    var randomMediaType: MemeMediaType { get }
-}
-
-extension RandomMemeViewModelProtocol {
-    var randomMediaType: MemeMediaType {
-        return MemeMediaType.allCases.randomElement() ?? .image
-    }
+    var mediaObservable: Observable<(mediaURL: URL?, type: MemeMediaType)> { get }
+    var media: (mediaURL: URL?, type: MemeMediaType) { get }
+    var keywordRelay: BehaviorRelay<String?> { get }
+    var descriptionObservable: Observable<String> { get }
+    var description: String { get }
 }

@@ -35,5 +35,18 @@ struct Utility {
         
         return String(localized: String.LocalizationValue(key), locale: locale)
     }
+    
+    static func showShareSheet(items: [Any], parentVC: UIViewController) {
+        let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        
+        // for iPad
+        if let popoverController = activityViewController.popoverPresentationController {
+            popoverController.sourceView = parentVC.view
+            popoverController.sourceRect = CGRect(x: parentVC.view.bounds.midX, y: parentVC.view.bounds.midY, width: 0, height: 0)
+            popoverController.permittedArrowDirections = []
+        }
+        
+        parentVC.present(activityViewController, animated: true, completion: nil)
+    }
 }
 

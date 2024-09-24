@@ -20,27 +20,23 @@ struct RandomJokeTests {
     @Test func testLoadFirstDataIfNeeded() async throws {
         assert(sut.loadingState == .initial)
         
-        let initialJoke = try sut.joke.take(1).toBlocking().last()
-        assert(initialJoke == "")
+        assert(sut.joke == "")
         
         sut.loadFirstMemeIfNeeded()
         assert(sut.loadingState == .success)
         
-        let loadedJoke = try sut.joke.take(1).toBlocking().last()
-        assert(loadedJoke == "Can you swim? Some times. What do you mean by \"some times\"? Only when I'm in the water.")
+        assert(sut.joke == "Can you swim? Some times. What do you mean by \"some times\"? Only when I'm in the water.")
     }
     
     @Test func testFetchRandomJoke() async throws {
         assert(sut.loadingState == .initial)
         
-        let initialJoke = try sut.joke.take(1).toBlocking().last()
-        assert(initialJoke == "")
+        assert(sut.joke == "")
         
         sut.fetchRandomJoke()
         assert(sut.loadingState == .success)
         
-        let loadedJoke = try sut.joke.take(1).toBlocking().last()
-        assert(loadedJoke == "Can you swim? Some times. What do you mean by \"some times\"? Only when I'm in the water.")
+        assert(sut.joke == "Can you swim? Some times. What do you mean by \"some times\"? Only when I'm in the water.")
     }
     
     @Test func testJokeCategories() async throws {
