@@ -19,8 +19,8 @@ final class RandomMemeViewController: BaseViewController {
     private let viewModel: RandomMemeViewModelProtocol
     
     // MARK: - UI
-    private lazy var imageView: UIImageView = {
-        let imageView = UIImageView()
+    private lazy var imageView: AnimatedImageView = {
+        let imageView = AnimatedImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.kf.indicatorType = .activity
         imageView.isUserInteractionEnabled = true
