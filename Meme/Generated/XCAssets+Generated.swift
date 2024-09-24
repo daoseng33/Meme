@@ -27,6 +27,7 @@ internal enum Asset {
   internal static let accentColor = ColorAsset(name: "AccentColor")
   internal enum Global {
     internal static let noResult = ImageAsset(name: "no-result")
+    internal static let share = ImageAsset(name: "share")
   }
   internal enum Home {
     internal static let jokeApi = ImageAsset(name: "joke-api")
