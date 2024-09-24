@@ -32,7 +32,7 @@ final class RandomJokeViewController: BaseViewController {
         var config: UIButton.Configuration = {
             var config = UIButton.Configuration.filled()
             config.title = viewModel.selectedCategory.rawValue.localized()
-            config.image = R.image.slideUp()
+            config.image = Asset.RandomJoke.slideUp.image
             config.imagePlacement = .trailing
             config.imagePadding = Constant.spacing1
             config.baseForegroundColor = .label

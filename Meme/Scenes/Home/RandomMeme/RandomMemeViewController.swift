@@ -129,8 +129,19 @@ final class RandomMemeViewController: BaseViewController {
         generateMemeButton.tapEvent
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
+                self.videoPlayerView.reset()
                 self.viewModel.fetchRandomMeme()
             })
+            .disposed(by: rx.disposeBag)
+        
+        videoPlayerView.handleErrorObservable
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self) { (self, _) in
+                self.videoPlayerView.reset()
+                self.videoPlayerView.isHidden = true
+                self.imageView.isHidden = false
+                self.imageView.image = Asset.Global.noResult.image
+            }
             .disposed(by: rx.disposeBag)
     }
     
@@ -148,7 +159,6 @@ final class RandomMemeViewController: BaseViewController {
             .drive(with: self) { (self, mediaData) in
                 switch mediaData.type {
                 case .image:
-                    self.videoPlayerView.reset()
                     self.videoPlayerView.isHidden = true
                     self.imageView.isHidden = false
                     self.imageView.kf.setImage(with: mediaData.mediaURL)

@@ -12,13 +12,11 @@ final class HomePageViewModel {
     // MARK: - Properties
     private let gridDatas: [GridData] = {
         var datas = [
-            GridData(title: "Random Meme".localized(), imageType: .static(image: R.image.memeApi()!)),
-            GridData(title: "Random Joke".localized(), imageType: .static(image: R.image.jokeApi()!)),
+            GridData(title: "Random Meme".localized(), imageType: .static(image: Asset.Home.memeApi.image)),
+            GridData(title: "Random Joke".localized(), imageType: .static(image: Asset.Home.jokeApi.image)),
         ]
-        
-        if let gifUrl = R.file.bananaCheererGif() {
-            datas.append(GridData(title: "GIFs".localized(), imageType: .gif(url: gifUrl)))
-        }
+  
+        datas.append(GridData(title: "GIFs".localized(), imageType: .gif(url: Files.bananaCheererGif.url)))
         
         return datas
     }()

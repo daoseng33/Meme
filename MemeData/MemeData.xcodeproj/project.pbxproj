@@ -3,27 +3,26 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		1C020EFC2C9829500028CAE0 /* MemeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C020EFB2C9829500028CAE0 /* MemeError.swift */; };
-		1C2D21422C9FEA4A00589C6A /* GIFs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2D21412C9FEA4A00589C6A /* GIFs.swift */; };
-		1C2D21442C9FEA8200589C6A /* ImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2D21432C9FEA8200589C6A /* ImageData.swift */; };
-		1CD9F5382C85CACA009DDABD /* MemeData.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CD9F5372C85CACA009DDABD /* MemeData.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1CE138902C9AA8C600633CFC /* RandomJoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE1388F2C9AA8C600633CFC /* RandomJoke.swift */; };
-		1CE608EC2C85CB0F004844B7 /* RandomMeme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE608EB2C85CB0F004844B7 /* RandomMeme.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
-		1C020EFB2C9829500028CAE0 /* MemeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeError.swift; sourceTree = "<group>"; };
-		1C2D21412C9FEA4A00589C6A /* GIFs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFs.swift; sourceTree = "<group>"; };
-		1C2D21432C9FEA8200589C6A /* ImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageData.swift; sourceTree = "<group>"; };
 		1CD9F5342C85CACA009DDABD /* MemeData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MemeData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1CD9F5372C85CACA009DDABD /* MemeData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MemeData.h; sourceTree = "<group>"; };
-		1CE1388F2C9AA8C600633CFC /* RandomJoke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomJoke.swift; sourceTree = "<group>"; };
-		1CE608EB2C85CB0F004844B7 /* RandomMeme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomMeme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1C305EAF2CA2885D002EADCA /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			publicHeaders = (
+				MemeData.h,
+			);
+			target = 1CD9F5332C85CACA009DDABD /* MemeData */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		1C305EA82CA2885D002EADCA /* MemeData */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (1C305EAF2CA2885D002EADCA /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = MemeData; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		1CD9F5312C85CACA009DDABD /* Frameworks */ = {
@@ -39,7 +38,7 @@
 		1CD9F52A2C85CACA009DDABD = {
 			isa = PBXGroup;
 			children = (
-				1CD9F5362C85CACA009DDABD /* MemeData */,
+				1C305EA82CA2885D002EADCA /* MemeData */,
 				1CD9F5352C85CACA009DDABD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -52,19 +51,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1CD9F5362C85CACA009DDABD /* MemeData */ = {
-			isa = PBXGroup;
-			children = (
-				1C2D21412C9FEA4A00589C6A /* GIFs.swift */,
-				1C2D21432C9FEA8200589C6A /* ImageData.swift */,
-				1CD9F5372C85CACA009DDABD /* MemeData.h */,
-				1C020EFB2C9829500028CAE0 /* MemeError.swift */,
-				1CE1388F2C9AA8C600633CFC /* RandomJoke.swift */,
-				1CE608EB2C85CB0F004844B7 /* RandomMeme.swift */,
-			);
-			path = MemeData;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -72,7 +58,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1CD9F5382C85CACA009DDABD /* MemeData.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +76,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				1C305EA82CA2885D002EADCA /* MemeData */,
 			);
 			name = MemeData;
 			productName = MemeData;
@@ -145,11 +133,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C2D21422C9FEA4A00589C6A /* GIFs.swift in Sources */,
-				1C2D21442C9FEA8200589C6A /* ImageData.swift in Sources */,
-				1C020EFC2C9829500028CAE0 /* MemeError.swift in Sources */,
-				1CE138902C9AA8C600633CFC /* RandomJoke.swift in Sources */,
-				1CE608EC2C85CB0F004844B7 /* RandomMeme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -22,6 +22,12 @@ final class VideoPlayerView: UIView {
         return statusRelay.value
     }
     
+    private let handleErrorRelay = PublishRelay<Void>()
+    
+    var handleErrorObservable: Observable<Void> {
+        handleErrorRelay.asObservable()
+    }
+    
     // MARK: - UI
     private let activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .medium)
@@ -88,6 +94,7 @@ final class VideoPlayerView: UIView {
             .compactMap { $0 }
             .withUnretained(self)
             .subscribe(onNext: { (self, status) in
+                self.hideLoading()
                 self.handlePlayerItemStatus(status)
             })
             .disposed(by: rx.disposeBag)
@@ -95,17 +102,11 @@ final class VideoPlayerView: UIView {
     
     private func handlePlayerItemStatus(_ status: AVPlayerItem.Status) {
         switch status {
-        case .readyToPlay:
-            hideLoading()
-            
         case .failed:
-            hideLoading()
+            self.handleErrorRelay.accept(())
             print("Video failed to load")
             
-        case .unknown:
-            break
-            
-        @unknown default:
+        default:
             break
         }
     }
@@ -119,6 +120,8 @@ final class VideoPlayerView: UIView {
     }
     
     func reset() {
+        pause()
+        playerLooper = nil
         player.replaceCurrentItem(with: nil)
     }
     
