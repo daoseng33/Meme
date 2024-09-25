@@ -8,13 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1C248C672C81D0090015A7F1 /* WebAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C248C5E2C81D0090015A7F1 /* WebAPI.framework */; };
-		1C248C6C2C81D0090015A7F1 /* MemeAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C248C6B2C81D0090015A7F1 /* MemeAPITests.swift */; };
-		1C2D214A2C9FEE6200589C6A /* GIFsAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2D21492C9FEE6200589C6A /* GIFsAPITests.swift */; };
 		1C87C3592C9963FF00A63581 /* RxBlocking-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C3582C9963FF00A63581 /* RxBlocking-Dynamic */; };
 		1C87C35C2C99642100A63581 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C35B2C99642100A63581 /* RxMoya */; };
 		1CE608EE2C85CB40004844B7 /* MemeData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CE608ED2C85CB40004844B7 /* MemeData.framework */; };
 		1CE608EF2C85CB40004844B7 /* MemeData.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1CE608ED2C85CB40004844B7 /* MemeData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1CF80EEB2C9ABB6F00D18F18 /* JokeAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF80EEA2C9ABB6F00D18F18 /* JokeAPITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,11 +41,8 @@
 /* Begin PBXFileReference section */
 		1C248C5E2C81D0090015A7F1 /* WebAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WebAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C248C662C81D0090015A7F1 /* WebAPITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WebAPITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1C248C6B2C81D0090015A7F1 /* MemeAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeAPITests.swift; sourceTree = "<group>"; };
-		1C2D21492C9FEE6200589C6A /* GIFsAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFsAPITests.swift; sourceTree = "<group>"; };
 		1CC9DCC32C82FA1200A1EEC6 /* MemeModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MemeModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CE608ED2C85CB40004844B7 /* MemeData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MemeData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1CF80EEA2C9ABB6F00D18F18 /* JokeAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeAPITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -62,6 +56,7 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		1C0111E22CA446310005347A /* WebAPITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = WebAPITests; sourceTree = "<group>"; };
 		1C305E862CA28857002EADCA /* WebAPI */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (1C305EA12CA28857002EADCA /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = WebAPI; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -93,7 +88,7 @@
 				7BA7CC562369007BA5326457 /* Frameworks */,
 				1C248C5F2C81D0090015A7F1 /* Products */,
 				1C305E862CA28857002EADCA /* WebAPI */,
-				1C248C6A2C81D0090015A7F1 /* WebAPITests */,
+				1C0111E22CA446310005347A /* WebAPITests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,16 +99,6 @@
 				1C248C662C81D0090015A7F1 /* WebAPITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		1C248C6A2C81D0090015A7F1 /* WebAPITests */ = {
-			isa = PBXGroup;
-			children = (
-				1C2D21492C9FEE6200589C6A /* GIFsAPITests.swift */,
-				1CF80EEA2C9ABB6F00D18F18 /* JokeAPITests.swift */,
-				1C248C6B2C81D0090015A7F1 /* MemeAPITests.swift */,
-			);
-			path = WebAPITests;
 			sourceTree = "<group>";
 		};
 		7BA7CC562369007BA5326457 /* Frameworks */ = {
@@ -175,6 +160,9 @@
 			);
 			dependencies = (
 				1C248C692C81D0090015A7F1 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				1C0111E22CA446310005347A /* WebAPITests */,
 			);
 			name = WebAPITests;
 			packageProductDependencies = (
@@ -255,9 +243,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C2D214A2C9FEE6200589C6A /* GIFsAPITests.swift in Sources */,
-				1CF80EEB2C9ABB6F00D18F18 /* JokeAPITests.swift in Sources */,
-				1C248C6C2C81D0090015A7F1 /* MemeAPITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,28 @@
+{
+  "configurations" : [
+    {
+      "id" : "8331A801-BD05-4D02-82C2-9521DAC7794C",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Meme.xcodeproj",
+      "identifier" : "1CDA352F2C81AB6C001FF654",
+      "name" : "Meme"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Meme.xcodeproj",
+        "identifier" : "1CDA35482C81AB6F001FF654",
+        "name" : "MemeTests"
+      }
+    }
+  ],
+  "version" : 1
+}
