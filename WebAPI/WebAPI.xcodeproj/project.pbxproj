@@ -45,19 +45,9 @@
 		1CE608ED2C85CB40004844B7 /* MemeData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MemeData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		1C305EA12CA28857002EADCA /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			publicHeaders = (
-				WebAPI.h,
-			);
-			target = 1C248C5D2C81D0090015A7F1 /* WebAPI */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		1C0111E22CA446310005347A /* WebAPITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = WebAPITests; sourceTree = "<group>"; };
-		1C305E862CA28857002EADCA /* WebAPI */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (1C305EA12CA28857002EADCA /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = WebAPI; sourceTree = "<group>"; };
+		1C1E1CC02CA458E000E41022 /* WebAPITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = WebAPITests; sourceTree = "<group>"; };
+		1C305E862CA28857002EADCA /* WebAPI */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = WebAPI; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +78,7 @@
 				7BA7CC562369007BA5326457 /* Frameworks */,
 				1C248C5F2C81D0090015A7F1 /* Products */,
 				1C305E862CA28857002EADCA /* WebAPI */,
-				1C0111E22CA446310005347A /* WebAPITests */,
+				1C1E1CC02CA458E000E41022 /* WebAPITests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -162,7 +152,7 @@
 				1C248C692C81D0090015A7F1 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				1C0111E22CA446310005347A /* WebAPITests */,
+				1C1E1CC02CA458E000E41022 /* WebAPITests */,
 			);
 			name = WebAPITests;
 			packageProductDependencies = (

@@ -8,6 +8,7 @@
 import Testing
 import RxBlocking
 import WebAPI
+import Foundation
 @testable import Meme
 struct GIFsTests {
     var sut: GIFsViewModelProtocol!
@@ -39,7 +40,7 @@ struct GIFsTests {
         let firstGridViewModel = sut.gridCollectionViewModel.gridCellViewModel(with: 0)
         let imageType = try firstGridViewModel.imageType.take(1).toBlocking().single()
         switch imageType {
-        case .static(let image):
+        case .static:
             Issue.record("Should now be image type")
             
         case .gif(let url):

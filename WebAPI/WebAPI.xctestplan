@@ -1,0 +1,27 @@
+{
+  "configurations" : [
+    {
+      "id" : "5575996C-C2C2-43F4-AAD9-9C0BEBE3D12E",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "repeatInNewRunnerProcess" : true,
+    "testRepetitionMode" : "retryOnFailure",
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:WebAPI.xcodeproj",
+        "identifier" : "1C248C652C81D0090015A7F1",
+        "name" : "WebAPITests"
+      }
+    }
+  ],
+  "version" : 1
+}

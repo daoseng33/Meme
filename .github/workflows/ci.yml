@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 env:
-  XCODE_DESTINATION: 'platform=iOS Simulator,name=iPhone 16,OS=latest'
+  XCODE_DESTINATION: 'platform=iOS Simulator,name=iPhone 16 Pro,OS=latest'
 
 jobs:
   test_meme:

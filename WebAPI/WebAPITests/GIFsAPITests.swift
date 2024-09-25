@@ -7,13 +7,13 @@
 
 import Testing
 import RxBlocking
+import Foundation
 @testable import WebAPI
 struct GIFsAPITests {
-
     let sut: GIFsAPIServiceProtocol!
     
     init() async throws {
-        self.sut = GIFsAPIService(useMockData: true)
+        sut = GIFsAPIService(useMockData: true)
     }
     
     @Test func testFetchGifs() async throws {

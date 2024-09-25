@@ -8,7 +8,6 @@
 import Testing
 import RxBlocking
 @testable import WebAPI
-
 struct JokeAPITests {
     var sut: JokeAPIServiceProtocol!
     

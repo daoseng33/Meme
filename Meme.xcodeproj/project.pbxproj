@@ -62,13 +62,6 @@
 			);
 			target = 1CDA352F2C81AB6C001FF654 /* Meme */;
 		};
-		1CA746302CA4475200096515 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				MemeDebug.xctestplan,
-			);
-			target = 1CDA35482C81AB6F001FF654 /* MemeTests */;
-		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
@@ -83,7 +76,7 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1C305E312CA2884E002EADCA /* Meme */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (1C305E612CA2884E002EADCA /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 1C305E622CA2884E002EADCA /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Meme; sourceTree = "<group>"; };
-		1CF585AE2CA2868600175C2D /* MemeTests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (1CA746302CA4475200096515 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = MemeTests; sourceTree = "<group>"; };
+		1CF585AE2CA2868600175C2D /* MemeTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = MemeTests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */

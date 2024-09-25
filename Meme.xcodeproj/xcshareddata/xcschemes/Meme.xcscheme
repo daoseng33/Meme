@@ -30,7 +30,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:MemeTests/MemeDebug.xctestplan"
+            reference = "container:Meme.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
