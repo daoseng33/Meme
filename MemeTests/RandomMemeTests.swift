@@ -6,7 +6,7 @@
 //
 
 import Testing
-import WebAPI
+import HumorAPIService
 import RxBlocking
 @testable import Meme
 struct RandomMemeTests {

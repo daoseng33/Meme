@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import WebAPI
-import MemeData
+import HumorAPIService
+import HumorDataModel
 import RxRelay
 import RxSwift
 
@@ -73,7 +73,9 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
                 
                 switch result {
                 case .success(let randomMeme):
-                    DataStorageManager.shared.save(randomMeme)
+                    DispatchQueue.main.async {
+                        DataStorageManager.shared.save(randomMeme)
+                    }
 
                     let mediaType = getMediaType(with: randomMeme.type)
                     mediaRelay.accept((randomMeme.url, mediaType))

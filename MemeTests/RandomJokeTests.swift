@@ -6,7 +6,7 @@
 //
 
 import Testing
-import WebAPI
+import HumorAPIService
 @testable import Meme
 struct RandomJokeTests {
 

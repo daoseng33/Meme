@@ -10,14 +10,11 @@
 		1C01D4182C904DE9007E93A9 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1C01D4172C904DE9007E93A9 /* Kingfisher */; };
 		1C020EF42C981F450028CAE0 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1C020EF32C981F450028CAE0 /* IQKeyboardManagerSwift */; };
 		1C2D212F2C9D61DE00589C6A /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 1C2D212E2C9D61DE00589C6A /* SFSafeSymbols */; };
-		1C783E022C83067100E6C4BE /* WebAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */; };
-		1C783E032C83067100E6C4BE /* WebAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1C87C34E2C9961FB00A63581 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C34D2C9961FB00A63581 /* RxCocoa */; };
 		1C87C3502C9961FB00A63581 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C34F2C9961FB00A63581 /* RxRelay */; };
 		1C87C3622C996A5E00A63581 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C3612C996A5E00A63581 /* RxBlocking */; };
+		1C9598562CA54D2F00727866 /* HumorAPIService in Frameworks */ = {isa = PBXBuildFile; productRef = 1C9598552CA54D2F00727866 /* HumorAPIService */; };
 		1CD9F5172C8316BC009DDABD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1CD9F5162C8316BC009DDABD /* SnapKit */; };
-		1CE608F22C85CB4C004844B7 /* MemeData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CE608F12C85CB4C004844B7 /* MemeData.framework */; };
-		1CE608F32C85CB4C004844B7 /* MemeData.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1CE608F12C85CB4C004844B7 /* MemeData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1CF584EF2CA15D7F00175C2D /* SKPhotoBrowser in Frameworks */ = {isa = PBXBuildFile; productRef = 1CF584EE2CA15D7F00175C2D /* SKPhotoBrowser */; };
 /* End PBXBuildFile section */
 
@@ -30,21 +27,6 @@
 			remoteInfo = Meme;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		1C783DFF2C83066F00E6C4BE /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				1CE608F32C85CB4C004844B7 /* MemeData.framework in Embed Frameworks */,
-				1C783E032C83067100E6C4BE /* WebAPI.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WebAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,13 +68,12 @@
 			files = (
 				1C020EF42C981F450028CAE0 /* IQKeyboardManagerSwift in Frameworks */,
 				1C01D4182C904DE9007E93A9 /* Kingfisher in Frameworks */,
-				1CE608F22C85CB4C004844B7 /* MemeData.framework in Frameworks */,
 				1C87C34E2C9961FB00A63581 /* RxCocoa in Frameworks */,
 				1CF584EF2CA15D7F00175C2D /* SKPhotoBrowser in Frameworks */,
 				1C87C3502C9961FB00A63581 /* RxRelay in Frameworks */,
 				1C2D212F2C9D61DE00589C6A /* SFSafeSymbols in Frameworks */,
+				1C9598562CA54D2F00727866 /* HumorAPIService in Frameworks */,
 				1CD9F5172C8316BC009DDABD /* SnapKit in Frameworks */,
-				1C783E022C83067100E6C4BE /* WebAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,7 +126,6 @@
 				1CDA352C2C81AB6C001FF654 /* Sources */,
 				1CDA352D2C81AB6C001FF654 /* Frameworks */,
 				1CDA352E2C81AB6C001FF654 /* Resources */,
-				1C783DFF2C83066F00E6C4BE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -163,6 +143,7 @@
 				1C87C34F2C9961FB00A63581 /* RxRelay */,
 				1C2D212E2C9D61DE00589C6A /* SFSafeSymbols */,
 				1CF584EE2CA15D7F00175C2D /* SKPhotoBrowser */,
+				1C9598552CA54D2F00727866 /* HumorAPIService */,
 			);
 			productName = Meme;
 			productReference = 1CDA35302C81AB6C001FF654 /* Meme.app */;
@@ -227,6 +208,7 @@
 				1C87C34C2C9961FB00A63581 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				1C2D212D2C9D61DE00589C6A /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
 				1CF584ED2CA15D7E00175C2D /* XCRemoteSwiftPackageReference "SKPhotoBrowser" */,
+				1C9598542CA54D2F00727866 /* XCRemoteSwiftPackageReference "HumorAPIService" */,
 			);
 			preferredProjectObjectVersion = 56;
 			productRefGroup = 1CDA35312C81AB6C001FF654 /* Products */;
@@ -565,6 +547,14 @@
 				minimumVersion = 6.7.1;
 			};
 		};
+		1C9598542CA54D2F00727866 /* XCRemoteSwiftPackageReference "HumorAPIService" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/daoseng33/HumorAPIService.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		1CD9F5152C8316BC009DDABD /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -613,6 +603,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1C87C34C2C9961FB00A63581 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxBlocking;
+		};
+		1C9598552CA54D2F00727866 /* HumorAPIService */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C9598542CA54D2F00727866 /* XCRemoteSwiftPackageReference "HumorAPIService" */;
+			productName = HumorAPIService;
 		};
 		1CD9F5162C8316BC009DDABD /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

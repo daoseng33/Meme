@@ -36,4 +36,4 @@ HockeySDK-iOS
 # Pods/
 MLImageAsset
 # Carthage
-WebAPI/WebAPI/Base/APIConfig.plist
+Meme/APIConfig.plist

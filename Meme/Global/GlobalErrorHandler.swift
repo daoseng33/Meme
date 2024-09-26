@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import WebAPI
+import HumorAPIService
 import RxSwift
 import UIKit
 

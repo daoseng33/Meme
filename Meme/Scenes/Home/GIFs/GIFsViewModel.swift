@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 import RxRelay
-import WebAPI
+import HumorAPIService
 
 final class GIFsViewModel: GIFsViewModelProtocol {
     // MARK: - Properties

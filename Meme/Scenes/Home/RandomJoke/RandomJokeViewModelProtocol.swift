@@ -7,8 +7,8 @@
 
 import Foundation
 import RxSwift
-import MemeData
-import WebAPI
+import HumorDataModel
+import HumorAPIService
 
 protocol RandomJokeViewModelProtocol: AnyObject, LoadingStateProtocol {
     func loadFirstMemeIfNeeded()

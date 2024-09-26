@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import WebAPI
+import HumorAPIService
 
 final class HomePageViewModel {
     // MARK: - Properties

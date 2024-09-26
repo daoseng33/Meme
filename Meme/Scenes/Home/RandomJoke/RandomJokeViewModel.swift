@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 import RxRelay
-import WebAPI
+import HumorAPIService
 
 final class RandomJokeViewModel: RandomJokeViewModelProtocol {
     var loadingStateObservable: Observable<LoadingState> {

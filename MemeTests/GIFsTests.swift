@@ -7,7 +7,7 @@
 
 import Testing
 import RxBlocking
-import WebAPI
+import HumorAPIService
 import Foundation
 @testable import Meme
 struct GIFsTests {
