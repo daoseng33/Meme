@@ -18,9 +18,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Clear Derived Data for specific project
+      - name: Clear Derived Data
         run: |
-          find ~/Library/Developer/Xcode/DerivedData -type d -name "Meme-*" -exec rm -rf {} +
+          rm -rf ~/Library/Developer/Xcode/DerivedData/*
+
+      - name: Reset Simulators
+        run: |
+          xcrun simctl shutdown all
+          xcrun simctl erase all
 
       - name: Xcode Clean
         run: |
@@ -37,7 +42,7 @@ jobs:
           echo '<plist version="1.0">' >> Meme/APIConfig.plist
           echo '<dict>' >> Meme/APIConfig.plist
           echo '  <key>API_KEY</key>' >> Meme/APIConfig.plist
-          echo "  <string>testAPIKey</string>" >> Meme/APIConfig.plist
+          echo '  <string>testAPIKey</string>' >> Meme/APIConfig.plist
           echo '</dict>' >> Meme/APIConfig.plist
           echo '</plist>' >> Meme/APIConfig.plist
 
