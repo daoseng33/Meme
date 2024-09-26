@@ -24,11 +24,11 @@ jobs:
 
       - name: Xcode Clean
         run: |
-          xcodebuild clean -workspace Meme.xcworkspace -scheme Meme -destination "${{ env.XCODE_DESTINATION }}"
+          xcodebuild clean -project Meme.xcodeproj -scheme Meme -destination "${{ env.XCODE_DESTINATION }}"
 
       - name: Install dependencies
         run: |
-          xcodebuild -resolvePackageDependencies
+          xcodebuild -resolvePackageDependencies -project Meme.xcodeproj
 
       - name: Create plist file with sensitive data
         run: |
@@ -43,4 +43,4 @@ jobs:
 
       - name: Run Meme tests
         run: |
-          xcodebuild test -workspace Meme.xcworkspace -scheme Meme -destination "${{ env.XCODE_DESTINATION }}"
+          xcodebuild test -project Meme.xcodeproj -scheme Meme -destination "${{ env.XCODE_DESTINATION }}"
