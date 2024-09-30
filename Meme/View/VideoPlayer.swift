@@ -120,6 +120,7 @@ final class VideoPlayerView: UIView {
     }
     
     func reset() {
+        player.pause()
         player.replaceCurrentItem(with: nil)
     }
     
