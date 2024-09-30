@@ -1,12 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "no-result.png",
+      "filename" : "meme_sad_frog.pdf",
       "idiom" : "universal"
     }
   ],
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
   }
 }

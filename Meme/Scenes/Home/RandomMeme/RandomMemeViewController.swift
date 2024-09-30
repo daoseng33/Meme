@@ -159,7 +159,7 @@ final class RandomMemeViewController: BaseViewController {
                 self.videoPlayerView.reset()
                 self.videoPlayerView.isHidden = true
                 self.imageView.isHidden = false
-                self.imageView.image = Asset.Global.noResult.image
+                self.imageView.image = Asset.Global.imageNotFound.image
             }
             .disposed(by: rx.disposeBag)
         
@@ -208,7 +208,7 @@ final class RandomMemeViewController: BaseViewController {
                             
                         case .failure(let error):
                             print("kf load image error: \(error.localizedDescription)")
-                            self.imageView.image = Asset.Global.noResult.image
+                            self.imageView.image = Asset.Global.imageNotFound.image
                         }
                     }
                     

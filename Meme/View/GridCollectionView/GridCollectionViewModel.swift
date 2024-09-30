@@ -35,7 +35,7 @@ final class GridCollectionViewModel: GridCollectionViewModelProtocol {
     // MARK: - Configures
     func gridCellViewModel(with index: Int) -> GridCellViewModelProtocol {
         guard let gridDatas = try? gridDatasSubject.value() else {
-            let noResultGridData = GridData(title: nil, imageType: .static(image: Asset.Global.noResult.image))
+            let noResultGridData = GridData(title: nil, imageType: .static(image: Asset.Global.imageNotFound.image))
             return GridCellViewModel(gridData: noResultGridData)
         }
         let gridData = gridDatas[index]

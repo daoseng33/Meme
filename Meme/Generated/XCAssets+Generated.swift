@@ -26,7 +26,7 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 internal enum Asset {
   internal static let accentColor = ColorAsset(name: "AccentColor")
   internal enum Global {
-    internal static let noResult = ImageAsset(name: "no-result")
+    internal static let imageNotFound = ImageAsset(name: "image_not_found")
     internal static let share = ImageAsset(name: "share")
   }
   internal enum Home {
@@ -34,7 +34,7 @@ internal enum Asset {
     internal static let memeApi = ImageAsset(name: "meme-api")
   }
   internal enum RandomJoke {
-    internal static let slideUp = ImageAsset(name: "slide-up")
+    internal static let slideUp = ImageAsset(name: "slide_up")
   }
   internal enum Tabbar {
     internal static let favorite = ImageAsset(name: "favorite")
@@ -42,6 +42,7 @@ internal enum Asset {
     internal static let home = ImageAsset(name: "home")
     internal static let settings = ImageAsset(name: "settings")
   }
+  internal static let memeThisIsFineDog = ImageAsset(name: "meme_this_is_fine_dog")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

@@ -83,7 +83,7 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
                     descriptionRelay.accept(randomMeme.memeDescription)
                     
                 case .failure(let error):
-                    let noResultImageURL = Utility.getImageURL(named: Asset.Global.noResult.name)
+                    let noResultImageURL = Utility.getImageURL(named: Asset.Global.imageNotFound.name)
                     mediaRelay.accept((noResultImageURL, .image))
                     descriptionRelay.accept(error.message)
                 }
