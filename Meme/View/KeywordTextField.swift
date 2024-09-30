@@ -15,7 +15,7 @@ final class KeywordTextField: UIView {
         let textField = UITextField()
         textField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         textField.textColor = .label
-        textField.backgroundColor = .systemGray6
+        textField.backgroundColor = .secondarySystemBackground
         textField.placeholder = "\("Key in keyword".localized())(\("Optional".localized()))"
         textField.layer.cornerRadius = 4
         textField.clipsToBounds = true
