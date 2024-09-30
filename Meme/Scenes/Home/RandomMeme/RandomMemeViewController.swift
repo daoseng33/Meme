@@ -85,12 +85,11 @@ final class RandomMemeViewController: BaseViewController {
     
     // MARK: - Setup
     private func setupUI() {
-        view.backgroundColor = .systemBackground
-        navigationBar.topItem?.title = "Random Meme".localized()
+        navigationItem.title = "Random Meme".localized()
         
         view.addSubview(imageView)
         imageView.snp.makeConstraints {
-            $0.top.equalTo(navigationBar.snp.bottom)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.left.right.equalToSuperview()
             $0.height.equalTo(view.snp.width)
         }
@@ -188,8 +187,10 @@ final class RandomMemeViewController: BaseViewController {
         guard let image = self.imageView.image else { return }
         let images = [SKPhoto.photoWithImage(image)]
         let browser = SKPhotoBrowser(photos: images)
+        browser.delegate = self
+        navigationController?.setNavigationBarHidden(true, animated: false)
         
-        show(browser, sender: nil)
+        present(browser, animated: true)
     }
     
     private func setupBinding() {
@@ -252,5 +253,12 @@ final class RandomMemeViewController: BaseViewController {
         keywordTextField.textBinder
             .bind(to: viewModel.keywordRelay)
             .disposed(by: rx.disposeBag)
+    }
+}
+
+// MARK: - SKPhotoBrowserDelegate
+extension RandomMemeViewController: SKPhotoBrowserDelegate {
+    func willDismissAtPageIndex(_ index: Int) {
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
 }

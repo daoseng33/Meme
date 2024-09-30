@@ -53,11 +53,11 @@ final class GIFsViewController: BaseViewController {
     // MARK: - Setup
     private func setupUI() {
         view.backgroundColor = .systemBackground
-        navigationBar.topItem?.title = "GIFs".localized()
+        navigationItem.title = "GIFs".localized()
         
         view.addSubview(gridCollectionView)
         gridCollectionView.snp.makeConstraints {
-            $0.top.equalTo(navigationBar.snp.bottom)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.left.right.equalToSuperview()
         }
         

@@ -287,6 +287,17 @@
         }
       }
     },
+    "Memepire" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "迷因帝國"
+          }
+        }
+      }
+    },
     "Nerdy" : {
       "extractionState" : "manual",
       "localizations" : {

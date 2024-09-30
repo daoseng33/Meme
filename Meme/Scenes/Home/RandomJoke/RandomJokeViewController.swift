@@ -101,8 +101,7 @@ final class RandomJokeViewController: BaseViewController {
     
     // MARK: - Setup
     private func setupUI() {
-        view.backgroundColor = .systemBackground
-        navigationBar.topItem?.title = "Random Joke".localized()
+        navigationItem.title = "Random Joke".localized()
         
         let categorySelectedView = UIView()
         
@@ -120,7 +119,7 @@ final class RandomJokeViewController: BaseViewController {
         
         view.addSubview(stackView)
         stackView.snp.makeConstraints {
-            $0.top.equalTo(navigationBar.snp.bottom)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.left.right.bottom.equalTo(view.safeAreaLayoutGuide).inset(Constant.spacing2)
         }
         

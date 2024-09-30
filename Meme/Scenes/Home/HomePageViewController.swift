@@ -22,6 +22,7 @@ final class HomePageViewController: UIViewController {
 
     // MARK: - Setup
     private func setupUI() {
+        navigationItem.title = "Memepire".localized()
         homePageCollectionView.delegate = self
 
         view.addSubview(homePageCollectionView)
@@ -39,7 +40,6 @@ extension HomePageViewController: GridCollectionViewDelegate {
         switch category {
         case .meme:
             vc = RandomMemeViewController(viewModel: viewModel.randomMemeViewModel)
-            show(vc, sender: self)
             
         case .joke:
             vc = RandomJokeViewController(viewModel: viewModel.randomJokeViewModel)
@@ -51,7 +51,8 @@ extension HomePageViewController: GridCollectionViewDelegate {
             return
         }
         
-        show(vc, sender: self)
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

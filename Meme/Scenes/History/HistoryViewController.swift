@@ -8,11 +8,15 @@
 import UIKit
 
 final class HistoryViewController: UIViewController {
-
+    // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setupUI()
     }
-
+    
+    // MARK: - Setup
+    private func setupUI() {
+        navigationItem.title = "History".localized()
+    }
 }

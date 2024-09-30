@@ -8,11 +8,15 @@
 import UIKit
 
 final class SettingViewController: UIViewController {
-
+    // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setupUI()
     }
-
+    
+    // MARK: - Setup
+    private func setupUI() {
+        navigationItem.title = "Setting".localized()
+    }
 }

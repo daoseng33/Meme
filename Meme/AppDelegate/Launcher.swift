@@ -8,11 +8,14 @@
 import Foundation
 import IQKeyboardManagerSwift
 import HumorAPIService
+import UIKit
+import SFSafeSymbols
 
 final class Launcher {
     @MainActor func setup() {
         setupIQKeyboardManager()
         setupAPIConfig()
+        setupNavigationBar()
         handleGlobalError()
     }
     
@@ -23,6 +26,12 @@ final class Launcher {
     
     private func handleGlobalError() {
         GlobalErrorHandler.shared.handleError()
+    }
+    
+    private func setupNavigationBar() {
+        let backButtonAppearance = UIBarButtonItemAppearance()
+        backButtonAppearance.normal.backgroundImage = UIImage(systemSymbol: .chevronBackward)
+        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: -1000, vertical: 0), for: .default)
     }
     
     private func setupAPIConfig() {
