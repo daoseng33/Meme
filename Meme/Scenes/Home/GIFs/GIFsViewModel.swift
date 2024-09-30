@@ -9,23 +9,17 @@ import Foundation
 import RxSwift
 import RxRelay
 import HumorAPIService
+import HumorDataModel
 
 final class GIFsViewModel: GIFsViewModelProtocol {
     // MARK: - Properties
     private let loadingStateRelay = BehaviorRelay<LoadingState>(value: .initial)
-    private lazy var keywordBehaviorSubject = BehaviorSubject<String?>(value: nil)
     private var gridCellViewModels: [GridCellViewModelProtocol] = []
     private let webService: GIFsAPIServiceProtocol
     private let disposeBag = DisposeBag()
+    
+    let keywordRelay = BehaviorRelay<String?>(value: nil)
     let gridCollectionViewModel: GridCollectionViewModelProtocol = GridCollectionViewModel(gridDatas: [])
-    
-    var keywordObserver: AnyObserver<String?> {
-        keywordBehaviorSubject.asObserver()
-    }
-    
-    var keyword: Observable<String?> {
-        keywordBehaviorSubject.asObservable()
-    }
     
     var loadingState: LoadingState {
         loadingStateRelay.value
@@ -50,7 +44,7 @@ final class GIFsViewModel: GIFsViewModelProtocol {
         loadingStateRelay.accept(.loading)
         // !query could not be empty string!
         let query: String
-        if let keywordString = (try? keywordBehaviorSubject.value()), !keywordString.isEmpty {
+        if let keywordString = keywordRelay.value, !keywordString.isEmpty {
             query = keywordString
         } else {
             query = randomWord()
@@ -62,7 +56,13 @@ final class GIFsViewModel: GIFsViewModelProtocol {
                 
                 switch result {
                 case .success(let gif):
-                    let gridDatas = gif.images.map { GridData(title: nil, imageType: .gif(url: $0.url)) }
+                    gif.images.forEach { imageData in
+                        DispatchQueue.main.async {
+                            DataStorageManager.shared.save(imageData)
+                        }
+                    }
+                    let urls = gif.images.compactMap { $0.url }
+                    let gridDatas = urls.map { GridData(title: nil, imageType: .gif(url: $0)) }
                     self.gridCollectionViewModel.gridDatasObserver.onNext(gridDatas)
                     
                     self.loadingStateRelay.accept(.success)

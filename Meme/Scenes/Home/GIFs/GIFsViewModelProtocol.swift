@@ -7,10 +7,10 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 protocol GIFsViewModelProtocol: LoadingStateProtocol {
-    var keywordObserver: AnyObserver<String?> { get }
-    var keyword: Observable<String?> { get }
+    var keywordRelay: BehaviorRelay<String?> { get }
     var gridCollectionViewModel: GridCollectionViewModelProtocol { get }
     func loadFirstDataIfNeeded()
     func fetchGIFs()

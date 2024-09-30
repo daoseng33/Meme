@@ -85,12 +85,12 @@ final class GIFsViewController: BaseViewController {
     }
     
     private func setupBinding() {
-        viewModel.keyword
+        viewModel.keywordRelay
             .bind(to: keywordTextField.textBinder)
             .disposed(by: rx.disposeBag)
         
         keywordTextField.textBinder
-            .bind(to: viewModel.keywordObserver)
+            .bind(to: viewModel.keywordRelay)
             .disposed(by: rx.disposeBag)
         
         viewModel.loadingStateObservable
@@ -123,8 +123,6 @@ final class GIFsViewController: BaseViewController {
                 self.viewModel.fetchGIFs()
             })
             .disposed(by: rx.disposeBag)
-        
-        
     }
 }
 

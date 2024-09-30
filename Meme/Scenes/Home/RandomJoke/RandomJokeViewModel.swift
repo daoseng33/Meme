@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 import RxRelay
 import HumorAPIService
+import HumorDataModel
 
 final class RandomJokeViewModel: RandomJokeViewModelProtocol {
     var loadingStateObservable: Observable<LoadingState> {
@@ -72,6 +73,10 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
                 
                 switch result {
                 case .success(let joke):
+                    DispatchQueue.main.async {
+                        DataStorageManager.shared.save(joke)
+                    }
+                    
                     self.jokeRelay.accept(joke.joke)
                     
                 case .failure(let error):
