@@ -9,6 +9,7 @@ import Foundation
 import HumorAPIService
 import HumorDataModel
 import RxRelay
+import RxCocoa
 import RxSwift
 
 final class RandomMemeViewModel: RandomMemeViewModelProtocol {
@@ -21,16 +22,16 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
     }
     
     // MARK: - Properties
-    var mediaObservable: Observable<(mediaURL: URL?, type: MemeMediaType)> {
-        mediaRelay.asObservable()
+    var mediaDriver: Driver<(mediaURL: URL?, type: MemeMediaType)> {
+        mediaRelay.asDriver().filter { $0.mediaURL != nil }
     }
     
     var media: (mediaURL: URL?, type: MemeMediaType) {
         mediaRelay.value
     }
     
-    var descriptionObservable: Observable<String> {
-        descriptionRelay.asObservable()
+    var descriptionDriver: Driver<String> {
+        descriptionRelay.asDriver()
     }
     
     var description: String {

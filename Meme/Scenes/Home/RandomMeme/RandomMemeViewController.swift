@@ -8,10 +8,8 @@
 import UIKit
 import AVFoundation
 import SnapKit
-//import RxSwift
 import RxCocoa
 import Kingfisher
-//import RxGesture
 import SKPhotoBrowser
 
 final class RandomMemeViewController: BaseViewController {
@@ -195,14 +193,23 @@ final class RandomMemeViewController: BaseViewController {
     }
     
     private func setupBinding() {
-        viewModel.mediaObservable
-            .asDriver(onErrorJustReturn: (nil, .image))
+        viewModel.mediaDriver
             .drive(with: self) { (self, mediaData) in
                 switch mediaData.type {
                 case .image:
                     self.videoPlayerView.isHidden = true
                     self.imageView.isHidden = false
-                    self.imageView.kf.setImage(with: mediaData.mediaURL)
+                    self.imageView.kf.setImage(with: mediaData.mediaURL) { [weak self] result in
+                        guard let self = self else { return }
+                        switch result {
+                        case .success:
+                            break
+                            
+                        case .failure(let error):
+                            print("kf load image error: \(error.localizedDescription)")
+                            self.imageView.image = Asset.Global.noResult.image
+                        }
+                    }
                     
                 case .video:
                     if let url = mediaData.mediaURL {
@@ -234,8 +241,8 @@ final class RandomMemeViewController: BaseViewController {
             })
             .disposed(by: rx.disposeBag)
             
-        viewModel.descriptionObservable
-            .bind(to: descriptionTextView.textBinder)
+        viewModel.descriptionDriver
+            .drive(descriptionTextView.textBinder)
             .disposed(by: rx.disposeBag)
         
         viewModel.keywordRelay
