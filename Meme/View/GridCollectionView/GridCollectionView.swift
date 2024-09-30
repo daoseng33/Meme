@@ -26,7 +26,7 @@ final class GridCollectionView: UIView {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(GridCell.self)
-        collectionView.backgroundColor = .systemBackground
+        collectionView.backgroundColor = .secondarySystemBackground
         
         return collectionView
     }()

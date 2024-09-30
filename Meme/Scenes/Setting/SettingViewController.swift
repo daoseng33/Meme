@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SettingViewController: UIViewController {
+final class SettingViewController: BaseViewController {
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -35,7 +35,7 @@ final class RandomJokeViewController: BaseViewController {
             config.imagePlacement = .trailing
             config.imagePadding = Constant.spacing1
             config.baseForegroundColor = .label
-            config.baseBackgroundColor = .systemBackground
+            config.baseBackgroundColor = .secondarySystemBackground
             config.contentInsets.leading = Constant.spacing2
             config.contentInsets.trailing = Constant.spacing2
             config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in

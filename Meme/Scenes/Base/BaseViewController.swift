@@ -18,6 +18,6 @@ class BaseViewController: UIViewController {
     
     // MARK: - Setup
     private func setup() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .secondarySystemBackground
     }
 }

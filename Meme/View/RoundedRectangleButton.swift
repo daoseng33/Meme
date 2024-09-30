@@ -63,7 +63,7 @@ final class RoundedRectangleButton: UIView {
                 config?.baseForegroundColor = titleColor
                 
             case .disabled:
-                config?.background.backgroundColor = .systemGray5
+                config?.background.backgroundColor = .systemGray3
                 config?.baseForegroundColor = .gray
                 
             case .highlighted:

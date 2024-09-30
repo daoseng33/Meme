@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class HomePageViewController: UIViewController {
+final class HomePageViewController: BaseViewController {
     // MARK: - Properties
     let viewModel = HomePageViewModel()
     private lazy var homePageCollectionView = GridCollectionView(viewModel: viewModel.gridCollectionViewModel)

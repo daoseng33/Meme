@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class FavoriteViewController: UIViewController {
+final class FavoriteViewController: BaseViewController {
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

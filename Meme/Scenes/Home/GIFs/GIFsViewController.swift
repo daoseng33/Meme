@@ -52,7 +52,6 @@ final class GIFsViewController: BaseViewController {
     
     // MARK: - Setup
     private func setupUI() {
-        view.backgroundColor = .systemBackground
         navigationItem.title = "GIFs".localized()
         
         view.addSubview(gridCollectionView)
@@ -142,6 +141,6 @@ extension GIFsViewController: GridCollectionViewDelegate {
         }
         
         let browser = SKPhotoBrowser(photos: images)
-        show(browser, sender: nil)
+        present(browser, animated: true)
     }
 }
