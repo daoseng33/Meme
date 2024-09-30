@@ -35,14 +35,13 @@ final class Launcher {
     }
     
     private func setupAPIConfig() {
-        // warning: you can replace your own humor api key here
-        // https://humorapi.com/?ref=public_apis
-        if let path = Bundle.main.path(forResource: "APIConfig", ofType: "plist"),
-           let dict = NSDictionary(contentsOfFile: path) as? [String: Any],
-           let apiKey = dict["API_KEY"] as? String {
+        if let apiKey = Bundle.main.infoDictionary?["API_KEY"] as? String {
             APIConfiguration.shared.APIKey = apiKey
+            print("API Key: \(apiKey)")
         } else {
-            print("You need to set your own API key in APIConfig.plist")
-        }   
+            print("API Key not found in Info.plist")
+            // warning: you can replace your own humor api key here
+            // https://humorapi.com/?ref=public_apis
+        }
     }
 }
