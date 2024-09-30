@@ -33,9 +33,6 @@ internal enum Asset {
     internal static let jokeApi = ImageAsset(name: "joke-api")
     internal static let memeApi = ImageAsset(name: "meme-api")
   }
-  internal enum RandomJoke {
-    internal static let slideUp = ImageAsset(name: "slide_up")
-  }
   internal enum Tabbar {
     internal static let favorite = ImageAsset(name: "favorite")
     internal static let history = ImageAsset(name: "history")

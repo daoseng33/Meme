@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import RxCocoa
+import SFSafeSymbols
 
 final class RandomJokeViewController: BaseViewController {
     // MARK: - Properties
@@ -31,7 +32,9 @@ final class RandomJokeViewController: BaseViewController {
         var config: UIButton.Configuration = {
             var config = UIButton.Configuration.filled()
             config.title = viewModel.selectedCategory.rawValue.localized()
-            config.image = Asset.RandomJoke.slideUp.image
+            let symbolConfig = UIImage.SymbolConfiguration(pointSize: 12, weight: .black)
+            let image = UIImage(systemSymbol: .chevronUpCircleFill, withConfiguration: symbolConfig).withTintColor(.accent, renderingMode: .alwaysOriginal)
+            config.image = image
             config.imagePlacement = .trailing
             config.imagePadding = Constant.spacing1
             config.baseForegroundColor = .label
