@@ -10,18 +10,15 @@ import IQKeyboardManagerSwift
 import HumorAPIService
 import UIKit
 import SFSafeSymbols
+import SKPhotoBrowser
 
 final class Launcher {
     @MainActor func setup() {
-        setupIQKeyboardManager()
         setupAPIConfig()
         setupNavigationBar()
         handleGlobalError()
-    }
-    
-    @MainActor private func setupIQKeyboardManager() {
-        IQKeyboardManager.shared.enable = true
-        IQKeyboardManager.shared.resignOnTouchOutside = true
+        setupIQKeyboardManager()
+        setupSKPhotoBrowser()
     }
     
     private func handleGlobalError() {
@@ -42,5 +39,18 @@ final class Launcher {
             // warning: you can replace your own humor api key here
             // https://humorapi.com/?ref=public_apis
         }
+    }
+    
+    @MainActor private func setupIQKeyboardManager() {
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.resignOnTouchOutside = true
+    }
+    
+    private func setupSKPhotoBrowser() {
+        SKPhotoBrowserOptions.displayAction = false
+        SKPhotoBrowserOptions.backgroundColor = .black.withAlphaComponent(0.9)
+        SKPhotoBrowserOptions.indicatorStyle = .medium
+        SKPhotoBrowserOptions.displayCloseButton = false
+        SKPhotoBrowserOptions.enableSingleTapDismiss = true
     }
 }
