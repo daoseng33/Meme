@@ -128,6 +128,8 @@ final class GIFsViewController: BaseViewController {
 // MARK: - GridCollectionViewDelegate
 extension GIFsViewController: GridCollectionViewDelegate {
     func gridCollectionView(_ gridCollectionView: GridCollectionView, didSelectItemAt index: Int) {
+        viewModel.saveSelectedImageData(with: index)
+        
         let cellViewModel = viewModel.gridCollectionViewModel.gridCellViewModel(with: index)
         let imageType = cellViewModel.currentImageType
         

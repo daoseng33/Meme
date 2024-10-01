@@ -11,13 +11,14 @@ import RxRelay
 import HumorAPIService
 import HumorDataModel
 
-final class GIFsViewModel: GIFsViewModelProtocol {
+final class GIFsViewModel: GIFsViewModelProtocol {    
     // MARK: - Properties
     private let loadingStateRelay = BehaviorRelay<LoadingState>(value: .initial)
     private var gridCellViewModels: [GridCellViewModelProtocol] = []
     private let webService: GIFsAPIServiceProtocol
     private let disposeBag = DisposeBag()
     
+    var imageDatas: [ImageData] = []
     let keywordRelay = BehaviorRelay<String?>(value: nil)
     let gridCollectionViewModel: GridCollectionViewModelProtocol = GridCollectionViewModel(gridDatas: [])
     
@@ -56,11 +57,6 @@ final class GIFsViewModel: GIFsViewModelProtocol {
                 
                 switch result {
                 case .success(let gif):
-                    gif.images.forEach { imageData in
-                        DispatchQueue.main.async {
-                            DataStorageManager.shared.save(imageData)
-                        }
-                    }
                     let urls = gif.images.compactMap { $0.url }
                     let gridDatas = urls.map { GridData(title: nil, imageType: .gif(url: $0)) }
                     self.gridCollectionViewModel.gridDatasObserver.onNext(gridDatas)
@@ -93,5 +89,13 @@ final class GIFsViewModel: GIFsViewModelProtocol {
         }
         
         return word
+    }
+    
+    func saveSelectedImageData(with index: Int) {
+        guard imageDatas.count > index else { return }
+        let imageData = imageDatas[index]
+        DispatchQueue.main.async {
+            DataStorageManager.shared.save(imageData)
+        }
     }
 }
