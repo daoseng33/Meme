@@ -21,8 +21,23 @@ final class GridCollectionView: UIView {
     // MARK: - UI
     private let collectionViewPadding = 8.0
     private let collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
+        let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
+            let collectionViewPadding = Constant.spacing2
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                  heightDimension: .estimated(186))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                   heightDimension: .estimated(186))
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
+            group.interItemSpacing = .fixed(collectionViewPadding)
+            
+            let section = NSCollectionLayoutSection(group: group)
+            section.interGroupSpacing = collectionViewPadding
+            section.contentInsets = NSDirectionalEdgeInsets(top: collectionViewPadding, leading: collectionViewPadding, bottom: collectionViewPadding, trailing: collectionViewPadding)
+            
+            return section
+        }
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(GridCell.self)
@@ -86,26 +101,5 @@ extension GridCollectionView: UICollectionViewDataSource {
 extension GridCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.gridCollectionView(self, didSelectItemAt: indexPath.item)
-    }
-}
-
-// MARK: - UICollectionViewDelegateFlowLayout
-extension GridCollectionView: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: collectionViewPadding, left: collectionViewPadding, bottom: collectionViewPadding, right: collectionViewPadding)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return collectionViewPadding
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return collectionViewPadding
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let collectionViewWidth = collectionView.bounds.width
-        let itemWidth = (collectionViewWidth - collectionViewPadding * 3) / 2
-        return CGSize(width: itemWidth, height: 186)
     }
 }
