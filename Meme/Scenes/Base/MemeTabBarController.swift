@@ -12,14 +12,25 @@ final class MemeTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setup()
+        setupUI()
+        setupViewControllers()
     }
 
-    //MARK: - Setup
-    private func setup() {
+    // MARK: - Setup
+    private func setupUI() {
         view.backgroundColor = .secondarySystemBackground
-        tabBar.backgroundColor = .systemGray5
         
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .secondarySystemBackground
+        appearance.shadowColor = .opaqueSeparator
+        appearance.shadowImage = UIImage()
+        
+        tabBar.standardAppearance = appearance
+        tabBar.scrollEdgeAppearance = appearance
+    }
+    
+    private func setupViewControllers() {
         let homeViewController = UINavigationController(rootViewController: HomePageViewController())
         homeViewController.tabBarItem = UITabBarItem(title: "Home".localized(), image: Asset.Tabbar.home.image, tag: 0)
         
