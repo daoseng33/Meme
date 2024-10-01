@@ -17,6 +17,7 @@ final class MemeTabBarController: UITabBarController {
 
     //MARK: - Setup
     private func setup() {
+        view.backgroundColor = .secondarySystemBackground
         tabBar.backgroundColor = .systemGray5
         
         let homeViewController = UINavigationController(rootViewController: HomePageViewController())
