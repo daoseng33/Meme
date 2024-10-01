@@ -61,7 +61,7 @@ final class GridCell: UICollectionViewCell {
         }
         
         gridImageView.snp.makeConstraints {
-            $0.height.equalTo(150)
+            $0.height.equalTo(150).priority(.high)
         }
     }
     
