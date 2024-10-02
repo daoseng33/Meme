@@ -16,6 +16,7 @@ final class VideoPlayerView: UIView {
     private var playerLayer: AVPlayerLayer?
     private var playerLooper: AVPlayerLooper?
     private let player = AVQueuePlayer()
+    private var currentItem: AVPlayerItem?
     
     private let statusRelay = BehaviorRelay<AVPlayer.TimeControlStatus>(value: .paused)
     var status: AVPlayer.TimeControlStatus {
@@ -82,7 +83,15 @@ final class VideoPlayerView: UIView {
         
         observePlayerItemStatus(item)
         
-        player.replaceCurrentItem(with: item)
+        playerLooper?.disableLooping()
+        playerLooper = nil
+        
+        if let currentItem = currentItem {
+            player.remove(currentItem)
+        }
+        
+        currentItem = item
+        player.insert(item, after: nil)
         
         playerLooper = AVPlayerLooper(player: player, templateItem: item)
         
@@ -121,7 +130,12 @@ final class VideoPlayerView: UIView {
     
     func reset() {
         player.pause()
-        player.replaceCurrentItem(with: nil)
+        playerLooper?.disableLooping()
+        playerLooper = nil
+        if let currentItem = currentItem {
+            player.remove(currentItem)
+        }
+        currentItem = nil
     }
     
     private func showLoading() {
