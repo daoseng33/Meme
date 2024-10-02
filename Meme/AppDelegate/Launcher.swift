@@ -33,7 +33,7 @@ final class Launcher {
     
     private func setupAPIConfig() {
         if let apiKey = Bundle.main.infoDictionary?["API_KEY"] as? String {
-            APIConfiguration.shared.APIKey = apiKey
+            APIConfiguration.apiKey = apiKey
         } else {
             print("API Key not found")
             // warning: you can replace your own humor api key here

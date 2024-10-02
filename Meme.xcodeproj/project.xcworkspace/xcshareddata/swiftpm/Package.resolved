@@ -1,5 +1,5 @@
 {
-  "originHash" : "2d111a6f33dd919f8385c381856d06ef4f45e96463eb7439a0f07141e8507af1",
+  "originHash" : "a88478c11ce312bf9bb2e276e9b0a4ded272d30e3532a252c7d550dda9b6ae0e",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -16,7 +16,7 @@
       "location" : "https://github.com/daoseng33/HumorAPIService.git",
       "state" : {
         "branch" : "main",
-        "revision" : "2a075090bd1f5c85c9d2338f31e30a5eadbe77af"
+        "revision" : "99d4d48771b3136922fede6462b16fe0286060b7"
       }
     },
     {
@@ -25,7 +25,7 @@
       "location" : "https://github.com/daoseng33/HumorDataModel.git",
       "state" : {
         "branch" : "main",
-        "revision" : "6e0ab0c5608026853c2e3b7d7c3f18aaa9589e0c"
+        "revision" : "5231d5b94c3ad45063085af768d10bd4f0ede323"
       }
     },
     {
