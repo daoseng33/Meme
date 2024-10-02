@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 import RxRelay
-import HumorDataModel
+import HumorAPIService
 
 protocol GIFsViewModelProtocol: LoadingStateProtocol {
     var keywordRelay: BehaviorRelay<String?> { get }

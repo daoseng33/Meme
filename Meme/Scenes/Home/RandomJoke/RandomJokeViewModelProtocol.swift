@@ -7,7 +7,6 @@
 
 import Foundation
 import RxSwift
-import HumorDataModel
 import HumorAPIService
 
 protocol RandomJokeViewModelProtocol: AnyObject, LoadingStateProtocol {

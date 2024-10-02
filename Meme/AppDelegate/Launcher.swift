@@ -11,14 +11,16 @@ import HumorAPIService
 import UIKit
 import SFSafeSymbols
 import SKPhotoBrowser
+import RealmSwift
 
 final class Launcher {
-    @MainActor func setup() {
+    func launch() {
         setupAPIConfig()
         setupNavigationBar()
         handleGlobalError()
         setupIQKeyboardManager()
         setupSKPhotoBrowser()
+        setupDatabaseMigration()
     }
     
     private func handleGlobalError() {
@@ -41,9 +43,11 @@ final class Launcher {
         }
     }
     
-    @MainActor private func setupIQKeyboardManager() {
-        IQKeyboardManager.shared.enable = true
-        IQKeyboardManager.shared.resignOnTouchOutside = true
+    private func setupIQKeyboardManager() {
+        DispatchQueue.main.async {
+            IQKeyboardManager.shared.enable = true
+            IQKeyboardManager.shared.resignOnTouchOutside = true
+        }
     }
     
     private func setupSKPhotoBrowser() {
@@ -52,5 +56,31 @@ final class Launcher {
         SKPhotoBrowserOptions.indicatorStyle = .medium
         SKPhotoBrowserOptions.displayCloseButton = false
         SKPhotoBrowserOptions.enableSingleTapDismiss = true
+    }
+    
+    private func setupDatabaseMigration() {
+        DispatchQueue.main.async {
+            let config = Realm.Configuration(
+                    schemaVersion: 2,
+                    migrationBlock: { migration, oldSchemaVersion in
+                        if oldSchemaVersion < 2 {
+                            migration.enumerateObjects(ofType: ImageData.className()) { oldObject, newObject in
+                                newObject!["createdAt"] = Date()
+                            }
+                            migration.enumerateObjects(ofType: RandomJoke.className()) { oldObject, newObject in
+                                newObject!["createdAt"] = Date()
+                            }
+                        }
+                    }
+                )
+                
+                Realm.Configuration.defaultConfiguration = config
+                
+                do {
+                    let _ = try Realm()
+                } catch {
+                    print("Error opening Realm: \(error)")
+                }
+        }
     }
 }

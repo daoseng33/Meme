@@ -17,6 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
+        launcher.launch()
+        
         window = UIWindow(windowScene: windowScene)
         
         let initialViewController = MemeTabBarController()
@@ -24,8 +26,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = initialViewController
         
         window?.makeKeyAndVisible()
-        
-        launcher.setup()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

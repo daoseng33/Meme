@@ -7,7 +7,6 @@
 
 import Foundation
 import HumorAPIService
-import HumorDataModel
 import RxRelay
 import RxCocoa
 import RxSwift

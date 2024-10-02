@@ -16,16 +16,7 @@
       "location" : "https://github.com/daoseng33/HumorAPIService.git",
       "state" : {
         "branch" : "main",
-        "revision" : "99d4d48771b3136922fede6462b16fe0286060b7"
-      }
-    },
-    {
-      "identity" : "humordatamodel",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/daoseng33/HumorDataModel.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "5231d5b94c3ad45063085af768d10bd4f0ede323"
+        "revision" : "09f4ec90de74a3a7c393466a8685bfccdbd92ed1"
       }
     },
     {
