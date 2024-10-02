@@ -28,9 +28,16 @@ final class Launcher {
     }
     
     private func setupNavigationBar() {
-        let backButtonAppearance = UIBarButtonItemAppearance()
-        backButtonAppearance.normal.backgroundImage = UIImage(systemSymbol: .chevronBackward)
-        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: -1000, vertical: 0), for: .default)
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .secondarySystemBackground
+        appearance.shadowColor = .clear
+        appearance.setBackIndicatorImage(UIImage(systemSymbol: .chevronBackward), transitionMaskImage: UIImage(systemSymbol: .chevronBackward))
+        appearance.backButtonAppearance.normal.titlePositionAdjustment = UIOffset(horizontal: -1000, vertical: 0)
+        
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        UINavigationBar.appearance().compactAppearance = appearance
     }
     
     private func setupAPIConfig() {
