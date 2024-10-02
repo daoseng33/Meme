@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import HumorAPIService
 
 struct Utility {
     static func getImageURL(named imageName: String) -> URL? {
@@ -47,6 +48,18 @@ struct Utility {
         }
         
         parentVC.present(activityViewController, animated: true, completion: nil)
+    }
+    
+    /// type string example: "video/mp4", "image/jpeg"
+    static func getMediaType(with typeString: String) -> MemeMediaType {
+        // get "video" or "image"
+        let components = typeString.components(separatedBy: "/")
+        guard let firstPart = components.first,
+                let type = MemeMediaType(rawValue: firstPart) else {
+            return .image
+        }
+        
+        return type
     }
 }
 

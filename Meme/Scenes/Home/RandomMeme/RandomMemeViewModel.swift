@@ -77,7 +77,7 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
                         DataStorageManager.shared.save(randomMeme)
                     }
 
-                    let mediaType = getMediaType(with: randomMeme.type)
+                    let mediaType = Utility.getMediaType(with: randomMeme.type)
                     mediaRelay.accept((randomMeme.url, mediaType))
                     descriptionRelay.accept(randomMeme.memeDescription)
                     
@@ -93,18 +93,5 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
                 self.loadingStateRelay.accept(.failure(error: error))
             })
             .disposed(by: disposeBag)
-    }
-    
-    // MARK: - Utility
-    /// type string example: "video/mp4", "image/jpeg"
-    private func getMediaType(with typeString: String) -> MemeMediaType {
-        // get "video" or "image"
-        let components = typeString.components(separatedBy: "/")
-        guard let firstPart = components.first,
-                let type = MemeMediaType(rawValue: firstPart) else {
-            return .image
-        }
-        
-        return type
     }
 }
