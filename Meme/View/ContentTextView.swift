@@ -16,7 +16,7 @@ final class ContentTextView: UIView {
         textView.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         textView.textColor = .label
         textView.isEditable = false
-        textView.backgroundColor = .secondarySystemBackground
+        textView.backgroundColor = .clear
         
         return textView
     }()
