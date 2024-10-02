@@ -184,13 +184,18 @@ final class RandomMemeViewController: BaseViewController {
     }
     
     @objc private func tapGestureAction() {
-        guard let image = self.imageView.image else { return }
-        let images = [SKPhoto.photoWithImage(image)]
-        let browser = SKPhotoBrowser(photos: images)
-        browser.delegate = self
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        
-        present(browser, animated: true)
+        if let image = imageView.image {
+            let images = [SKPhoto.photoWithImage(image)]
+            let browser = SKPhotoBrowser(photos: images)
+            
+            present(browser, animated: true)
+        } else {
+            if videoPlayerView.status == .playing {
+                videoPlayerView.pause()
+            } else {
+                videoPlayerView.play()
+            }
+        }
     }
     
     private func setupBinding() {
@@ -253,12 +258,5 @@ final class RandomMemeViewController: BaseViewController {
         keywordTextField.textBinder
             .bind(to: viewModel.keywordRelay)
             .disposed(by: rx.disposeBag)
-    }
-}
-
-// MARK: - SKPhotoBrowserDelegate
-extension RandomMemeViewController: SKPhotoBrowserDelegate {
-    func willDismissAtPageIndex(_ index: Int) {
-        navigationController?.setNavigationBarHidden(false, animated: false)
     }
 }
