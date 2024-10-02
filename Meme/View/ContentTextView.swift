@@ -21,6 +21,16 @@ final class ContentTextView: UIView {
         return textView
     }()
     
+    var enableScroll: Bool {
+        get { textView.isScrollEnabled }
+        set { textView.isScrollEnabled = newValue }
+    }
+    
+    var text: String? {
+        get { textView.text }
+        set { textView.text = newValue }
+    }
+    
     var textBinder: ControlProperty<String?> {
         return textView.rx.text
     }
