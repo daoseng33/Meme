@@ -1,5 +1,5 @@
 //
-//  GlobalErrorHandler.swift
+//  GlobalErrorHandleManager.swift
 //  Meme
 //
 //  Created by DAO on 2024/9/3.
@@ -10,9 +10,9 @@ import HumorAPIService
 import RxSwift
 import UIKit
 
-final class GlobalErrorHandler {
+final class GlobalErrorHandleManager {
     // MARK: - Properties
-    static let shared = GlobalErrorHandler()
+    static let shared = GlobalErrorHandleManager()
     
     private let disposeBag = DisposeBag()
     

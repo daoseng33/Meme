@@ -24,7 +24,7 @@ final class Launcher {
     }
     
     private func handleGlobalError() {
-        GlobalErrorHandler.shared.handleError()
+        GlobalErrorHandleManager.shared.handleError()
     }
     
     private func setupNavigationBar() {

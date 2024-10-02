@@ -234,7 +234,7 @@ final class RandomMemeViewController: BaseViewController {
                     
                 case .failure(let error):
                     self.generateMemeButton.isEnabled = true
-                    GlobalErrorHandler.shared.popErrorAlert(error: error, presentVC: self) { [weak self] in
+                    GlobalErrorHandleManager.shared.popErrorAlert(error: error, presentVC: self) { [weak self] in
                         guard let self = self else { return }
                         self.viewModel.fetchRandomMeme()
                     }
