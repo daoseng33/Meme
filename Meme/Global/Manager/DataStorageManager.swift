@@ -35,7 +35,7 @@ final public class DataStorageManager {
         }
     }
     
-    public func fetch<T: Object>(_ type: T.Type, sorted: (keyPath: String, ascending: Bool)? = nil, completion: @escaping (Result<[T], Error>) -> Void) {
+    public func fetch<T: Object>(_ type: T.Type, sorted: (keyPath: String, ascending: Bool)? = nil, completion: @escaping (Result<Results<T>, Error>) -> Void) {
         do {
             let realm = try self.realm()
             let results: Results<T>
@@ -45,17 +45,21 @@ final public class DataStorageManager {
                 results = realm.objects(type)
             }
             
-            let array = Array(results)
-            completion(.success(array))
+            completion(.success(results))
         } catch {
             completion(.failure(error))
         }
     }
     
-    public func fetchAsync<T: Object>(_ type: T.Type) async throws -> [T] {
-        let realm = try self.realm()
-        let results = realm.objects(type)
-        return Array(results)
+    public func fetch<T: Object>(_ type: T.Type, primaryKey: String, completion: @escaping (Result<T?, Error>) -> Void) {
+        do {
+            let realm = try self.realm()
+            let result = realm.object(ofType: type, forPrimaryKey: primaryKey)
+            
+            completion(.success(result))
+        } catch {
+            completion(.failure(error))
+        }
     }
     
     public func update<T: Object>(_ object: T, with dictionary: [String: Any?], onError: ((Error?) -> Void)? = nil) {
