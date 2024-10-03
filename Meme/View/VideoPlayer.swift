@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxRelay
 import SnapKit
+import SFSafeSymbols
 
 final class VideoPlayerView: UIView {
     // MARK: - Properties
@@ -18,9 +19,9 @@ final class VideoPlayerView: UIView {
     private let player = AVQueuePlayer()
     private var currentItem: AVPlayerItem?
     
-    private let statusRelay = BehaviorRelay<AVPlayer.TimeControlStatus>(value: .paused)
-    var status: AVPlayer.TimeControlStatus {
-        return statusRelay.value
+    private let timeStatusRelay = BehaviorRelay<AVPlayer.TimeControlStatus>(value: .paused)
+    var timeStatus: AVPlayer.TimeControlStatus {
+        timeStatusRelay.value
     }
     
     private let handleErrorRelay = PublishRelay<Void>()
@@ -35,6 +36,25 @@ final class VideoPlayerView: UIView {
         indicator.hidesWhenStopped = true
         indicator.translatesAutoresizingMaskIntoConstraints = false
         return indicator
+    }()
+    
+    private let playImageView: UIImageView = {
+        let symbolConfig = UIImage.SymbolConfiguration(pointSize: 44, weight: .regular)
+        let image = UIImage(systemSymbol: .playCircle, withConfiguration: symbolConfig).withRenderingMode(.alwaysOriginal).withTintColor(.accent)
+        let imageView = UIImageView(image: image)
+        imageView.isHidden = true
+        
+        // Add shadow effect
+        imageView.layer.shadowColor = UIColor.black.cgColor
+        imageView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        imageView.layer.shadowRadius = 1
+        imageView.layer.shadowOpacity = 0.5
+        
+        // Ensure shadow is visible if the image has transparent parts
+        imageView.layer.shouldRasterize = true
+        imageView.layer.rasterizationScale = UIScreen.main.scale
+        
+        return imageView
     }()
     
     // MARK: - Init
@@ -60,12 +80,31 @@ final class VideoPlayerView: UIView {
         activityIndicator.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
         }
+        
+        addSubview(playImageView)
+        playImageView.snp.makeConstraints {
+            $0.centerX.centerY.equalToSuperview()
+        }
     }
     
     private func setupBindings() {
         player.rx.observe(AVPlayer.TimeControlStatus.self, #keyPath(AVPlayer.timeControlStatus))
             .compactMap { $0 }
-            .bind(to: statusRelay)
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { (self, status) in
+                self.timeStatusRelay.accept(status)
+                
+                switch status {
+                case .paused:
+                    if self.currentItem != nil {
+                        self.playImageView.isHidden = false
+                    }
+                    
+                default:
+                    self.playImageView.isHidden = true
+                }
+            })
             .disposed(by: rx.disposeBag)
     }
     
@@ -77,6 +116,7 @@ final class VideoPlayerView: UIView {
     // MARK: - Video player
     func loadVideo(from url: URL) {
         showLoading()
+        playImageView.isHidden = true
         
         let asset = AVAsset(url: url)
         let item = AVPlayerItem(asset: asset)
@@ -136,6 +176,7 @@ final class VideoPlayerView: UIView {
             player.remove(currentItem)
         }
         currentItem = nil
+        playImageView.isHidden = true
     }
     
     private func showLoading() {

@@ -71,14 +71,14 @@ final class RandomMemeViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if videoPlayerView.status == .playing, videoPlayerView.isHidden == false {
+        if videoPlayerView.timeStatus == .playing, videoPlayerView.isHidden == false {
             videoPlayerView.pause()
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if videoPlayerView.status == .paused, videoPlayerView.isHidden == false {
+        if videoPlayerView.timeStatus == .paused, videoPlayerView.isHidden == false {
             videoPlayerView.play()
         }
     }
@@ -94,9 +94,9 @@ final class RandomMemeViewController: BaseViewController {
             $0.height.equalTo(view.snp.width)
         }
         
-        view.addSubview(videoPlayerView)
+        imageView.addSubview(videoPlayerView)
         videoPlayerView.snp.makeConstraints {
-            $0.edges.equalTo(imageView)
+            $0.edges.equalToSuperview()
         }
         
         let interactionStackView: UIStackView = {
@@ -158,7 +158,6 @@ final class RandomMemeViewController: BaseViewController {
             .drive(with: self) { (self, _) in
                 self.videoPlayerView.reset()
                 self.videoPlayerView.isHidden = true
-                self.imageView.isHidden = false
                 self.imageView.image = Asset.Global.imageNotFound.image
             }
             .disposed(by: rx.disposeBag)
@@ -190,7 +189,7 @@ final class RandomMemeViewController: BaseViewController {
             
             present(browser, animated: true)
         } else {
-            if videoPlayerView.status == .playing {
+            if videoPlayerView.timeStatus == .playing {
                 videoPlayerView.pause()
             } else {
                 videoPlayerView.play()
@@ -204,7 +203,6 @@ final class RandomMemeViewController: BaseViewController {
                 switch mediaData.type {
                 case .image:
                     self.videoPlayerView.isHidden = true
-                    self.imageView.isHidden = false
                     self.imageView.kf.setImage(with: mediaData.mediaURL) { [weak self] result in
                         guard let self = self else { return }
                         switch result {
@@ -220,7 +218,7 @@ final class RandomMemeViewController: BaseViewController {
                 case .video:
                     if let url = mediaData.mediaURL {
                         self.videoPlayerView.isHidden = false
-                        self.imageView.isHidden = true
+                        self.imageView.image = nil
                         self.videoPlayerView.loadVideo(from: url)
                     }
                 }

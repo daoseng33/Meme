@@ -125,6 +125,7 @@ final class GeneralContentCell: UITableViewCell {
             case .video:
                 videoPlayerView.isHidden = false
                 videoPlayerView.loadVideo(from: url)
+                videoPlayerView.pause()
             }
             
             descriptionTextView.text = description
@@ -158,8 +159,8 @@ final class GeneralContentCell: UITableViewCell {
         bottomSeparatorView.isHidden = isLast
     }
     
-    func resetViedoPlayer() {
-        videoPlayerView.reset()
+    func pauseViedoPlayer() {
+        videoPlayerView.pause()
     }
     
     // MARK: - Actions
@@ -172,7 +173,7 @@ final class GeneralContentCell: UITableViewCell {
                 viewModel.imageTappedRelay.accept(url)
                 
             case .video:
-                if videoPlayerView.status == .playing {
+                if videoPlayerView.timeStatus == .playing {
                     videoPlayerView.pause()
                 } else {
                     videoPlayerView.play()
