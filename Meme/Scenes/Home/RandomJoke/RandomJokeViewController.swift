@@ -26,44 +26,8 @@ final class RandomJokeViewController: BaseViewController {
         return label
     }()
     
-    private lazy var categorySelectedButton: UIButton = {
-        let button = UIButton()
-        
-        var config: UIButton.Configuration = {
-            var config = UIButton.Configuration.filled()
-            config.title = viewModel.selectedCategory.rawValue.localized()
-            let symbolConfig = UIImage.SymbolConfiguration(pointSize: 12, weight: .black)
-            let image = UIImage(systemSymbol: .chevronUpCircleFill, withConfiguration: symbolConfig).withTintColor(.accent, renderingMode: .alwaysOriginal)
-            config.image = image
-            config.imagePlacement = .trailing
-            config.imagePadding = Constant.spacing1
-            config.baseForegroundColor = .label
-            config.baseBackgroundColor = .secondarySystemBackground
-            config.contentInsets.leading = Constant.spacing2
-            config.contentInsets.trailing = Constant.spacing2
-            config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
-                var outgoing = incoming
-                outgoing.font = .systemFont(ofSize: 16, weight: .medium)
-                return outgoing
-            }
-            
-            return config
-        }()
-        
-        let actions = viewModel.categories.map { [weak viewModel] option in
-            UIAction(title: option.localized()) { [weak button] _ in
-                button?.configuration?.title = option.localized()
-                viewModel?.selectedCategoryObserver.onNext(option)
-            }
-        }
-
-        button.menu = UIMenu(children: actions)
-        button.showsMenuAsPrimaryAction = true
-        
-        button.configuration = config
-        
-        return button
-    }()
+    private lazy var categorySelectedButton = MenuButton(contentStrings: viewModel.categories,
+                                                         arrowDirection: .up)
     
     private let shareButton: UIButton = {
         let button = UIButton()
@@ -140,15 +104,21 @@ final class RandomJokeViewController: BaseViewController {
             $0.right.top.bottom.equalToSuperview()
         }
         
-        categorySelectedView.addSubview(categorySelectedLabel)
-        categorySelectedLabel.snp.makeConstraints {
-            $0.top.left.bottom.equalToSuperview()
-        }
+        let categoryMenuStackView: UIStackView = {
+            let stackView = UIStackView(arrangedSubviews: [
+                categorySelectedLabel,
+                categorySelectedButton
+            ])
+            stackView.axis = .horizontal
+            stackView.spacing = Constant.spacing1
+            
+            return stackView
+        }()
         
-        categorySelectedView.addSubview(categorySelectedButton)
-        categorySelectedButton.snp.makeConstraints {
-            $0.left.equalTo(categorySelectedLabel.snp.right).offset(Constant.spacing1)
-            $0.top.bottom.equalToSuperview()
+        categorySelectedView.addSubview(categoryMenuStackView)
+        
+        categoryMenuStackView.snp.makeConstraints {
+            $0.left.top.bottom.equalToSuperview()
             $0.right.lessThanOrEqualTo(shareButton.snp.left)
         }
     }
@@ -193,6 +163,10 @@ final class RandomJokeViewController: BaseViewController {
                     }
                 }
             })
+            .disposed(by: rx.disposeBag)
+        
+        categorySelectedButton.selectedOptionObservable
+            .bind(to: viewModel.selectedCategoryObserver)
             .disposed(by: rx.disposeBag)
     }
 }
