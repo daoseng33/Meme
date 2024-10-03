@@ -35,7 +35,7 @@ final public class DataStorageManager {
         }
     }
     
-    public func fetch<T: Object>(_ type: T.Type, sorted: (keyPath: String, ascending: Bool)? = nil, completion: @escaping (Result<Results<T>, Error>) -> Void) {
+    public func fetch<T: Object>(_ type: T.Type, sorted: (keyPath: String, ascending: Bool)? = nil, completion: @escaping (Result<[T], Error>) -> Void) {
         do {
             let realm = try self.realm()
             let results: Results<T>
@@ -45,7 +45,8 @@ final public class DataStorageManager {
                 results = realm.objects(type)
             }
             
-            completion(.success(results))
+            let array = Array(results)
+            completion(.success(array))
         } catch {
             completion(.failure(error))
         }

@@ -13,9 +13,11 @@ final class GeneralContentCellViewModel: GeneralContentCellViewModelProtocol {
     var content: GeneralContentCellType
     var shareButtonTappedRelay = PublishRelay<GeneralContentCellType>()
     var imageTappedRelay = PublishRelay<URL>()
+    let createdAt: Date
     
     // MARK: - Init
-    init(content: GeneralContentCellType) {
+    init(content: GeneralContentCellType, createdAt: Date) {
         self.content = content
+        self.createdAt = createdAt
     }
 }

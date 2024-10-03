@@ -56,6 +56,7 @@ final class GIFsViewModel: GIFsViewModelProtocol {
                 
                 switch result {
                 case .success(let gif):
+                    self.imageDatas = gif.images
                     let urls = gif.images.compactMap { $0.url }
                     let gridDatas = urls.map { GridData(title: nil, imageType: .gif(url: $0)) }
                     self.gridCollectionViewModel.gridDatasObserver.onNext(gridDatas)

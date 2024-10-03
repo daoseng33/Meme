@@ -27,6 +27,7 @@ final class GeneralContentCell: UITableViewCell {
     }()
     
     private let videoPlayerView = VideoPlayerView()
+    private let containerTextView = UIView()
     private let descriptionTextView: ContentTextView = {
         let textView = ContentTextView()
         textView.enableScroll = false
@@ -42,6 +43,13 @@ final class GeneralContentCell: UITableViewCell {
         return button
     }()
     
+    private let bottomSeparatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .secondarySystemBackground
+        
+        return view
+    }()
+    
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -55,14 +63,28 @@ final class GeneralContentCell: UITableViewCell {
     
     // MARK: - Setup
     private func setupUI() {
+        contentView.backgroundColor = .secondarySystemGroupedBackground
+        
         animatedImageView.addSubview(videoPlayerView)
         videoPlayerView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
-        let stackView = UIStackView(arrangedSubviews: [animatedImageView, descriptionTextView, actionContainerView])
-        stackView.axis = .vertical
-        stackView.spacing = Constant.spacing2
+        containerTextView.addSubview(descriptionTextView)
+        descriptionTextView.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+            $0.left.right.equalToSuperview().inset(Constant.spacing2)
+        }
+        
+        let stackView: UIStackView = {
+            let stackView = UIStackView(arrangedSubviews: [animatedImageView, containerTextView, actionContainerView, bottomSeparatorView])
+            stackView.axis = .vertical
+            stackView.spacing = Constant.spacing2
+            stackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: Constant.spacing2, right: 0)
+            stackView.isLayoutMarginsRelativeArrangement = true
+            
+            return stackView
+        }()
         
         contentView.addSubview(stackView)
         stackView.snp.makeConstraints {
@@ -70,11 +92,7 @@ final class GeneralContentCell: UITableViewCell {
         }
         
         animatedImageView.snp.makeConstraints {
-            $0.height.equalTo(150).priority(.high)
-        }
-        
-        descriptionTextView.snp.makeConstraints {
-            $0.height.equalTo(150).priority(.high)
+            $0.height.equalTo(contentView.snp.width).priority(.high)
         }
         
         actionContainerView.snp.makeConstraints {
@@ -86,22 +104,25 @@ final class GeneralContentCell: UITableViewCell {
             $0.right.top.bottom.equalToSuperview()
             $0.width.equalTo(35)
         }
+        
+        bottomSeparatorView.snp.makeConstraints {
+            $0.height.equalTo(Constant.spacing2)
+        }
     }
     
-    func configure(with viewModel: GeneralContentCellViewModelProtocol) {
+    func configure(with viewModel: GeneralContentCellViewModelProtocol, isLast: Bool) {
+        self.viewModel = viewModel
         switch viewModel.content {
         case .meme(let url, let description, let mediaType):
             animatedImageView.isHidden = false
-            descriptionTextView.isHidden = false
+            containerTextView.isHidden = false
             
             switch mediaType {
             case .image:
-                videoPlayerView.reset()
                 videoPlayerView.isHidden = true
                 animatedImageView.kf.setImage(with: url)
                 
             case .video:
-                animatedImageView.image = nil
                 videoPlayerView.isHidden = false
                 videoPlayerView.loadVideo(from: url)
             }
@@ -110,13 +131,13 @@ final class GeneralContentCell: UITableViewCell {
             
         case .joke(let joke):
             animatedImageView.isHidden = true
-            descriptionTextView.isHidden = false
+            containerTextView.isHidden = false
             
             descriptionTextView.text = joke
             
         case .gif(let url):
             animatedImageView.isHidden = false
-            descriptionTextView.isHidden = true
+            containerTextView.isHidden = true
             
             animatedImageView.kf.setImage(with: url)
         }
@@ -125,16 +146,40 @@ final class GeneralContentCell: UITableViewCell {
             .map { viewModel.content }
             .bind(to: viewModel.shareButtonTappedRelay)
             .disposed(by: rx.disposeBag)
+        
+        videoPlayerView.handleErrorObservable
+            .withUnretained(self)
+            .subscribe(onNext: { (self, _) in
+                self.videoPlayerView.reset()
+                self.animatedImageView.image = Asset.Global.imageNotFound.image
+            })
+            .disposed(by: rx.disposeBag)
+        
+        bottomSeparatorView.isHidden = isLast
+    }
+    
+    func resetViedoPlayer() {
+        videoPlayerView.reset()
     }
     
     // MARK: - Actions
     @objc private func tapGestureAction() {
         guard let viewModel = viewModel else { return }
         switch viewModel.content {
-        case .meme(let url, let description, let mediaType):
-            viewModel.imageTappedRelay.accept(url)
+        case .meme(let url, _, let mediaType):
+            switch mediaType {
+            case .image:
+                viewModel.imageTappedRelay.accept(url)
+                
+            case .video:
+                if videoPlayerView.status == .playing {
+                    videoPlayerView.pause()
+                } else {
+                    videoPlayerView.play()
+                }
+            }
             
-        case .joke(let joke):
+        case .joke:
             break
             
         case .gif(let url):
@@ -144,6 +189,11 @@ final class GeneralContentCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        
+        animatedImageView.image = nil
+        animatedImageView.kf.cancelDownloadTask()
+        descriptionTextView.text = nil
+        videoPlayerView.reset()
         
         var mutableSelf = self
         mutableSelf.rx.disposeBag = DisposeBag()

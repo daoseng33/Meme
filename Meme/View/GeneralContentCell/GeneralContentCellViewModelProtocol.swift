@@ -16,8 +16,9 @@ enum GeneralContentCellType {
 }
 
 protocol GeneralContentCellViewModelProtocol {
+    var createdAt: Date { get }
     var content: GeneralContentCellType { get }
     var shareButtonTappedRelay: PublishRelay<GeneralContentCellType> { get }
     var imageTappedRelay: PublishRelay<URL> { get }
-    init(content: GeneralContentCellType)
+    init(content: GeneralContentCellType, createdAt: Date)
 }
