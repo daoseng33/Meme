@@ -140,7 +140,7 @@ final class MenuButton: UIView {
                 self.button.configuration?.title = option.localized()
                 self.button.menu?.children.forEach({ item in
                     guard let action = item as? UIAction else { return }
-                    action.state = action.title == option ? .on : .off
+                    action.state = action.title == option.localized() ? .on : .off
                 })
             }
             .disposed(by: rx.disposeBag)
