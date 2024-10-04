@@ -120,7 +120,17 @@ final class GeneralContentCell: UITableViewCell {
             switch mediaType {
             case .image:
                 videoPlayerView.isHidden = true
-                animatedImageView.kf.setImage(with: url)
+                animatedImageView.kf.setImage(with: url) { [weak self] result in
+                    guard let self = self else { return }
+                    switch result {
+                    case .success:
+                        break
+                        
+                    case .failure(let error):
+                        print("kf load image error: \(error.localizedDescription)")
+                        animatedImageView.image = Asset.Global.imageNotFound.image
+                    }
+                }
                 
             case .video:
                 videoPlayerView.isHidden = false
