@@ -19,22 +19,23 @@ final class VideoPlayerView: UIView {
     private let player = AVQueuePlayer()
     private var currentItem: AVPlayerItem?
     
-    private let timeStatusRelay = BehaviorRelay<AVPlayer.TimeControlStatus>(value: .paused)
+    private let timeStatusRelay = BehaviorRelay<AVPlayer.TimeControlStatus>(value: .waitingToPlayAtSpecifiedRate)
     var timeStatus: AVPlayer.TimeControlStatus {
         timeStatusRelay.value
     }
     
     private let handleErrorRelay = PublishRelay<Void>()
-    
     var handleErrorObservable: Observable<Void> {
         handleErrorRelay.asObservable()
     }
+    
+    private var playerStatus: AVPlayerItem.Status = .unknown
     
     // MARK: - UI
     private let activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .medium)
         indicator.hidesWhenStopped = true
-        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.color = .systemGray
         return indicator
     }()
     
@@ -97,7 +98,8 @@ final class VideoPlayerView: UIView {
                 
                 switch status {
                 case .paused:
-                    if self.currentItem != nil {
+                    if self.currentItem != nil,
+                       self.playerStatus == .readyToPlay {
                         self.playImageView.isHidden = false
                     }
                     
@@ -143,7 +145,7 @@ final class VideoPlayerView: UIView {
             .compactMap { $0 }
             .withUnretained(self)
             .subscribe(onNext: { (self, status) in
-                self.hideLoading()
+                self.playerStatus = status
                 self.handlePlayerItemStatus(status)
             })
             .disposed(by: rx.disposeBag)
@@ -151,7 +153,11 @@ final class VideoPlayerView: UIView {
     
     private func handlePlayerItemStatus(_ status: AVPlayerItem.Status) {
         switch status {
+        case .readyToPlay:
+            self.hideLoading()
+            
         case .failed:
+            self.hideLoading()
             self.handleErrorRelay.accept(())
             print("Video failed to load")
             
