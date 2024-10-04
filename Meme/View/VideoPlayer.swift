@@ -29,8 +29,6 @@ final class VideoPlayerView: UIView {
         handleErrorRelay.asObservable()
     }
     
-    private var playerStatus: AVPlayerItem.Status = .unknown
-    
     // MARK: - UI
     private let activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .medium)
@@ -89,23 +87,40 @@ final class VideoPlayerView: UIView {
     }
     
     private func setupBindings() {
-        player.rx.observe(AVPlayer.TimeControlStatus.self, #keyPath(AVPlayer.timeControlStatus))
-            .compactMap { $0 }
+        Observable.combineLatest(
+                player.rx.observe(AVPlayer.TimeControlStatus.self, #keyPath(AVPlayer.timeControlStatus)).compactMap { $0 },
+                player.rx.observe(AVPlayerItem.Status.self, #keyPath(AVPlayer.currentItem.status)).compactMap { $0 }
+            )
+            .debounce(.milliseconds(100), scheduler: MainScheduler.instance)
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .subscribe(onNext: { (self, status) in
-                self.timeStatusRelay.accept(status)
+            .subscribe(onNext: { (self, combined) in
+                let (timeStatus, itemStatus) = combined
                 
-                switch status {
-                case .paused:
-                    if self.currentItem != nil,
-                       self.playerStatus == .readyToPlay {
+                self.timeStatusRelay.accept(timeStatus)
+                
+                switch (timeStatus, itemStatus) {
+                case (.paused, .readyToPlay):
+                    if self.currentItem != nil {
                         self.playImageView.isHidden = false
                     }
+                    
+                    self.hideLoading()
+                    
+                case (.playing, _):
+                    self.playImageView.isHidden = true
+                    
+                case (_, .readyToPlay):
+                    self.hideLoading()
+                    
+                case (_, .failed):
+                    self.handleErrorRelay.accept(())
+                    self.hideLoading()
                     
                 default:
                     self.playImageView.isHidden = true
                 }
+                
             })
             .disposed(by: rx.disposeBag)
     }
@@ -116,14 +131,12 @@ final class VideoPlayerView: UIView {
     }
     
     // MARK: - Video player
-    func loadVideo(from url: URL) {
+    func loadVideo(from url: URL, shouldAutoPlay: Bool = true) {
         showLoading()
         playImageView.isHidden = true
         
         let asset = AVAsset(url: url)
         let item = AVPlayerItem(asset: asset)
-        
-        observePlayerItemStatus(item)
         
         playerLooper?.disableLooping()
         playerLooper = nil
@@ -137,32 +150,8 @@ final class VideoPlayerView: UIView {
         
         playerLooper = AVPlayerLooper(player: player, templateItem: item)
         
-        player.play()
-    }
-    
-    private func observePlayerItemStatus(_ item: AVPlayerItem) {
-        item.rx.observe(AVPlayerItem.Status.self, #keyPath(AVPlayerItem.status))
-            .compactMap { $0 }
-            .withUnretained(self)
-            .subscribe(onNext: { (self, status) in
-                self.playerStatus = status
-                self.handlePlayerItemStatus(status)
-            })
-            .disposed(by: rx.disposeBag)
-    }
-    
-    private func handlePlayerItemStatus(_ status: AVPlayerItem.Status) {
-        switch status {
-        case .readyToPlay:
-            self.hideLoading()
-            
-        case .failed:
-            self.hideLoading()
-            self.handleErrorRelay.accept(())
-            print("Video failed to load")
-            
-        default:
-            break
+        if shouldAutoPlay {
+            player.play()
         }
     }
     
@@ -175,7 +164,6 @@ final class VideoPlayerView: UIView {
     }
     
     func reset() {
-        player.pause()
         playerLooper?.disableLooping()
         playerLooper = nil
         if let currentItem = currentItem {

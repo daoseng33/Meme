@@ -124,8 +124,7 @@ final class GeneralContentCell: UITableViewCell {
                 
             case .video:
                 videoPlayerView.isHidden = false
-                videoPlayerView.loadVideo(from: url)
-                videoPlayerView.pause()
+                videoPlayerView.loadVideo(from: url, shouldAutoPlay: false)
             }
             
             descriptionTextView.text = description
