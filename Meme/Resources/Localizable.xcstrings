@@ -1,6 +1,28 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "A while ago" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "一段時間以前"
+          }
+        }
+      }
+    },
+    "All" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "全部"
+          }
+        }
+      }
+    },
     "Analogy" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -41,6 +63,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "取消"
+          }
+        }
+      }
+    },
+    "Category" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "類別"
           }
         }
       }
@@ -287,6 +320,17 @@
         }
       }
     },
+    "Meme" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "迷因"
+          }
+        }
+      }
+    },
     "Memepire" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -309,6 +353,17 @@
         }
       }
     },
+    "Newest" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最新"
+          }
+        }
+      }
+    },
     "NSFW" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -316,6 +371,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "不適合工作場合"
+          }
+        }
+      }
+    },
+    "Oldest" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最舊"
           }
         }
       }
@@ -338,6 +404,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "可選"
+          }
+        }
+      }
+    },
+    "Ordering" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "排序"
           }
         }
       }
@@ -496,6 +573,17 @@
         }
       }
     },
+    "Today" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今天"
+          }
+        }
+      }
+    },
     "We need access to your photo album to save meme photos." : {
       "extractionState" : "manual",
       "localizations" : {
@@ -503,6 +591,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "需要你的相簿權限來儲存迷因照片"
+          }
+        }
+      }
+    },
+    "Within last 7 days" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最近7天"
+          }
+        }
+      }
+    },
+    "Yesterday" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "昨天"
           }
         }
       }

@@ -15,6 +15,7 @@ final class HistoryViewController: BaseViewController {
     // MARK: - Properties
     private let viewModel: HistoryViewModelProtocol
     private var tabBarDidSelectDisposable: Disposable?
+    private let filterViewHeight: CGFloat = 35
     
     // MARK: - UI
     private let refreshControl: UIRefreshControl = {
@@ -22,6 +23,12 @@ final class HistoryViewController: BaseViewController {
         refreshControl.tintColor = .systemGray
         
         return refreshControl
+    }()
+    
+    private lazy var filterContainerView: FilterContainerView = {
+        let filterContainerView = FilterContainerView(viewModel: viewModel.filterContainerViewModel)
+        
+        return filterContainerView
     }()
     
     private lazy var historyTableView: UITableView = {
@@ -32,8 +39,10 @@ final class HistoryViewController: BaseViewController {
         tableView.estimatedRowHeight = 215
         tableView.separatorStyle = .none
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.sectionFooterHeight = 0
         tableView.refreshControl = refreshControl
+        tableView.contentInset = UIEdgeInsets(top: filterViewHeight, left: 0, bottom: 0, right: 0)
         
         return tableView
     }()
@@ -73,12 +82,21 @@ final class HistoryViewController: BaseViewController {
     private func setupUI() {
         navigationItem.title = "History".localized()
         
+        view.addSubview(filterContainerView)
+        filterContainerView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.left.right.equalToSuperview().inset(Constant.spacing3)
+            $0.height.equalTo(filterViewHeight)
+        }
+        
         view.addSubview(historyTableView)
         historyTableView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
             $0.left.right.equalToSuperview()
         }
+        
+        view.bringSubviewToFront(filterContainerView)
     }
     
     private func setupBindings() {
@@ -115,6 +133,10 @@ final class HistoryViewController: BaseViewController {
 
 // MARK: - UITableViewDataSource
 extension HistoryViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        viewModel.getNumberOfSections()
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.getRowsCount(with: section)
     }
@@ -158,5 +180,47 @@ extension HistoryViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension HistoryViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? GeneralContentCell else { return }
+        cell.pauseViedoPlayer()
+    }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        32
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let title = viewModel.getSectionTitle(at: section)
+        let view = TextTableViewHeaderView(text: title)
+        
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        Constant.spacing3
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .clear
+        
+        return view
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+extension HistoryViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard scrollView == historyTableView else { return }
+        
+        let offsetY = scrollView.contentOffset.y
+        
+        let dynamicOffset: CGFloat = min(max(-(filterViewHeight + offsetY), -filterViewHeight), .leastNormalMagnitude)
+        
+        filterContainerView.snp.updateConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(dynamicOffset)
+        }
+        
+        view.setNeedsLayout()
+    }
 }

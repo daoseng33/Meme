@@ -15,11 +15,13 @@ import RealmSwift
 final class HistoryViewModel: HistoryViewModelProtocol {
     // MARK: - Properties
     private let disposeBag = DisposeBag()
-    private var generalContentCellViewModels: [GeneralContentCellViewModelProtocol] = []
     private let reloadDataRelay = PublishRelay<Void>()
     private let memeDatasRelay = PublishRelay<[RandomMeme]>()
     private let jokeDatasRelay = PublishRelay<[RandomJoke]>()
     private let imageDatasRelay = PublishRelay<[ImageData]>()
+    private var sectionTypeDict = IndexedDictionary<DateCategory, [GeneralContentCellViewModelProtocol]>()
+    
+    let filterContainerViewModel: FilterContainerViewModelProtocol = FilterContainerViewModel()
     
     var reloadDataSignal: Signal<Void> {
         reloadDataRelay.asSignal()
@@ -32,10 +34,16 @@ final class HistoryViewModel: HistoryViewModelProtocol {
 
     // MARK: - SetupObserver
     private func setupObserver() {
-        Observable.combineLatest(memeDatasRelay, jokeDatasRelay, imageDatasRelay)
+        Observable.combineLatest(memeDatasRelay,
+                                 jokeDatasRelay,
+                                 imageDatasRelay,
+                                 filterContainerViewModel.selectedDateRelay,
+                                 filterContainerViewModel.selectedCategoryRelay)
             .withUnretained(self)
             .subscribe(onNext: { (self, combined) in
-                let (memes, jokes, images) = combined
+                self.sectionTypeDict.reset()
+                
+                let (memes, jokes, images, date, category) = combined
                 
                 let memeCellViewModels = memes
                     .filter{ $0.url != nil }
@@ -60,9 +68,44 @@ final class HistoryViewModel: HistoryViewModelProtocol {
                         return cellViewModel
                     })
                 
-                self.generalContentCellViewModels = (memeCellViewModels + jokeCellViewModels + imageCellViewModels).sorted(by: {
-                    $0.createdAt > $1.createdAt
-                })
+                var cellViewModels: [GeneralContentCellViewModelProtocol]
+                
+                switch category {
+                case .all:
+                    cellViewModels = memeCellViewModels + jokeCellViewModels + imageCellViewModels
+                    
+                case .meme:
+                    cellViewModels = memeCellViewModels
+                    
+                case .joke:
+                    cellViewModels = jokeCellViewModels
+                    
+                case .gifs:
+                    cellViewModels = imageCellViewModels
+                }
+                
+                switch date {
+                case .newest:
+                    cellViewModels.sort {
+                        $0.createdAt > $1.createdAt
+                    }
+                    
+                case .oldest:
+                    cellViewModels.sort {
+                        $0.createdAt < $1.createdAt
+                    }
+                }
+                
+                cellViewModels.forEach { cellViewModel in
+                    let dateCategory = self.categorizeDate(cellViewModel.createdAt)
+                    
+                    if self.sectionTypeDict[dateCategory] == nil {
+                        self.sectionTypeDict[dateCategory] = [cellViewModel]
+                    } else {
+                        self.sectionTypeDict[dateCategory]?.append(cellViewModel)
+                    }
+                }
+                
                 self.reloadDataRelay.accept(())
             })
             .disposed(by: disposeBag)
@@ -107,10 +150,87 @@ final class HistoryViewModel: HistoryViewModelProtocol {
     }
     
     func getCellViewModel(at indexPath: IndexPath) -> GeneralContentCellViewModelProtocol {
-        generalContentCellViewModels[indexPath.row]
+        switch indexPath.section {
+        case sectionTypeDict.index(forKey: .today):
+            sectionTypeDict[.today]![indexPath.row]
+            
+        case sectionTypeDict.index(forKey: .yesterday):
+            sectionTypeDict[.yesterday]![indexPath.row]
+            
+        case sectionTypeDict.index(forKey: .thisWeek):
+            sectionTypeDict[.thisWeek]![indexPath.row]
+            
+        case sectionTypeDict.index(forKey: .whileAgo):
+            sectionTypeDict[.whileAgo]![indexPath.row]
+            
+        default:
+            fatalError("Unknown section type")
+        }
+    }
+    
+    func getNumberOfSections() -> Int {
+        sectionTypeDict.keys.count
     }
     
     func getRowsCount(with section: Int) -> Int {
-        generalContentCellViewModels.count
+        switch section {
+        case sectionTypeDict.index(forKey: .today):
+            sectionTypeDict[.today]!.count
+            
+        case sectionTypeDict.index(forKey: .yesterday):
+            sectionTypeDict[.yesterday]!.count
+            
+        case sectionTypeDict.index(forKey: .thisWeek):
+            sectionTypeDict[.thisWeek]!.count
+            
+        case sectionTypeDict.index(forKey: .whileAgo):
+            sectionTypeDict[.whileAgo]!.count
+            
+        default:
+            fatalError("Unknown section type")
+        }
+    }
+    
+    func getSectionTitle(at section: Int) -> String? {
+        switch section {
+        case sectionTypeDict.index(forKey: .today):
+            DateCategory.today.rawValue.localized()
+            
+        case sectionTypeDict.index(forKey: .yesterday):
+            DateCategory.yesterday.rawValue.localized()
+            
+        case sectionTypeDict.index(forKey: .thisWeek):
+            DateCategory.thisWeek.rawValue.localized()
+            
+        case sectionTypeDict.index(forKey: .whileAgo):
+            DateCategory.whileAgo.rawValue.localized()
+            
+        default:
+            fatalError("Unknown section type")
+        }
+    }
+    
+    // MARL: - Date cateogory
+    enum DateCategory: String {
+        case today = "Today"
+        case yesterday = "Yesterday"
+        case thisWeek = "Within last 7 days"
+        case whileAgo = "A while ago"
+    }
+
+    private func categorizeDate(_ date: Date) -> DateCategory {
+        let calendar = Calendar.current
+        let now = Date()
+        let components = calendar.dateComponents([.day], from: date, to: now)
+        
+        if calendar.isDateInToday(date) {
+            return .today
+        } else if calendar.isDateInYesterday(date) {
+            return .yesterday
+        } else if let days = components.day, days < 7 {
+            return .thisWeek
+        } else {
+            return .whileAgo
+        }
     }
 }

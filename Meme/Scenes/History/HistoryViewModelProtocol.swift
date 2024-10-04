@@ -10,7 +10,10 @@ import RxCocoa
 
 protocol HistoryViewModelProtocol {
     var reloadDataSignal: Signal<Void> { get }
+    var filterContainerViewModel: FilterContainerViewModelProtocol { get }
     func getCellViewModel(at indexPath: IndexPath) -> GeneralContentCellViewModelProtocol
+    func getNumberOfSections() -> Int
     func getRowsCount(with section: Int) -> Int
     func getLocalDatas()
+    func getSectionTitle(at section: Int) -> String?
 }
