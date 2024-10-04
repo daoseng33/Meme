@@ -67,7 +67,7 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
         if let value: String = keywordRelay.value {
             keyword = value
         }
-        randomMemeWebAPI.fetchRandomMeme(with: keyword, mediaType: randomMediaType, minRating: 8)
+        randomMemeWebAPI.fetchRandomMeme(with: keyword, mediaType: randomMediaType, minRating: 9)
             .subscribe(onSuccess: { [weak self] result in
                 guard let self = self else { return }
                 

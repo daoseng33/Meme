@@ -66,7 +66,7 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
     func fetchRandomJoke() {
         loadingStateRelay.accept(.loading)
         
-        webService.fetchRandomJoke(tags: [selectedCategory], excludedTags: [], minRating: 8, maxLength: 999)
+        webService.fetchRandomJoke(tags: [selectedCategory], excludedTags: [], minRating: 9, maxLength: 999)
             .subscribe(onSuccess: { [weak self] result in
                 guard let self = self else { return }
                 
