@@ -48,6 +48,10 @@ final class Launcher {
             // warning: you can replace your own humor api key here
             // https://humorapi.com/?ref=public_apis
         }
+        
+#if CI
+        APIConfiguration.useMockData = true
+#endif
     }
     
     private func setupIQKeyboardManager() {

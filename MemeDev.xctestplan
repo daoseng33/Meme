@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "77E9531E-6D2A-4EED-8683-0EEA74C332D9",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Meme.xcodeproj",
+        "identifier" : "1CDA35482C81AB6F001FF654",
+        "name" : "MemeTests"
+      }
+    }
+  ],
+  "version" : 1
+}
