@@ -13,7 +13,7 @@ import SKPhotoBrowser
 
 final class HistoryViewController: BaseViewController {
     // MARK: - Properties
-    private let viewModel: HistoryViewModelProtocol
+    private let viewModel: GeneralContentViewModelProtocol
     private var tabBarDidSelectDisposable: Disposable?
     private let filterViewHeight: CGFloat = 35
     
@@ -48,7 +48,7 @@ final class HistoryViewController: BaseViewController {
     }()
     
     // MARK: - Setup
-    init(viewModel: HistoryViewModelProtocol) {
+    init(viewModel: GeneralContentViewModelProtocol) {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)

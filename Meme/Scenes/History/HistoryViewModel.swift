@@ -12,7 +12,7 @@ import RxCocoa
 import HumorAPIService
 import RealmSwift
 
-final class HistoryViewModel: HistoryViewModelProtocol {
+final class HistoryViewModel: GeneralContentViewModelProtocol {
     // MARK: - Properties
     private let disposeBag = DisposeBag()
     private let reloadDataRelay = PublishRelay<Void>()
