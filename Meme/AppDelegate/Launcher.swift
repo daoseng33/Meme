@@ -72,7 +72,7 @@ final class Launcher {
     private func setupDatabaseMigration() {
         DispatchQueue.main.async {
 #if CI
-            let config = Realm.Configuration.defaultConfiguration
+            var config = Realm.Configuration.defaultConfiguration
             config.deleteRealmIfMigrationNeeded = true
             config.inMemoryIdentifier = "MemeCI"
             Realm.Configuration.defaultConfiguration = config
