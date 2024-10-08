@@ -162,12 +162,13 @@ extension GeneralContentViewController: UITableViewDataSource {
                 switch cellType {
                 case .meme(let meme):
                     guard let url = meme.url else { return }
-                    Utility.showShareSheet(items: [url, meme.description], parentVC: self)
+                    Utility.showShareSheet(items: [url, meme.memeDescription], parentVC: self)
                     
                 case .joke(let joke):
-                    Utility.showShareSheet(items: [joke], parentVC: self)
+                    Utility.showShareSheet(items: [joke.joke], parentVC: self)
                     
-                case .gif(let url):
+                case .gif(let imageData):
+                    guard let url = imageData.url else { return }
                     Utility.showShareSheet(items: [url], parentVC: self)
                 }
             }
