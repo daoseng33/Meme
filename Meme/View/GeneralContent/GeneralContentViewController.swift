@@ -18,6 +18,7 @@ class GeneralContentViewController: BaseViewController {
     private let filterViewHeight: CGFloat = 35
     private let naviItemTitle: String
     private let tabBarType: MemeTabBarItem
+    private let refreshControl = UIRefreshControl()
     
     // MARK: - UI
     private lazy var filterContainerView: FilterContainerView = {
@@ -37,6 +38,7 @@ class GeneralContentViewController: BaseViewController {
         tableView.delegate = self
         tableView.sectionFooterHeight = 0
         tableView.contentInset = UIEdgeInsets(top: filterViewHeight, left: 0, bottom: 0, right: 0)
+        tableView.refreshControl = refreshControl
         
         return tableView
     }()
@@ -60,6 +62,7 @@ class GeneralContentViewController: BaseViewController {
 
         setupUI()
         setupBindings()
+        setupActions()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -99,7 +102,17 @@ class GeneralContentViewController: BaseViewController {
         viewModel.reloadDataSignal
             .emit(with: self) { (self, _) in
                 self.contentTableView.reloadData()
+                self.refreshControl.endRefreshing()
             }
+            .disposed(by: rx.disposeBag)
+    }
+    
+    private func setupActions() {
+        refreshControl.rx.controlEvent(.valueChanged)
+            .withUnretained(self)
+            .subscribe(onNext: { (self, _) in
+                self.viewModel.getLocalDatas()
+            })
             .disposed(by: rx.disposeBag)
     }
     

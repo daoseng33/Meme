@@ -1,8 +1,8 @@
 //
-//  HistoryViewModel.swift
+//  GeneralContentViewModel.swift
 //  Meme
 //
-//  Created by DAO on 2024/10/2.
+//  Created by DAO on 2024/10/8.
 //
 
 import Foundation
@@ -12,7 +12,7 @@ import RxCocoa
 import HumorAPIService
 import RealmSwift
 
-final class HistoryViewModel: GeneralContentViewModelProtocol {
+class GeneralContentViewModel: GeneralContentViewModelProtocol {
     // MARK: - Properties
     private let disposeBag = DisposeBag()
     private let reloadDataRelay = PublishRelay<Void>()
@@ -20,6 +20,7 @@ final class HistoryViewModel: GeneralContentViewModelProtocol {
     private let jokeDatasRelay = PublishRelay<[RandomJoke]>()
     private let imageDatasRelay = PublishRelay<[ImageData]>()
     private var sectionTypeDict = IndexedDictionary<DateCategory, [GeneralContentCellViewModelProtocol]>()
+    let predicate: NSPredicate?
     
     let filterContainerViewModel: FilterContainerViewModelProtocol = FilterContainerViewModel()
     
@@ -28,7 +29,8 @@ final class HistoryViewModel: GeneralContentViewModelProtocol {
     }
     
     // MARK: - Init
-    init() {
+    required init(predicate: NSPredicate? = nil) {
+        self.predicate = predicate
         setupObserver()
     }
 
@@ -114,7 +116,7 @@ final class HistoryViewModel: GeneralContentViewModelProtocol {
     // MARK: - Getter
     func getLocalDatas() {
         DispatchQueue.main.async {
-            DataStorageManager.shared.fetch(RandomMeme.self) { [weak self] result in
+            DataStorageManager.shared.fetch(RandomMeme.self, predicate: self.predicate) { [weak self] result in
                 guard let self = self else { return }
                 switch result {
                 case .success(let datas):
@@ -125,7 +127,7 @@ final class HistoryViewModel: GeneralContentViewModelProtocol {
                 }
             }
             
-            DataStorageManager.shared.fetch(RandomJoke.self) { [weak self] result in
+            DataStorageManager.shared.fetch(RandomJoke.self, predicate: self.predicate) { [weak self] result in
                 guard let self = self else { return }
                 switch result {
                 case .success(let datas):
@@ -136,7 +138,7 @@ final class HistoryViewModel: GeneralContentViewModelProtocol {
                 }
             }
             
-            DataStorageManager.shared.fetch(ImageData.self) { [weak self] result in
+            DataStorageManager.shared.fetch(ImageData.self, predicate: self.predicate) { [weak self] result in
                 guard let self = self else { return }
                 switch result {
                 case .success(let datas):
