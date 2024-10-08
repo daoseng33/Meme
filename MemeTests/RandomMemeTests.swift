@@ -20,28 +20,28 @@ struct RandomMemeTests {
     @Test func testLoadInitialData() async throws {
         assert(sut.media.mediaURL == nil)
         
-        sut.loadFirstMemeIfNeeded()
+        sut.refreshData()
         assert(sut.media.mediaURL != nil)
     }
     
     func testFetchRandomMeme() throws {
         assert(sut.media.mediaURL == nil)
         
-        sut.fetchRandomMeme()
+        sut.fetchData()
         
         assert(sut.media.mediaURL != nil)
     }
     
     func testFetchRandomMemeWithValidKeyword() throws {
         sut.keywordRelay.accept("your mom")
-        sut.fetchRandomMeme()
+        sut.fetchData()
         
         assert(sut.description == "When you’re walking past the aisles at Walmart and finally see your mom")
     }
     
     func testFetchRandomMemeWithInvalidKeyword() throws {
         sut.keywordRelay.accept("Boobs")
-        sut.fetchRandomMeme()
+        sut.fetchData()
         
         assert(sut.description == "Could not find a meme with the given keywords.")
     }

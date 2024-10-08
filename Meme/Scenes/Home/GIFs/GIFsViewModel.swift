@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxRelay
+import RxCocoa
 import HumorAPIService
 
 final class GIFsViewModel: GIFsViewModelProtocol {    
@@ -25,8 +26,8 @@ final class GIFsViewModel: GIFsViewModelProtocol {
         loadingStateRelay.value
     }
     
-    var loadingStateObservable: Observable<LoadingState> {
-        loadingStateRelay.asObservable()
+    var loadingStateDriver: Driver<LoadingState> {
+        loadingStateRelay.asDriver()
     }
     
     // MARK: - Init

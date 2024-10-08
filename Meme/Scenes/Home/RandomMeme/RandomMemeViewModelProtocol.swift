@@ -12,9 +12,7 @@ import RxRelay
 import RxCocoa
 import UIKit
 
-protocol RandomMemeViewModelProtocol: LoadingStateProtocol {
-    func loadFirstMemeIfNeeded()
-    func fetchRandomMeme()
+protocol RandomMemeViewModelProtocol: FetchDataProtocol, LoadingStateProtocol, FavoriteStateProtocol {
     var mediaDriver: Driver<(mediaURL: URL?, type: MemeMediaType)> { get }
     var media: (mediaURL: URL?, type: MemeMediaType) { get }
     var keywordRelay: BehaviorRelay<String?> { get }

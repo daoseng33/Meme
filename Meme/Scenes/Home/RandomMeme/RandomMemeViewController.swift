@@ -24,26 +24,19 @@ final class RandomMemeViewController: BaseViewController {
         imageView.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureAction))
         imageView.addGestureRecognizer(tapGesture)
-        
+
         return imageView
     }()
     
     private let videoPlayerView = VideoPlayerView()
     private let descriptionTextView = ContentTextView()
     private let keywordTextField = KeywordTextField()
-    private let shareButton: UIButton = {
-        let button = UIButton()
-        button.setImage(Asset.Global.share.image, for: .normal)
-        
-        return button
-    }()
-    
+    private let actionsContainerView = ActionsContainerView()
     private let generateMemeButton: RoundedRectangleButton = {
         let button = RoundedRectangleButton()
         button.title = "Generate Meme".localized()
         button.titleColor = .white
         button.buttonBackgroundColor = .accent
-        button.isEnabled = false
         
         return button
     }()
@@ -66,20 +59,21 @@ final class RandomMemeViewController: BaseViewController {
         setupUI()
         setupBinding()
         setupActions()
-        viewModel.loadFirstMemeIfNeeded()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.refreshData()
+        
+        if videoPlayerView.timeStatus == .paused, videoPlayerView.isHidden == false {
+            videoPlayerView.play()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if videoPlayerView.timeStatus == .playing, videoPlayerView.isHidden == false {
             videoPlayerView.pause()
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if videoPlayerView.timeStatus == .paused, videoPlayerView.isHidden == false {
-            videoPlayerView.play()
         }
     }
     
@@ -102,7 +96,7 @@ final class RandomMemeViewController: BaseViewController {
         let interactionStackView: UIStackView = {
             let stackView = UIStackView(arrangedSubviews: [
                 keywordTextField,
-                shareButton
+                actionsContainerView
             ])
             
             stackView.axis = .horizontal
@@ -138,18 +132,15 @@ final class RandomMemeViewController: BaseViewController {
         generateMemeButton.snp.makeConstraints {
             $0.height.equalTo(50)
         }
-        
-        shareButton.snp.makeConstraints {
-            $0.width.equalTo(35)
-        }
     }
     
     private func setupActions() {
         generateMemeButton.tapEvent
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
+                self.viewModel.isFavoriteRelay.accept(false)
                 self.videoPlayerView.reset()
-                self.viewModel.fetchRandomMeme()
+                self.viewModel.fetchData()
             })
             .disposed(by: rx.disposeBag)
         
@@ -162,7 +153,7 @@ final class RandomMemeViewController: BaseViewController {
             }
             .disposed(by: rx.disposeBag)
         
-        shareButton.rx.tap
+        actionsContainerView.shareButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
                 guard let mediaURL = self.viewModel.media.mediaURL else { return }
@@ -178,6 +169,17 @@ final class RandomMemeViewController: BaseViewController {
                         Utility.showShareSheet(items: [mediaURL, description], parentVC: self)
                     }
                 }
+            })
+            .disposed(by: rx.disposeBag)
+        
+        viewModel.isFavoriteRelay
+            .bind(to: actionsContainerView.favoriteButton.rx.isSelected)
+            .disposed(by: rx.disposeBag)
+        
+        actionsContainerView.favoriteButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { (self, _) in
+                self.viewModel.toggleIsFavorite()
             })
             .disposed(by: rx.disposeBag)
     }
@@ -225,21 +227,26 @@ final class RandomMemeViewController: BaseViewController {
             }
             .disposed(by: rx.disposeBag)
         
-        viewModel.loadingStateObservable
-            .asDriver(onErrorJustReturn: .initial)
+        viewModel.loadingStateDriver
             .drive(with: self, onNext: { (self, state) in
                 switch state {
                 case .initial, .loading:
                     self.generateMemeButton.isEnabled = false
+                    self.actionsContainerView.favoriteButton.isEnabled = false
+                    self.actionsContainerView.shareButton.isEnabled = false
                     
                 case .success:
                     self.generateMemeButton.isEnabled = true
+                    self.actionsContainerView.favoriteButton.isEnabled = true
+                    self.actionsContainerView.shareButton.isEnabled = true
                     
                 case .failure(let error):
                     self.generateMemeButton.isEnabled = true
+                    self.actionsContainerView.shareButton.isEnabled = false
+                    self.actionsContainerView.favoriteButton.isEnabled = false
                     GlobalErrorHandleManager.shared.popErrorAlert(error: error, presentVC: self) { [weak self] in
                         guard let self = self else { return }
-                        self.viewModel.fetchRandomMeme()
+                        self.viewModel.fetchData()
                     }
                 }
             })

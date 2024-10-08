@@ -71,22 +71,32 @@ final class Launcher {
     
     private func setupDatabaseMigration() {
         DispatchQueue.main.async {
+#if CI
+            let config = Realm.Configuration.defaultConfiguration
+            config.deleteRealmIfMigrationNeeded = true
+            config.inMemoryIdentifier = "MemeCI"
+            Realm.Configuration.defaultConfiguration = config
+#else
             let config = Realm.Configuration(
-                    schemaVersion: 2,
-                    migrationBlock: { migration, oldSchemaVersion in
-                        if oldSchemaVersion < 2 {
-                            migration.enumerateObjects(ofType: ImageData.className()) { oldObject, newObject in
-                                newObject!["createdAt"] = Date()
-                            }
-                            migration.enumerateObjects(ofType: RandomJoke.className()) { oldObject, newObject in
-                                newObject!["createdAt"] = Date()
-                            }
+                schemaVersion: 3,
+                migrationBlock: { migration, oldSchemaVersion in
+                    if oldSchemaVersion < 3 {
+                        migration.enumerateObjects(ofType: ImageData.className()) { oldObject, newObject in
+                            newObject![Constant.Key.isFavorite] = false
+                        }
+                        migration.enumerateObjects(ofType: ImageData.className()) { oldObject, newObject in
+                            newObject![Constant.Key.isFavorite] = false
+                        }
+                        migration.enumerateObjects(ofType: RandomJoke.className()) { oldObject, newObject in
+                            newObject![Constant.Key.isFavorite] = false
                         }
                     }
-                )
-                
-                Realm.Configuration.defaultConfiguration = config
-                
+                }
+            )
+            
+            Realm.Configuration.defaultConfiguration = config
+#endif
+            
                 do {
                     let _ = try Realm()
                 } catch {

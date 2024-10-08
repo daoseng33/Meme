@@ -8,11 +8,12 @@
 import Foundation
 import RxSwift
 import RxRelay
+import RxCocoa
 import HumorAPIService
 
 final class RandomJokeViewModel: RandomJokeViewModelProtocol {
-    var loadingStateObservable: Observable<LoadingState> {
-        loadingStateRelay.asObservable()
+    var loadingStateDriver: Driver<LoadingState> {
+        loadingStateRelay.asDriver()
     }
     
     var loadingState: LoadingState {
@@ -45,25 +46,43 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
         return category
     }
     
+    let isFavoriteRelay = BehaviorRelay(value: false)
+    
     private let webService: JokeAPIServiceProtocol
     private let jokeRelay: BehaviorRelay<String> = .init(value: "")
     private let selectedCategorySubject = BehaviorSubject<String>(value: JokeCategory.Random.rawValue)
     private let loadingStateRelay: BehaviorRelay<LoadingState> = .init(value: .initial)
     private let disposeBag = DisposeBag()
+    private var currentJoke: RandomJoke?
     
     // MARK: - Init
     init(webService: JokeAPIServiceProtocol) {
         self.webService = webService
+        
+        setupObservable()
     }
     
     // MARK: - Get data
-    func loadFirstMemeIfNeeded() {
+    func refreshData() {
         if loadingState == .initial {
-            fetchRandomJoke()
+            fetchData()
+        } else if let currentJoke = self.currentJoke {
+            DispatchQueue.main.async {
+                DataStorageManager.shared.fetch(RandomJoke.self, primaryKey: currentJoke.id) { result in
+                    switch result {
+                    case .success(let joke):
+                        guard let isFavorite = joke?.isFavorite else { return }
+                        self.isFavoriteRelay.accept(isFavorite)
+                        
+                    case .failure:
+                        break
+                    }
+                }
+            }
         }
     }
     
-    func fetchRandomJoke() {
+    func fetchData() {
         loadingStateRelay.accept(.loading)
         
         webService.fetchRandomJoke(tags: [selectedCategory], excludedTags: [], minRating: 9, maxLength: 999)
@@ -72,10 +91,13 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
                 
                 switch result {
                 case .success(let joke):
+                    self.currentJoke = joke
+                    
                     DispatchQueue.main.async {
                         DataStorageManager.shared.save(joke)
                     }
                     
+                    self.isFavoriteRelay.accept(joke.isFavorite)
                     self.jokeRelay.accept(joke.joke)
                     
                 case .failure(let error):
@@ -86,6 +108,21 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
             }, onFailure: { [weak self] error in
                 guard let self = self else { return }
                 self.loadingStateRelay.accept(.failure(error: error))
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func setupObservable() {
+        isFavoriteRelay
+            .withUnretained(self)
+            .subscribe(onNext: { (self, isFavorite) in
+                DispatchQueue.main.async {
+                    guard let currentJoke = self.currentJoke else {
+                        return
+                    }
+                    
+                    DataStorageManager.shared.update(currentJoke, with: [Constant.Key.isFavorite: isFavorite])
+                }
             })
             .disposed(by: disposeBag)
     }

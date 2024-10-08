@@ -35,13 +35,7 @@ final class GeneralContentCell: UITableViewCell {
         return textView
     }()
     
-    private let actionContainerView = UIView()
-    private let shareButton: UIButton = {
-        let button = UIButton()
-        button.setImage(Asset.Global.share.image, for: .normal)
-        
-        return button
-    }()
+    private let actionsContainerView = ActionsContainerView()
     
     private let bottomSeparatorView: UIView = {
         let view = UIView()
@@ -77,7 +71,7 @@ final class GeneralContentCell: UITableViewCell {
         }
         
         let stackView: UIStackView = {
-            let stackView = UIStackView(arrangedSubviews: [animatedImageView, containerTextView, actionContainerView, bottomSeparatorView])
+            let stackView = UIStackView(arrangedSubviews: [animatedImageView, containerTextView, actionsContainerView, bottomSeparatorView])
             stackView.axis = .vertical
             stackView.spacing = Constant.spacing2
             stackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: Constant.spacing2, right: 0)
@@ -95,14 +89,8 @@ final class GeneralContentCell: UITableViewCell {
             $0.height.equalTo(contentView.snp.width).priority(.high)
         }
         
-        actionContainerView.snp.makeConstraints {
+        actionsContainerView.snp.makeConstraints {
             $0.height.equalTo(35)
-        }
-        
-        actionContainerView.addSubview(shareButton)
-        shareButton.snp.makeConstraints {
-            $0.right.top.bottom.equalToSuperview()
-            $0.width.equalTo(35)
         }
         
         bottomSeparatorView.snp.makeConstraints {
@@ -113,14 +101,15 @@ final class GeneralContentCell: UITableViewCell {
     func configure(with viewModel: GeneralContentCellViewModelProtocol, isLast: Bool) {
         self.viewModel = viewModel
         switch viewModel.content {
-        case .meme(let url, let description, let mediaType):
+        case .meme(let meme):
             animatedImageView.isHidden = false
             containerTextView.isHidden = false
+            actionsContainerView.favoriteButton.isSelected = meme.isFavorite
             
-            switch mediaType {
+            switch meme.mediaType {
             case .image:
                 videoPlayerView.isHidden = true
-                animatedImageView.kf.setImage(with: url) { [weak self] result in
+                animatedImageView.kf.setImage(with: meme.url) { [weak self] result in
                     guard let self = self else { return }
                     switch result {
                     case .success:
@@ -133,6 +122,7 @@ final class GeneralContentCell: UITableViewCell {
                 }
                 
             case .video:
+                guard let url = meme.url else { return }
                 videoPlayerView.isHidden = false
                 videoPlayerView.loadVideo(from: url, shouldAutoPlay: false)
             }
@@ -143,18 +133,29 @@ final class GeneralContentCell: UITableViewCell {
             animatedImageView.isHidden = true
             containerTextView.isHidden = false
             
-            descriptionTextView.text = joke
+            descriptionTextView.text = joke.joke
             
-        case .gif(let url):
+        case .gif(let imageData):
             animatedImageView.isHidden = false
             containerTextView.isHidden = true
             
-            animatedImageView.kf.setImage(with: url)
+            animatedImageView.kf.setImage(with: imageData.url)
         }
         
-        shareButton.rx.tap
+        actionsContainerView.shareButton.rx.tap
             .map { viewModel.content }
             .bind(to: viewModel.shareButtonTappedRelay)
+            .disposed(by: rx.disposeBag)
+        
+        viewModel.isFavoriteRelay
+            .bind(to: actionsContainerView.favoriteButton.rx.isSelected)
+            .disposed(by: rx.disposeBag)
+        
+        actionsContainerView.favoriteButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { (self, _) in
+                self.viewModel?.toggleIsFavorite()
+            })
             .disposed(by: rx.disposeBag)
         
         videoPlayerView.handleErrorObservable
@@ -176,9 +177,10 @@ final class GeneralContentCell: UITableViewCell {
     @objc private func tapGestureAction() {
         guard let viewModel = viewModel else { return }
         switch viewModel.content {
-        case .meme(let url, _, let mediaType):
-            switch mediaType {
+        case .meme(let meme):
+            switch meme.mediaType {
             case .image:
+                guard let url = meme.url else { return }
                 viewModel.imageTappedRelay.accept(url)
                 
             case .video:
@@ -192,7 +194,8 @@ final class GeneralContentCell: UITableViewCell {
         case .joke:
             break
             
-        case .gif(let url):
+        case .gif(let imageData):
+            guard let url = imageData.url else { return }
             viewModel.imageTappedRelay.accept(url)
         }
     }

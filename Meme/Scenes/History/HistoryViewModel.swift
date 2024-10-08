@@ -48,23 +48,23 @@ final class HistoryViewModel: GeneralContentViewModelProtocol {
                 let memeCellViewModels = memes
                     .filter{ $0.url != nil }
                     .map({ meme in
-                        let content = GeneralContentCellType.meme(url: meme.url!, description: meme.memeDescription, mediaType: Utility.getMediaType(with: meme.type))
-                        let cellViewModel = GeneralContentCellViewModel(content: content, createdAt: meme.createdAt)
+                        let content = GeneralContentCellType.meme(meme: meme)
+                        let cellViewModel = GeneralContentCellViewModel(content: content)
                         return cellViewModel
                     })
                 
                 let jokeCellViewModels = jokes
                     .map({ joke in
-                        let content = GeneralContentCellType.joke(joke: joke.joke)
-                        let cellViewModel = GeneralContentCellViewModel(content: content, createdAt: joke.createdAt)
+                        let content = GeneralContentCellType.joke(joke: joke)
+                        let cellViewModel = GeneralContentCellViewModel(content: content)
                         return cellViewModel
                     })
                 
                 let imageCellViewModels = images
                     .filter{ $0.url != nil }
                     .map({ imageData in
-                        let content = GeneralContentCellType.gif(url: imageData.url!)
-                        let cellViewModel = GeneralContentCellViewModel(content: content, createdAt: imageData.createdAt)
+                        let content = GeneralContentCellType.gif(imageData: imageData)
+                        let cellViewModel = GeneralContentCellViewModel(content: content)
                         return cellViewModel
                     })
                 

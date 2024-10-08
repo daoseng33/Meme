@@ -22,6 +22,7 @@ final class RandomJokeViewController: BaseViewController {
         label.font = .systemFont(ofSize: 16, weight: .medium)
         label.textColor = .label
         label.text = "\("Joke category".localized()):"
+        label.lineBreakMode = .byTruncatingTail
         
         return label
     }()
@@ -29,12 +30,7 @@ final class RandomJokeViewController: BaseViewController {
     private lazy var categorySelectedButton = MenuButton(contentStrings: viewModel.categories,
                                                          arrowDirection: .up)
     
-    private let shareButton: UIButton = {
-        let button = UIButton()
-        button.setImage(Asset.Global.share.image, for: .normal)
-        
-        return button
-    }()
+    private let actionsContainerView = ActionsContainerView()
     
     private let generateJokeButton: RoundedRectangleButton = {
         let button = RoundedRectangleButton()
@@ -63,7 +59,12 @@ final class RandomJokeViewController: BaseViewController {
         setupUI()
         setupBinding()
         setupActions()
-        viewModel.loadFirstMemeIfNeeded()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.refreshData()
     }
     
     // MARK: - Setup
@@ -84,7 +85,27 @@ final class RandomJokeViewController: BaseViewController {
             return stackView
         }()
         
+        let categoryMenuStackView: UIStackView = {
+            let stackView = UIStackView(arrangedSubviews: [
+                categorySelectedLabel,
+                categorySelectedButton
+            ])
+            stackView.axis = .horizontal
+            stackView.spacing = Constant.spacing1
+            
+            return stackView
+        }()
+        
+        categorySelectedLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        categorySelectedLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        
+        categorySelectedButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+        categorySelectedButton.setContentHuggingPriority(.required, for: .horizontal)
+        
         view.addSubview(stackView)
+        categorySelectedView.addSubview(actionsContainerView)
+        categorySelectedView.addSubview(categoryMenuStackView)
+        
         stackView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.left.right.bottom.equalTo(view.safeAreaLayoutGuide).inset(Constant.spacing2)
@@ -98,28 +119,14 @@ final class RandomJokeViewController: BaseViewController {
             $0.height.equalTo(35)
         }
         
-        categorySelectedView.addSubview(shareButton)
-        shareButton.snp.makeConstraints {
-            $0.width.equalTo(35)
+        actionsContainerView.snp.makeConstraints {
             $0.right.top.bottom.equalToSuperview()
+            $0.width.greaterThanOrEqualTo(78)
         }
-        
-        let categoryMenuStackView: UIStackView = {
-            let stackView = UIStackView(arrangedSubviews: [
-                categorySelectedLabel,
-                categorySelectedButton
-            ])
-            stackView.axis = .horizontal
-            stackView.spacing = Constant.spacing1
-            
-            return stackView
-        }()
-        
-        categorySelectedView.addSubview(categoryMenuStackView)
         
         categoryMenuStackView.snp.makeConstraints {
             $0.left.top.bottom.equalToSuperview()
-            $0.right.lessThanOrEqualTo(shareButton.snp.left)
+            $0.right.lessThanOrEqualTo(actionsContainerView.snp.left).offset(-8)
         }
     }
 
@@ -127,16 +134,22 @@ final class RandomJokeViewController: BaseViewController {
         generateJokeButton.tapEvent
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
-                self.generateJokeButton.isEnabled = false
-                self.viewModel.fetchRandomJoke()
+                self.viewModel.fetchData()
             })
             .disposed(by: rx.disposeBag)
         
-        shareButton.rx.tap
+        actionsContainerView.shareButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
                 let joke = self.viewModel.joke
                 Utility.showShareSheet(items: [joke], parentVC: self)
+            })
+            .disposed(by: rx.disposeBag)
+        
+        actionsContainerView.favoriteButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { (self, _) in
+                self.viewModel.toggleIsFavorite()
             })
             .disposed(by: rx.disposeBag)
     }
@@ -146,20 +159,26 @@ final class RandomJokeViewController: BaseViewController {
             .bind(to: jokeTextView.textBinder)
             .disposed(by: rx.disposeBag)
         
-        viewModel.loadingStateObservable
-            .asDriver(onErrorJustReturn: .initial)
-            .drive(onNext: { state in
+        viewModel.loadingStateDriver
+            .drive(with: self, onNext: { (self, state) in
                 switch state {
                 case .initial, .loading:
                     self.generateJokeButton.isEnabled = false
+                    self.actionsContainerView.shareButton.isEnabled = false
+                    self.actionsContainerView.favoriteButton.isEnabled = false
+                    
                 case .success:
                     self.generateJokeButton.isEnabled = true
+                    self.actionsContainerView.shareButton.isEnabled = true
+                    self.actionsContainerView.favoriteButton.isEnabled = true
                     
                 case .failure(let error):
                     self.generateJokeButton.isEnabled = true
+                    self.actionsContainerView.shareButton.isEnabled = false
+                    self.actionsContainerView.favoriteButton.isEnabled = false
                     GlobalErrorHandleManager.shared.popErrorAlert(error: error, presentVC: self) { [weak self] in
                         guard let self = self else { return }
-                        self.viewModel.fetchRandomJoke()
+                        self.viewModel.fetchData()
                     }
                 }
             })
@@ -167,6 +186,10 @@ final class RandomJokeViewController: BaseViewController {
         
         categorySelectedButton.selectedOptionObservable
             .bind(to: viewModel.selectedCategoryObserver)
+            .disposed(by: rx.disposeBag)
+        
+        viewModel.isFavoriteRelay
+            .bind(to: actionsContainerView.favoriteButton.rx.isSelected)
             .disposed(by: rx.disposeBag)
     }
 }

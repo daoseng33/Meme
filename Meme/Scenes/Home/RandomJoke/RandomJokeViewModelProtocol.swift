@@ -7,11 +7,10 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 import HumorAPIService
 
-protocol RandomJokeViewModelProtocol: AnyObject, LoadingStateProtocol {
-    func loadFirstMemeIfNeeded()
-    func fetchRandomJoke()
+protocol RandomJokeViewModelProtocol: FetchDataProtocol, LoadingStateProtocol, FavoriteStateProtocol {
     var jokeObservable: Observable<String> { get }
     var joke: String { get }
     var selectedCategoryObserver: AnyObserver<String> { get }

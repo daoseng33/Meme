@@ -16,8 +16,8 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
         return loadingStateRelay.value
     }
     
-    var loadingStateObservable: Observable<LoadingState> {
-        return loadingStateRelay.asObservable()
+    var loadingStateDriver: Driver<LoadingState> {
+        return loadingStateRelay.asDriver()
     }
     
     // MARK: - Properties
@@ -39,6 +39,8 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
     
     let keywordRelay = BehaviorRelay<String?>(value: nil)
     
+    let isFavoriteRelay = BehaviorRelay<Bool>(value: false)
+    
     private var randomMediaType: MemeMediaType {
         return MemeMediaType.allCases.randomElement() ?? .image
     }
@@ -47,20 +49,35 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
     private let descriptionRelay = BehaviorRelay<String>(value: "")
     private let loadingStateRelay = BehaviorRelay<LoadingState>(value: .initial)
     private let disposeBag = DisposeBag()
+    private var currentMeme: RandomMeme?
     
     // MARK: - Init
     init(webService: MemeAPIServiceProtocol) {
         randomMemeWebAPI = webService
+        setupObservable()
     }
     
     // MARK: - Get data
-    func loadFirstMemeIfNeeded() {
+    func refreshData() {
         if loadingState == .initial {
-            fetchRandomMeme()
+            fetchData()
+        } else if let currentMeme = currentMeme {
+            DispatchQueue.main.async {
+                DataStorageManager.shared.fetch(RandomMeme.self, primaryKey: currentMeme.id) { result in
+                    switch result {
+                    case .success(let meme):
+                        guard let isFavorite = meme?.isFavorite else { return }
+                        self.isFavoriteRelay.accept(isFavorite)
+                        
+                    case .failure:
+                        break
+                    }
+                }
+            }
         }
     }
 
-    func fetchRandomMeme() {
+    func fetchData() {
         loadingStateRelay.accept(.loading)
         
         var keyword: String = ""
@@ -73,12 +90,14 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
                 
                 switch result {
                 case .success(let randomMeme):
+                    currentMeme = randomMeme
+                    
                     DispatchQueue.main.async {
                         DataStorageManager.shared.save(randomMeme)
                     }
-
-                    let mediaType = Utility.getMediaType(with: randomMeme.type)
-                    mediaRelay.accept((randomMeme.url, mediaType))
+                    
+                    self.isFavoriteRelay.accept(randomMeme.isFavorite)
+                    mediaRelay.accept((randomMeme.url, randomMeme.mediaType))
                     descriptionRelay.accept(randomMeme.memeDescription)
                     
                 case .failure(let error):
@@ -91,6 +110,21 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
             }, onFailure: { [weak self] error in
                 guard let self = self else { return }
                 self.loadingStateRelay.accept(.failure(error: error))
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func setupObservable() {
+        isFavoriteRelay
+            .withUnretained(self)
+            .subscribe(onNext: { (self, isFavorite) in
+                DispatchQueue.main.async {
+                    guard let currentMeme = self.currentMeme else {
+                        return
+                    }
+                    
+                    DataStorageManager.shared.update(currentMeme, with: [Constant.Key.isFavorite: isFavorite])
+                }
             })
             .disposed(by: disposeBag)
     }

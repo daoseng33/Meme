@@ -22,7 +22,7 @@ struct RandomJokeTests {
         
         assert(sut.joke == "")
         
-        sut.loadFirstMemeIfNeeded()
+        sut.refreshData()
         assert(sut.loadingState == .success)
         
         assert(sut.joke == "Can you swim? Some times. What do you mean by \"some times\"? Only when I'm in the water.")
@@ -33,7 +33,7 @@ struct RandomJokeTests {
         
         assert(sut.joke == "")
         
-        sut.fetchRandomJoke()
+        sut.fetchData()
         assert(sut.loadingState == .success)
         
         assert(sut.joke == "Can you swim? Some times. What do you mean by \"some times\"? Only when I'm in the water.")

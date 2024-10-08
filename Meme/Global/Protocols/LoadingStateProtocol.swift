@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import RxSwift
+import RxCocoa
 
 enum LoadingState: Equatable {
     case initial
@@ -33,5 +33,5 @@ enum LoadingState: Equatable {
 
 protocol LoadingStateProtocol {
     var loadingState: LoadingState { get }
-    var loadingStateObservable: Observable<LoadingState> { get }
+    var loadingStateDriver: Driver<LoadingState> { get }
 }

@@ -10,9 +10,9 @@ import HumorAPIService
 import RxRelay
 
 enum GeneralContentCellType {
-    case meme(url: URL, description: String, mediaType: MemeMediaType)
-    case joke(joke: String)
-    case gif(url: URL)
+    case meme(meme: RandomMeme)
+    case joke(joke: RandomJoke)
+    case gif(imageData: ImageData)
 }
 
 protocol GeneralContentCellViewModelProtocol {
@@ -20,5 +20,13 @@ protocol GeneralContentCellViewModelProtocol {
     var content: GeneralContentCellType { get }
     var shareButtonTappedRelay: PublishRelay<GeneralContentCellType> { get }
     var imageTappedRelay: PublishRelay<URL> { get }
-    init(content: GeneralContentCellType, createdAt: Date)
+    var isFavoriteRelay: BehaviorRelay<Bool> { get }
+    func toggleIsFavorite()
+    init(content: GeneralContentCellType)
+}
+
+extension GeneralContentCellViewModelProtocol {
+    func toggleIsFavorite() {
+        isFavoriteRelay.accept(!isFavoriteRelay.value)
+    }
 }

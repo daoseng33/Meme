@@ -92,8 +92,7 @@ final class GIFsViewController: BaseViewController {
             .bind(to: viewModel.keywordRelay)
             .disposed(by: rx.disposeBag)
         
-        viewModel.loadingStateObservable
-            .asDriver(onErrorJustReturn: .initial)
+        viewModel.loadingStateDriver
             .drive(with: self, onNext: { (self, state) in
                 switch state {
                 case .initial, .loading:

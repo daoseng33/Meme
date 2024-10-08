@@ -35,14 +35,20 @@ final public class DataStorageManager {
         }
     }
     
-    public func fetch<T: Object>(_ type: T.Type, sorted: (keyPath: String, ascending: Bool)? = nil, completion: @escaping (Result<[T], Error>) -> Void) {
+    public func fetch<T: Object>(_ type: T.Type,
+                                 sorted: (keyPath: String, ascending: Bool)? = nil,
+                                 predicate: NSPredicate? = nil,
+                                 completion: @escaping (Result<[T], Error>) -> Void) {
         do {
             let realm = try self.realm()
-            let results: Results<T>
+            var results = realm.objects(type)
+            
+            if let predicate = predicate {
+                results = results.filter(predicate)
+            }
+            
             if let sorted = sorted {
-                results = realm.objects(type).sorted(byKeyPath: sorted.keyPath, ascending: sorted.ascending)
-            } else {
-                results = realm.objects(type)
+                results = results.sorted(byKeyPath: sorted.keyPath, ascending: sorted.ascending)
             }
             
             let array = Array(results)
@@ -52,7 +58,9 @@ final public class DataStorageManager {
         }
     }
     
-    public func fetch<T: Object>(_ type: T.Type, primaryKey: String, completion: @escaping (Result<T?, Error>) -> Void) {
+    public func fetch<T: Object>(_ type: T.Type,
+                                 primaryKey: Any,
+                                 completion: @escaping (Result<T?, Error>) -> Void) {
         do {
             let realm = try self.realm()
             let result = realm.object(ofType: type, forPrimaryKey: primaryKey)
@@ -63,7 +71,9 @@ final public class DataStorageManager {
         }
     }
     
-    public func update<T: Object>(_ object: T, with dictionary: [String: Any?], onError: ((Error?) -> Void)? = nil) {
+    public func update<T: Object>(_ object: T,
+                                  with dictionary: [String: Any?],
+                                  onError: ((Error?) -> Void)? = nil) {
         do {
             let realm = try self.realm()
             
@@ -79,7 +89,8 @@ final public class DataStorageManager {
         }
     }
     
-    public func delete<T: Object>(_ object: T, onError: ((Error?) -> Void)? = nil) {
+    public func delete<T: Object>(_ object: T,
+                                  onError: ((Error?) -> Void)? = nil) {
         do {
             let realm = try self.realm()
             
