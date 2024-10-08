@@ -127,7 +127,7 @@ final class GeneralContentCell: UITableViewCell {
                 videoPlayerView.loadVideo(from: url, shouldAutoPlay: false)
             }
             
-            descriptionTextView.text = description
+            descriptionTextView.text = meme.memeDescription
             
         case .joke(let joke):
             animatedImageView.isHidden = true
