@@ -64,6 +64,10 @@ final class GlobalErrorHandleManager {
         
         let cancelAction = UIAlertAction(title: "Cancel".localized(), style: .cancel)
         
+        let key = "titleTextColor"
+        retryAction.setValue(UIColor.accent, forKey: key)
+        cancelAction.setValue(UIColor.accent, forKey: key)
+        
         alert.addAction(cancelAction)
         alert.addAction(retryAction)
         
