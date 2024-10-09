@@ -8,21 +8,27 @@
 import UIKit
 import RxSwift
 import RxRelay
+import HumorAPIService
 
 final class GridCellViewModel: GridCellViewModelProtocol {
     // MARK: - Properties
     private let titleRelay: BehaviorRelay<String?>
     private let imageTypeRelay: BehaviorRelay<GridImageType>
+    private let disposeBag = DisposeBag()
+
+    let shareButtonTappedRelay = PublishRelay<GridImageType>()
+    let favoriteButtonTappedRelay = PublishRelay<(gridImageType: GridImageType, isFavorite: Bool)>()
+    let isFavoriteRelay = BehaviorRelay<Bool>(value: false)
     
     var currentImageType: GridImageType {
         imageTypeRelay.value
     }
     
-    var title: Observable<String?> {
+    var titleObservable: Observable<String?> {
         titleRelay.asObservable()
     }
     
-    var imageType: Observable<(GridImageType)> {
+    var imageTypeObservable: Observable<(GridImageType)> {
         imageTypeRelay.asObservable()
     }
     
@@ -30,5 +36,17 @@ final class GridCellViewModel: GridCellViewModelProtocol {
     init(gridData: GridData) {
         titleRelay = BehaviorRelay<String?>(value: gridData.title)
         imageTypeRelay = BehaviorRelay<(GridImageType)>(value: (gridData.imageType))
+        isFavoriteRelay.accept(gridData.isFavorite)
+        
+        setupObservables()
+    }
+    
+    private func setupObservables() {
+        isFavoriteRelay
+            .withUnretained(self)
+            .subscribe(onNext: { (self, isFavorite) in
+                self.favoriteButtonTappedRelay.accept((self.currentImageType, isFavorite))
+            })
+            .disposed(by: disposeBag)
     }
 }

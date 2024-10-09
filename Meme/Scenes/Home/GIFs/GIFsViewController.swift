@@ -47,7 +47,12 @@ final class GIFsViewController: BaseViewController {
         setupUI()
         setupBinding()
         setupActions()
-        viewModel.loadFirstDataIfNeeded()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.refreshData()
     }
     
     // MARK: - Setup
@@ -107,7 +112,7 @@ final class GIFsViewController: BaseViewController {
                     
                     GlobalErrorHandleManager.shared.popErrorAlert(error: error, presentVC: self) { [weak self] in
                         guard let self = self else { return }
-                        self.viewModel.fetchGIFs()
+                        self.viewModel.fetchData()
                     }
                 }
             })
@@ -118,8 +123,21 @@ final class GIFsViewController: BaseViewController {
         generateGifsButton.tapEvent
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
-                self.viewModel.fetchGIFs()
+                self.viewModel.fetchData()
             })
+            .disposed(by: rx.disposeBag)
+        
+        viewModel.gridCollectionViewModel.shareButtonTappedRelay
+            .asSignal()
+            .emit(with: self) { (self, imageType) in
+                switch imageType {
+                case .static:
+                    break
+                    
+                case .gif(let url):
+                    Utility.showShareSheet(items: [url], parentVC: self)
+                }
+            }
             .disposed(by: rx.disposeBag)
     }
 }
@@ -127,9 +145,8 @@ final class GIFsViewController: BaseViewController {
 // MARK: - GridCollectionViewDelegate
 extension GIFsViewController: GridCollectionViewDelegate {
     func gridCollectionView(_ gridCollectionView: GridCollectionView, didSelectItemAt index: Int) {
-        viewModel.saveSelectedImageData(with: index)
-        
         let cellViewModel = viewModel.gridCollectionViewModel.gridCellViewModel(with: index)
+        viewModel.saveSelectedImageData(with: index, isFavorite: cellViewModel.isFavoriteRelay.value)
         let imageType = cellViewModel.currentImageType
         
         let images: [SKPhoto]

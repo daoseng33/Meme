@@ -9,9 +9,11 @@ import Foundation
 import RxSwift
 import RxRelay
 
-protocol GridCellViewModelProtocol {
-    var title: Observable<String?> { get }
-    var imageType: Observable<GridImageType> { get }
+protocol GridCellViewModelProtocol: FavoriteStateProtocol {
+    var titleObservable: Observable<String?> { get }
+    var imageTypeObservable: Observable<GridImageType> { get }
     var currentImageType: GridImageType { get }
+    var favoriteButtonTappedRelay: PublishRelay<(gridImageType: GridImageType, isFavorite: Bool)> { get }
+    var shareButtonTappedRelay: PublishRelay<GridImageType> { get }
     init(gridData: GridData)
 }

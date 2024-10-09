@@ -19,7 +19,6 @@ final class GridCollectionView: UIView {
     private let viewModel: GridCollectionViewModelProtocol
     
     // MARK: - UI
-    private let collectionViewPadding = 8.0
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
             let collectionViewPadding = Constant.spacing2
@@ -91,6 +90,15 @@ extension GridCollectionView: UICollectionViewDataSource {
         let cell: GridCell = collectionView.dequeueReusableCell(for: indexPath)
         
         let cellViewModel = viewModel.gridCellViewModel(with: indexPath.item)
+        
+        cellViewModel.favoriteButtonTappedRelay
+            .bind(to: viewModel.favoriteButtonTappedRelay)
+            .disposed(by: cell.rx.disposeBag)
+        
+        cellViewModel.shareButtonTappedRelay
+            .bind(to: viewModel.shareButtonTappedRelay)
+            .disposed(by: cell.rx.disposeBag)
+        
         cell.configure(viewModel: cellViewModel)
         
         return cell

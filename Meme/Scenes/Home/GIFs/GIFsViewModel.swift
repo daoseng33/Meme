@@ -11,10 +11,9 @@ import RxRelay
 import RxCocoa
 import HumorAPIService
 
-final class GIFsViewModel: GIFsViewModelProtocol {    
+final class GIFsViewModel: GIFsViewModelProtocol {
     // MARK: - Properties
     private let loadingStateRelay = BehaviorRelay<LoadingState>(value: .initial)
-    private var gridCellViewModels: [GridCellViewModelProtocol] = []
     private let webService: GIFsAPIServiceProtocol
     private let disposeBag = DisposeBag()
     
@@ -33,15 +32,43 @@ final class GIFsViewModel: GIFsViewModelProtocol {
     // MARK: - Init
     init(webService: GIFsAPIServiceProtocol) {
         self.webService = webService
+        
+        setupObservables()
+    }
+    
+    // MARK: - Setup
+    private func setupObservables() {
+        gridCollectionViewModel
+            .favoriteButtonTappedRelay
+            .withUnretained(self)
+            .subscribe(onNext: { (self, favoriteData) in
+                DispatchQueue.main.async {
+                    switch favoriteData.gridImageType {
+                    case .static:
+                        break
+                        
+                    case .gif(let url):
+                        let imageData = ImageData(urlString: url.absoluteString, isFavorite: favoriteData.isFavorite)
+                        DataStorageManager.shared.save(imageData)
+                    }
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     // MARK: - data handler
-    func loadFirstDataIfNeeded() {
-        guard loadingState == .initial else { return }
-        fetchGIFs()
+    func refreshData() {
+        if loadingState == .initial {
+            fetchData()
+        } else {
+            updateGridDatas(with: imageDatas) { [weak self] gridDatas in
+                guard let self = self else { return }
+                self.gridCollectionViewModel.gridDatasObserver.onNext(gridDatas)
+            }
+        }
     }
     
-    func fetchGIFs() {
+    func fetchData() {
         loadingStateRelay.accept(.loading)
         // !query could not be empty string!
         let query: String
@@ -58,11 +85,11 @@ final class GIFsViewModel: GIFsViewModelProtocol {
                 switch result {
                 case .success(let gif):
                     self.imageDatas = gif.images
-                    let urls = gif.images.compactMap { $0.url }
-                    let gridDatas = urls.map { GridData(title: nil, imageType: .gif(url: $0)) }
-                    self.gridCollectionViewModel.gridDatasObserver.onNext(gridDatas)
-                    
-                    self.loadingStateRelay.accept(.success)
+                    self.updateGridDatas(with: gif.images) { [weak self] gridDatas in
+                        guard let self = self else { return }
+                        self.gridCollectionViewModel.gridDatasObserver.onNext(gridDatas)
+                        self.loadingStateRelay.accept(.success)
+                    }
                     
                 case .failure(let error):
                     self.loadingStateRelay.accept(.failure(error: NSError(domain: error.message, code: error.code)))
@@ -73,6 +100,24 @@ final class GIFsViewModel: GIFsViewModelProtocol {
                 self.loadingStateRelay.accept(.failure(error: error))
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func updateGridDatas(with imageDatas: [ImageData], completion: @escaping (([GridData]) -> Void)) {
+        DispatchQueue.main.async {
+            var gridDatas: [GridData] = []
+            imageDatas.forEach { imageData in
+                if let localData = try? DataStorageManager.shared.fetch(ImageData.self, primaryKey: imageData.urlString),
+                    let url = imageData.url {
+                    let gridData = GridData(title: nil, imageType: .gif(url: url), isFavorite: localData.isFavorite)
+                    gridDatas.append(gridData)
+                } else if let url = imageData.url {
+                    let gridData = GridData(title: nil, imageType: .gif(url: url))
+                    gridDatas.append(gridData)
+                }
+            }
+            
+            completion(gridDatas)
+        }
     }
     
     private func randomWord() -> String {
@@ -92,11 +137,15 @@ final class GIFsViewModel: GIFsViewModelProtocol {
         return word
     }
     
-    func saveSelectedImageData(with index: Int) {
+    func saveSelectedImageData(with index: Int, isFavorite: Bool) {
         guard imageDatas.count > index else { return }
-        let imageData = imageDatas[index]
         DispatchQueue.main.async {
-            DataStorageManager.shared.save(imageData)
+            let imageData = self.imageDatas[index]
+            if let localData = try? DataStorageManager.shared.fetch(ImageData.self, primaryKey: imageData.urlString) {
+                DataStorageManager.shared.update(localData, with: [Constant.Key.isFavorite: isFavorite])
+            } else {
+                DataStorageManager.shared.save(imageData)
+            }
         }
     }
 }

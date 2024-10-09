@@ -13,6 +13,9 @@ import Kingfisher
 import SKPhotoBrowser
 
 final class GridCell: UICollectionViewCell {
+    // MARK: - Properties
+    private var viewModel: GridCellViewModelProtocol?
+    
     // MARK: - UI
     private let gridImageView: AnimatedImageView = {
         let imageView = AnimatedImageView()
@@ -33,6 +36,8 @@ final class GridCell: UICollectionViewCell {
         return label
     }()
     
+    private let actionsContainerView = ActionsContainerView()
+    
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,7 +52,7 @@ final class GridCell: UICollectionViewCell {
     // MARK: - Setup
     private func setupViews() {
         let stackView: UIStackView = {
-            let stackView = UIStackView(arrangedSubviews: [gridImageView, gridTitleLabel])
+            let stackView = UIStackView(arrangedSubviews: [gridImageView, gridTitleLabel, actionsContainerView])
             stackView.axis = .vertical
             stackView.spacing = Constant.spacing2
             
@@ -63,18 +68,29 @@ final class GridCell: UICollectionViewCell {
         gridImageView.snp.makeConstraints {
             $0.height.equalTo(150).priority(.high)
         }
+        
+        actionsContainerView.snp.makeConstraints {
+            $0.height.equalTo(35).priority(.high)
+        }
     }
     
     func configure(viewModel: GridCellViewModelProtocol) {
-        viewModel.title.map { $0 == nil }
-            .bind(to: gridTitleLabel.rx.isHidden)
+        self.viewModel = viewModel
+        
+        viewModel.titleObservable.map { $0 == nil }
+            .withUnretained(self)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { (self, isTextNil) in
+                self.gridTitleLabel.isHidden = isTextNil
+                self.actionsContainerView.isHidden = !isTextNil
+            })
             .disposed(by: rx.disposeBag)
         
-        viewModel.title
+        viewModel.titleObservable
             .bind(to: gridTitleLabel.rx.text)
             .disposed(by: rx.disposeBag)
         
-        viewModel.imageType
+        viewModel.imageTypeObservable
             .withUnretained(self)
             .subscribe(onNext: {  (self, imageData) in
                 switch imageData {
@@ -85,6 +101,22 @@ final class GridCell: UICollectionViewCell {
                     let provider = LocalFileImageDataProvider(fileURL: url)
                     self.gridImageView.kf.setImage(with: provider, options: [.cacheOriginalImage])
                 }
+            })
+            .disposed(by: rx.disposeBag)
+        
+        viewModel.isFavoriteRelay
+            .bind(to: actionsContainerView.favoriteButton.rx.isSelected)
+            .disposed(by: rx.disposeBag)
+        
+        actionsContainerView.favoriteButton.rx.tap
+            .subscribe(onNext: {
+                viewModel.toggleIsFavorite()
+            })
+            .disposed(by: rx.disposeBag)
+        
+        actionsContainerView.shareButton.rx.tap
+            .subscribe(onNext: {
+                viewModel.shareButtonTappedRelay.accept(viewModel.currentImageType)
             })
             .disposed(by: rx.disposeBag)
     }

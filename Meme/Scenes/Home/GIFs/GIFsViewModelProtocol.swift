@@ -10,11 +10,9 @@ import RxSwift
 import RxRelay
 import HumorAPIService
 
-protocol GIFsViewModelProtocol: LoadingStateProtocol {
+protocol GIFsViewModelProtocol: FetchDataProtocol, LoadingStateProtocol {
     var keywordRelay: BehaviorRelay<String?> { get }
     var gridCollectionViewModel: GridCollectionViewModelProtocol { get }
     var imageDatas: [ImageData] { get }
-    func loadFirstDataIfNeeded()
-    func fetchGIFs()
-    func saveSelectedImageData(with index: Int)
+    func saveSelectedImageData(with index: Int, isFavorite: Bool)
 }

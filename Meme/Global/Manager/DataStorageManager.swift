@@ -59,16 +59,11 @@ final public class DataStorageManager {
     }
     
     public func fetch<T: Object>(_ type: T.Type,
-                                 primaryKey: Any,
-                                 completion: @escaping (Result<T?, Error>) -> Void) {
-        do {
-            let realm = try self.realm()
-            let result = realm.object(ofType: type, forPrimaryKey: primaryKey)
-            
-            completion(.success(result))
-        } catch {
-            completion(.failure(error))
-        }
+                                 primaryKey: Any) throws -> T? {
+        let realm = try self.realm()
+        let result = realm.object(ofType: type, forPrimaryKey: primaryKey)
+        
+        return result
     }
     
     public func update<T: Object>(_ object: T,

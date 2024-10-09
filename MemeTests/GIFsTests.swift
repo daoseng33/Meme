@@ -22,7 +22,9 @@ struct GIFsTests {
         assert(sut.loadingState == .initial)
         assert(sut.gridCollectionViewModel.numberOfItems == 0)
         
-        sut.loadFirstDataIfNeeded()
+        sut.refreshData()
+        
+        try await Task.sleep(nanoseconds: 100_000_000)
         
         assert(sut.loadingState == .success)
         assert(sut.gridCollectionViewModel.numberOfItems == 10)
@@ -32,13 +34,15 @@ struct GIFsTests {
         assert(sut.loadingState == .initial)
         assert(sut.gridCollectionViewModel.numberOfItems == 0)
         
-        sut.fetchGIFs()
+        sut.fetchData()
+        
+        try await Task.sleep(nanoseconds: 100_000_000)
         
         assert(sut.loadingState == .success)
         assert(sut.gridCollectionViewModel.numberOfItems == 10)
         
         let firstGridViewModel = sut.gridCollectionViewModel.gridCellViewModel(with: 0)
-        let imageType = try firstGridViewModel.imageType.take(1).toBlocking().single()
+        let imageType = try firstGridViewModel.imageTypeObservable.take(1).toBlocking().single()
         switch imageType {
         case .static:
             Issue.record("Should now be image type")
