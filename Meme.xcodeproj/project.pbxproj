@@ -11,6 +11,7 @@
 		1C020EF42C981F450028CAE0 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1C020EF32C981F450028CAE0 /* IQKeyboardManagerSwift */; };
 		1C2D212F2C9D61DE00589C6A /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 1C2D212E2C9D61DE00589C6A /* SFSafeSymbols */; };
 		1C770F352CB6598700ECE617 /* HumorAPIService in Frameworks */ = {isa = PBXBuildFile; productRef = 1C770F342CB6598700ECE617 /* HumorAPIService */; };
+		1C7A0D8C2CB8119A0083C436 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 1C7A0D8B2CB8119A0083C436 /* ProgressHUD */; };
 		1C87C34E2C9961FB00A63581 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C34D2C9961FB00A63581 /* RxCocoa */; };
 		1C87C3502C9961FB00A63581 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C34F2C9961FB00A63581 /* RxRelay */; };
 		1C87C3622C996A5E00A63581 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C3612C996A5E00A63581 /* RxBlocking */; };
@@ -69,6 +70,7 @@
 				1C020EF42C981F450028CAE0 /* IQKeyboardManagerSwift in Frameworks */,
 				1C01D4182C904DE9007E93A9 /* Kingfisher in Frameworks */,
 				1C87C34E2C9961FB00A63581 /* RxCocoa in Frameworks */,
+				1C7A0D8C2CB8119A0083C436 /* ProgressHUD in Frameworks */,
 				1CF584EF2CA15D7F00175C2D /* SKPhotoBrowser in Frameworks */,
 				1C87C3502C9961FB00A63581 /* RxRelay in Frameworks */,
 				1C770F352CB6598700ECE617 /* HumorAPIService in Frameworks */,
@@ -144,6 +146,7 @@
 				1C2D212E2C9D61DE00589C6A /* SFSafeSymbols */,
 				1CF584EE2CA15D7F00175C2D /* SKPhotoBrowser */,
 				1C770F342CB6598700ECE617 /* HumorAPIService */,
+				1C7A0D8B2CB8119A0083C436 /* ProgressHUD */,
 			);
 			productName = Meme;
 			productReference = 1CDA35302C81AB6C001FF654 /* Meme.app */;
@@ -209,6 +212,7 @@
 				1C2D212D2C9D61DE00589C6A /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
 				1CF584ED2CA15D7E00175C2D /* XCRemoteSwiftPackageReference "SKPhotoBrowser" */,
 				1C770F332CB6598700ECE617 /* XCRemoteSwiftPackageReference "HumorAPIService" */,
+				1C7A0D8A2CB8119A0083C436 /* XCRemoteSwiftPackageReference "ProgressHUD" */,
 			);
 			preferredProjectObjectVersion = 56;
 			productRefGroup = 1CDA35312C81AB6C001FF654 /* Products */;
@@ -676,6 +680,14 @@
 				kind = branch;
 			};
 		};
+		1C7A0D8A2CB8119A0083C436 /* XCRemoteSwiftPackageReference "ProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/relatedcode/ProgressHUD";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 14.1.3;
+			};
+		};
 		1C87C34C2C9961FB00A63581 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift";
@@ -722,6 +734,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1C770F332CB6598700ECE617 /* XCRemoteSwiftPackageReference "HumorAPIService" */;
 			productName = HumorAPIService;
+		};
+		1C7A0D8B2CB8119A0083C436 /* ProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C7A0D8A2CB8119A0083C436 /* XCRemoteSwiftPackageReference "ProgressHUD" */;
+			productName = ProgressHUD;
 		};
 		1C87C34D2C9961FB00A63581 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;

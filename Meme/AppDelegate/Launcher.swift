@@ -12,6 +12,7 @@ import UIKit
 import SFSafeSymbols
 import SKPhotoBrowser
 import RealmSwift
+import ProgressHUD
 
 final class Launcher {
     func launch() {
@@ -21,6 +22,7 @@ final class Launcher {
         setupIQKeyboardManager()
         setupSKPhotoBrowser()
         setupDatabaseMigration()
+        setupLoadingHUD()
     }
     
     private func handleGlobalError() {
@@ -103,5 +105,17 @@ final class Launcher {
                     print("Error opening Realm: \(error)")
                 }
         }
+    }
+    
+    private func setupLoadingHUD() {
+        ProgressHUD.animationType = .sfSymbolBounce
+        if #available(iOS 16.0, *) {
+            ProgressHUD.animationSymbol = SFSymbol.faceSmilingInverse.rawValue
+        } else {
+            ProgressHUD.animationSymbol = SFSymbol.faceSmiling.rawValue
+        }
+        ProgressHUD.colorHUD = .clear
+        ProgressHUD.colorBackground = .clear
+        ProgressHUD.colorAnimation = .accent
     }
 }

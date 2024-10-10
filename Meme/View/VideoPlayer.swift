@@ -98,6 +98,7 @@ final class VideoPlayerView: UIView {
                 let (timeStatus, itemStatus) = combined
                 
                 self.timeStatusRelay.accept(timeStatus)
+                self.hideLoading()
                 
                 switch (timeStatus, itemStatus) {
                 case (.paused, .readyToPlay):
@@ -105,17 +106,11 @@ final class VideoPlayerView: UIView {
                         self.playImageView.isHidden = false
                     }
                     
-                    self.hideLoading()
-                    
                 case (.playing, _):
                     self.playImageView.isHidden = true
                     
-                case (_, .readyToPlay):
-                    self.hideLoading()
-                    
                 case (_, .failed):
                     self.handleErrorRelay.accept(())
-                    self.hideLoading()
                     
                 default:
                     self.playImageView.isHidden = true

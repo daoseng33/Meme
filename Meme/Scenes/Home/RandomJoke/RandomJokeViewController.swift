@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import RxCocoa
 import SFSafeSymbols
+import ProgressHUD
 
 final class RandomJokeViewController: BaseViewController {
     // MARK: - Properties
@@ -166,16 +167,19 @@ final class RandomJokeViewController: BaseViewController {
                     self.generateJokeButton.isEnabled = false
                     self.actionsContainerView.shareButton.isEnabled = false
                     self.actionsContainerView.favoriteButton.isEnabled = false
+                    ProgressHUD.animate()
                     
                 case .success:
                     self.generateJokeButton.isEnabled = true
                     self.actionsContainerView.shareButton.isEnabled = true
                     self.actionsContainerView.favoriteButton.isEnabled = true
+                    ProgressHUD.dismiss()
                     
                 case .failure(let error):
                     self.generateJokeButton.isEnabled = true
                     self.actionsContainerView.shareButton.isEnabled = false
                     self.actionsContainerView.favoriteButton.isEnabled = false
+                    ProgressHUD.dismiss()
                     GlobalErrorHandleManager.shared.popErrorAlert(error: error, presentVC: self) { [weak self] in
                         guard let self = self else { return }
                         self.viewModel.fetchData()

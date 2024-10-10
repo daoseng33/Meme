@@ -10,6 +10,7 @@ import SnapKit
 import RxCocoa
 import RxSwift
 import SKPhotoBrowser
+import ProgressHUD
 
 final class GIFsViewController: BaseViewController {
     // MARK: - Properties
@@ -103,13 +104,17 @@ final class GIFsViewController: BaseViewController {
                 case .initial, .loading:
                     self.keywordTextField.isUserInteractionEnabled = false
                     self.generateGifsButton.isEnabled = false
+                    ProgressHUD.animate()
+                    
                 case .success:
                     self.keywordTextField.isUserInteractionEnabled = true
                     self.generateGifsButton.isEnabled = true
+                    ProgressHUD.dismiss()
+                    
                 case .failure(error: let error):
                     self.keywordTextField.isUserInteractionEnabled = true
                     self.generateGifsButton.isEnabled = true
-                    
+                    ProgressHUD.dismiss()
                     GlobalErrorHandleManager.shared.popErrorAlert(error: error, presentVC: self) { [weak self] in
                         guard let self = self else { return }
                         self.viewModel.fetchData()

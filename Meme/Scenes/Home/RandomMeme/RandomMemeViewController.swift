@@ -11,6 +11,7 @@ import SnapKit
 import RxCocoa
 import Kingfisher
 import SKPhotoBrowser
+import ProgressHUD
 
 final class RandomMemeViewController: BaseViewController {
     // MARK: - Properties
@@ -234,16 +235,19 @@ final class RandomMemeViewController: BaseViewController {
                     self.generateMemeButton.isEnabled = false
                     self.actionsContainerView.favoriteButton.isEnabled = false
                     self.actionsContainerView.shareButton.isEnabled = false
+                    ProgressHUD.animate()
                     
                 case .success:
                     self.generateMemeButton.isEnabled = true
                     self.actionsContainerView.favoriteButton.isEnabled = true
                     self.actionsContainerView.shareButton.isEnabled = true
+                    ProgressHUD.dismiss()
                     
                 case .failure(let error):
                     self.generateMemeButton.isEnabled = true
                     self.actionsContainerView.shareButton.isEnabled = false
                     self.actionsContainerView.favoriteButton.isEnabled = false
+                    ProgressHUD.failed()
                     GlobalErrorHandleManager.shared.popErrorAlert(error: error, presentVC: self) { [weak self] in
                         guard let self = self else { return }
                         self.viewModel.fetchData()
