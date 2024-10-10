@@ -116,38 +116,15 @@ class GeneralContentViewModel: GeneralContentViewModelProtocol {
     // MARK: - Getter
     func getLocalDatas() {
         DispatchQueue.main.async {
-            DataStorageManager.shared.fetch(RandomMeme.self, predicate: self.predicate) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let datas):
-                    self.memeDatasRelay.accept(datas)
-                    
-                case .failure(let failure):
-                    print(failure.localizedDescription)
-                }
-            }
+            let memeLocalDatas = DataStorageManager.shared.fetch(RandomMeme.self, predicate: self.predicate)
+            self.memeDatasRelay.accept(memeLocalDatas)
             
-            DataStorageManager.shared.fetch(RandomJoke.self, predicate: self.predicate) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let datas):
-                    self.jokeDatasRelay.accept(datas)
-                    
-                case .failure(let failure):
-                    print(failure.localizedDescription)
-                }
-            }
+            let jokeLocalDatas = DataStorageManager.shared.fetch(RandomJoke.self, predicate: self.predicate)
+            self.jokeDatasRelay.accept(jokeLocalDatas)
             
-            DataStorageManager.shared.fetch(ImageData.self, predicate: self.predicate) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let datas):
-                    self.imageDatasRelay.accept(datas)
-                    
-                case .failure(let failure):
-                    print(failure.localizedDescription)
-                }
-            }
+            let imageLocalDatas = DataStorageManager.shared.fetch(ImageData.self, predicate: self.predicate)
+            self.imageDatasRelay.accept(imageLocalDatas)
+            
         }
     }
     

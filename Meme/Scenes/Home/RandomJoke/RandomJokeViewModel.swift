@@ -68,7 +68,7 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
             fetchData()
         } else if let currentJoke = self.currentJoke {
             DispatchQueue.main.async {
-                if let localJoke = try? DataStorageManager.shared.fetch(RandomJoke.self, primaryKey: currentJoke.id) {
+                if let localJoke = DataStorageManager.shared.fetch(RandomJoke.self, primaryKey: currentJoke.id) {
                     self.isFavoriteRelay.accept(localJoke.isFavorite)
                 }
             }

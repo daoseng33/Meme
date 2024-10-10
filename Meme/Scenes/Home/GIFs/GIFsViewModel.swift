@@ -106,7 +106,7 @@ final class GIFsViewModel: GIFsViewModelProtocol {
         DispatchQueue.main.async {
             var gridDatas: [GridData] = []
             imageDatas.forEach { imageData in
-                if let localData = try? DataStorageManager.shared.fetch(ImageData.self, primaryKey: imageData.urlString),
+                if let localData = DataStorageManager.shared.fetch(ImageData.self, primaryKey: imageData.urlString),
                     let url = imageData.url {
                     let gridData = GridData(title: nil, imageType: .gif(url: url), isFavorite: localData.isFavorite)
                     gridDatas.append(gridData)
@@ -141,7 +141,7 @@ final class GIFsViewModel: GIFsViewModelProtocol {
         guard imageDatas.count > index else { return }
         DispatchQueue.main.async {
             let imageData = self.imageDatas[index]
-            if let localData = try? DataStorageManager.shared.fetch(ImageData.self, primaryKey: imageData.urlString) {
+            if let localData = DataStorageManager.shared.fetch(ImageData.self, primaryKey: imageData.urlString) {
                 DataStorageManager.shared.update(localData, with: [Constant.Key.isFavorite: isFavorite])
             } else {
                 DataStorageManager.shared.save(imageData)

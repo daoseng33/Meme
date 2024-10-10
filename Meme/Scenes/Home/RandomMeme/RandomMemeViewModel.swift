@@ -63,7 +63,7 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
             fetchData()
         } else if let currentMeme = currentMeme {
             DispatchQueue.main.async {
-                if let localMeme = try? DataStorageManager.shared.fetch(RandomMeme.self, primaryKey: currentMeme.id) {
+                if let localMeme = DataStorageManager.shared.fetch(RandomMeme.self, primaryKey: currentMeme.id) {
                     self.isFavoriteRelay.accept(localMeme.isFavorite)
                 }
             }

@@ -37,8 +37,7 @@ final public class DataStorageManager {
     
     public func fetch<T: Object>(_ type: T.Type,
                                  sorted: (keyPath: String, ascending: Bool)? = nil,
-                                 predicate: NSPredicate? = nil,
-                                 completion: @escaping (Result<[T], Error>) -> Void) {
+                                 predicate: NSPredicate? = nil) -> [T] {
         do {
             let realm = try self.realm()
             var results = realm.objects(type)
@@ -52,18 +51,24 @@ final public class DataStorageManager {
             }
             
             let array = Array(results)
-            completion(.success(array))
+            return array
         } catch {
-            completion(.failure(error))
+            print(error.localizedDescription)
+            return []
         }
     }
     
     public func fetch<T: Object>(_ type: T.Type,
-                                 primaryKey: Any) throws -> T? {
-        let realm = try self.realm()
-        let result = realm.object(ofType: type, forPrimaryKey: primaryKey)
-        
-        return result
+                                 primaryKey: Any) -> T? {
+        do {
+            let realm = try self.realm()
+            let result = realm.object(ofType: type, forPrimaryKey: primaryKey)
+            
+            return result
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
     }
     
     public func update<T: Object>(_ object: T,
@@ -77,9 +82,13 @@ final public class DataStorageManager {
                     object.setValue(value, forKey: key)
                 }
             } onComplete: { error in
-                onError?(error)
+                if let error {
+                    print(error.localizedDescription)
+                    onError?(error)
+                }
             }
         } catch {
+            print(error.localizedDescription)
             onError?(error)
         }
     }
