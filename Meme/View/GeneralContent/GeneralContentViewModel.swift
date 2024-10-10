@@ -41,76 +41,76 @@ class GeneralContentViewModel: GeneralContentViewModelProtocol {
                                  imageDatasRelay,
                                  filterContainerViewModel.selectedDateRelay,
                                  filterContainerViewModel.selectedCategoryRelay)
-            .withUnretained(self)
-            .subscribe(onNext: { (self, combined) in
-                self.sectionTypeDict.reset()
+        .withUnretained(self)
+        .subscribe(onNext: { (self, combined) in
+            self.sectionTypeDict.reset()
+            
+            let (memes, jokes, images, date, category) = combined
+            
+            let memeCellViewModels = memes
+                .filter{ $0.url != nil }
+                .map({ meme in
+                    let content = GeneralContentCellType.meme(meme: meme)
+                    let cellViewModel = GeneralContentCellViewModel(content: content)
+                    return cellViewModel
+                })
+            
+            let jokeCellViewModels = jokes
+                .map({ joke in
+                    let content = GeneralContentCellType.joke(joke: joke)
+                    let cellViewModel = GeneralContentCellViewModel(content: content)
+                    return cellViewModel
+                })
+            
+            let imageCellViewModels = images
+                .filter{ $0.url != nil }
+                .map({ imageData in
+                    let content = GeneralContentCellType.gif(imageData: imageData)
+                    let cellViewModel = GeneralContentCellViewModel(content: content)
+                    return cellViewModel
+                })
+            
+            var cellViewModels: [GeneralContentCellViewModelProtocol]
+            
+            switch category {
+            case .all:
+                cellViewModels = memeCellViewModels + jokeCellViewModels + imageCellViewModels
                 
-                let (memes, jokes, images, date, category) = combined
+            case .meme:
+                cellViewModels = memeCellViewModels
                 
-                let memeCellViewModels = memes
-                    .filter{ $0.url != nil }
-                    .map({ meme in
-                        let content = GeneralContentCellType.meme(meme: meme)
-                        let cellViewModel = GeneralContentCellViewModel(content: content)
-                        return cellViewModel
-                    })
+            case .joke:
+                cellViewModels = jokeCellViewModels
                 
-                let jokeCellViewModels = jokes
-                    .map({ joke in
-                        let content = GeneralContentCellType.joke(joke: joke)
-                        let cellViewModel = GeneralContentCellViewModel(content: content)
-                        return cellViewModel
-                    })
-                
-                let imageCellViewModels = images
-                    .filter{ $0.url != nil }
-                    .map({ imageData in
-                        let content = GeneralContentCellType.gif(imageData: imageData)
-                        let cellViewModel = GeneralContentCellViewModel(content: content)
-                        return cellViewModel
-                    })
-                
-                var cellViewModels: [GeneralContentCellViewModelProtocol]
-                
-                switch category {
-                case .all:
-                    cellViewModels = memeCellViewModels + jokeCellViewModels + imageCellViewModels
-                    
-                case .meme:
-                    cellViewModels = memeCellViewModels
-                    
-                case .joke:
-                    cellViewModels = jokeCellViewModels
-                    
-                case .gifs:
-                    cellViewModels = imageCellViewModels
+            case .gifs:
+                cellViewModels = imageCellViewModels
+            }
+            
+            switch date {
+            case .newest:
+                cellViewModels.sort {
+                    $0.createdAt > $1.createdAt
                 }
                 
-                switch date {
-                case .newest:
-                    cellViewModels.sort {
-                        $0.createdAt > $1.createdAt
-                    }
-                    
-                case .oldest:
-                    cellViewModels.sort {
-                        $0.createdAt < $1.createdAt
-                    }
+            case .oldest:
+                cellViewModels.sort {
+                    $0.createdAt < $1.createdAt
                 }
+            }
+            
+            cellViewModels.forEach { cellViewModel in
+                let dateCategory = self.categorizeDate(cellViewModel.createdAt)
                 
-                cellViewModels.forEach { cellViewModel in
-                    let dateCategory = self.categorizeDate(cellViewModel.createdAt)
-                    
-                    if self.sectionTypeDict[dateCategory] == nil {
-                        self.sectionTypeDict[dateCategory] = [cellViewModel]
-                    } else {
-                        self.sectionTypeDict[dateCategory]?.append(cellViewModel)
-                    }
+                if self.sectionTypeDict[dateCategory] == nil {
+                    self.sectionTypeDict[dateCategory] = [cellViewModel]
+                } else {
+                    self.sectionTypeDict[dateCategory]?.append(cellViewModel)
                 }
-                
-                self.reloadDataRelay.accept(())
-            })
-            .disposed(by: disposeBag)
+            }
+            
+            self.reloadDataRelay.accept(())
+        })
+        .disposed(by: disposeBag)
     }
     
     // MARK: - Getter
@@ -124,26 +124,26 @@ class GeneralContentViewModel: GeneralContentViewModelProtocol {
             
             let imageLocalDatas = DataStorageManager.shared.fetch(ImageData.self, predicate: self.predicate)
             self.imageDatasRelay.accept(imageLocalDatas)
-            
         }
     }
     
-    func getCellViewModel(at indexPath: IndexPath) -> GeneralContentCellViewModelProtocol {
+    func getCellViewModel(at indexPath: IndexPath) -> GeneralContentCellViewModelProtocol? {
         switch indexPath.section {
         case sectionTypeDict.index(forKey: .today):
-            sectionTypeDict[.today]![indexPath.row]
+            return sectionTypeDict[.today]![indexPath.row]
             
         case sectionTypeDict.index(forKey: .yesterday):
-            sectionTypeDict[.yesterday]![indexPath.row]
+            return sectionTypeDict[.yesterday]![indexPath.row]
             
         case sectionTypeDict.index(forKey: .thisWeek):
-            sectionTypeDict[.thisWeek]![indexPath.row]
+            return sectionTypeDict[.thisWeek]![indexPath.row]
             
         case sectionTypeDict.index(forKey: .whileAgo):
-            sectionTypeDict[.whileAgo]![indexPath.row]
+            return sectionTypeDict[.whileAgo]![indexPath.row]
             
         default:
-            fatalError("Unknown section type")
+            print("Error: Unknown section type")
+            return nil
         }
     }
     
@@ -154,38 +154,40 @@ class GeneralContentViewModel: GeneralContentViewModelProtocol {
     func getRowsCount(with section: Int) -> Int {
         switch section {
         case sectionTypeDict.index(forKey: .today):
-            sectionTypeDict[.today]!.count
+            return sectionTypeDict[.today]!.count
             
         case sectionTypeDict.index(forKey: .yesterday):
-            sectionTypeDict[.yesterday]!.count
+            return sectionTypeDict[.yesterday]!.count
             
         case sectionTypeDict.index(forKey: .thisWeek):
-            sectionTypeDict[.thisWeek]!.count
+            return sectionTypeDict[.thisWeek]!.count
             
         case sectionTypeDict.index(forKey: .whileAgo):
-            sectionTypeDict[.whileAgo]!.count
+            return sectionTypeDict[.whileAgo]!.count
             
         default:
-            fatalError("Unknown section type")
+            print("Error: Unknown section type")
+            return 0
         }
     }
     
     func getSectionTitle(at section: Int) -> String? {
         switch section {
         case sectionTypeDict.index(forKey: .today):
-            DateCategory.today.rawValue.localized()
+            return DateCategory.today.rawValue.localized()
             
         case sectionTypeDict.index(forKey: .yesterday):
-            DateCategory.yesterday.rawValue.localized()
+            return DateCategory.yesterday.rawValue.localized()
             
         case sectionTypeDict.index(forKey: .thisWeek):
-            DateCategory.thisWeek.rawValue.localized()
+            return DateCategory.thisWeek.rawValue.localized()
             
         case sectionTypeDict.index(forKey: .whileAgo):
-            DateCategory.whileAgo.rawValue.localized()
+            return DateCategory.whileAgo.rawValue.localized()
             
         default:
-            fatalError("Unknown section type")
+            print("Error: Unknown section type")
+            return nil
         }
     }
     

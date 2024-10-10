@@ -101,10 +101,26 @@ final public class DataStorageManager {
             realm.writeAsync {
                 realm.delete(object)
             } onComplete: { error in
-                onError?(error)
+                if let error {
+                    print(error.localizedDescription)
+                    onError?(error)
+                }
+                
             }
         } catch {
+            print(error.localizedDescription)
             onError?(error)
+        }
+    }
+    
+    public func deleteAll() {
+        do {
+            let realm = try Realm()
+            realm.writeAsync {
+                realm.deleteAll()
+            }
+        } catch {
+            print(error.localizedDescription)
         }
     }
 }

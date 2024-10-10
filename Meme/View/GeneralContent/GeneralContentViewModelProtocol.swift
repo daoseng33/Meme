@@ -12,7 +12,7 @@ protocol GeneralContentViewModelProtocol {
     var reloadDataSignal: Signal<Void> { get }
     var filterContainerViewModel: FilterContainerViewModelProtocol { get }
     var predicate: NSPredicate? { get }
-    func getCellViewModel(at indexPath: IndexPath) -> GeneralContentCellViewModelProtocol
+    func getCellViewModel(at indexPath: IndexPath) -> GeneralContentCellViewModelProtocol?
     func getNumberOfSections() -> Int
     func getRowsCount(with section: Int) -> Int
     func getLocalDatas()

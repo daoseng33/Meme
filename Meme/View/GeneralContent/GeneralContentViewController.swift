@@ -100,6 +100,7 @@ class GeneralContentViewController: BaseViewController {
     
     private func setupBindings() {
         viewModel.reloadDataSignal
+            .throttle(.seconds(1))
             .emit(with: self) { (self, _) in
                 self.contentTableView.reloadData()
                 self.refreshControl.endRefreshing()
@@ -145,37 +146,38 @@ extension GeneralContentViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: GeneralContentCell = tableView.dequeueReusableCell(for: indexPath)
         
-        let cellViewModel = viewModel.getCellViewModel(at: indexPath)
-        cellViewModel.imageTappedRelay
-            .asSignal()
-            .emit(with: self) { (self, url) in
-                let images = [SKPhoto.photoWithImageURL(url.absoluteString)]
-                let browser = SKPhotoBrowser(photos: images)
-                
-                self.present(browser, animated: true)
-            }
-            .disposed(by: cell.rx.disposeBag)
-        
-        cellViewModel.shareButtonTappedRelay
-            .asSignal()
-            .emit(with: self) { (self, cellType) in
-                switch cellType {
-                case .meme(let meme):
-                    guard let url = meme.url else { return }
-                    Utility.showShareSheet(items: [url, meme.memeDescription], parentVC: self)
+        if let cellViewModel = viewModel.getCellViewModel(at: indexPath) {
+            cellViewModel.imageTappedRelay
+                .asSignal()
+                .emit(with: self) { (self, url) in
+                    let images = [SKPhoto.photoWithImageURL(url.absoluteString)]
+                    let browser = SKPhotoBrowser(photos: images)
                     
-                case .joke(let joke):
-                    Utility.showShareSheet(items: [joke.joke], parentVC: self)
-                    
-                case .gif(let imageData):
-                    guard let url = imageData.url else { return }
-                    Utility.showShareSheet(items: [url], parentVC: self)
+                    self.present(browser, animated: true)
                 }
-            }
-            .disposed(by: cell.rx.disposeBag)
+                .disposed(by: cell.rx.disposeBag)
             
-        let isLast = indexPath.row == viewModel.getRowsCount(with: indexPath.section) - 1
-        cell.configure(with: cellViewModel, isLast: isLast)
+            cellViewModel.shareButtonTappedRelay
+                .asSignal()
+                .emit(with: self) { (self, cellType) in
+                    switch cellType {
+                    case .meme(let meme):
+                        guard let url = meme.url else { return }
+                        Utility.showShareSheet(items: [url, meme.memeDescription], parentVC: self)
+                        
+                    case .joke(let joke):
+                        Utility.showShareSheet(items: [joke.joke], parentVC: self)
+                        
+                    case .gif(let imageData):
+                        guard let url = imageData.url else { return }
+                        Utility.showShareSheet(items: [url], parentVC: self)
+                    }
+                }
+                .disposed(by: cell.rx.disposeBag)
+                
+            let isLast = indexPath.row == viewModel.getRowsCount(with: indexPath.section) - 1
+            cell.configure(with: cellViewModel, isLast: isLast)
+        }
         
         return cell
     }
