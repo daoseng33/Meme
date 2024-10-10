@@ -41,6 +41,7 @@ class GeneralContentViewModel: GeneralContentViewModelProtocol {
                                  imageDatasRelay,
                                  filterContainerViewModel.selectedDateRelay,
                                  filterContainerViewModel.selectedCategoryRelay)
+        .debounce(.milliseconds(100), scheduler: MainScheduler.instance)
         .withUnretained(self)
         .subscribe(onNext: { (self, combined) in
             self.sectionTypeDict.reset()

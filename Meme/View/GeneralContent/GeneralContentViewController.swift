@@ -100,7 +100,6 @@ class GeneralContentViewController: BaseViewController {
     
     private func setupBindings() {
         viewModel.reloadDataSignal
-            .throttle(.seconds(1))
             .emit(with: self) { (self, _) in
                 self.contentTableView.reloadData()
                 self.refreshControl.endRefreshing()
