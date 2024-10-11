@@ -235,7 +235,7 @@ final class RandomMemeViewController: BaseViewController {
                     self.generateMemeButton.isEnabled = false
                     self.actionsContainerView.favoriteButton.isEnabled = false
                     self.actionsContainerView.shareButton.isEnabled = false
-                    ProgressHUD.animate()
+                    ProgressHUD.animate("Loading".localized(), interaction: false)
                     
                 case .success:
                     self.generateMemeButton.isEnabled = true

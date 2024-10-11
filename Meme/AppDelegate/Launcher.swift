@@ -110,12 +110,18 @@ final class Launcher {
     private func setupLoadingHUD() {
         ProgressHUD.animationType = .sfSymbolBounce
         if #available(iOS 16.0, *) {
-            ProgressHUD.animationSymbol = SFSymbol.faceSmilingInverse.rawValue
+            ProgressHUD.animationSymbol = SFSymbol.faceSmiling.rawValue
         } else {
             ProgressHUD.animationSymbol = SFSymbol.faceSmiling.rawValue
         }
         ProgressHUD.colorHUD = .clear
         ProgressHUD.colorBackground = .clear
         ProgressHUD.colorAnimation = .accent
+        ProgressHUD.colorBannerTitle = .accent
+        ProgressHUD.colorBannerMessage = .accent
+        ProgressHUD.colorStatus = .accent
+        ProgressHUD.fontBannerTitle = .systemFont(ofSize: 18, weight: .medium)
+        ProgressHUD.fontBannerMessage = .systemFont(ofSize: 14, weight: .regular)
+        ProgressHUD.fontStatus = .systemFont(ofSize: 18, weight: .heavy)
     }
 }

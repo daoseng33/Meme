@@ -320,6 +320,17 @@
         }
       }
     },
+    "Loading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "載入中"
+          }
+        }
+      }
+    },
     "Meme" : {
       "extractionState" : "manual",
       "localizations" : {

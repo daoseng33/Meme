@@ -104,7 +104,7 @@ final class GIFsViewController: BaseViewController {
                 case .initial, .loading:
                     self.keywordTextField.isUserInteractionEnabled = false
                     self.generateGifsButton.isEnabled = false
-                    ProgressHUD.animate()
+                    ProgressHUD.animate("Loading".localized(), interaction: false)
                     
                 case .success:
                     self.keywordTextField.isUserInteractionEnabled = true

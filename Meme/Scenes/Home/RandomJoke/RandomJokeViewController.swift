@@ -167,7 +167,7 @@ final class RandomJokeViewController: BaseViewController {
                     self.generateJokeButton.isEnabled = false
                     self.actionsContainerView.shareButton.isEnabled = false
                     self.actionsContainerView.favoriteButton.isEnabled = false
-                    ProgressHUD.animate()
+                    ProgressHUD.animate("Loading".localized(), interaction: false)
                     
                 case .success:
                     self.generateJokeButton.isEnabled = true
