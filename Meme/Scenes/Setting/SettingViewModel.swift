@@ -10,7 +10,7 @@ import RxRelay
 
 enum SettingSectionType: String {
     case general = "General"
-    case purchase = "Purchase"
+    case sponsor = "Sponsor"
     case about = "About"
 }
 
@@ -31,7 +31,7 @@ final class SettingViewModel {
     private let sectionTypeDict: IndexedDictionary<SettingSectionType, [SettingRowType]> = {
         var sections = IndexedDictionary<SettingSectionType, [SettingRowType]>()
         sections[.general] = [.appearance, .language]
-        sections[.purchase] = [.removeAds, .restorePurchases]
+        sections[.sponsor] = [.removeAds, .restorePurchases]
         sections[.about] = [.contactUs, .version]
         
         return sections
@@ -71,8 +71,8 @@ final class SettingViewModel {
         case sectionTypeDict.index(forKey: .general):
             return .general
             
-        case sectionTypeDict.index(forKey: .purchase):
-            return .purchase
+        case sectionTypeDict.index(forKey: .sponsor):
+            return .sponsor
             
         case sectionTypeDict.index(forKey: .about):
             return .about
@@ -88,8 +88,8 @@ final class SettingViewModel {
         case sectionTypeDict.index(forKey: .general):
             return sectionTypeDict[.general]?[indexPath.row]
             
-        case sectionTypeDict.index(forKey: .purchase):
-            return sectionTypeDict[.purchase]?[indexPath.row]
+        case sectionTypeDict.index(forKey: .sponsor):
+            return sectionTypeDict[.sponsor]?[indexPath.row]
             
         case sectionTypeDict.index(forKey: .about):
             return sectionTypeDict[.about]?[indexPath.row]
@@ -105,8 +105,8 @@ final class SettingViewModel {
         case sectionTypeDict.index(forKey: .general):
             return SettingSectionType.general.rawValue.localized()
             
-        case sectionTypeDict.index(forKey: .purchase):
-            return SettingSectionType.purchase.rawValue.localized()
+        case sectionTypeDict.index(forKey: .sponsor):
+            return SettingSectionType.sponsor.rawValue.localized()
             
         case sectionTypeDict.index(forKey: .about):
             return SettingSectionType.about.rawValue.localized()
@@ -122,8 +122,8 @@ final class SettingViewModel {
         case sectionTypeDict.index(forKey: .general):
             return sectionTypeDict[.general]?[indexPath.row].rawValue.localized()
             
-        case sectionTypeDict.index(forKey: .purchase):
-            return sectionTypeDict[.purchase]?[indexPath.row].rawValue.localized()
+        case sectionTypeDict.index(forKey: .sponsor):
+            return sectionTypeDict[.sponsor]?[indexPath.row].rawValue.localized()
             
         case sectionTypeDict.index(forKey: .about):
             return sectionTypeDict[.about]?[indexPath.row].rawValue.localized()

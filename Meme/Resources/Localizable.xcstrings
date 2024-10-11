@@ -540,17 +540,6 @@
         }
       }
     },
-    "Purchase" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "購買"
-          }
-        }
-      }
-    },
     "Racist" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -701,6 +690,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "發生錯誤"
+          }
+        }
+      }
+    },
+    "Sponsor" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "贊助"
           }
         }
       }
