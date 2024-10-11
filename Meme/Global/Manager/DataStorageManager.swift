@@ -20,18 +20,33 @@ final public class DataStorageManager {
         return try Realm(configuration: configuration)
     }
     
-    public func save<T: Object>(_ object: T, onError: ((Error?) -> Void)? = nil) {
+    public func save<T: Object>(_ object: T) {
         do {
             let realm = try self.realm()
-            
-            realm.writeAsync {
+            try realm.write {
                 realm.add(object, update: .modified)
-            } onComplete: { error in
-                onError?(error)
             }
             
         } catch {
-            onError?(error)
+            print(error.localizedDescription)
+        }
+    }
+    
+    public func saveAsync<T: Object>(_ object: T, onComplete: ((Error?) -> Void)? = nil) {
+        do {
+            let realm = try self.realm()
+            realm.writeAsync {
+                realm.add(object, update: .modified)
+            } onComplete: { error in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+
+                onComplete?(error)
+            }
+            
+        } catch {
+            onComplete?(error)
         }
     }
     
@@ -72,8 +87,23 @@ final public class DataStorageManager {
     }
     
     public func update<T: Object>(_ object: T,
+                                  with dictionary: [String: Any?]) {
+        do {
+            let realm = try self.realm()
+            
+            try realm.write {
+                for (key, value) in dictionary {
+                    object.setValue(value, forKey: key)
+                }
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    public func updateAsync<T: Object>(_ object: T,
                                   with dictionary: [String: Any?],
-                                  onError: ((Error?) -> Void)? = nil) {
+                                  onComplete: ((Error?) -> Void)? = nil) {
         do {
             let realm = try self.realm()
             
@@ -84,17 +114,30 @@ final public class DataStorageManager {
             } onComplete: { error in
                 if let error {
                     print(error.localizedDescription)
-                    onError?(error)
                 }
+                
+                onComplete?(error)
             }
         } catch {
             print(error.localizedDescription)
-            onError?(error)
+            onComplete?(error)
         }
     }
     
-    public func delete<T: Object>(_ object: T,
-                                  onError: ((Error?) -> Void)? = nil) {
+    public func delete<T: Object>(_ object: T) {
+        do {
+            let realm = try self.realm()
+            
+            try realm.write {
+                realm.delete(object)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    public func deleteAsync<T: Object>(_ object: T,
+                                  onComplete: ((Error?) -> Void)? = nil) {
         do {
             let realm = try self.realm()
             
@@ -103,20 +146,20 @@ final public class DataStorageManager {
             } onComplete: { error in
                 if let error {
                     print(error.localizedDescription)
-                    onError?(error)
                 }
                 
+                onComplete?(error)
             }
         } catch {
             print(error.localizedDescription)
-            onError?(error)
+            onComplete?(error)
         }
     }
     
     public func deleteAll() {
         do {
             let realm = try Realm()
-            realm.writeAsync {
+            try realm.write {
                 realm.deleteAll()
             }
         } catch {

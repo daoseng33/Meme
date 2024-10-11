@@ -86,7 +86,7 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
                     currentMeme = randomMeme
                     
                     DispatchQueue.main.async {
-                        DataStorageManager.shared.save(randomMeme)
+                        DataStorageManager.shared.saveAsync(randomMeme)
                     }
                     
                     self.isFavoriteRelay.accept(randomMeme.isFavorite)
@@ -116,7 +116,7 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
                         return
                     }
                     
-                    DataStorageManager.shared.update(currentMeme, with: [Constant.Key.isFavorite: isFavorite])
+                    DataStorageManager.shared.updateAsync(currentMeme, with: [Constant.Key.isFavorite: isFavorite])
                 }
             })
             .disposed(by: disposeBag)

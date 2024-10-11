@@ -49,7 +49,7 @@ final class GIFsViewModel: GIFsViewModelProtocol {
                         
                     case .gif(let url):
                         let imageData = ImageData(urlString: url.absoluteString, isFavorite: favoriteData.isFavorite)
-                        DataStorageManager.shared.save(imageData)
+                        DataStorageManager.shared.saveAsync(imageData)
                     }
                 }
             })
@@ -142,9 +142,9 @@ final class GIFsViewModel: GIFsViewModelProtocol {
         DispatchQueue.main.async {
             let imageData = self.imageDatas[index]
             if let localData = DataStorageManager.shared.fetch(ImageData.self, primaryKey: imageData.urlString) {
-                DataStorageManager.shared.update(localData, with: [Constant.Key.isFavorite: isFavorite])
+                DataStorageManager.shared.updateAsync(localData, with: [Constant.Key.isFavorite: isFavorite])
             } else {
-                DataStorageManager.shared.save(imageData)
+                DataStorageManager.shared.saveAsync(imageData)
             }
         }
     }

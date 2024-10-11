@@ -45,11 +45,13 @@ final class GeneralContentCellViewModel: GeneralContentCellViewModelProtocol {
                 DispatchQueue.main.async {
                     switch self.content {
                     case .meme(let meme):
-                        DataStorageManager.shared.update(meme, with: [Constant.Key.isFavorite: isFavorite])
+                        DataStorageManager.shared.updateAsync(meme, with: [Constant.Key.isFavorite: isFavorite])
+                        
                     case .joke(let joke):
-                        DataStorageManager.shared.update(joke, with: [Constant.Key.isFavorite: isFavorite])
+                        DataStorageManager.shared.updateAsync(joke, with: [Constant.Key.isFavorite: isFavorite])
+                        
                     case .gif(let imageData):
-                        DataStorageManager.shared.update(imageData, with: [Constant.Key.isFavorite: isFavorite])
+                        DataStorageManager.shared.updateAsync(imageData, with: [Constant.Key.isFavorite: isFavorite])
                     }
                 }
             })

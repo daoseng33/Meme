@@ -87,7 +87,7 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
                     self.currentJoke = joke
                     
                     DispatchQueue.main.async {
-                        DataStorageManager.shared.save(joke)
+                        DataStorageManager.shared.saveAsync(joke)
                     }
                     
                     self.isFavoriteRelay.accept(joke.isFavorite)
@@ -114,7 +114,7 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
                         return
                     }
                     
-                    DataStorageManager.shared.update(currentJoke, with: [Constant.Key.isFavorite: isFavorite])
+                    DataStorageManager.shared.updateAsync(currentJoke, with: [Constant.Key.isFavorite: isFavorite])
                 }
             })
             .disposed(by: disposeBag)
