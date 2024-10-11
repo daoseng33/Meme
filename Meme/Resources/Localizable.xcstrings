@@ -12,6 +12,17 @@
         }
       }
     },
+    "About" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "關於"
+          }
+        }
+      }
+    },
     "All" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -41,6 +52,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "動物"
+          }
+        }
+      }
+    },
+    "App Version" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "應用版本"
+          }
+        }
+      }
+    },
+    "Appearance" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "主題外觀"
           }
         }
       }
@@ -111,6 +144,17 @@
         }
       }
     },
+    "Contact Us" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "聯絡我們"
+          }
+        }
+      }
+    },
     "Dark" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -118,6 +162,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "黑暗"
+          }
+        }
+      }
+    },
+    "Dark Mode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "黑暗模式"
           }
         }
       }
@@ -133,6 +188,17 @@
         }
       }
     },
+    "Display Language" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "顯示語言"
+          }
+        }
+      }
+    },
     "Favorite" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -144,6 +210,17 @@
         }
       }
     },
+    "Follow System" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "跟隨系統"
+          }
+        }
+      }
+    },
     "Food" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -151,6 +228,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "食物"
+          }
+        }
+      }
+    },
+    "General" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "一般"
           }
         }
       }
@@ -320,6 +408,17 @@
         }
       }
     },
+    "Light Mode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "明亮模式"
+          }
+        }
+      }
+    },
     "Loading" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -441,6 +540,17 @@
         }
       }
     },
+    "Purchase" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "購買"
+          }
+        }
+      }
+    },
     "Racist" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -503,6 +613,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "宗教"
+          }
+        }
+      }
+    },
+    "Remove Ads" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "移除廣告"
+          }
+        }
+      }
+    },
+    "Restore Purchases" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "恢復購買"
           }
         }
       }

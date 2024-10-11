@@ -20,6 +20,22 @@ final class TextTableViewHeaderView: UIView {
         }
     }
     
+    private var _padding: CGFloat = 0
+    
+    var padding: CGFloat {
+        get {
+            return _padding
+        }
+        
+        set {
+            titleLabel.snp.updateConstraints {
+                $0.left.right.equalToSuperview().inset(newValue)
+            }
+            
+            _padding = newValue
+        }
+    }
+    
     // MARK: - UI
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -43,10 +59,11 @@ final class TextTableViewHeaderView: UIView {
     
     // MARK: - Setup
     private func setupUI() {
+        backgroundColor = .secondarySystemBackground
         addSubview(titleLabel)
         
         titleLabel.snp.makeConstraints {
-            $0.left.right.equalToSuperview().inset(Constant.spacing3)
+            $0.left.right.equalToSuperview()
             $0.top.bottom.equalToSuperview()
         }
     }

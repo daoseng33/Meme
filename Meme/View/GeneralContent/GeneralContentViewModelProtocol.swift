@@ -16,6 +16,6 @@ protocol GeneralContentViewModelProtocol {
     func getNumberOfSections() -> Int
     func getRowsCount(with section: Int) -> Int
     func getLocalDatas()
-    func getSectionTitle(at section: Int) -> String?
+    func getSectionTitle(with section: Int) -> String?
     init(predicate: NSPredicate?)
 }

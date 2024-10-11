@@ -17,6 +17,12 @@ enum Constant {
     /// 12
     static let spacing3: CGFloat = 12
     
+    /// 16
+    static let spacing4: CGFloat = 16
+    
+    /// 20
+    static let spacing5: CGFloat = 20
+    
     enum Key {
         static let isFavorite = "isFavorite"
     }

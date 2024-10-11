@@ -170,7 +170,7 @@ class GeneralContentViewModel: @preconcurrency GeneralContentViewModelProtocol {
         }
     }
     
-    func getSectionTitle(at section: Int) -> String? {
+    func getSectionTitle(with section: Int) -> String? {
         switch section {
         case sectionTypeDict.index(forKey: .today):
             return DateCategory.today.rawValue.localized()

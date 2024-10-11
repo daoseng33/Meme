@@ -49,7 +49,7 @@ final class MemeTabBarController: UITabBarController {
         let favoriteViewController = UINavigationController(rootViewController: GeneralContentViewController(viewModel: favoriteViewModel, title: "Favorite".localized(), tabBarType: .favorite))
         favoriteViewController.tabBarItem = UITabBarItem(title: "Favorite".localized(), image: Asset.Tabbar.favorite.image, tag: MemeTabBarItem.favorite.rawValue)
         
-        let settingViewController = UINavigationController(rootViewController: SettingViewController())
+        let settingViewController = UINavigationController(rootViewController: SettingViewController(viewModel: SettingViewModel()))
         settingViewController.tabBarItem = UITabBarItem(title: "Setting".localized(), image: Asset.Tabbar.settings.image, tag: MemeTabBarItem.settings.rawValue)
         
         viewControllers = [homeViewController, historyViewController, favoriteViewController, settingViewController]

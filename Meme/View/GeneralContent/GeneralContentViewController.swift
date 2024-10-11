@@ -30,7 +30,7 @@ class GeneralContentViewController: BaseViewController {
     private lazy var contentTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.register(GeneralContentCell.self)
-        tableView.backgroundColor = .secondarySystemBackground
+        tableView.backgroundColor = .clear
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 215
         tableView.separatorStyle = .none
@@ -123,6 +123,9 @@ class GeneralContentViewController: BaseViewController {
                 self.tabBarController?.selectedIndex == self.tabBarType.rawValue
             }
             .filter { (self, _) in
+                self.contentTableView.numberOfSections > 0
+            }
+            .filter { (self, _) in
                 self.contentTableView.numberOfRows(inSection: 0) > 0
             }
             .subscribe(onNext: { (self, _) in
@@ -194,7 +197,7 @@ extension GeneralContentViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let title = viewModel.getSectionTitle(at: section)
+        let title = viewModel.getSectionTitle(with: section)
         let view = TextTableViewHeaderView(text: title)
         
         return view
