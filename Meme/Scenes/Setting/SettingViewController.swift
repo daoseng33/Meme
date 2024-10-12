@@ -16,7 +16,7 @@ final class SettingViewController: BaseViewController {
     
     // MARK: - UI
     private lazy var settingTableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.dataSource = self
         tableView.delegate = self
@@ -102,13 +102,12 @@ extension SettingViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionTitle = viewModel.getSectionTitle(with: section)
         let view = TextTableViewHeaderView(text: sectionTitle)
-        view.padding = Constant.spacing4
         
         return view
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return .leastNormalMagnitude
+        return Constant.spacing3
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

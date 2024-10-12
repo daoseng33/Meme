@@ -8,19 +8,38 @@
 import Foundation
 import RxRelay
 
-enum SettingSectionType: String {
-    case general = "General"
-    case sponsor = "Sponsor"
-    case about = "About"
+enum SettingSectionType: Int, CaseIterable {
+    case general
+    case sponsor
+    case about
+    
+    var title: String {
+        switch self {
+        case .general: return "General".localized()
+        case .sponsor: return "Sponsor".localized()
+        case .about: return "About".localized()
+        }
+    }
 }
 
-enum SettingRowType: String {
-    case appearance = "Appearance"
-    case language = "Display Language"
-    case removeAds = "Remove Ads"
-    case restorePurchases = "Restore Purchases"
-    case version = "App Version"
-    case contactUs = "Contact Us"
+enum SettingRowType: Int {
+    case appearance
+    case language
+    case removeAds
+    case restorePurchases
+    case version
+    case contactUs
+    
+    var title: String {
+        switch self {
+        case .appearance: return "Appearance".localized()
+        case .language: return "Display Language".localized()
+        case .removeAds: return "Remove Ads".localized()
+        case .restorePurchases: return "Restore Purchases".localized()
+        case .version: return "App Version".localized()
+        case .contactUs: return "Contact Us".localized()
+        }
+    }
 }
 
 final class SettingViewModel {
@@ -28,13 +47,12 @@ final class SettingViewModel {
     lazy var appearanceTableViewModel = AppearanceTableViewModel(appearance: appearanceRelay.value)
     let appearanceRelay: BehaviorRelay<AppearanceStyle>
     
-    private let sectionTypeDict: IndexedDictionary<SettingSectionType, [SettingRowType]> = {
-        var sections = IndexedDictionary<SettingSectionType, [SettingRowType]>()
-        sections[.general] = [.appearance, .language]
-        sections[.sponsor] = [.removeAds, .restorePurchases]
-        sections[.about] = [.contactUs, .version]
-        
-        return sections
+    private let sectionsInfo: [SettingSectionType: [SettingRowType]] = {
+        return [
+            .general: [.appearance, .language],
+            .sponsor: [.removeAds, .restorePurchases],
+            .about: [.contactUs, .version]
+        ]
     }()
     
     init() {
@@ -59,79 +77,42 @@ final class SettingViewModel {
     
     // MARK: - Getter
     func getNumberOfSections() -> Int {
-        sectionTypeDict.keys.count
+        return sectionsInfo.keys.count
     }
     
     func getNumberOfRows(in section: Int) -> Int {
-        sectionTypeDict[getSectionType(with: section)]?.count ?? 0
-    }
-    
-    func getSectionType(with section: Int) -> SettingSectionType {
-        switch section {
-        case sectionTypeDict.index(forKey: .general):
-            return .general
-            
-        case sectionTypeDict.index(forKey: .sponsor):
-            return .sponsor
-            
-        case sectionTypeDict.index(forKey: .about):
-            return .about
-            
-        default:
-            print("Invalid section: \(section).")
-            return .general
+        guard let sectionType = SettingSectionType(rawValue: section),
+                let rows = sectionsInfo[sectionType] else {
+            return 0
         }
+        
+        return rows.count
     }
     
     func getRowType(with indexPath: IndexPath) -> SettingRowType? {
-        switch indexPath.section {
-        case sectionTypeDict.index(forKey: .general):
-            return sectionTypeDict[.general]?[indexPath.row]
-            
-        case sectionTypeDict.index(forKey: .sponsor):
-            return sectionTypeDict[.sponsor]?[indexPath.row]
-            
-        case sectionTypeDict.index(forKey: .about):
-            return sectionTypeDict[.about]?[indexPath.row]
-            
-        default:
-            print("Invalid row: \(indexPath).")
+        guard let sectionType = SettingSectionType(rawValue: indexPath.section),
+                let rows = sectionsInfo[sectionType] else {
             return nil
         }
+        
+        return rows[indexPath.row]
     }
     
     func getSectionTitle(with section: Int) -> String? {
-        switch section {
-        case sectionTypeDict.index(forKey: .general):
-            return SettingSectionType.general.rawValue.localized()
-            
-        case sectionTypeDict.index(forKey: .sponsor):
-            return SettingSectionType.sponsor.rawValue.localized()
-            
-        case sectionTypeDict.index(forKey: .about):
-            return SettingSectionType.about.rawValue.localized()
-            
-        default:
-            print("Invalid section: \(section).")
+        guard let sectionType = SettingSectionType(rawValue: section) else {
             return nil
         }
+        
+        return sectionType.title
     }
     
     func getRowTitle(with indexPath: IndexPath) -> String? {
-        switch indexPath.section {
-        case sectionTypeDict.index(forKey: .general):
-            return sectionTypeDict[.general]?[indexPath.row].rawValue.localized()
-            
-        case sectionTypeDict.index(forKey: .sponsor):
-            return sectionTypeDict[.sponsor]?[indexPath.row].rawValue.localized()
-            
-        case sectionTypeDict.index(forKey: .about):
-            return sectionTypeDict[.about]?[indexPath.row].rawValue.localized()
-            
-        default:
-            print("Invalid row: \(indexPath).")
+        guard let sectionType = SettingSectionType(rawValue: indexPath.section),
+                let rows = sectionsInfo[sectionType] else {
             return nil
         }
+        
+        return rows[indexPath.row].title
     }
     
     func getRowSecondaryTitle(with indexPath: IndexPath) -> String? {

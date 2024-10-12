@@ -16,7 +16,7 @@ final class AppearanceTableViewController: UITableViewController {
     // MARK: - Init
     init(viewModel: AppearanceTableViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init(style: .insetGrouped)
         hidesBottomBarWhenPushed = true
     }
     
@@ -90,5 +90,27 @@ final class AppearanceTableViewController: UITableViewController {
         }
         
         viewModel.appearanceRelay.accept(appearanceType)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return .leastNormalMagnitude
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .clear
+        
+        return view
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return .leastNormalMagnitude
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .clear
+        
+        return view
     }
 }
