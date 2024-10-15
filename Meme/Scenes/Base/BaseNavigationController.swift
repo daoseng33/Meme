@@ -10,6 +10,7 @@ import UIKit
 class BaseNavigationController: UINavigationController {
     // MARK: - Properties
     private let velocityThreshold: CGFloat = 1000 // Adjust this value to change the sensitivity
+    private let animationTime: TimeInterval = 0.1
     
     // MARK: - UI
     private var snapshotView: UIView?
@@ -50,7 +51,7 @@ class BaseNavigationController: UINavigationController {
             
             if shouldComplete {
                 // If swiped more than halfway or with high velocity, complete the return operation
-                UIView.animate(withDuration: 0.3, animations: {
+                UIView.animate(withDuration: animationTime, animations: {
                     topViewController.view.frame.origin.x = self.view.bounds.width
                     if let snapshotView = self.snapshotView {
                         snapshotView.frame.origin.x = 0
@@ -62,7 +63,7 @@ class BaseNavigationController: UINavigationController {
                 }
             } else {
                 // Otherwise, restore to the original position
-                UIView.animate(withDuration: 0.3) {
+                UIView.animate(withDuration: animationTime) {
                     topViewController.view.frame.origin.x = 0
                     if let snapshotView = self.snapshotView {
                         snapshotView.frame.origin.x = -self.view.bounds.width
