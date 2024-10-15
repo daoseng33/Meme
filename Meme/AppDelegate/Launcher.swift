@@ -79,9 +79,7 @@ final class Launcher {
 #if CI
             var config = Realm.Configuration.defaultConfiguration
             config.deleteRealmIfMigrationNeeded = true
-            config.inMemoryIdentifier = "MemeCI"
             Realm.Configuration.defaultConfiguration = config
-            DataStorageManager.shared.deleteAll()
 #else
             let config = Realm.Configuration(
                 schemaVersion: 3,
