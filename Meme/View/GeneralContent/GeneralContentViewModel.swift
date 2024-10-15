@@ -12,7 +12,7 @@ import RxCocoa
 import HumorAPIService
 import RealmSwift
 
-class GeneralContentViewModel: @preconcurrency GeneralContentViewModelProtocol {
+class GeneralContentViewModel: GeneralContentViewModelProtocol {
     // MARK: - Properties
     private let disposeBag = DisposeBag()
     private let reloadDataRelay = PublishRelay<Void>()
@@ -115,15 +115,17 @@ class GeneralContentViewModel: @preconcurrency GeneralContentViewModelProtocol {
     }
     
     // MARK: - Getter
-    @MainActor func getLocalDatas() {
-        let memeLocalDatas = DataStorageManager.shared.fetch(RandomMeme.self, predicate: self.predicate)
-        self.memeDatasRelay.accept(memeLocalDatas)
-        
-        let jokeLocalDatas = DataStorageManager.shared.fetch(RandomJoke.self, predicate: self.predicate)
-        self.jokeDatasRelay.accept(jokeLocalDatas)
-        
-        let imageLocalDatas = DataStorageManager.shared.fetch(ImageData.self, predicate: self.predicate)
-        self.imageDatasRelay.accept(imageLocalDatas)
+    func getLocalDatas() {
+        DispatchQueue.main.async {
+            let memeLocalDatas = DataStorageManager.shared.fetch(RandomMeme.self, predicate: self.predicate)
+            self.memeDatasRelay.accept(memeLocalDatas)
+            
+            let jokeLocalDatas = DataStorageManager.shared.fetch(RandomJoke.self, predicate: self.predicate)
+            self.jokeDatasRelay.accept(jokeLocalDatas)
+            
+            let imageLocalDatas = DataStorageManager.shared.fetch(ImageData.self, predicate: self.predicate)
+            self.imageDatasRelay.accept(imageLocalDatas)
+        }
     }
     
     func getCellViewModel(at indexPath: IndexPath) -> GeneralContentCellViewModelProtocol? {

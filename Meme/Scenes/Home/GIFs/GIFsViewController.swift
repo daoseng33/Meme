@@ -140,6 +140,8 @@ final class GIFsViewController: BaseViewController {
                     break
                     
                 case .gif(let url):
+                    AnalyticsManager.shared.logShareEvent(contentType: .gif, itemID: url.absoluteString)
+                    
                     Utility.showShareSheet(items: [url], parentVC: self) {
                         InAppReviewManager.shared.requestReview()
                     }

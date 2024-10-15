@@ -18,4 +18,5 @@ protocol RandomMemeViewModelProtocol: FetchDataProtocol, LoadingStateProtocol, F
     var keywordRelay: BehaviorRelay<String?> { get }
     var descriptionDriver: Driver<String> { get }
     var description: String { get }
+    var shareButtonTappedRelay: PublishRelay<Void> { get }
 }

@@ -47,6 +47,7 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
     }
     
     let isFavoriteRelay = BehaviorRelay(value: false)
+    let shareButtonTappedRelay = PublishRelay<Void>()
     
     private let webService: JokeAPIServiceProtocol
     private let jokeRelay: BehaviorRelay<String> = .init(value: "")
@@ -116,6 +117,17 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
                     
                     DataStorageManager.shared.updateAsync(currentJoke, with: [Constant.Key.isFavorite: isFavorite])
                 }
+            })
+            .disposed(by: disposeBag)
+        
+        shareButtonTappedRelay
+            .withUnretained(self)
+            .subscribe(onNext: { (self, _) in
+                guard let currentJoke = self.currentJoke else {
+                    return
+                }
+                
+                AnalyticsManager.shared.logShareEvent(contentType: .joke, itemID: "\(currentJoke.id)")
             })
             .disposed(by: disposeBag)
     }

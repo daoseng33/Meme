@@ -16,4 +16,5 @@ protocol RandomJokeViewModelProtocol: FetchDataProtocol, LoadingStateProtocol, F
     var selectedCategoryObserver: AnyObserver<String> { get }
     var selectedCategory: JokeCategory { get }
     var categories: [String] { get }
+    var shareButtonTappedRelay: PublishRelay<Void> { get }
 }

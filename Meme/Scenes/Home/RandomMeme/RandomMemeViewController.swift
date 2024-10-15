@@ -199,6 +199,7 @@ final class RandomMemeViewController: BaseViewController {
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
                 guard let mediaURL = self.viewModel.media.mediaURL else { return }
+                self.viewModel.shareButtonTappedRelay.accept(())
                 let description = self.viewModel.description
                 
                 KingfisherManager.shared.retrieveImage(with: mediaURL) { [weak self] result in

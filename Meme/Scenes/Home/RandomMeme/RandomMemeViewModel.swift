@@ -40,6 +40,7 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
     let keywordRelay = BehaviorRelay<String?>(value: nil)
     
     let isFavoriteRelay = BehaviorRelay<Bool>(value: false)
+    let shareButtonTappedRelay = PublishRelay<Void>()
     
     private var randomMediaType: MemeMediaType {
         return MemeMediaType.allCases.randomElement() ?? .image
@@ -118,6 +119,17 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
                     
                     DataStorageManager.shared.updateAsync(currentMeme, with: [Constant.Key.isFavorite: isFavorite])
                 }
+            })
+            .disposed(by: disposeBag)
+        
+        shareButtonTappedRelay
+            .withUnretained(self)
+            .subscribe(onNext: { (self, _) in
+                guard let currentMeme = self.currentMeme else {
+                    return
+                }
+                
+                AnalyticsManager.shared.logShareEvent(contentType: .meme, itemID: "\(currentMeme.id)")
             })
             .disposed(by: disposeBag)
     }

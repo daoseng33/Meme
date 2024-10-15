@@ -143,6 +143,7 @@ final class RandomJokeViewController: BaseViewController {
         actionsContainerView.shareButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
+                self.viewModel.shareButtonTappedRelay.accept(())
                 let joke = self.viewModel.joke
                 Utility.showShareSheet(items: [joke], parentVC: self) {
                     InAppReviewManager.shared.requestReview()
