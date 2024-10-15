@@ -8,9 +8,13 @@
 import UIKit
 
 class BaseNavigationController: UINavigationController {
-    private var snapshotView: UIView?
+    // MARK: - Properties
     private let velocityThreshold: CGFloat = 1000 // Adjust this value to change the sensitivity
     
+    // MARK: - UI
+    private var snapshotView: UIView?
+    
+    // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         interactivePopGestureRecognizer?.isEnabled = false
@@ -18,6 +22,7 @@ class BaseNavigationController: UINavigationController {
         view.addGestureRecognizer(panGesture)
     }
     
+    // MARK: - Actions
     @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
         guard let topViewController = viewControllers.last else { return }
         
@@ -73,6 +78,7 @@ class BaseNavigationController: UINavigationController {
         }
     }
     
+    // MARK: - Misc
     private func createAndAddSnapshotView(for viewController: UIViewController) {
         // Remove existing snapshot if any
         snapshotView?.removeFromSuperview()
