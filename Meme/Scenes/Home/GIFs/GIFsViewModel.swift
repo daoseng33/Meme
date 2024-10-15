@@ -120,6 +120,11 @@ final class GIFsViewModel: GIFsViewModelProtocol {
         }
     }
     
+    func getImageType(with index: Int) -> GridImageType {
+        let cellViewModel = gridCollectionViewModel.gridCellViewModel(with: index)
+        return cellViewModel.currentImageType
+    }
+    
     private func randomWord() -> String {
         let consonants = "bcdfghjklmnpqrstvwxyz"
         let vowels = "aeiou"
@@ -137,13 +142,13 @@ final class GIFsViewModel: GIFsViewModelProtocol {
         return word
     }
     
-    func saveSelectedImageData(with index: Int, isFavorite: Bool) {
-        guard imageDatas.count > index else { return }
+    func saveSelectedImageData(with index: Int) {
+        guard self.imageDatas.count > index else { return }
+        
         DispatchQueue.main.async {
             let imageData = self.imageDatas[index]
-            if let localData = DataStorageManager.shared.fetch(ImageData.self, primaryKey: imageData.urlString) {
-                DataStorageManager.shared.updateAsync(localData, with: [Constant.Key.isFavorite: isFavorite])
-            } else {
+            
+            if DataStorageManager.shared.fetch(ImageData.self, primaryKey: imageData.urlString) == nil {
                 DataStorageManager.shared.saveAsync(imageData)
             }
         }

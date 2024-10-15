@@ -14,5 +14,6 @@ protocol GIFsViewModelProtocol: FetchDataProtocol, LoadingStateProtocol {
     var keywordRelay: BehaviorRelay<String?> { get }
     var gridCollectionViewModel: GridCollectionViewModelProtocol { get }
     var imageDatas: [ImageData] { get }
-    func saveSelectedImageData(with index: Int, isFavorite: Bool)
+    func saveSelectedImageData(with index: Int)
+    func getImageType(with index: Int) -> GridImageType
 }
