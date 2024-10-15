@@ -205,10 +205,14 @@ final class RandomMemeViewController: BaseViewController {
                     guard let self = self else { return }
                     switch result {
                         case .success(let resource):
-                        Utility.showShareSheet(items: [mediaURL, resource.image, description], parentVC: self)
+                        Utility.showShareSheet(items: [mediaURL, resource.image, description], parentVC: self) {
+                            InAppReviewManager.shared.requestReview()
+                        }
                         
                     case .failure:
-                        Utility.showShareSheet(items: [mediaURL, description], parentVC: self)
+                        Utility.showShareSheet(items: [mediaURL, description], parentVC: self) {
+                            InAppReviewManager.shared.requestReview()
+                        }
                     }
                 }
             })
@@ -222,6 +226,7 @@ final class RandomMemeViewController: BaseViewController {
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
                 self.viewModel.toggleIsFavorite()
+                InAppReviewManager.shared.requestReview()
             })
             .disposed(by: rx.disposeBag)
     }

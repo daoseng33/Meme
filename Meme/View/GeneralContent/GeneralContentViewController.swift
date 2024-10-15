@@ -165,14 +165,20 @@ extension GeneralContentViewController: UITableViewDataSource {
                     switch cellType {
                     case .meme(let meme):
                         guard let url = meme.url else { return }
-                        Utility.showShareSheet(items: [url, meme.memeDescription], parentVC: self)
+                        Utility.showShareSheet(items: [url, meme.memeDescription], parentVC: self) {
+                            InAppReviewManager.shared.requestReview()
+                        }
                         
                     case .joke(let joke):
-                        Utility.showShareSheet(items: [joke.joke], parentVC: self)
+                        Utility.showShareSheet(items: [joke.joke], parentVC: self) {
+                            InAppReviewManager.shared.requestReview()
+                        }
                         
                     case .gif(let imageData):
                         guard let url = imageData.url else { return }
-                        Utility.showShareSheet(items: [url], parentVC: self)
+                        Utility.showShareSheet(items: [url], parentVC: self) {
+                            InAppReviewManager.shared.requestReview()
+                        }
                     }
                 }
                 .disposed(by: cell.rx.disposeBag)

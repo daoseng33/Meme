@@ -155,6 +155,7 @@ final class GeneralContentCell: UITableViewCell {
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
                 self.viewModel?.toggleIsFavorite()
+                InAppReviewManager.shared.requestReview()
             })
             .disposed(by: rx.disposeBag)
         

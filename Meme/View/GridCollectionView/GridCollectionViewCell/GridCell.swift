@@ -111,6 +111,7 @@ final class GridCell: UICollectionViewCell {
         actionsContainerView.favoriteButton.rx.tap
             .subscribe(onNext: {
                 viewModel.toggleIsFavorite()
+                InAppReviewManager.shared.requestReview()
             })
             .disposed(by: rx.disposeBag)
         

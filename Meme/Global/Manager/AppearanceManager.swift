@@ -16,9 +16,10 @@ enum AppearanceStyle: String, CaseIterable {
 final class AppearanceManager {
     static let shared = AppearanceManager()
     
+    private init() { }
+    
     func changeAppearance(_ style: AppearanceStyle) {
-        let windowScene = UIApplication.shared.connectedScenes
-            .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene
+        let windowScene = UIApplication.activeScene
         
         let windows = windowScene?.windows ?? []
  

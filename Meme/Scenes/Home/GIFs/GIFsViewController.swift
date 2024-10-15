@@ -140,7 +140,9 @@ final class GIFsViewController: BaseViewController {
                     break
                     
                 case .gif(let url):
-                    Utility.showShareSheet(items: [url], parentVC: self)
+                    Utility.showShareSheet(items: [url], parentVC: self) {
+                        InAppReviewManager.shared.requestReview()
+                    }
                 }
             }
             .disposed(by: rx.disposeBag)

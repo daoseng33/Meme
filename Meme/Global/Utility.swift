@@ -37,7 +37,7 @@ struct Utility {
         return String(localized: String.LocalizationValue(key), locale: locale)
     }
     
-    static func showShareSheet(items: [Any], parentVC: UIViewController) {
+    static func showShareSheet(items: [Any], parentVC: UIViewController, completion: (() -> Void)? = nil) {
         let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
         
         // for iPad
@@ -47,7 +47,7 @@ struct Utility {
             popoverController.permittedArrowDirections = []
         }
         
-        parentVC.present(activityViewController, animated: true, completion: nil)
+        parentVC.present(activityViewController, animated: true, completion: completion)
     }
 }
 

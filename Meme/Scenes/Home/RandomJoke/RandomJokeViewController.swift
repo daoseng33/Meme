@@ -10,6 +10,7 @@ import SnapKit
 import RxCocoa
 import SFSafeSymbols
 import ProgressHUD
+import StoreKit
 
 final class RandomJokeViewController: BaseViewController {
     // MARK: - Properties
@@ -143,7 +144,9 @@ final class RandomJokeViewController: BaseViewController {
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
                 let joke = self.viewModel.joke
-                Utility.showShareSheet(items: [joke], parentVC: self)
+                Utility.showShareSheet(items: [joke], parentVC: self) {
+                    InAppReviewManager.shared.requestReview()
+                }
             })
             .disposed(by: rx.disposeBag)
         
@@ -151,6 +154,7 @@ final class RandomJokeViewController: BaseViewController {
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
                 self.viewModel.toggleIsFavorite()
+                InAppReviewManager.shared.requestReview()
             })
             .disposed(by: rx.disposeBag)
     }
