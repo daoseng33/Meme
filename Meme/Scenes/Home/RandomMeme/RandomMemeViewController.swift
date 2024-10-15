@@ -18,6 +18,15 @@ final class RandomMemeViewController: BaseViewController {
     private let viewModel: RandomMemeViewModelProtocol
     
     // MARK: - UI
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.alwaysBounceVertical = true
+        
+        return scrollView
+    }()
+    
+    private let containerView = UIView()
+    
     private lazy var imageView: AnimatedImageView = {
         let imageView = AnimatedImageView()
         imageView.contentMode = .scaleAspectFit
@@ -30,7 +39,12 @@ final class RandomMemeViewController: BaseViewController {
     }()
     
     private let videoPlayerView = VideoPlayerView()
-    private let descriptionTextView = ContentTextView()
+    private let descriptionTextView: ContentTextView = {
+        let view = ContentTextView()
+        view.enableScroll = false
+        
+        return view
+    }()
     private let keywordTextField = KeywordTextField()
     private let actionsContainerView = ActionsContainerView()
     private let generateMemeButton: RoundedRectangleButton = {
@@ -82,18 +96,6 @@ final class RandomMemeViewController: BaseViewController {
     private func setupUI() {
         navigationItem.title = "Random Meme".localized()
         
-        view.addSubview(imageView)
-        imageView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide)
-            $0.left.right.equalToSuperview()
-            $0.height.equalTo(view.snp.width)
-        }
-        
-        imageView.addSubview(videoPlayerView)
-        videoPlayerView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        
         let interactionStackView: UIStackView = {
             let stackView = UIStackView(arrangedSubviews: [
                 keywordTextField,
@@ -110,9 +112,8 @@ final class RandomMemeViewController: BaseViewController {
             $0.height.equalTo(35)
         }
         
-        let stackView: UIStackView = {
+        let bottomStackView: UIStackView = {
             let stackView = UIStackView(arrangedSubviews: [
-                descriptionTextView,
                 interactionStackView,
                 generateMemeButton
             ])
@@ -123,15 +124,55 @@ final class RandomMemeViewController: BaseViewController {
             return stackView
         }()
         
-        view.addSubview(stackView)
-        
-        stackView.snp.makeConstraints {
-            $0.top.equalTo(imageView.snp.bottom).offset(Constant.spacing2)
+        view.addSubview(bottomStackView)
+        bottomStackView.snp.makeConstraints {
             $0.left.right.bottom.equalTo(view.safeAreaLayoutGuide).inset(Constant.spacing2)
         }
         
         generateMemeButton.snp.makeConstraints {
             $0.height.equalTo(50)
+        }
+        
+        view.addSubview(scrollView)
+        scrollView.snp.makeConstraints {
+            $0.top.left.right.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(bottomStackView.snp.top).offset(-Constant.spacing2)
+        }
+        
+        scrollView.addSubview(containerView)
+        containerView.snp.makeConstraints {
+            $0.edges.equalTo(scrollView.contentLayoutGuide)
+            $0.width.equalTo(scrollView.frameLayoutGuide.snp.width)
+        }
+        
+        let topStackView: UIStackView = {
+            let stackView = UIStackView(arrangedSubviews: [
+                imageView,
+                descriptionTextView
+            ])
+            
+            stackView.axis = .vertical
+            stackView.spacing = Constant.spacing1
+            
+            return stackView
+        }()
+        
+        containerView.addSubview(topStackView)
+        topStackView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        imageView.snp.makeConstraints {
+            $0.height.equalTo(containerView.snp.width)
+        }
+        
+        imageView.addSubview(videoPlayerView)
+        videoPlayerView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        containerView.snp.makeConstraints {
+            $0.height.greaterThanOrEqualTo(topStackView)
         }
     }
     
