@@ -12,6 +12,9 @@
 		1C2D212F2C9D61DE00589C6A /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 1C2D212E2C9D61DE00589C6A /* SFSafeSymbols */; };
 		1C770F352CB6598700ECE617 /* HumorAPIService in Frameworks */ = {isa = PBXBuildFile; productRef = 1C770F342CB6598700ECE617 /* HumorAPIService */; };
 		1C7A0D8C2CB8119A0083C436 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 1C7A0D8B2CB8119A0083C436 /* ProgressHUD */; };
+		1C7A0DA42CBE23840083C436 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1C7A0DA32CBE23840083C436 /* FirebaseAnalytics */; };
+		1C7A0DA92CBE280D0083C436 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 1C7A0DA82CBE280D0083C436 /* FirebasePerformance */; };
+		1C7A0DB02CBE451D0083C436 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1C7A0DAF2CBE451D0083C436 /* FirebaseCrashlytics */; };
 		1C87C34E2C9961FB00A63581 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C34D2C9961FB00A63581 /* RxCocoa */; };
 		1C87C3502C9961FB00A63581 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C34F2C9961FB00A63581 /* RxRelay */; };
 		1C87C3622C996A5E00A63581 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C3612C996A5E00A63581 /* RxBlocking */; };
@@ -67,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C7A0DA92CBE280D0083C436 /* FirebasePerformance in Frameworks */,
 				1C020EF42C981F450028CAE0 /* IQKeyboardManagerSwift in Frameworks */,
 				1C01D4182C904DE9007E93A9 /* Kingfisher in Frameworks */,
 				1C87C34E2C9961FB00A63581 /* RxCocoa in Frameworks */,
@@ -75,6 +79,8 @@
 				1C87C3502C9961FB00A63581 /* RxRelay in Frameworks */,
 				1C770F352CB6598700ECE617 /* HumorAPIService in Frameworks */,
 				1C2D212F2C9D61DE00589C6A /* SFSafeSymbols in Frameworks */,
+				1C7A0DB02CBE451D0083C436 /* FirebaseCrashlytics in Frameworks */,
+				1C7A0DA42CBE23840083C436 /* FirebaseAnalytics in Frameworks */,
 				1CD9F5172C8316BC009DDABD /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -128,6 +134,7 @@
 				1CDA352C2C81AB6C001FF654 /* Sources */,
 				1CDA352D2C81AB6C001FF654 /* Frameworks */,
 				1CDA352E2C81AB6C001FF654 /* Resources */,
+				1C7A0DA72CBE24690083C436 /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -147,6 +154,9 @@
 				1CF584EE2CA15D7F00175C2D /* SKPhotoBrowser */,
 				1C770F342CB6598700ECE617 /* HumorAPIService */,
 				1C7A0D8B2CB8119A0083C436 /* ProgressHUD */,
+				1C7A0DA32CBE23840083C436 /* FirebaseAnalytics */,
+				1C7A0DA82CBE280D0083C436 /* FirebasePerformance */,
+				1C7A0DAF2CBE451D0083C436 /* FirebaseCrashlytics */,
 			);
 			productName = Meme;
 			productReference = 1CDA35302C81AB6C001FF654 /* Meme.app */;
@@ -213,6 +223,7 @@
 				1CF584ED2CA15D7E00175C2D /* XCRemoteSwiftPackageReference "SKPhotoBrowser" */,
 				1C770F332CB6598700ECE617 /* XCRemoteSwiftPackageReference "HumorAPIService" */,
 				1C7A0D8A2CB8119A0083C436 /* XCRemoteSwiftPackageReference "ProgressHUD" */,
+				1C7A0DA22CBE23840083C436 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 56;
 			productRefGroup = 1CDA35312C81AB6C001FF654 /* Products */;
@@ -241,6 +252,33 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1C7A0DA72CBE24690083C436 /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
+				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
+			);
+			name = Crashlytics;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1CDA352C2C81AB6C001FF654 /* Sources */ = {
@@ -357,6 +395,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.likeabossapp.Meme.ci;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -419,7 +458,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -533,6 +572,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.likeabossapp.Meme.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -565,6 +605,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.likeabossapp.Meme;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -687,6 +728,14 @@
 				minimumVersion = 14.1.3;
 			};
 		};
+		1C7A0DA22CBE23840083C436 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.3.0;
+			};
+		};
 		1C87C34C2C9961FB00A63581 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift";
@@ -738,6 +787,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1C7A0D8A2CB8119A0083C436 /* XCRemoteSwiftPackageReference "ProgressHUD" */;
 			productName = ProgressHUD;
+		};
+		1C7A0DA32CBE23840083C436 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C7A0DA22CBE23840083C436 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		1C7A0DA82CBE280D0083C436 /* FirebasePerformance */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C7A0DA22CBE23840083C436 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebasePerformance;
+		};
+		1C7A0DAF2CBE451D0083C436 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C7A0DA22CBE23840083C436 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
 		};
 		1C87C34D2C9961FB00A63581 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;

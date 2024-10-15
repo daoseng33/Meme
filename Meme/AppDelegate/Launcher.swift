@@ -13,6 +13,8 @@ import SFSafeSymbols
 import SKPhotoBrowser
 import RealmSwift
 import ProgressHUD
+import FirebaseCore
+import FirebaseAnalytics
 
 final class Launcher {
     func launch() {
@@ -21,8 +23,9 @@ final class Launcher {
         handleGlobalError()
         setupIQKeyboardManager()
         setupSKPhotoBrowser()
-        setupDatabaseMigration()
+        setupRealmDatabase()
         setupLoadingHUD()
+        setupFirebase()
     }
     
     private func handleGlobalError() {
@@ -71,13 +74,14 @@ final class Launcher {
         SKPhotoBrowserOptions.enableSingleTapDismiss = true
     }
     
-    private func setupDatabaseMigration() {
+    private func setupRealmDatabase() {
         DispatchQueue.main.async {
 #if CI
             var config = Realm.Configuration.defaultConfiguration
             config.deleteRealmIfMigrationNeeded = true
             config.inMemoryIdentifier = "MemeCI"
             Realm.Configuration.defaultConfiguration = config
+            DataStorageManager.shared.deleteAll()
 #else
             let config = Realm.Configuration(
                 schemaVersion: 3,
@@ -123,5 +127,16 @@ final class Launcher {
         ProgressHUD.fontBannerTitle = .systemFont(ofSize: 18, weight: .medium)
         ProgressHUD.fontBannerMessage = .systemFont(ofSize: 14, weight: .regular)
         ProgressHUD.fontStatus = .systemFont(ofSize: 18, weight: .heavy)
+    }
+    
+    private func setupFirebase() {
+#if RELEASE
+        FirebaseApp.configure()
+#elseif DEBUG
+        let filePath = Bundle.main.path(forResource: "GoogleService-Info-Dev", ofType: "plist")
+        guard let fileopts = FirebaseOptions(contentsOfFile: filePath!)
+        else { assert(false, "Couldn't load DEV config file") }
+        FirebaseApp.configure(options: fileopts)
+#endif
     }
 }

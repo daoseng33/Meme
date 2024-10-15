@@ -38,3 +38,5 @@ MLImageAsset
 # Carthage
 
 Meme/Resources/Secrects.xcconfig
+Meme/Resources/GoogleService-Info.plist
+Meme/Resources/GoogleService-Info-Dev.plist
