@@ -90,6 +90,8 @@ final class RandomMemeViewController: BaseViewController {
         if videoPlayerView.timeStatus == .playing, videoPlayerView.isHidden == false {
             videoPlayerView.pause()
         }
+        
+        AnalyticsManager.shared.logScreenView(screenName: .randomMeme)
     }
     
     // MARK: - Setup

@@ -41,12 +41,12 @@ final class MemeTabBarController: UITabBarController {
         let homeViewController = BaseNavigationController(rootViewController: HomePageViewController())
         homeViewController.tabBarItem = UITabBarItem(title: "Home".localized(), image: Asset.Tabbar.home.image, tag: MemeTabBarItem.home.rawValue)
         
-        let historyViewController = BaseNavigationController(rootViewController: GeneralContentViewController(viewModel: GeneralContentViewModel(), title: "History".localized(), tabBarType: .history))
+        let historyViewController = BaseNavigationController(rootViewController: HistoryViewController(viewModel: GeneralContentViewModel(), title: "History".localized(), tabBarType: .history))
         historyViewController.tabBarItem = UITabBarItem(title: "History".localized(), image: Asset.Tabbar.history.image, tag: MemeTabBarItem.history.rawValue)
         
         let predicate = NSPredicate(format: "isFavorite == %@", NSNumber(value: true))
         let favoriteViewModel = GeneralContentViewModel(predicate: predicate)
-        let favoriteViewController = BaseNavigationController(rootViewController: GeneralContentViewController(viewModel: favoriteViewModel, title: "Favorite".localized(), tabBarType: .favorite))
+        let favoriteViewController = BaseNavigationController(rootViewController: FavoriteViewController(viewModel: favoriteViewModel, title: "Favorite".localized(), tabBarType: .favorite))
         favoriteViewController.tabBarItem = UITabBarItem(title: "Favorite".localized(), image: Asset.Tabbar.favorite.image, tag: MemeTabBarItem.favorite.rawValue)
         
         let settingViewController = BaseNavigationController(rootViewController: SettingViewController(viewModel: SettingViewModel()))

@@ -69,6 +69,12 @@ final class RandomJokeViewController: BaseViewController {
         viewModel.refreshData()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        AnalyticsManager.shared.logScreenView(screenName: .randomJoke)
+    }
+    
     // MARK: - Setup
     private func setupUI() {
         navigationItem.title = "Random Joke".localized()

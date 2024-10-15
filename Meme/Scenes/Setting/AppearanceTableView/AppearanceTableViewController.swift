@@ -39,6 +39,12 @@ final class AppearanceTableViewController: UITableViewController {
         tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        AnalyticsManager.shared.logScreenView(screenName: .appearance)
+    }
+    
     // MARK: - Setup
     private func setupUI() {
         tableView.backgroundColor = .secondarySystemBackground

@@ -19,6 +19,12 @@ final class HomePageViewController: BaseViewController {
         
         setupUI()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        AnalyticsManager.shared.logScreenView(screenName: .homepage)
+    }
 
     // MARK: - Setup
     private func setupUI() {

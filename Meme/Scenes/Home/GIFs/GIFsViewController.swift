@@ -56,6 +56,12 @@ final class GIFsViewController: BaseViewController {
         viewModel.refreshData()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        AnalyticsManager.shared.logScreenView(screenName: .gifs)
+    }
+    
     // MARK: - Setup
     private func setupUI() {
         navigationItem.title = "GIFs".localized()

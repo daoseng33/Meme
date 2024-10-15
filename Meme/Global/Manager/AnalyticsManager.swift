@@ -13,6 +13,23 @@ final class AnalyticsManager {
     
     private init() { }
     
+    enum ScreenName: String {
+        case homepage = "Home Page"
+        case history = "History Page"
+        case favorite = "Favorite Page"
+        case settings = "Settings Page"
+        case randomMeme = "RandomMeme Page"
+        case randomJoke = "RandomJoke Page"
+        case gifs = "GIFs Page"
+        case appearance = "Appearance Page"
+    }
+    
+    func logScreenView(screenName: ScreenName) {
+        let parameters: [String: Any] = [AnalyticsParameterScreenName: screenName.rawValue]
+        
+        Analytics.logEvent(AnalyticsEventScreenView, parameters: parameters)
+    }
+    
     enum ContentType: String {
         case meme = "Meme"
         case joke = "Joke"

@@ -43,6 +43,12 @@ final class SettingViewController: BaseViewController {
         setupBinding()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        AnalyticsManager.shared.logScreenView(screenName: .settings)
+    }
+    
     // MARK: - Setup
     private func setupUI() {
         navigationItem.title = "Setting".localized()
