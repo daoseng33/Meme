@@ -13,7 +13,8 @@ env:
 jobs:
   test_meme:
     runs-on: self-hosted
-
+    env:
+      CI: true
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
