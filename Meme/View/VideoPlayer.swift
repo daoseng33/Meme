@@ -72,7 +72,7 @@ final class VideoPlayerView: UIView {
     // MARK: - Setup
     private func setupView() {
         playerLayer = AVPlayerLayer(player: player)
-        playerLayer?.videoGravity = .resizeAspectFill
+        playerLayer?.videoGravity = .resizeAspect
         layer.addSublayer(playerLayer!)
         
         addSubview(activityIndicator)
