@@ -153,6 +153,10 @@ extension SettingViewController: UITableViewDelegate {
         case .contactUs:
             AnalyticsManager.shared.logSettingContactUsClick()
             
+            if let url = URL(string: Constant.URL.discord) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+            
         case .version:
             break
         }

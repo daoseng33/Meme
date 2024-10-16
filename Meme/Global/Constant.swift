@@ -26,4 +26,8 @@ enum Constant {
     enum Key {
         static let isFavorite = "isFavorite"
     }
+    
+    enum URL {
+        static let discord = "https://discord.gg/cNhvGKQgEY"
+    }
 }
