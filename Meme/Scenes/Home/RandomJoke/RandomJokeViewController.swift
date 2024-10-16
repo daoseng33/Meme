@@ -142,6 +142,7 @@ final class RandomJokeViewController: BaseViewController {
         generateJokeButton.tapEvent
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
+                AnalyticsManager.shared.logGenerateContentClickEvent(type: .joke)
                 self.viewModel.fetchData()
             })
             .disposed(by: rx.disposeBag)
@@ -161,6 +162,7 @@ final class RandomJokeViewController: BaseViewController {
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
                 self.viewModel.toggleIsFavorite()
+                AnalyticsManager.shared.logFavoriteEvent(isFavorite: self.viewModel.isFavoriteRelay.value)
                 InAppReviewManager.shared.requestReview()
             })
             .disposed(by: rx.disposeBag)

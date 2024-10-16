@@ -182,6 +182,7 @@ final class RandomMemeViewController: BaseViewController {
         generateMemeButton.tapEvent
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
+                AnalyticsManager.shared.logGenerateContentClickEvent(type: .meme)
                 self.viewModel.isFavoriteRelay.accept(false)
                 self.videoPlayerView.reset()
                 self.viewModel.fetchData()
@@ -229,6 +230,7 @@ final class RandomMemeViewController: BaseViewController {
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
                 self.viewModel.toggleIsFavorite()
+                AnalyticsManager.shared.logFavoriteEvent(isFavorite: self.viewModel.isFavoriteRelay.value)
                 InAppReviewManager.shared.requestReview()
             })
             .disposed(by: rx.disposeBag)

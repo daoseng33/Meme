@@ -154,7 +154,9 @@ final class GeneralContentCell: UITableViewCell {
         actionsContainerView.favoriteButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
-                self.viewModel?.toggleIsFavorite()
+                guard let viewModel = self.viewModel else { return }
+                viewModel.toggleIsFavorite()
+                AnalyticsManager.shared.logFavoriteEvent(isFavorite: viewModel.isFavoriteRelay.value)
                 InAppReviewManager.shared.requestReview()
             })
             .disposed(by: rx.disposeBag)

@@ -15,6 +15,35 @@ final class AnalyticsManager {
     private init() { }
 }
 
+// MARK: - General
+extension AnalyticsManager {
+    enum EventName: String {
+        case attStatus
+        case favorite
+        case generateContentClick
+        
+        var value: String {
+            switch self {
+                // Custom event
+            case .attStatus, .favorite:
+                return rawValue.camelCaseToSnakeCase()
+                // Others
+            case _:
+                return rawValue.camelCaseToTitleCase()
+            }
+        }
+    }
+    
+    enum EventParameter: String {
+        case isFavorite
+        case status
+        
+        var value: String {
+            return rawValue.camelCaseToSnakeCase()
+        }
+    }
+}
+
 // MARK: - Screen
 extension AnalyticsManager {
     enum ScreenName: String {
@@ -53,25 +82,7 @@ extension AnalyticsManager {
 
 // MARK: - Custom
 extension AnalyticsManager {
-    enum CustomEventName: String {
-        case attStatus
-        case favorite
-        
-        var value: String {
-            return rawValue.camelCaseToSnakeCase()
-        }
-    }
-    
-    enum EventParameter: String {
-        case isFavorite
-        case status
-        
-        var value: String {
-            return rawValue.camelCaseToSnakeCase()
-        }
-    }
-    
-    private func logCustomEvent(eventName: CustomEventName, parameters: [String: Any]?) {
+    private func logCustomEvent(eventName: EventName, parameters: [String: Any]?) {
         Analytics.logEvent(eventName.value, parameters: parameters)
     }
     
@@ -90,7 +101,14 @@ extension AnalyticsManager {
 
 // MARK: - Select Content
 extension AnalyticsManager {
-    func logSelectConentEvent(parameters: [String: Any]?) {
+    private func logSelectConentEvent(parameters: [String: Any]?) {
         Analytics.logEvent(AnalyticsEventSelectContent, parameters: parameters)
+    }
+    
+    func logGenerateContentClickEvent(type: ContentType) {
+        logSelectConentEvent(parameters: [
+            AnalyticsParameterContent: EventName.generateContentClick.value,
+            AnalyticsParameterContentType: type.rawValue,
+        ])
     }
 }
