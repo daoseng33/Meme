@@ -15,6 +15,7 @@ import RealmSwift
 import ProgressHUD
 import FirebaseCore
 import FirebaseAnalytics
+import AppTrackingTransparency
 
 final class Launcher {
     func launch() {
@@ -26,6 +27,7 @@ final class Launcher {
         setupRealmDatabase()
         setupLoadingHUD()
         setupFirebase()
+        requestTrackingAuthorization()
     }
     
     private func handleGlobalError() {
@@ -136,5 +138,22 @@ final class Launcher {
         else { assert(false, "Couldn't load DEV config file") }
         FirebaseApp.configure(options: fileopts)
 #endif
+    }
+    
+    private func requestTrackingAuthorization() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            ATTrackingManager.requestTrackingAuthorization { status in
+                AnalyticsManager.shared.logAttStatusEvent(attStatus: status)
+                
+                switch status {
+                case .authorized:
+                    print("User allows tracking")
+                case .denied, .restricted:
+                    print("User denied tracking")
+                case _:
+                    break
+                }
+            }
+        })
     }
 }

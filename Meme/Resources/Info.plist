@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>${PHOTO_LIBRARY_USAGE_DESCRIPTION}</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>${TRACKING_USAGE_DESCRIPTION}</string>
 	<key>FIREBASE_ANALYTICS_COLLECTION_ENABLED</key>
 	<true/>
 	<key>API_KEY</key>
