@@ -36,7 +36,7 @@ jobs:
         run: xcodebuild -resolvePackageDependencies -project Meme.xcodeproj
 
       - name: Xcode clean Meme project
-        run: xcodebuild clean -project Meme.xcodeproj -scheme MemeCI -destination "${{ env.XCODE_DESTINATION }}"
+        run: xcodebuild clean -project Meme.xcodeproj -scheme Meme -destination "${{ env.XCODE_DESTINATION }}"
 
       - name: Build Meme project
         run: xcodebuild build -project Meme.xcodeproj -scheme Meme -destination "${{ env.XCODE_DESTINATION }}"
