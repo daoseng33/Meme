@@ -11,7 +11,7 @@ env:
   DEVELOPER_DIR: /Applications/Xcode-16.0.0.app/Contents/Developer
 
 jobs:
-  test_meme:
+  build_and_test_meme:
     runs-on: self-hosted
     env:
       CI: true
@@ -32,11 +32,17 @@ jobs:
           xcrun simctl shutdown all
           xcrun simctl erase all
 
-      - name: Xcode Clean
-        run: xcodebuild clean -project Meme.xcodeproj -scheme MemeCI -destination "${{ env.XCODE_DESTINATION }}"
-
       - name: Install dependencies
         run: xcodebuild -resolvePackageDependencies -project Meme.xcodeproj
 
-      - name: Run Meme tests
+      - name: Xcode clean Meme project
+        run: xcodebuild clean -project Meme.xcodeproj -scheme MemeCI -destination "${{ env.XCODE_DESTINATION }}"
+
+      - name: Build Meme project
+        run: xcodebuild build -project Meme.xcodeproj -scheme Meme -destination "${{ env.XCODE_DESTINATION }}"
+
+      - name: Xcode clean MemeCI project
+        run: xcodebuild clean -project Meme.xcodeproj -scheme MemeCI -destination "${{ env.XCODE_DESTINATION }}"
+
+      - name: Run MemeCI tests
         run: xcodebuild test -project Meme.xcodeproj -scheme MemeCI -destination "${{ env.XCODE_DESTINATION }}"
