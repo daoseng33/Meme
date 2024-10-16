@@ -2,12 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>GAD_FULL_PAGE_AD_UNIT_ID</key>
-	<string>$(GAD_FULL_PAGE_AD_UNIT_ID)</string>
-	<key>GAD_BANNER_AD_UNIT_ID</key>
-	<string>$(GAD_BANNER_AD_UNIT_ID)</string>
+	<key>API_KEY</key>
+	<string>$(API_KEY)</string>
+	<key>FIREBASE_ANALYTICS_COLLECTION_ENABLED</key>
+	<true/>
 	<key>GADApplicationIdentifier</key>
 	<string>$(GAD_APP_ID)</string>
+	<key>GAD_BANNER_AD_UNIT_ID</key>
+	<string>$(GAD_BANNER_AD_UNIT_ID)</string>
+	<key>GAD_FULL_PAGE_AD_UNIT_ID</key>
+	<string>$(GAD_FULL_PAGE_AD_UNIT_ID)</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
@@ -179,14 +183,6 @@
 			<string>3qcr597p9d.skadnetwork</string>
 		</dict>
 	</array>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>${PHOTO_LIBRARY_USAGE_DESCRIPTION}</string>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>${TRACKING_USAGE_DESCRIPTION}</string>
-	<key>FIREBASE_ANALYTICS_COLLECTION_ENABLED</key>
-	<true/>
-	<key>API_KEY</key>
-	<string>$(API_KEY)</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

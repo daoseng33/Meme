@@ -25,7 +25,8 @@ class BaseNavigationController: UINavigationController {
     
     // MARK: - Actions
     @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
-        guard let topViewController = viewControllers.last else { return }
+        guard let topViewController = viewControllers.last,
+              topViewController != viewControllers.first else { return }
         
         let translation = gesture.translation(in: view)
         let progress = translation.x / view.bounds.width
