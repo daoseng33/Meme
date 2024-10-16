@@ -31,11 +31,11 @@ class GeneralContentViewModel: GeneralContentViewModelProtocol {
     // MARK: - Init
     required init(predicate: NSPredicate? = nil) {
         self.predicate = predicate
-        setupObserver()
+        setupObservable()
     }
 
     // MARK: - SetupObserver
-    private func setupObserver() {
+    private func setupObservable() {
         Observable.combineLatest(memeDatasRelay,
                                  jokeDatasRelay,
                                  imageDatasRelay,
@@ -112,6 +112,20 @@ class GeneralContentViewModel: GeneralContentViewModelProtocol {
             self.reloadDataRelay.accept(())
         })
         .disposed(by: disposeBag)
+        
+        filterContainerViewModel.selectedDateRelay
+            .skip(1)
+            .subscribe(onNext: { date in
+                AnalyticsManager.shared.logSelectDateTypeEvent(dateType: date)
+            })
+            .disposed(by: disposeBag)
+        
+        filterContainerViewModel.selectedCategoryRelay
+            .skip(1)
+            .subscribe(onNext: { category in
+                AnalyticsManager.shared.logSelectCategoryTypeEvent(categoryType: category)
+            })
+            .disposed(by: disposeBag)
     }
     
     // MARK: - Getter

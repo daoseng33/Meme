@@ -23,6 +23,8 @@ extension AnalyticsManager {
         case favorite
         case generateContentClick
         case jokeCategorySelect
+        case menuDateSelect
+        case menuCategorySelect
         
         var value: String {
             switch self {
@@ -118,6 +120,20 @@ extension AnalyticsManager {
         logSelectConentEvent(parameters: [
             AnalyticsParameterContent: EventName.jokeCategorySelect.value,
             AnalyticsParameterContentType: category.rawValue
+        ])
+    }
+    
+    func logSelectDateTypeEvent(dateType: MenuDate) {
+        logSelectConentEvent(parameters: [
+            AnalyticsParameterContent: EventName.menuDateSelect.value,
+            AnalyticsParameterContentType: dateType.rawValue
+        ])
+    }
+    
+    func logSelectCategoryTypeEvent(categoryType: MenuCategory) {
+        logSelectConentEvent(parameters: [
+            AnalyticsParameterContent: EventName.menuCategorySelect.value,
+            AnalyticsParameterContentType: categoryType.rawValue
         ])
     }
 }
