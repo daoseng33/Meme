@@ -182,7 +182,7 @@ final class RandomMemeViewController: BaseViewController {
         generateMemeButton.tapEvent
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
-                AnalyticsManager.shared.logGenerateContentClickEvent(type: .meme)
+                AnalyticsManager.shared.logGenerateContentClickEvent(type: .meme, keyword: self.viewModel.keywordRelay.value)
                 self.viewModel.isFavoriteRelay.accept(false)
                 self.videoPlayerView.reset()
                 self.viewModel.fetchData()

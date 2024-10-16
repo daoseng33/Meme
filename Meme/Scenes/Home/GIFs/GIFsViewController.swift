@@ -134,7 +134,7 @@ final class GIFsViewController: BaseViewController {
         generateGifsButton.tapEvent
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
-                AnalyticsManager.shared.logGenerateContentClickEvent(type: .gif)
+                AnalyticsManager.shared.logGenerateContentClickEvent(type: .gif, keyword: self.viewModel.keywordRelay.value)
                 self.viewModel.fetchData()
             })
             .disposed(by: rx.disposeBag)

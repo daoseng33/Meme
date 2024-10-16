@@ -41,6 +41,7 @@ extension AnalyticsManager {
     enum EventParameter: String {
         case isFavorite
         case status
+        case keyword
         
         var value: String {
             return rawValue.camelCaseToSnakeCase()
@@ -109,10 +110,11 @@ extension AnalyticsManager {
         Analytics.logEvent(AnalyticsEventSelectContent, parameters: parameters)
     }
     
-    func logGenerateContentClickEvent(type: ContentType) {
+    func logGenerateContentClickEvent(type: ContentType, keyword: String? = nil) {
         logSelectConentEvent(parameters: [
             AnalyticsParameterContent: EventName.generateContentClick.value,
             AnalyticsParameterContentType: type.rawValue,
+            EventParameter.keyword.rawValue: keyword ?? ""
         ])
     }
     
