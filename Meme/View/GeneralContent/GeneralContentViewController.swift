@@ -21,8 +21,6 @@ class GeneralContentViewController: BaseViewController {
     private let refreshControl = UIRefreshControl()
     
     // MARK: - UI
-    private lazy var adBannerView = AdBannerView(parentVC: self)
-    
     private lazy var filterContainerView: FilterContainerView = {
         let filterContainerView = FilterContainerView(viewModel: viewModel.filterContainerViewModel)
         
@@ -83,12 +81,6 @@ class GeneralContentViewController: BaseViewController {
     private func setupUI() {
         navigationItem.title = naviItemTitle
         
-        view.addSubview(adBannerView)
-        adBannerView.snp.makeConstraints {
-            $0.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(Constant.adBannerHeight)
-        }
-        
         view.addSubview(filterContainerView)
         filterContainerView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -98,9 +90,7 @@ class GeneralContentViewController: BaseViewController {
         
         view.addSubview(contentTableView)
         contentTableView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            $0.bottom.equalTo(adBannerView.snp.top)
-            $0.left.right.equalToSuperview()
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
         
         view.bringSubviewToFront(filterContainerView)
@@ -212,7 +202,7 @@ extension GeneralContentViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        32
+        return 32
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -223,7 +213,7 @@ extension GeneralContentViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        Constant.spacing3
+        return Constant.spacing3
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

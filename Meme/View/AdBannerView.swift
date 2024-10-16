@@ -40,7 +40,7 @@ final class AdBannerView: UIView {
             adBannerView.adUnitID = adUnitId
         }
         #else
-        adBannerView.adUnitID = "ca-app-pub-3940256099942544/2435281174"
+        adBannerView.adUnitID = Constant.DEBUG.gadBannerUnitId
         #endif
         adBannerView.rootViewController = parentVC
 

@@ -32,4 +32,9 @@ enum Constant {
     enum URL {
         static let discord = "https://discord.gg/cNhvGKQgEY"
     }
+    
+    enum DEBUG {
+        static let gadBannerUnitId = "ca-app-pub-3940256099942544/2435281174"
+        static let gadFullPageUnitId = "ca-app-pub-3940256099942544/4411468910"
+    }
 }
