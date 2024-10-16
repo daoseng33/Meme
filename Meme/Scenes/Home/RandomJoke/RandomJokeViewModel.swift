@@ -107,6 +107,14 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
     }
     
     private func setupObservable() {
+        selectedCategorySubject
+            .skip(1)
+            .withUnretained(self)
+            .subscribe(onNext: { (self, _) in
+                AnalyticsManager.shared.logSelectJokeCategoryEvent(category: self.selectedCategory)
+            })
+            .disposed(by: disposeBag)
+        
         isFavoriteRelay
             .withUnretained(self)
             .subscribe(onNext: { (self, isFavorite) in

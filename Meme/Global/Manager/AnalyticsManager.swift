@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseAnalytics
 import AppTrackingTransparency
+import HumorAPIService
 
 final class AnalyticsManager {
     static let shared = AnalyticsManager()
@@ -21,6 +22,7 @@ extension AnalyticsManager {
         case attStatus
         case favorite
         case generateContentClick
+        case jokeCategorySelect
         
         var value: String {
             switch self {
@@ -109,6 +111,13 @@ extension AnalyticsManager {
         logSelectConentEvent(parameters: [
             AnalyticsParameterContent: EventName.generateContentClick.value,
             AnalyticsParameterContentType: type.rawValue,
+        ])
+    }
+    
+    func logSelectJokeCategoryEvent(category: JokeCategory) {
+        logSelectConentEvent(parameters: [
+            AnalyticsParameterContent: EventName.jokeCategorySelect.value,
+            AnalyticsParameterContentType: category.rawValue
         ])
     }
 }
