@@ -16,6 +16,7 @@ import ProgressHUD
 import FirebaseCore
 import FirebaseAnalytics
 import AppTrackingTransparency
+import GoogleMobileAds
 
 final class Launcher {
     func launch() {
@@ -155,5 +156,9 @@ final class Launcher {
                 }
             }
         })
+    }
+    
+    private func setupAdMob() {
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
     }
 }

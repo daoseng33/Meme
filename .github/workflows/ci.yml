@@ -19,9 +19,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Clear Derived Data
+      - name: Update Info.plist
         run: |
-          rm -rf ~/Library/Developer/Xcode/DerivedData/*
+          cd Meme/Resources
+          plutil -replace GADApplicationIdentifier -string "ca-app-pub-3940256099942544~1458002511" Info.plist
+
+      - name: Clear Derived Data
+        run: rm -rf ~/Library/Developer/Xcode/DerivedData/*
 
       - name: Reset Simulators
         run: |
@@ -29,24 +33,10 @@ jobs:
           xcrun simctl erase all
 
       - name: Xcode Clean
-        run: |
-          xcodebuild clean -project Meme.xcodeproj -scheme MemeCI -destination "${{ env.XCODE_DESTINATION }}"
+        run: xcodebuild clean -project Meme.xcodeproj -scheme MemeCI -destination "${{ env.XCODE_DESTINATION }}"
 
       - name: Install dependencies
-        run: |
-          xcodebuild -resolvePackageDependencies -project Meme.xcodeproj
-
-      - name: Create plist file with sensitive data
-        run: |
-          echo '<?xml version="1.0" encoding="UTF-8"?>' > Meme/APIConfig.plist
-          echo '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">' >> Meme/APIConfig.plist
-          echo '<plist version="1.0">' >> Meme/APIConfig.plist
-          echo '<dict>' >> Meme/APIConfig.plist
-          echo '  <key>API_KEY</key>' >> Meme/APIConfig.plist
-          echo '  <string>testAPIKey</string>' >> Meme/APIConfig.plist
-          echo '</dict>' >> Meme/APIConfig.plist
-          echo '</plist>' >> Meme/APIConfig.plist
+        run: xcodebuild -resolvePackageDependencies -project Meme.xcodeproj
 
       - name: Run Meme tests
-        run: |
-          xcodebuild test -project Meme.xcodeproj -scheme MemeCI -destination "${{ env.XCODE_DESTINATION }}"
+        run: xcodebuild test -project Meme.xcodeproj -scheme MemeCI -destination "${{ env.XCODE_DESTINATION }}"

@@ -15,6 +15,8 @@ final class SettingViewController: BaseViewController {
     private let viewModel: SettingViewModel
     
     // MARK: - UI
+    private lazy var adBannerView = AdBannerView(parentVC: self)
+    
     private lazy var settingTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
@@ -53,9 +55,16 @@ final class SettingViewController: BaseViewController {
     private func setupUI() {
         navigationItem.title = "Setting".localized()
         
+        view.addSubview(adBannerView)
+        adBannerView.snp.makeConstraints {
+            $0.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(Constant.adBannerHeight)
+        }
+        
         view.addSubview(settingTableView)
         settingTableView.snp.makeConstraints {
-            $0.top.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(adBannerView.snp.top)
             $0.left.right.equalToSuperview()
         }
     }

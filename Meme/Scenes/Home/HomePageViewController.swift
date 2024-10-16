@@ -7,8 +7,12 @@
 
 import UIKit
 import SnapKit
+import GoogleMobileAds
 
 final class HomePageViewController: BaseViewController {
+    // MARK: - UI
+    private lazy var adBannerView = AdBannerView(parentVC: self)
+    
     // MARK: - Properties
     let viewModel = HomePageViewModel()
     private lazy var homePageCollectionView = GridCollectionView(viewModel: viewModel.gridCollectionViewModel)
@@ -31,9 +35,16 @@ final class HomePageViewController: BaseViewController {
         navigationItem.title = "Memepire".localized()
         homePageCollectionView.delegate = self
 
+        view.addSubview(adBannerView)
+        adBannerView.snp.makeConstraints {
+            $0.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(Constant.adBannerHeight)
+        }
+        
         view.addSubview(homePageCollectionView)
         homePageCollectionView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.left.right.equalToSuperview()
+            $0.bottom.equalTo(adBannerView.snp.top)
         }
     }
 }
