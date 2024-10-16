@@ -57,7 +57,9 @@ final class GeneralContentCell: UITableViewCell {
     
     // MARK: - Setup
     private func setupUI() {
-        contentView.backgroundColor = .secondarySystemGroupedBackground
+        contentView.backgroundColor = UIColor(dynamicProvider: { traitCollection in
+            return traitCollection.userInterfaceStyle == .dark ? .tertiarySystemGroupedBackground : .secondarySystemGroupedBackground
+        })
         
         animatedImageView.addSubview(videoPlayerView)
         videoPlayerView.snp.makeConstraints {

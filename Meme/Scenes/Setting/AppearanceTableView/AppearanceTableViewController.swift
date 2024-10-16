@@ -47,6 +47,7 @@ final class AppearanceTableViewController: UITableViewController {
     
     // MARK: - Setup
     private func setupUI() {
+        navigationItem.title = "Appearance".localized()
         tableView.backgroundColor = .secondarySystemBackground
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.allowsSelection = true
@@ -63,7 +64,9 @@ final class AppearanceTableViewController: UITableViewController {
         let appearanceType = AppearanceStyle.allCases[indexPath.row]
         cell.textLabel?.text = appearanceType.rawValue.localized()
         cell.selectionStyle = .none
-        cell.backgroundColor = .secondarySystemGroupedBackground
+        cell.backgroundColor = UIColor(dynamicProvider: { traitCollection in
+            return traitCollection.userInterfaceStyle == .dark ? .tertiarySystemGroupedBackground : .secondarySystemGroupedBackground
+        })
 
         if tableView.indexPathForSelectedRow == indexPath {
             cell.accessoryType = .checkmark
