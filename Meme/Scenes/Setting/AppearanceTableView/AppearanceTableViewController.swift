@@ -83,6 +83,8 @@ final class AppearanceTableViewController: UITableViewController {
         
         let appearanceType = AppearanceStyle.allCases[indexPath.row]
         
+        AnalyticsManager.shared.logAppearanceModeSelect(mode: appearanceType)
+        
         switch appearanceType {
             
         case .system:

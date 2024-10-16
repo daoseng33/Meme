@@ -128,6 +128,8 @@ extension SettingViewController: UITableViewDelegate {
         
         switch rowType {
         case .appearance:
+            AnalyticsManager.shared.logSettingAppearanceClick()
+            
             let appearanceViewController = AppearanceTableViewController(viewModel: viewModel.appearanceTableViewModel)
             navigationController?.pushViewController(appearanceViewController, animated: true)
             
@@ -136,16 +138,18 @@ extension SettingViewController: UITableViewDelegate {
                 return
             }
             
+            AnalyticsManager.shared.logSettingLanguageClick()
+            
             UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
             
         case .removeAds:
-            break
+            AnalyticsManager.shared.logSettingRemoveAdsClick()
             
         case .restorePurchases:
-            break
+            AnalyticsManager.shared.logSettingRestorePurchasesClick()
             
         case .contactUs:
-            break
+            AnalyticsManager.shared.logSettingContactUsClick()
             
         case .version:
             break

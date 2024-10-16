@@ -26,6 +26,12 @@ extension AnalyticsManager {
         case menuDateSelect
         case menuCategorySelect
         case photoBrowserClick
+        case settingAppearanceClick
+        case settingLanguageClick
+        case settingRemoveAdsClick
+        case settingRestorePurchasesClick
+        case settingContactUsClick
+        case appearanceModeSelect
         
         var value: String {
             switch self {
@@ -143,6 +149,43 @@ extension AnalyticsManager {
     func logPhotoBrowserClick() {
         logSelectConentEvent(parameters: [
             AnalyticsParameterContent: EventName.photoBrowserClick.value
+        ])
+    }
+    
+    func logSettingAppearanceClick() {
+        logSelectConentEvent(parameters: [
+            AnalyticsParameterContent: EventName.settingAppearanceClick.value
+        ])
+    }
+    
+    func logSettingLanguageClick() {
+        logSelectConentEvent(parameters: [
+            AnalyticsParameterContent: EventName.settingLanguageClick.value
+        ])
+    }
+    
+    func logSettingRemoveAdsClick() {
+        logSelectConentEvent(parameters: [
+            AnalyticsParameterContent: EventName.settingRemoveAdsClick.value
+        ])
+    }
+    
+    func logSettingRestorePurchasesClick() {
+        logSelectConentEvent(parameters: [
+            AnalyticsParameterContent: EventName.settingRestorePurchasesClick.value
+        ])
+    }
+    
+    func logSettingContactUsClick() {
+        logSelectConentEvent(parameters: [
+            AnalyticsParameterContent: EventName.settingContactUsClick.value
+        ])
+    }
+    
+    func logAppearanceModeSelect(mode: AppearanceStyle) {
+        logSelectConentEvent(parameters: [
+            AnalyticsParameterContent: EventName.appearanceModeSelect.value,
+            AnalyticsParameterContentType: mode.rawValue
         ])
     }
 }
