@@ -175,5 +175,7 @@ extension GIFsViewController: GridCollectionViewDelegate {
         
         let browser = SKPhotoBrowser(photos: images)
         present(browser, animated: true)
+        
+        AnalyticsManager.shared.logPhotoBrowserClick()
     }
 }

@@ -156,6 +156,8 @@ extension GeneralContentViewController: UITableViewDataSource {
                     let browser = SKPhotoBrowser(photos: images)
                     
                     self.present(browser, animated: true)
+                    
+                    AnalyticsManager.shared.logPhotoBrowserClick()
                 }
                 .disposed(by: cell.rx.disposeBag)
             

@@ -25,6 +25,7 @@ extension AnalyticsManager {
         case jokeCategorySelect
         case menuDateSelect
         case menuCategorySelect
+        case photoBrowserClick
         
         var value: String {
             switch self {
@@ -136,6 +137,12 @@ extension AnalyticsManager {
         logSelectConentEvent(parameters: [
             AnalyticsParameterContent: EventName.menuCategorySelect.value,
             AnalyticsParameterContentType: categoryType.rawValue
+        ])
+    }
+    
+    func logPhotoBrowserClick() {
+        logSelectConentEvent(parameters: [
+            AnalyticsParameterContent: EventName.photoBrowserClick.value
         ])
     }
 }

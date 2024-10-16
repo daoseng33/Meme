@@ -242,6 +242,8 @@ final class RandomMemeViewController: BaseViewController {
             let browser = SKPhotoBrowser(photos: images)
             
             present(browser, animated: true)
+            
+            AnalyticsManager.shared.logPhotoBrowserClick()
         } else {
             if videoPlayerView.timeStatus == .playing {
                 videoPlayerView.pause()
