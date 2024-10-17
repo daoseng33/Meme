@@ -40,3 +40,5 @@ MLImageAsset
 Meme/Resources/Secrects.xcconfig
 Meme/Resources/GoogleService-Info.plist
 Meme/Resources/GoogleService-Info-Dev.plist
+
+Meme/Resources/remote_config_defaults.plist

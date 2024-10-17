@@ -12,6 +12,9 @@ import RxCocoa
 import RxSwift
 
 final class RandomMemeViewModel: RandomMemeViewModelProtocol {
+    // MARK: - Properties
+    let adFullPageHandler: AdFullPageHandler = AdFullPageHandler()
+    
     var loadingState: LoadingState {
         return loadingStateRelay.value
     }
@@ -20,7 +23,6 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
         return loadingStateRelay.asDriver()
     }
     
-    // MARK: - Properties
     var mediaDriver: Driver<(mediaURL: URL?, type: MemeMediaType)> {
         mediaRelay.asDriver().filter { $0.mediaURL != nil }
     }
@@ -73,6 +75,8 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
 
     func fetchData() {
         loadingStateRelay.accept(.loading)
+        
+        adFullPageHandler.increaseRequestCount()
         
         var keyword: String = ""
         if let value: String = keywordRelay.value {

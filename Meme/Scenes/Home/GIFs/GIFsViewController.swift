@@ -45,6 +45,7 @@ final class GIFsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setup()
         setupUI()
         setupBinding()
         setupActions()
@@ -63,6 +64,10 @@ final class GIFsViewController: BaseViewController {
     }
     
     // MARK: - Setup
+    private func setup() {
+        viewModel.adFullPageHandler.loadFullPageAd()
+    }
+    
     private func setupUI() {
         navigationItem.title = "GIFs".localized()
         
@@ -135,7 +140,12 @@ final class GIFsViewController: BaseViewController {
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
                 AnalyticsManager.shared.logGenerateContentClickEvent(type: .gif, keyword: self.viewModel.keywordRelay.value)
-                self.viewModel.fetchData()
+                
+                if self.viewModel.adFullPageHandler.shouldDisplayAd {
+                    self.viewModel.adFullPageHandler.presentFullPageAd(parentVC: self)
+                } else {
+                    self.viewModel.fetchData()
+                }
             })
             .disposed(by: rx.disposeBag)
         
@@ -154,6 +164,13 @@ final class GIFsViewController: BaseViewController {
                     }
                 }
             }
+            .disposed(by: rx.disposeBag)
+        
+        viewModel.adFullPageHandler.dismissAdObservable
+            .withUnretained(self)
+            .subscribe(onNext: { (self, _) in
+                self.viewModel.fetchData()
+            })
             .disposed(by: rx.disposeBag)
     }
 }

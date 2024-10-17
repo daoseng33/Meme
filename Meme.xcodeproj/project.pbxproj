@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1C01D4182C904DE9007E93A9 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1C01D4172C904DE9007E93A9 /* Kingfisher */; };
 		1C020EF42C981F450028CAE0 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1C020EF32C981F450028CAE0 /* IQKeyboardManagerSwift */; };
+		1C0D0A0F2CC0BDFC004C82F2 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 1C0D0A0E2CC0BDFC004C82F2 /* FirebaseRemoteConfig */; };
 		1C2D212F2C9D61DE00589C6A /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 1C2D212E2C9D61DE00589C6A /* SFSafeSymbols */; };
 		1C770F352CB6598700ECE617 /* HumorAPIService in Frameworks */ = {isa = PBXBuildFile; productRef = 1C770F342CB6598700ECE617 /* HumorAPIService */; };
 		1C7A0D8C2CB8119A0083C436 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 1C7A0D8B2CB8119A0083C436 /* ProgressHUD */; };
@@ -74,6 +75,7 @@
 				1C7A0DA92CBE280D0083C436 /* FirebasePerformance in Frameworks */,
 				1C020EF42C981F450028CAE0 /* IQKeyboardManagerSwift in Frameworks */,
 				1C01D4182C904DE9007E93A9 /* Kingfisher in Frameworks */,
+				1C0D0A0F2CC0BDFC004C82F2 /* FirebaseRemoteConfig in Frameworks */,
 				1C87C34E2C9961FB00A63581 /* RxCocoa in Frameworks */,
 				1C7A0D8C2CB8119A0083C436 /* ProgressHUD in Frameworks */,
 				1CE0575F2CBFAD1400873753 /* GoogleMobileAds in Frameworks */,
@@ -160,6 +162,7 @@
 				1C7A0DA82CBE280D0083C436 /* FirebasePerformance */,
 				1C7A0DAF2CBE451D0083C436 /* FirebaseCrashlytics */,
 				1CE0575E2CBFAD1400873753 /* GoogleMobileAds */,
+				1C0D0A0E2CC0BDFC004C82F2 /* FirebaseRemoteConfig */,
 			);
 			productName = Meme;
 			productReference = 1CDA35302C81AB6C001FF654 /* Meme.app */;
@@ -790,6 +793,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1C020EF22C981F450028CAE0 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		1C0D0A0E2CC0BDFC004C82F2 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C7A0DA22CBE23840083C436 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
 		};
 		1C2D212E2C9D61DE00589C6A /* SFSafeSymbols */ = {
 			isa = XCSwiftPackageProductDependency;

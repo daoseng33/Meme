@@ -12,6 +12,9 @@ import RxCocoa
 import HumorAPIService
 
 final class RandomJokeViewModel: RandomJokeViewModelProtocol {
+    // MARK: - Porperties
+    let adFullPageHandler: AdFullPageHandler = AdFullPageHandler()
+    
     var loadingStateDriver: Driver<LoadingState> {
         loadingStateRelay.asDriver()
     }
@@ -20,7 +23,6 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
         loadingStateRelay.value
     }
     
-    // MARK: - Porperties
     var jokeObservable: Observable<String> {
         jokeRelay.asObservable()
     }
@@ -78,6 +80,8 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
     
     func fetchData() {
         loadingStateRelay.accept(.loading)
+        
+        adFullPageHandler.increaseRequestCount()
         
         webService.fetchRandomJoke(tags: [selectedCategory], excludedTags: [], minRating: 9, maxLength: 999)
             .subscribe(onSuccess: { [weak self] result in

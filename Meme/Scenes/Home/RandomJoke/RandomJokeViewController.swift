@@ -10,7 +10,6 @@ import SnapKit
 import RxCocoa
 import SFSafeSymbols
 import ProgressHUD
-import StoreKit
 
 final class RandomJokeViewController: BaseViewController {
     // MARK: - Properties
@@ -54,10 +53,11 @@ final class RandomJokeViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - View life cycle
+    // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setup()
         setupUI()
         setupBinding()
         setupActions()
@@ -76,6 +76,10 @@ final class RandomJokeViewController: BaseViewController {
     }
     
     // MARK: - Setup
+    private func setup() {
+        viewModel.adFullPageHandler.loadFullPageAd()
+    }
+    
     private func setupUI() {
         navigationItem.title = "Random Joke".localized()
         
@@ -143,7 +147,11 @@ final class RandomJokeViewController: BaseViewController {
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
                 AnalyticsManager.shared.logGenerateContentClickEvent(type: .joke)
-                self.viewModel.fetchData()
+                if self.viewModel.adFullPageHandler.shouldDisplayAd {
+                    self.viewModel.adFullPageHandler.presentFullPageAd(parentVC: self)
+                } else {
+                    self.viewModel.fetchData()
+                }
             })
             .disposed(by: rx.disposeBag)
         
@@ -207,6 +215,13 @@ final class RandomJokeViewController: BaseViewController {
         
         viewModel.isFavoriteRelay
             .bind(to: actionsContainerView.favoriteButton.rx.isSelected)
+            .disposed(by: rx.disposeBag)
+        
+        viewModel.adFullPageHandler.dismissAdObservable
+            .withUnretained(self)
+            .subscribe(onNext: { (self, _) in
+                self.viewModel.fetchData()
+            })
             .disposed(by: rx.disposeBag)
     }
 }

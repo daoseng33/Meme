@@ -23,7 +23,9 @@ enum Constant {
     /// 20
     static let spacing5: CGFloat = 20
     
-    static let adBannerHeight: CGFloat = 70
+    enum Ad {
+        static let adBannerHeight: CGFloat = 70
+    }
     
     enum Key {
         static let isFavorite = "isFavorite"

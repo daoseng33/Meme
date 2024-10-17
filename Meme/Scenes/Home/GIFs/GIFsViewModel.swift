@@ -17,6 +17,7 @@ final class GIFsViewModel: GIFsViewModelProtocol {
     private let webService: GIFsAPIServiceProtocol
     private let disposeBag = DisposeBag()
     
+    let adFullPageHandler: AdFullPageHandler = AdFullPageHandler()
     var imageDatas: [ImageData] = []
     let keywordRelay = BehaviorRelay<String?>(value: nil)
     let gridCollectionViewModel: GridCollectionViewModelProtocol = GridCollectionViewModel(gridDatas: [])
@@ -70,6 +71,9 @@ final class GIFsViewModel: GIFsViewModelProtocol {
     
     func fetchData() {
         loadingStateRelay.accept(.loading)
+        
+        adFullPageHandler.increaseRequestCount()
+        
         // !query could not be empty string!
         let query: String
         if let keywordString = keywordRelay.value, !keywordString.isEmpty {

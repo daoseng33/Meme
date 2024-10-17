@@ -38,7 +38,7 @@ final class HomePageViewController: BaseViewController {
         view.addSubview(adBannerView)
         adBannerView.snp.makeConstraints {
             $0.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(Constant.adBannerHeight)
+            $0.height.equalTo(Constant.Ad.adBannerHeight)
         }
         
         view.addSubview(homePageCollectionView)

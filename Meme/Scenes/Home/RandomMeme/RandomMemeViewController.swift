@@ -71,6 +71,7 @@ final class RandomMemeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setup()
         setupUI()
         setupBinding()
         setupActions()
@@ -95,6 +96,10 @@ final class RandomMemeViewController: BaseViewController {
     }
     
     // MARK: - Setup
+    private func setup() {
+        viewModel.adFullPageHandler.loadFullPageAd()
+    }
+    
     private func setupUI() {
         navigationItem.title = "Random Meme".localized()
         
@@ -185,7 +190,12 @@ final class RandomMemeViewController: BaseViewController {
                 AnalyticsManager.shared.logGenerateContentClickEvent(type: .meme, keyword: self.viewModel.keywordRelay.value)
                 self.viewModel.isFavoriteRelay.accept(false)
                 self.videoPlayerView.reset()
-                self.viewModel.fetchData()
+                
+                if self.viewModel.adFullPageHandler.shouldDisplayAd {
+                    self.viewModel.adFullPageHandler.presentFullPageAd(parentVC: self)
+                } else {
+                    self.viewModel.fetchData()
+                }
             })
             .disposed(by: rx.disposeBag)
         
@@ -319,6 +329,13 @@ final class RandomMemeViewController: BaseViewController {
         
         keywordTextField.textBinder
             .bind(to: viewModel.keywordRelay)
+            .disposed(by: rx.disposeBag)
+        
+        viewModel.adFullPageHandler.dismissAdObservable
+            .withUnretained(self)
+            .subscribe(onNext: { (self, _) in
+                self.viewModel.fetchData()
+            })
             .disposed(by: rx.disposeBag)
     }
 }

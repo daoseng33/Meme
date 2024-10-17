@@ -29,6 +29,7 @@ final class Launcher {
         setupLoadingHUD()
         setupFirebase()
         requestTrackingAuthorization()
+        setupRemoteConfig()
     }
     
     private func handleGlobalError() {
@@ -160,5 +161,10 @@ final class Launcher {
     
     private func setupAdMob() {
         GADMobileAds.sharedInstance().start(completionHandler: nil)
+    }
+    
+    private func setupRemoteConfig() {
+        RemoteConfigManager.shared.setupRemoteConfig()
+        RemoteConfigManager.shared.fetchAndActivate { _ in }
     }
 }

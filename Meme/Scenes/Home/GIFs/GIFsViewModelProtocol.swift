@@ -10,7 +10,7 @@ import RxSwift
 import RxRelay
 import HumorAPIService
 
-protocol GIFsViewModelProtocol: FetchDataProtocol, LoadingStateProtocol {
+protocol GIFsViewModelProtocol: FetchDataProtocol, LoadingStateProtocol, AdHandlerProtocol {
     var keywordRelay: BehaviorRelay<String?> { get }
     var gridCollectionViewModel: GridCollectionViewModelProtocol { get }
     var imageDatas: [ImageData] { get }
