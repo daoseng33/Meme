@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>We need access to your photo album to save meme images.</string>
+    <key>NSUserTrackingUsageDescription</key>
+    <string>This permission allows us to provide you with a personalized advertising experience and helps us improve our services.</string>
 	<key>API_KEY</key>
 	<string>$(API_KEY)</string>
 	<key>FIREBASE_ANALYTICS_COLLECTION_ENABLED</key>
