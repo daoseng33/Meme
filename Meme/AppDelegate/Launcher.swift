@@ -139,6 +139,11 @@ final class Launcher {
         guard let fileopts = FirebaseOptions(contentsOfFile: filePath!)
         else { assert(false, "Couldn't load DEV config file") }
         FirebaseApp.configure(options: fileopts)
+#elseif CI
+        let filePath = Bundle.main.path(forResource: "GoogleService-Info-CI", ofType: "plist")
+        guard let fileopts = FirebaseOptions(contentsOfFile: filePath!)
+        else { assert(false, "Couldn't load CI config file") }
+        FirebaseApp.configure(options: fileopts)
 #endif
     }
     

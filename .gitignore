@@ -42,3 +42,5 @@ Meme/Resources/GoogleService-Info.plist
 Meme/Resources/GoogleService-Info-Dev.plist
 
 Meme/Resources/remote_config_defaults.plist
+
+Meme/Resources/GoogleService-Info-CI.plist

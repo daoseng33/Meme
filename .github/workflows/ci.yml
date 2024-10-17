@@ -24,6 +24,11 @@ jobs:
           cd Meme/Resources
           plutil -replace GADApplicationIdentifier -string "ca-app-pub-3940256099942544~1458002511" Info.plist
 
+      - name: Create GoogleService-Info-CI.plist
+        run: |
+          mkdir -p Meme/Resources
+          echo "${{ secrets.GOOGLE_SERVICE_INFO_CI_PLIST }}" > Meme/Resources/GoogleService-Info-CI.plist
+
       - name: Clear Derived Data
         run: rm -rf ~/Library/Developer/Xcode/DerivedData/*
 
