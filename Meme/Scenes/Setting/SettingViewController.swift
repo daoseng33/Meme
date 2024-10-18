@@ -176,6 +176,12 @@ extension SettingViewController: UITableViewDelegate {
             UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
             
         case .removeAds:
+            let isSubscribed = PurchaseManager.shared.isSubscribedRelay.value
+            guard !isSubscribed else {
+                ProgressHUD.banner("Subscribed".localized(), "Already subscribed".localized())
+                return
+            }
+            
             AnalyticsManager.shared.logSettingRemoveAdsClick()
             
             ProgressHUD.animate("Loading".localized(), interaction: false)
@@ -190,6 +196,12 @@ extension SettingViewController: UITableViewDelegate {
             })
             
         case .restorePurchases:
+            let isSubscribed = PurchaseManager.shared.isSubscribedRelay.value
+            guard !isSubscribed else {
+                ProgressHUD.banner("Subscribed".localized(), "Already subscribed".localized())
+                return
+            }
+            
             AnalyticsManager.shared.logSettingRestorePurchasesClick()
             
             ProgressHUD.animate("Loading".localized(), interaction: false)

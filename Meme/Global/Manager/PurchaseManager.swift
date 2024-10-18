@@ -31,12 +31,14 @@ final class PurchaseManager {
                 let products = try await Product.products(for: [monthlySubscriptionId])
                 guard let product = products.first else {
                     print("No product found for identifier: \(monthlySubscriptionId)")
+                    completion?(nil)
                     return
                 }
                 
                 // 檢查是否已經購買
                 guard await !isPurchased() else {
                     print("Product already purchased")
+                    completion?(nil)
                     return
                 }
                 
@@ -107,8 +109,14 @@ final class PurchaseManager {
     
     private func handleTransaction(_ transaction: Transaction) async {
         if transaction.productID == monthlySubscriptionId {
-            await updateSubscriptionStatus(active: true)
-        }
+                if transaction.revocationDate == nil && transaction.expirationDate ?? Date.distantFuture > Date() {
+                    await updateSubscriptionStatus(active: true)
+                } else {
+                    await updateSubscriptionStatus(active: false)
+                }
+            } else {
+                print("Unhandled product ID: \(transaction.productID)")
+            }
     }
     
     private func handleVerifiedTransaction(_ transaction: Transaction) async {

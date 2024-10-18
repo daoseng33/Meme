@@ -34,6 +34,17 @@
         }
       }
     },
+    "Already subscribed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已經是訂閱狀態"
+          }
+        }
+      }
+    },
     "Analogy" : {
       "extractionState" : "manual",
       "localizations" : {
