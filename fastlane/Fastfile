@@ -19,7 +19,13 @@ desc "Push a new beta build to TestFlight"
     
     build_app(
       scheme: "Meme",
-      xcargs: "-allowProvisioningUpdates"
+      xcargs: "-allowProvisioningUpdates",
+      export_options: {
+        method: "app-store",
+        provisioningProfiles: { 
+          "com.likeabossapp.Meme" => "Ben Li Chen"
+        }
+      }
     )
    
     upload_to_testflight
