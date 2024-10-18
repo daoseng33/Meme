@@ -17,7 +17,12 @@ final class AdFullPageHandler: NSObject {
     }
     
     var shouldDisplayAd: Bool {
-        return apiRequestCount >= apiRequestLimit
+        guard !PurchaseManager.shared.isSubscribedRelay.value,
+                apiRequestCount >= apiRequestLimit else {
+            return false
+        }
+        
+        return true
     }
     
     private var interstitial: GADInterstitialAd?
@@ -28,12 +33,11 @@ final class AdFullPageHandler: NSObject {
     
     private var apiRequestCount: Int {
         get {
-            return KeychainManager.loadInt(forKey: .apiRequestCount) ?? 0
+            return KeychainManager.shared.loadInt(forKey: .apiRequestCount) ?? 0
         }
         
         set {
-            var value = newValue
-            let _ = KeychainManager.saveInt(&value, forKey: .apiRequestCount)
+            let _ = KeychainManager.shared.saveInt(newValue, forKey: .apiRequestCount)
         }
     }
     

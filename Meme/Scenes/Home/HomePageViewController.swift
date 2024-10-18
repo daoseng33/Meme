@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import GoogleMobileAds
+import RxCocoa
 
 final class HomePageViewController: BaseViewController {
     // MARK: - UI
@@ -22,6 +23,7 @@ final class HomePageViewController: BaseViewController {
         super.viewDidLoad()
         
         setupUI()
+        setupObservable()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -46,6 +48,23 @@ final class HomePageViewController: BaseViewController {
             $0.top.left.right.equalToSuperview()
             $0.bottom.equalTo(adBannerView.snp.top)
         }
+    }
+    
+    private func setupObservable() {
+        PurchaseManager.shared.isSubscribedRelay
+            .asDriver()
+            .drive(with: self) { (self, isSubscribed) in
+                if isSubscribed {
+                    self.adBannerView.snp.updateConstraints {
+                        $0.height.equalTo(0)
+                    }
+                } else {
+                    self.adBannerView.snp.updateConstraints {
+                        $0.height.equalTo(Constant.Ad.adBannerHeight)
+                    }
+                }
+            }
+            .disposed(by: rx.disposeBag)
     }
 }
 

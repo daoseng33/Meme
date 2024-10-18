@@ -31,7 +31,7 @@ final class GeneralContentTests {
         sut.getLocalDatas()
         
         // wait observable debounce in general content view model
-        try await Task.sleep(for: .milliseconds(200))
+        try await Task.sleep(for: .milliseconds(300))
         
         assert(sut.getRowsCount(with: 0) == 1)
     }

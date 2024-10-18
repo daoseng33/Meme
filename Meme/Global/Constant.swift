@@ -29,6 +29,7 @@ enum Constant {
     
     enum Key {
         static let isFavorite = "isFavorite"
+        static let titleTextColor = "titleTextColor"
     }
     
     enum URL {

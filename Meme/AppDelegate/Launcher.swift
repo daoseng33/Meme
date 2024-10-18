@@ -29,7 +29,9 @@ final class Launcher {
         setupLoadingHUD()
         setupFirebase()
         requestTrackingAuthorization()
+        setupAdMob()
         setupRemoteConfig()
+        setupPurchases()
     }
     
     private func handleGlobalError() {
@@ -171,5 +173,13 @@ final class Launcher {
     private func setupRemoteConfig() {
         RemoteConfigManager.shared.setupRemoteConfig()
         RemoteConfigManager.shared.fetchAndActivate { _ in }
+    }
+    
+    private func setupPurchases() {
+        if let isSubscribed = KeychainManager.shared.loadBool(forKey: .isSubscribed) {
+            PurchaseManager.shared.isSubscribedRelay.accept(isSubscribed)
+        }
+        
+        PurchaseManager.shared.startListeningForTransactions()
     }
 }

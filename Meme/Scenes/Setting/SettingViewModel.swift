@@ -124,6 +124,9 @@ final class SettingViewModel {
         case .language:
             return Locale.current.languageCode
             
+        case .removeAds:
+            return PurchaseManager.shared.isSubscribedRelay.value ? "Subscribed".localized() : "Unsubscribed".localized()
+            
         case .version:
 #if RELEASE
                 return Bundle.main.releaseVersionNumber

@@ -125,7 +125,7 @@ final class GIFsViewController: BaseViewController {
                 case .failure(error: let error):
                     self.keywordTextField.isUserInteractionEnabled = true
                     self.generateGifsButton.isEnabled = true
-                    ProgressHUD.dismiss()
+                    ProgressHUD.failed()
                     GlobalErrorHandleManager.shared.popErrorAlert(error: error, presentVC: self) { [weak self] in
                         guard let self = self else { return }
                         self.viewModel.fetchData()

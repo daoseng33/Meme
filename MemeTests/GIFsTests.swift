@@ -18,25 +18,27 @@ struct GIFsTests {
         sut = GIFsViewModel(webService: mockWebService)
     }
     
+    @available(iOS 16.0, *)
     @Test func testLoadFirstDataIfNeeded() async throws {
         assert(sut.loadingState == .initial)
         assert(sut.gridCollectionViewModel.numberOfItems == 0)
         
         sut.refreshData()
         
-        try await Task.sleep(nanoseconds: 100_000_000)
+        try await Task.sleep(for: .milliseconds(300))
         
         assert(sut.loadingState == .success)
         assert(sut.gridCollectionViewModel.numberOfItems == 10)
     }
-
+    
+    @available(iOS 16.0, *)
     @Test func testFetchGifsData() async throws {
         assert(sut.loadingState == .initial)
         assert(sut.gridCollectionViewModel.numberOfItems == 0)
         
         sut.fetchData()
         
-        try await Task.sleep(nanoseconds: 100_000_000)
+        try await Task.sleep(for: .milliseconds(300))
         
         assert(sut.loadingState == .success)
         assert(sut.gridCollectionViewModel.numberOfItems == 10)

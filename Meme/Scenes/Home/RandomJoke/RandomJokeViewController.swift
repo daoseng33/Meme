@@ -200,7 +200,7 @@ final class RandomJokeViewController: BaseViewController {
                     self.generateJokeButton.isEnabled = true
                     self.actionsContainerView.shareButton.isEnabled = false
                     self.actionsContainerView.favoriteButton.isEnabled = false
-                    ProgressHUD.dismiss()
+                    ProgressHUD.failed()
                     GlobalErrorHandleManager.shared.popErrorAlert(error: error, presentVC: self) { [weak self] in
                         guard let self = self else { return }
                         self.viewModel.fetchData()

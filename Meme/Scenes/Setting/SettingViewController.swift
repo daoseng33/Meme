@@ -66,6 +66,32 @@ final class SettingViewController: BaseViewController {
                 self.settingTableView.reloadData()
             })
             .disposed(by: rx.disposeBag)
+        
+        PurchaseManager.shared.isSubscribedRelay
+            .asDriver()
+            .drive(with: self, onNext: { (self, _) in
+                self.settingTableView.reloadData()
+            })
+            .disposed(by: rx.disposeBag)
+        
+        PurchaseManager.shared.purchaseSuccessfulRelay
+            .asSignal()
+            .emit(with: self) { (self, _) in
+                self.showPurchaseSuccessfulBanner()
+            }
+            .disposed(by: rx.disposeBag)
+    }
+    
+    private func showPurchaseSuccessfulBanner() {
+        ProgressHUD.banner("Purchase Successful".localized(), "Start enjoying an ad-free browsing experience".localized())
+    }
+    
+    private func showPurchaseFailedBanner(message: String) {
+        ProgressHUD.banner("Purchase Failed".localized(), message)
+    }
+    
+    private func showRestorePurchaseFailedBanner(message: String) {
+        ProgressHUD.banner("Restore Purchase Failed".localized(), message)
     }
 }
 
@@ -88,7 +114,13 @@ extension SettingViewController: UITableViewDataSource {
         var content = cell.defaultContentConfiguration()
         content.text = rowTitle
         content.secondaryText = secondaryTitle
-        content.secondaryTextProperties.color = .secondaryLabel
+        let isSubscribed = PurchaseManager.shared.isSubscribedRelay.value
+        if case .removeAds = viewModel.getRowType(with: indexPath),
+           isSubscribed {
+            content.secondaryTextProperties.color = .accent
+        } else {
+            content.secondaryTextProperties.color = .secondaryLabel
+        }
         
         cell.contentConfiguration = content
         cell.selectionStyle = .none
@@ -146,8 +178,30 @@ extension SettingViewController: UITableViewDelegate {
         case .removeAds:
             AnalyticsManager.shared.logSettingRemoveAdsClick()
             
+            ProgressHUD.animate("Loading".localized(), interaction: false)
+            
+            PurchaseManager.shared.purchase(completion: { [weak self] error in
+                guard let self = self else { return }
+                ProgressHUD.dismiss()
+                
+                if let error = error {
+                    self.showPurchaseFailedBanner(message: error.localizedDescription)
+                }
+            })
+            
         case .restorePurchases:
             AnalyticsManager.shared.logSettingRestorePurchasesClick()
+            
+            ProgressHUD.animate("Loading".localized(), interaction: false)
+            
+            PurchaseManager.shared.restorePurchases(completion: { [weak self] error in
+                guard let self = self else { return }
+                ProgressHUD.dismiss()
+                
+                if let error = error {
+                    self.showRestorePurchaseFailedBanner(message: error.localizedDescription)
+                }
+            })
             
         case .contactUs:
             AnalyticsManager.shared.logSettingContactUsClick()
