@@ -8,16 +8,19 @@ platform :ios do
 desc "Push a new beta build to TestFlight"
   lane :beta do
   	app_store_connect_api_key(
-	  key_id: ENV['APPSTORE_CONNECT_KEY_ID'],
-	  issuer_id: ENV['APPSTORE_CONNECT_ISSUER_ID'],
-	  key_filepath: "./AuthKey_LWSA7B8UYR.p8"
-	)
+  	  key_id: ENV['APPSTORE_CONNECT_KEY_ID'],
+  	  issuer_id: ENV['APPSTORE_CONNECT_ISSUER_ID'],
+  	  key_filepath: "./AuthKey_LWSA7B8UYR.p8"
+	 ) 
 
     increment_build_number(
       build_number: latest_testflight_build_number + 1
     )
     
-    build_app(scheme: "Meme")
+    build_app(
+      scheme: "Meme",
+      xcargs: "-allowProvisioningUpdates"
+    )
    
     upload_to_testflight
    
