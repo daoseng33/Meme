@@ -213,20 +213,28 @@ final class RandomMemeViewController: BaseViewController {
             .subscribe(onNext: { (self, _) in
                 guard let mediaURL = self.viewModel.media.mediaURL else { return }
                 self.viewModel.shareButtonTappedRelay.accept(())
+                let mediaType = self.viewModel.media.type
                 let description = self.viewModel.description
                 
-                KingfisherManager.shared.retrieveImage(with: mediaURL) { [weak self] result in
-                    guard let self = self else { return }
-                    switch result {
+                switch mediaType {
+                case .image:
+                    KingfisherManager.shared.retrieveImage(with: mediaURL) { [weak self] result in
+                        guard let self = self else { return }
+                        switch result {
                         case .success(let resource):
-                        Utility.showShareSheet(items: [mediaURL, resource.image, description], parentVC: self) {
-                            InAppReviewManager.shared.requestReview()
+                            Utility.showShareSheet(items: [mediaURL, resource.image, description], parentVC: self) {
+                                InAppReviewManager.shared.requestReview()
+                            }
+                            
+                        case .failure:
+                            Utility.showShareSheet(items: [mediaURL, description], parentVC: self) {
+                                InAppReviewManager.shared.requestReview()
+                            }
                         }
-                        
-                    case .failure:
-                        Utility.showShareSheet(items: [mediaURL, description], parentVC: self) {
-                            InAppReviewManager.shared.requestReview()
-                        }
+                    }
+                case .video:
+                    Utility.showShareSheet(items: [mediaURL, description], parentVC: self) {
+                        InAppReviewManager.shared.requestReview()
                     }
                 }
             })

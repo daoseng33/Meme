@@ -10,6 +10,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 import SKPhotoBrowser
+import Kingfisher
 
 class GeneralContentViewController: BaseViewController {
     // MARK: - Properties
@@ -165,9 +166,28 @@ extension GeneralContentViewController: UITableViewDataSource {
                     switch cellType {
                     case .meme(let meme):
                         guard let url = meme.url else { return }
+                        let memeDsecription = meme.memeDescription
                         AnalyticsManager.shared.logShareEvent(contentType: .meme, itemID: "\(meme.id)")
-                        Utility.showShareSheet(items: [url, meme.memeDescription], parentVC: self) {
-                            InAppReviewManager.shared.requestReview()
+                        switch meme.mediaType {
+                        case .image:
+                            KingfisherManager.shared.retrieveImage(with: url) { [weak self] result in
+                                guard let self = self else { return }
+                                switch result {
+                                case .success(let resource):
+                                    Utility.showShareSheet(items: [url, resource.image, memeDsecription], parentVC: self) {
+                                        InAppReviewManager.shared.requestReview()
+                                    }
+                                    
+                                case .failure:
+                                    Utility.showShareSheet(items: [url, memeDsecription], parentVC: self) {
+                                        InAppReviewManager.shared.requestReview()
+                                    }
+                                }
+                            }
+                        case .video:
+                            Utility.showShareSheet(items: [url, memeDsecription], parentVC: self) {
+                                InAppReviewManager.shared.requestReview()
+                            }
                         }
                         
                     case .joke(let joke):

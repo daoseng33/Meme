@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 import SKPhotoBrowser
 import ProgressHUD
+import Kingfisher
 
 final class GIFsViewController: BaseViewController {
     // MARK: - Properties
