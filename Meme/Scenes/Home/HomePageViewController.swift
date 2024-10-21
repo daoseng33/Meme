@@ -36,33 +36,31 @@ final class HomePageViewController: BaseViewController {
     private func setupUI() {
         navigationItem.title = "Memepire".localized()
         homePageCollectionView.delegate = self
+        adBannerView.isHidden = true
 
-        view.addSubview(adBannerView)
-        adBannerView.snp.makeConstraints {
-            $0.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(Constant.Ad.adBannerHeight)
+        let stackView: UIStackView = {
+            let stackView = UIStackView(arrangedSubviews: [homePageCollectionView, adBannerView])
+            stackView.axis = .vertical
+            stackView.spacing = 0
+            return stackView
+        }()
+        
+        view.addSubview(stackView)
+        stackView.snp.makeConstraints {
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
         
-        view.addSubview(homePageCollectionView)
-        homePageCollectionView.snp.makeConstraints {
-            $0.top.left.right.equalToSuperview()
-            $0.bottom.equalTo(adBannerView.snp.top)
+        adBannerView.snp.makeConstraints {
+            $0.height.equalTo(Constant.Ad.adBannerHeight).priority(.high)
         }
     }
     
     private func setupObservable() {
         PurchaseManager.shared.isSubscribedRelay
             .asDriver()
+            .skip(1)
             .drive(with: self) { (self, isSubscribed) in
-                if isSubscribed {
-                    self.adBannerView.snp.updateConstraints {
-                        $0.height.equalTo(0)
-                    }
-                } else {
-                    self.adBannerView.snp.updateConstraints {
-                        $0.height.equalTo(Constant.Ad.adBannerHeight)
-                    }
-                }
+                self.adBannerView.isHidden = isSubscribed
             }
             .disposed(by: rx.disposeBag)
     }

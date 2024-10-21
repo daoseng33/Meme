@@ -17,6 +17,11 @@ final class AdFullPageHandler: NSObject {
     }
     
     var shouldDisplayAd: Bool {
+        let enableAds = RemoteConfigManager.shared.getBool(forKey: .enableAds)
+        guard enableAds else {
+            return false
+        }
+        
         guard !PurchaseManager.shared.isSubscribedRelay.value,
                 apiRequestCount >= apiRequestLimit else {
             return false
