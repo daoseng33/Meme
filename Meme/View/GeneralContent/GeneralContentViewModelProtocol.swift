@@ -10,6 +10,7 @@ import RxCocoa
 
 protocol GeneralContentViewModelProtocol {
     var reloadDataSignal: Signal<Void> { get }
+    var emptyContentViewModel: EmptyContentViewModelProtocol { get }
     var filterContainerViewModel: FilterContainerViewModelProtocol { get }
     var predicate: NSPredicate? { get }
     func getCellViewModel(at indexPath: IndexPath) -> GeneralContentCellViewModelProtocol?

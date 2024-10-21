@@ -298,6 +298,17 @@
         }
       }
     },
+    "Go get some fun" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "去找點樂子"
+          }
+        }
+      }
+    },
     "History" : {
       "extractionState" : "manual",
       "localizations" : {

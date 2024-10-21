@@ -44,6 +44,8 @@ class GeneralContentViewController: BaseViewController {
         return tableView
     }()
     
+    private lazy var emptyContentView = EmptyContentView(viewModel: viewModel.emptyContentViewModel)
+    
     // MARK: - Setup
     init(viewModel: GeneralContentViewModelProtocol, title: String, tabBarType: MemeTabBarItem) {
         self.viewModel = viewModel
@@ -102,8 +104,19 @@ class GeneralContentViewController: BaseViewController {
             .emit(with: self) { (self, _) in
                 self.contentTableView.reloadData()
                 self.refreshControl.endRefreshing()
+                let isEmpty = self.viewModel.getNumberOfSections() == 0
+                self.contentTableView.backgroundView = isEmpty ? self.emptyContentView : nil
             }
             .disposed(by: rx.disposeBag)
+        
+        viewModel.emptyContentViewModel
+            .actionButtonRelay
+            .asSignal()
+            .emit(with: self) { (self, _) in
+                self.tabBarController?.selectedIndex = MemeTabBarItem.home.rawValue
+            }
+            .disposed(by: rx.disposeBag)
+        
     }
     
     private func setupActions() {

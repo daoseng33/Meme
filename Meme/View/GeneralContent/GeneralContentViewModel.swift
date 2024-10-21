@@ -22,6 +22,7 @@ class GeneralContentViewModel: GeneralContentViewModelProtocol {
     private var sectionTypeDict = IndexedDictionary<DateCategory, [GeneralContentCellViewModelProtocol]>()
     let predicate: NSPredicate?
     
+    let emptyContentViewModel: EmptyContentViewModelProtocol = EmptyContentViewModel()
     let filterContainerViewModel: FilterContainerViewModelProtocol = FilterContainerViewModel()
     
     var reloadDataSignal: Signal<Void> {

@@ -90,8 +90,11 @@ final class RoundedRectangleButton: UIView {
         self.init()
         
         self.title = title
+        button.setTitle(title, for: .normal)
+        
         self.titleColor = titleColor
         self.buttonBackgroundColor = backgroundColor
+        button.setNeedsUpdateConfiguration()
     }
     
     required init?(coder: NSCoder) {
