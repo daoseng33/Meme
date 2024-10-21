@@ -9,6 +9,7 @@ import Foundation
 import HumorAPIService
 import RxSwift
 import UIKit
+import FirebaseCrashlytics
 
 final class GlobalErrorHandleManager {
     // MARK: - Properties
@@ -36,7 +37,15 @@ final class GlobalErrorHandleManager {
             .disposed(by: disposeBag)
     }
     
+    enum HttpError: Error {
+        case badRequest
+        
+    }
+    
     private func handleHttpError(statusCode: Int) {
+        let error = NSError(domain: "HttpError", code: statusCode)
+        Crashlytics.crashlytics().record(error: error)
+        
         switch statusCode {
         case 400:
             print("Bad Request")
@@ -52,6 +61,7 @@ final class GlobalErrorHandleManager {
     }
 
     private func handleNetworkRequestError(_ error: Error) {
+        Crashlytics.crashlytics().record(error: error)
         print("Network error occurred: \(error.localizedDescription)")
     }
     

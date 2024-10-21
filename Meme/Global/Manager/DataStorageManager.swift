@@ -7,6 +7,7 @@
 
 import Foundation
 import RealmSwift
+import FirebaseCrashlytics
 
 @MainActor
 final public class DataStorageManager {
@@ -28,6 +29,7 @@ final public class DataStorageManager {
             }
             
         } catch {
+            Crashlytics.crashlytics().record(error: error)
             print(error.localizedDescription)
         }
     }
@@ -39,6 +41,7 @@ final public class DataStorageManager {
                 realm.add(object, update: .modified)
             } onComplete: { error in
                 if let error = error {
+                    Crashlytics.crashlytics().record(error: error)
                     print(error.localizedDescription)
                 }
 
@@ -46,6 +49,7 @@ final public class DataStorageManager {
             }
             
         } catch {
+            Crashlytics.crashlytics().record(error: error)
             onComplete?(error)
         }
     }
@@ -68,6 +72,7 @@ final public class DataStorageManager {
             let array = Array(results)
             return array
         } catch {
+            Crashlytics.crashlytics().record(error: error)
             print(error.localizedDescription)
             return []
         }
@@ -81,6 +86,7 @@ final public class DataStorageManager {
             
             return result
         } catch {
+            Crashlytics.crashlytics().record(error: error)
             print(error.localizedDescription)
             return nil
         }
@@ -97,6 +103,7 @@ final public class DataStorageManager {
                 }
             }
         } catch {
+            Crashlytics.crashlytics().record(error: error)
             print(error.localizedDescription)
         }
     }
@@ -113,12 +120,14 @@ final public class DataStorageManager {
                 }
             } onComplete: { error in
                 if let error {
+                    Crashlytics.crashlytics().record(error: error)
                     print(error.localizedDescription)
                 }
                 
                 onComplete?(error)
             }
         } catch {
+            Crashlytics.crashlytics().record(error: error)
             print(error.localizedDescription)
             onComplete?(error)
         }
@@ -132,6 +141,7 @@ final public class DataStorageManager {
                 realm.delete(object)
             }
         } catch {
+            Crashlytics.crashlytics().record(error: error)
             print(error.localizedDescription)
         }
     }
@@ -145,12 +155,14 @@ final public class DataStorageManager {
                 realm.delete(object)
             } onComplete: { error in
                 if let error {
+                    Crashlytics.crashlytics().record(error: error)
                     print(error.localizedDescription)
                 }
                 
                 onComplete?(error)
             }
         } catch {
+            Crashlytics.crashlytics().record(error: error)
             print(error.localizedDescription)
             onComplete?(error)
         }
@@ -163,6 +175,7 @@ final public class DataStorageManager {
                 realm.deleteAll()
             }
         } catch {
+            Crashlytics.crashlytics().record(error: error)
             print(error.localizedDescription)
         }
     }
