@@ -46,6 +46,7 @@ final class SettingViewModel {
     // MARK: - Properties
     lazy var appearanceTableViewModel = AppearanceTableViewModel(appearance: appearanceRelay.value)
     let appearanceRelay: BehaviorRelay<AppearanceStyle>
+    let contactEmail: String = "contact@likeabossapp.com"
     
     private let sectionsInfo: [SettingSectionType: [SettingRowType]] = {
         return [

@@ -672,6 +672,17 @@
         }
       }
     },
+    "Report" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "回報"
+          }
+        }
+      }
+    },
     "Restore Purchase Failed" : {
       "extractionState" : "manual",
       "localizations" : {

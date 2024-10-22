@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 import ProgressHUD
 import RxCocoa
+import MessageUI
+import FirebaseCrashlytics
 
 final class SettingViewController: BaseViewController {
     // MARK: - Properties
@@ -218,12 +220,27 @@ extension SettingViewController: UITableViewDelegate {
         case .contactUs:
             AnalyticsManager.shared.logSettingContactUsClick()
             
-            if let url = URL(string: Constant.URL.discord) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            if MFMailComposeViewController.canSendMail() {
+                let mail = MFMailComposeViewController()
+                mail.mailComposeDelegate = self
+                mail.setToRecipients([viewModel.contactEmail])
+                mail.setSubject("\("Report".localized()): \("Memepire".localized()) App")
+                
+                present(mail, animated: true)
+            } else {
+                Crashlytics.crashlytics().record(error: NSError(domain: "Device unable to send email", code: 0, userInfo: nil))
+                print("Device unable to send email")
             }
             
         case .version:
             break
         }
+    }
+}
+
+// MARK: - MFMailComposeViewControllerDelegate
+extension SettingViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
     }
 }
