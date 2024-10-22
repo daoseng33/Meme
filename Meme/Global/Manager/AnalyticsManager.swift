@@ -9,6 +9,7 @@ import Foundation
 import FirebaseAnalytics
 import AppTrackingTransparency
 import HumorAPIService
+import StoreKit
 
 final class AnalyticsManager {
     static let shared = AnalyticsManager()
@@ -32,6 +33,7 @@ extension AnalyticsManager {
         case settingRestorePurchasesClick
         case settingContactUsClick
         case appearanceModeSelect
+        case purchaseStatus
         
         var value: String {
             switch self {
@@ -107,6 +109,24 @@ extension AnalyticsManager {
     func logFavoriteEvent(isFavorite: Bool) {
         logCustomEvent(eventName: .favorite, parameters: [
             EventParameter.isFavorite.value: isFavorite ? "true" : "false",
+        ])
+    }
+    
+    func logPurchaseStatusEvent(purchaseResult: Product.PurchaseResult) {
+        let status: String
+        switch purchaseResult {
+        case .success(_):
+            status = "success"
+        case .userCancelled:
+            status = "user_cancelled"
+        case .pending:
+            status = "pending"
+        @unknown default:
+            status = "unknown"
+        }
+        
+        logCustomEvent(eventName: .purchaseStatus, parameters: [
+            EventParameter.isFavorite.value: status,
         ])
     }
 }

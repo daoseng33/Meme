@@ -36,7 +36,7 @@ final class HomePageViewController: BaseViewController {
     private func setupUI() {
         navigationItem.title = "Memepire".localized()
         homePageCollectionView.delegate = self
-        adBannerView.isHidden = true
+        adBannerView.isHidden = !RemoteConfigManager.shared.getBool(forKey: .enableAds)
 
         let stackView: UIStackView = {
             let stackView = UIStackView(arrangedSubviews: [homePageCollectionView, adBannerView])

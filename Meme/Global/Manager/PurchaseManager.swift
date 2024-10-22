@@ -8,6 +8,7 @@
 import Foundation
 import StoreKit
 import RxRelay
+import FirebaseCrashlytics
 
 final class PurchaseManager {
     // MARK: - Properties
@@ -43,23 +44,31 @@ final class PurchaseManager {
                 }
                 
                 let result = try await product.purchase()
-                completion?(nil)
+                AnalyticsManager.shared.logPurchaseStatusEvent(purchaseResult: result)
+                
                 switch result {
                 case .success(let verificationResult):
                     switch verificationResult {
                     case .verified(let transaction):
                         await handleVerifiedTransaction(transaction)
+                        completion?(nil)
                     case .unverified(_, let error):
+                        Crashlytics.crashlytics().record(error: error)
                         print("Unverified transaction: \(error)")
+                        completion?(error)
                     }
                 case .userCancelled:
                     print("User cancelled the purchase")
+                    completion?(nil)
                 case .pending:
                     print("Purchase is pending")
+                    completion?(nil)
                 @unknown default:
                     print("Unknown purchase result")
+                    completion?(nil)
                 }
             } catch {
+                Crashlytics.crashlytics().record(error: error)
                 print("Failed to purchase product: \(error)")
                 completion?(error)
             }
@@ -73,6 +82,7 @@ final class PurchaseManager {
                 await checkPurchaseStatus()
                 completion?(nil)
             } catch {
+                Crashlytics.crashlytics().record(error: error)
                 print("Failed to restore purchases: \(error)")
                 completion?(error)
             }
