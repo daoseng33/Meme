@@ -11,6 +11,7 @@ import ProgressHUD
 import RxCocoa
 import MessageUI
 import FirebaseCrashlytics
+import SFSafeSymbols
 
 final class SettingViewController: BaseViewController {
     // MARK: - Properties
@@ -117,12 +118,55 @@ extension SettingViewController: UITableViewDataSource {
         content.text = rowTitle
         content.secondaryText = secondaryTitle
         let isSubscribed = PurchaseManager.shared.isSubscribedRelay.value
-        if case .removeAds = viewModel.getRowType(with: indexPath),
-           isSubscribed {
-            content.secondaryTextProperties.color = .accent
-        } else {
-            content.secondaryTextProperties.color = .secondaryLabel
+        
+        if let rowType = viewModel.getRowType(with: indexPath) {
+            let sfSymobl: SFSymbol
+            let accessoryType: UITableViewCell.AccessoryType
+            let symbolConfig = UIImage.SymbolConfiguration(pointSize: 17)
+            switch rowType {
+            case .appearance:
+                accessoryType = .disclosureIndicator
+                sfSymobl = .sunMax
+                
+            case .language:
+                accessoryType = .disclosureIndicator
+                if #available(iOS 17.4, *) {
+                    sfSymobl = .translate
+                } else {
+                    sfSymobl = .ellipsisBubble
+                }
+                
+            case .removeAds:
+                accessoryType = .disclosureIndicator
+                sfSymobl = .cart
+                
+                if isSubscribed {
+                    content.secondaryTextProperties.color = .accent
+                } else {
+                    content.secondaryTextProperties.color = .secondaryLabel
+                }
+                
+            case .restorePurchases:
+                accessoryType = .disclosureIndicator
+                sfSymobl = .arrowCounterclockwise
+                
+            case .contactUs:
+                accessoryType = .disclosureIndicator
+                sfSymobl = .envelope
+                
+            case .version:
+                accessoryType = .none
+                if #available(iOS 16.0, *) {
+                    sfSymobl = .balloon2
+                } else {
+                    sfSymobl = .tortoise
+                }
+            }
+            
+            cell.accessoryType = accessoryType
+            content.image = UIImage(systemSymbol: sfSymobl, withConfiguration: symbolConfig).withTintColor(.label, renderingMode: .alwaysOriginal)
         }
+        
         
         cell.contentConfiguration = content
         cell.selectionStyle = .none
