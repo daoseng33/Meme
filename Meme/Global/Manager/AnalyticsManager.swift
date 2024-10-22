@@ -34,6 +34,7 @@ extension AnalyticsManager {
         case settingContactUsClick
         case appearanceModeSelect
         case purchaseStatus
+        case transparencyPolicyClick
         
         var value: String {
             switch self {
@@ -206,6 +207,12 @@ extension AnalyticsManager {
         logSelectConentEvent(parameters: [
             AnalyticsParameterContent: EventName.appearanceModeSelect.value,
             AnalyticsParameterContentType: mode.rawValue
+        ])
+    }
+    
+    func logTransparencyPolicyClick() {
+        logSelectConentEvent(parameters: [
+            AnalyticsParameterContent: EventName.transparencyPolicyClick.value
         ])
     }
 }

@@ -154,13 +154,13 @@ extension SettingViewController: UITableViewDataSource {
                 accessoryType = .disclosureIndicator
                 sfSymobl = .envelope
                 
+            case .transparencyPolicy:
+                accessoryType = .disclosureIndicator
+                sfSymobl = .eyes
+                
             case .version:
                 accessoryType = .none
-                if #available(iOS 16.0, *) {
-                    sfSymobl = .balloon2
-                } else {
-                    sfSymobl = .tortoise
-                }
+                sfSymobl = .flame
             }
             
             cell.accessoryType = accessoryType
@@ -274,6 +274,13 @@ extension SettingViewController: UITableViewDelegate {
             } else {
                 Crashlytics.crashlytics().record(error: NSError(domain: "Device unable to send email", code: 0, userInfo: nil))
                 print("Device unable to send email")
+            }
+            
+        case .transparencyPolicy:
+            AnalyticsManager.shared.logTransparencyPolicyClick()
+            
+            if let url = viewModel.transparencyPolicyURL {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
             
         case .version:

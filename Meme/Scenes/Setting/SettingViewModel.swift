@@ -29,6 +29,7 @@ enum SettingRowType: Int {
     case restorePurchases
     case version
     case contactUs
+    case transparencyPolicy
     
     var title: String {
         switch self {
@@ -38,6 +39,7 @@ enum SettingRowType: Int {
         case .restorePurchases: return "Restore Purchases".localized()
         case .version: return "App Version".localized()
         case .contactUs: return "Contact Us".localized()
+        case .transparencyPolicy: return "Transparency Policy".localized()
         }
     }
 }
@@ -47,12 +49,13 @@ final class SettingViewModel {
     lazy var appearanceTableViewModel = AppearanceTableViewModel(appearance: appearanceRelay.value)
     let appearanceRelay: BehaviorRelay<AppearanceStyle>
     let contactEmail: String = "contact@likeabossapp.com"
+    let transparencyPolicyURL = URL(string: "https://likeabossapp.com/memepire-transparency-policy/")
     
     private let sectionsInfo: [SettingSectionType: [SettingRowType]] = {
         return [
             .general: [.appearance, .language],
             .sponsor: [.removeAds, .restorePurchases],
-            .about: [.contactUs, .version]
+            .about: [.contactUs, .transparencyPolicy, .version]
         ]
     }()
     

@@ -826,6 +826,17 @@
         }
       }
     },
+    "Transparency Policy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "隱私權政策"
+          }
+        }
+      }
+    },
     "Unsubscribed" : {
       "extractionState" : "manual",
       "localizations" : {
