@@ -170,7 +170,7 @@ extension SettingViewController: UITableViewDataSource {
         
         cell.contentConfiguration = content
         cell.selectionStyle = .none
-        cell.contentView.backgroundColor = UIColor(dynamicProvider: { traitCollection in
+        cell.backgroundColor = UIColor(dynamicProvider: { traitCollection in
             return traitCollection.userInterfaceStyle == .dark ? .tertiarySystemGroupedBackground : .secondarySystemGroupedBackground
         })
         
