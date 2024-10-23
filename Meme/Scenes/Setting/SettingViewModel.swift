@@ -11,12 +11,14 @@ import RxRelay
 enum SettingSectionType: Int, CaseIterable {
     case general
     case sponsor
+    case term
     case about
     
     var title: String {
         switch self {
         case .general: return "General".localized()
         case .sponsor: return "Sponsor".localized()
+        case .term: return "Term".localized()
         case .about: return "About".localized()
         }
     }
@@ -58,7 +60,8 @@ final class SettingViewModel {
         return [
             .general: [.appearance, .language],
             .sponsor: [.removeAds, .restorePurchases],
-            .about: [.contactUs, .transparencyPolicy, .termsofUse, .version]
+            .term: [.transparencyPolicy, .termsofUse],
+            .about: [.contactUs, .version]
         ]
     }()
     

@@ -815,6 +815,17 @@
         }
       }
     },
+    "Term" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "條款"
+          }
+        }
+      }
+    },
     "Terms of Use" : {
       "extractionState" : "manual",
       "localizations" : {
