@@ -158,6 +158,10 @@ extension SettingViewController: UITableViewDataSource {
                 accessoryType = .disclosureIndicator
                 sfSymobl = .eyes
                 
+            case .termsofUse:
+                accessoryType = .disclosureIndicator
+                sfSymobl = .docText
+                
             case .version:
                 accessoryType = .none
                 sfSymobl = .flame
@@ -280,6 +284,13 @@ extension SettingViewController: UITableViewDelegate {
             AnalyticsManager.shared.logTransparencyPolicyClick()
             
             if let url = viewModel.transparencyPolicyURL {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+            
+        case .termsofUse:
+            AnalyticsManager.shared.logTermsOfUseClick()
+            
+            if let url = viewModel.termsOfUseURL {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
             

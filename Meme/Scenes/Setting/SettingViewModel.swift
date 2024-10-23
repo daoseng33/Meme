@@ -30,6 +30,7 @@ enum SettingRowType: Int {
     case version
     case contactUs
     case transparencyPolicy
+    case termsofUse
     
     var title: String {
         switch self {
@@ -40,6 +41,7 @@ enum SettingRowType: Int {
         case .version: return "App Version".localized()
         case .contactUs: return "Contact Us".localized()
         case .transparencyPolicy: return "Transparency Policy".localized()
+        case .termsofUse: return "Terms of Use".localized()
         }
     }
 }
@@ -50,12 +52,13 @@ final class SettingViewModel {
     let appearanceRelay: BehaviorRelay<AppearanceStyle>
     let contactEmail: String = "contact@likeabossapp.com"
     let transparencyPolicyURL = URL(string: "https://likeabossapp.com/memepire-transparency-policy/")
+    let termsOfUseURL = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")
     
     private let sectionsInfo: [SettingSectionType: [SettingRowType]] = {
         return [
             .general: [.appearance, .language],
             .sponsor: [.removeAds, .restorePurchases],
-            .about: [.contactUs, .transparencyPolicy, .version]
+            .about: [.contactUs, .transparencyPolicy, .termsofUse, .version]
         ]
     }()
     
