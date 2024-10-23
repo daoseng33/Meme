@@ -10,6 +10,7 @@
 		1C01D4182C904DE9007E93A9 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1C01D4172C904DE9007E93A9 /* Kingfisher */; };
 		1C020EF42C981F450028CAE0 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1C020EF32C981F450028CAE0 /* IQKeyboardManagerSwift */; };
 		1C0D0A0F2CC0BDFC004C82F2 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 1C0D0A0E2CC0BDFC004C82F2 /* FirebaseRemoteConfig */; };
+		1C0D0C892CC89BD4004C82F2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C0D0C882CC89BD4004C82F2 /* StoreKit.framework */; };
 		1C2D212F2C9D61DE00589C6A /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 1C2D212E2C9D61DE00589C6A /* SFSafeSymbols */; };
 		1C770F352CB6598700ECE617 /* HumorAPIService in Frameworks */ = {isa = PBXBuildFile; productRef = 1C770F342CB6598700ECE617 /* HumorAPIService */; };
 		1C7A0D8C2CB8119A0083C436 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 1C7A0D8B2CB8119A0083C436 /* ProgressHUD */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1C0D0C882CC89BD4004C82F2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WebAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CDA35302C81AB6C001FF654 /* Meme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meme.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CDA35492C81AB6F001FF654 /* MemeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +86,7 @@
 				1C770F352CB6598700ECE617 /* HumorAPIService in Frameworks */,
 				1C2D212F2C9D61DE00589C6A /* SFSafeSymbols in Frameworks */,
 				1C7A0DB02CBE451D0083C436 /* FirebaseCrashlytics in Frameworks */,
+				1C0D0C892CC89BD4004C82F2 /* StoreKit.framework in Frameworks */,
 				1C7A0DA42CBE23840083C436 /* FirebaseAnalytics in Frameworks */,
 				1CD9F5172C8316BC009DDABD /* SnapKit in Frameworks */,
 			);
@@ -122,6 +125,7 @@
 		8477AEB0E5C9C8C4395126A3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1C0D0C882CC89BD4004C82F2 /* StoreKit.framework */,
 				1CE608F12C85CB4C004844B7 /* MemeData.framework */,
 				1CC9DCC72C82FA3300A1EEC6 /* WebAPI.framework */,
 			);
@@ -386,6 +390,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconCI;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = R33X9HN7ET;
@@ -408,6 +413,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.likeabossapp.Meme.ci;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -567,6 +573,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDev;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = R33X9HN7ET;
@@ -589,6 +596,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.likeabossapp.Meme.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -602,6 +610,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = R33X9HN7ET;
@@ -624,6 +633,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.likeabossapp.Meme;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
