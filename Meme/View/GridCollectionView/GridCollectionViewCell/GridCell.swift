@@ -54,7 +54,7 @@ final class GridCell: UICollectionViewCell {
         let stackView: UIStackView = {
             let stackView = UIStackView(arrangedSubviews: [gridImageView, gridTitleLabel, actionsContainerView])
             stackView.axis = .vertical
-            stackView.spacing = Constant.spacing2
+            stackView.spacing = Constant.UI.spacing2
             
             return stackView
         }()

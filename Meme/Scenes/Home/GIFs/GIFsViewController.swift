@@ -81,15 +81,15 @@ final class GIFsViewController: BaseViewController {
         let stackView: UIStackView = {
             let stackView = UIStackView(arrangedSubviews: [keywordTextField, generateGifsButton])
             stackView.axis = .vertical
-            stackView.spacing = Constant.spacing2
+            stackView.spacing = Constant.UI.spacing2
             
             return stackView
         }()
         
         view.addSubview(stackView)
         stackView.snp.makeConstraints {
-            $0.top.equalTo(gridCollectionView.snp.bottom).offset(Constant.spacing1)
-            $0.left.right.bottom.equalTo(view.safeAreaLayoutGuide).inset(Constant.spacing2)
+            $0.top.equalTo(gridCollectionView.snp.bottom).offset(Constant.UI.spacing1)
+            $0.left.right.bottom.equalTo(view.safeAreaLayoutGuide).inset(Constant.UI.spacing2)
         }
         
         generateGifsButton.snp.makeConstraints {

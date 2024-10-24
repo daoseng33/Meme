@@ -73,7 +73,7 @@ final class FilterContainerView: UIView {
                 categoryMenuButton
             ])
             stackView.axis = .horizontal
-            stackView.spacing = Constant.spacing1
+            stackView.spacing = Constant.UI.spacing1
             
             return stackView
         }()

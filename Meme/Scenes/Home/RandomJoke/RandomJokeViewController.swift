@@ -92,7 +92,7 @@ final class RandomJokeViewController: BaseViewController {
             generateJokeButton
            ])
             stackView.axis = .vertical
-            stackView.spacing = Constant.spacing2
+            stackView.spacing = Constant.UI.spacing2
             
             return stackView
         }()
@@ -103,7 +103,7 @@ final class RandomJokeViewController: BaseViewController {
                 categorySelectedButton
             ])
             stackView.axis = .horizontal
-            stackView.spacing = Constant.spacing1
+            stackView.spacing = Constant.UI.spacing1
             
             return stackView
         }()
@@ -120,7 +120,7 @@ final class RandomJokeViewController: BaseViewController {
         
         stackView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
-            $0.left.right.bottom.equalTo(view.safeAreaLayoutGuide).inset(Constant.spacing2)
+            $0.left.right.bottom.equalTo(view.safeAreaLayoutGuide).inset(Constant.UI.spacing2)
         }
         
         generateJokeButton.snp.makeConstraints {

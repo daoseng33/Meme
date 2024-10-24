@@ -69,14 +69,14 @@ final class GeneralContentCell: UITableViewCell {
         containerTextView.addSubview(descriptionTextView)
         descriptionTextView.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
-            $0.left.right.equalToSuperview().inset(Constant.spacing2)
+            $0.left.right.equalToSuperview().inset(Constant.UI.spacing2)
         }
         
         let stackView: UIStackView = {
             let stackView = UIStackView(arrangedSubviews: [animatedImageView, containerTextView, actionsContainerView, bottomSeparatorView])
             stackView.axis = .vertical
-            stackView.spacing = Constant.spacing2
-            stackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: Constant.spacing2, right: 0)
+            stackView.spacing = Constant.UI.spacing2
+            stackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: Constant.UI.spacing2, right: 0)
             stackView.isLayoutMarginsRelativeArrangement = true
             
             return stackView
@@ -96,7 +96,7 @@ final class GeneralContentCell: UITableViewCell {
         }
         
         bottomSeparatorView.snp.makeConstraints {
-            $0.height.equalTo(Constant.spacing2)
+            $0.height.equalTo(Constant.UI.spacing2)
         }
     }
     

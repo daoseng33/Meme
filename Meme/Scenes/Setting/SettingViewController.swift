@@ -222,7 +222,7 @@ extension SettingViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return Constant.spacing3
+        return Constant.UI.spacing3
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -352,14 +352,14 @@ extension SettingViewController: DAOBottomSheetDelegate {
         
         view.addSubview(imageView)
         imageView.snp.makeConstraints {
-            $0.left.right.equalToSuperview().inset(Constant.spacing3)
+            $0.left.right.equalToSuperview().inset(Constant.UI.spacing3)
             $0.height.equalTo(150)
-            $0.top.equalToSuperview().offset(Constant.spacing2)
+            $0.top.equalToSuperview().offset(Constant.UI.spacing2)
         }
         
         view.addSubview(descriptionTextView)
         descriptionTextView.snp.makeConstraints {
-            $0.top.equalTo(imageView.snp.bottom).offset(Constant.spacing3)
+            $0.top.equalTo(imageView.snp.bottom).offset(Constant.UI.spacing3)
             $0.left.right.equalTo(imageView)
             $0.bottom.equalToSuperview()
         }

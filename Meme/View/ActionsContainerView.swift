@@ -45,7 +45,7 @@ final class ActionsContainerView: UIView {
     private func setupUI() {
         let actionsStackView: UIStackView = {
             let stackView = UIStackView(arrangedSubviews: [favoriteButton, shareButton])
-            stackView.spacing = Constant.spacing2
+            stackView.spacing = Constant.UI.spacing2
             stackView.axis = .horizontal
             
             return stackView

@@ -110,7 +110,7 @@ final class RandomMemeViewController: BaseViewController {
             ])
             
             stackView.axis = .horizontal
-            stackView.spacing = Constant.spacing1
+            stackView.spacing = Constant.UI.spacing1
             
             return stackView
         }()
@@ -126,14 +126,14 @@ final class RandomMemeViewController: BaseViewController {
             ])
             
             stackView.axis = .vertical
-            stackView.spacing = Constant.spacing2
+            stackView.spacing = Constant.UI.spacing2
             
             return stackView
         }()
         
         view.addSubview(bottomStackView)
         bottomStackView.snp.makeConstraints {
-            $0.left.right.bottom.equalTo(view.safeAreaLayoutGuide).inset(Constant.spacing2)
+            $0.left.right.bottom.equalTo(view.safeAreaLayoutGuide).inset(Constant.UI.spacing2)
         }
         
         generateMemeButton.snp.makeConstraints {
@@ -143,7 +143,7 @@ final class RandomMemeViewController: BaseViewController {
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints {
             $0.top.left.right.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(bottomStackView.snp.top).offset(-Constant.spacing2)
+            $0.bottom.equalTo(bottomStackView.snp.top).offset(-Constant.UI.spacing2)
         }
         
         scrollView.addSubview(containerView)
@@ -159,7 +159,7 @@ final class RandomMemeViewController: BaseViewController {
             ])
             
             stackView.axis = .vertical
-            stackView.spacing = Constant.spacing1
+            stackView.spacing = Constant.UI.spacing1
             
             return stackView
         }()

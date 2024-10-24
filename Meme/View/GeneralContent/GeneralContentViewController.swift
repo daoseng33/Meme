@@ -87,7 +87,7 @@ class GeneralContentViewController: BaseViewController {
         view.addSubview(filterContainerView)
         filterContainerView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            $0.left.right.equalToSuperview().inset(Constant.spacing3)
+            $0.left.right.equalToSuperview().inset(Constant.UI.spacing3)
             $0.height.equalTo(filterViewHeight)
         }
         
@@ -246,7 +246,7 @@ extension GeneralContentViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return Constant.spacing3
+        return Constant.UI.spacing3
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

@@ -21,7 +21,7 @@ final class GridCollectionView: UIView {
     // MARK: - UI
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
-            let collectionViewPadding = Constant.spacing2
+            let collectionViewPadding = Constant.UI.spacing2
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                   heightDimension: .estimated(186))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)

@@ -43,7 +43,7 @@ final class EmptyContentView: UIView {
         let stackView: UIStackView = {
             let stackView = UIStackView(arrangedSubviews: [emptyImageView, actionButton])
             stackView.axis = .vertical
-            stackView.spacing = Constant.spacing5
+            stackView.spacing = Constant.UI.spacing5
             return stackView
         }()
         

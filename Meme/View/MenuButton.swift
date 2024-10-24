@@ -88,11 +88,11 @@ final class MenuButton: UIView {
         var config: UIButton.Configuration = {
             var config = UIButton.Configuration.filled()
             config.imagePlacement = .trailing
-            config.imagePadding = Constant.spacing1
+            config.imagePadding = Constant.UI.spacing1
             config.baseForegroundColor = .label
             config.baseBackgroundColor = .secondarySystemBackground
-            config.contentInsets.leading = Constant.spacing2
-            config.contentInsets.trailing = Constant.spacing2
+            config.contentInsets.leading = Constant.UI.spacing2
+            config.contentInsets.trailing = Constant.UI.spacing2
             config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
                 var outgoing = incoming
                 outgoing.font = .systemFont(ofSize: 16, weight: .medium)
