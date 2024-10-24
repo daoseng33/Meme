@@ -176,6 +176,8 @@ extension GeneralContentViewController: UITableViewDataSource {
             cellViewModel.shareButtonTappedRelay
                 .asSignal()
                 .emit(with: self) { (self, cellType) in
+                    InAppReviewManager.shared.increasePositiveEngageCount()
+                    
                     switch cellType {
                     case .meme(let meme):
                         guard let url = meme.url else { return }

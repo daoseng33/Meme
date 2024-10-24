@@ -98,6 +98,8 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
                     self.isFavoriteRelay.accept(joke.isFavorite)
                     self.jokeRelay.accept(joke.joke)
                     
+                    InAppReviewManager.shared.increaseGenerateContentCount()
+                    
                 case .failure(let error):
                     self.jokeRelay.accept(error.message)
                 }

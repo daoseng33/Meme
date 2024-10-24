@@ -112,6 +112,7 @@ final class GridCell: UICollectionViewCell {
             .subscribe(onNext: {
                 viewModel.toggleIsFavorite()
                 AnalyticsManager.shared.logFavoriteEvent(isFavorite: viewModel.isFavoriteRelay.value)
+                InAppReviewManager.shared.increasePositiveEngageCount()
                 InAppReviewManager.shared.requestReview()
             })
             .disposed(by: rx.disposeBag)

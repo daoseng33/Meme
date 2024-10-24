@@ -93,6 +93,8 @@ final class GIFsViewModel: GIFsViewModelProtocol {
                         guard let self = self else { return }
                         self.gridCollectionViewModel.gridDatasObserver.onNext(gridDatas)
                         self.loadingStateRelay.accept(.success)
+                        
+                        InAppReviewManager.shared.increaseGenerateContentCount()
                     }
                     
                 case .failure(let error):

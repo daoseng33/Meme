@@ -98,6 +98,8 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
                     mediaRelay.accept((randomMeme.url, randomMeme.mediaType))
                     descriptionRelay.accept(randomMeme.memeDescription)
                     
+                    InAppReviewManager.shared.increaseGenerateContentCount()
+                    
                 case .failure(let error):
                     let noResultImageURL = Utility.getImageURL(named: Asset.Global.imageNotFound.name)
                     mediaRelay.accept((noResultImageURL, .image))

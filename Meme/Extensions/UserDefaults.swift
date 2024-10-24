@@ -10,5 +10,7 @@ import Foundation
 extension UserDefaults {
     enum Key: String {
         case appearance
+        case positiveEngageCount
+        case generateConentCount
     }
 }

@@ -29,6 +29,11 @@ enum Constant {
         static let adBannerHeight: CGFloat = 70
     }
     
+    enum Review {
+        static let positiveEngageBoundary = 3
+        static let generateContentBoundary = 10
+    }
+    
     enum Key {
         static let isFavorite = "isFavorite"
         static let titleTextColor = "titleTextColor"
