@@ -26,11 +26,15 @@ final class PurchaseManager {
     }
     
     // MARK: - Purchase Related
+    func getProduct() async throws -> Product? {
+        let products = try await Product.products(for: [monthlySubscriptionId])
+        return products.first
+    }
+    
     func purchase(completion: ((Error?) -> Void)?) {
         Task {
             do {
-                let products = try await Product.products(for: [monthlySubscriptionId])
-                guard let product = products.first else {
+                guard let product = try await getProduct() else {
                     print("No product found for identifier: \(monthlySubscriptionId)")
                     completion?(nil)
                     return

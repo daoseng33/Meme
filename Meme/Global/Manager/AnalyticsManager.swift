@@ -36,6 +36,9 @@ extension AnalyticsManager {
         case purchaseStatus
         case transparencyPolicyClick
         case termsOfUseClick
+        case subscribeButtonClick
+        case subscribeBottomSheetShow
+        case subscribeBottomSheetDismiss
         
         var value: String {
             switch self {
@@ -220,6 +223,24 @@ extension AnalyticsManager {
     func logTermsOfUseClick() {
         logSelectConentEvent(parameters: [
             AnalyticsParameterContent: EventName.termsOfUseClick.value
+        ])
+    }
+    
+    func logSubscribeBottomSheetShow() {
+        logSelectConentEvent(parameters: [
+            AnalyticsParameterContent: EventName.subscribeBottomSheetShow.value,
+        ])
+    }
+    
+    func logSubscribeBottomSheetDismiss() {
+        logSelectConentEvent(parameters: [
+            AnalyticsParameterContent: EventName.subscribeBottomSheetDismiss.value,
+        ])
+    }
+    
+    func logSubscribeButtonClick() {
+        logSelectConentEvent(parameters: [
+            AnalyticsParameterContent: EventName.subscribeButtonClick.value,
         ])
     }
 }

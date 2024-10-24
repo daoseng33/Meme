@@ -12,10 +12,13 @@ import RxCocoa
 import MessageUI
 import FirebaseCrashlytics
 import SFSafeSymbols
+import StoreKit
+import DAOBottomSheet
 
 final class SettingViewController: BaseViewController {
     // MARK: - Properties
     private let viewModel: SettingViewModel
+    private var product: Product?
     
     // MARK: - UI
     private lazy var settingTableView: UITableView = {
@@ -27,6 +30,8 @@ final class SettingViewController: BaseViewController {
         
         return tableView
     }()
+    
+    private var bottomSheet: DAOBottomSheet?
     
     // MARK: - Init
     init(viewModel: SettingViewModel) {
@@ -95,6 +100,27 @@ final class SettingViewController: BaseViewController {
     
     private func showRestorePurchaseFailedBanner(message: String) {
         ProgressHUD.banner("Restore Purchase Failed".localized(), message)
+    }
+    
+    private func showSubscriptionBottomSheet() {
+        Task {
+            AnalyticsManager.shared.logSubscribeBottomSheetShow()
+            
+            self.product = try await PurchaseManager.shared.getProduct()
+            
+            bottomSheet = DAOBottomSheet(parentVC: self, title: product?.displayName, type: .flexible)
+            bottomSheet?.delegate = self
+            bottomSheet?.backgroundColor = UIColor(dynamicProvider: { traitCollection in
+                return traitCollection.userInterfaceStyle == .dark ? .tertiarySystemGroupedBackground : .secondarySystemGroupedBackground
+            })
+            tabBarController?.tabBar.isHidden = true
+            bottomSheet?.show()
+        }
+    }
+    
+    private func removeSubscriptionBottomSheet() {
+        AnalyticsManager.shared.logSubscribeBottomSheetDismiss()
+        bottomSheet?.dismiss()
     }
 }
 
@@ -234,16 +260,7 @@ extension SettingViewController: UITableViewDelegate {
             
             AnalyticsManager.shared.logSettingRemoveAdsClick()
             
-            ProgressHUD.animate("Loading".localized(), interaction: false)
-            
-            PurchaseManager.shared.purchase(completion: { [weak self] error in
-                guard let self = self else { return }
-                ProgressHUD.dismiss()
-                
-                if let error = error {
-                    self.showPurchaseFailedBanner(message: error.localizedDescription)
-                }
-            })
+            showSubscriptionBottomSheet()
             
         case .restorePurchases:
             let isSubscribed = PurchaseManager.shared.isSubscribedRelay.value
@@ -304,5 +321,83 @@ extension SettingViewController: UITableViewDelegate {
 extension SettingViewController: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
+    }
+}
+
+// MARK: - DAOBottomSheetDelegate
+extension SettingViewController: DAOBottomSheetDelegate {
+    func bottomSheetWillDismiss(bottomSheet: DAOBottomSheetViewController) {
+        tabBarController?.tabBar.isHidden = false
+    }
+    
+    func setupDAOBottomSheetContentUI(bottomSheet: DAOBottomSheetViewController) -> UIView? {
+        let view = UIView()
+        
+        let imageView: UIImageView = {
+            let imageView = UIImageView(image: Asset.memePatrickIHave3Dollars.image)
+            imageView.contentMode = .scaleAspectFit
+            
+            return imageView
+        }()
+        
+        let descriptionTextView: UITextView = {
+            let textView = UITextView()
+            textView.font = .systemFont(ofSize: 16, weight: .medium)
+            textView.isScrollEnabled = false
+            textView.textColor = .label
+            textView.textAlignment = .center
+            
+            return textView
+        }()
+        
+        view.addSubview(imageView)
+        imageView.snp.makeConstraints {
+            $0.left.right.equalToSuperview().inset(Constant.spacing3)
+            $0.height.equalTo(150)
+            $0.top.equalToSuperview().offset(Constant.spacing2)
+        }
+        
+        view.addSubview(descriptionTextView)
+        descriptionTextView.snp.makeConstraints {
+            $0.top.equalTo(imageView.snp.bottom).offset(Constant.spacing3)
+            $0.left.right.equalTo(imageView)
+            $0.bottom.equalToSuperview()
+        }
+        
+        descriptionTextView.text = product?.description
+        
+        return view
+    }
+    
+    func setupFooterContentView(with bottomSheet: DAOBottomSheetViewController) -> UIView? {
+        let displayPrice = product?.displayPrice ?? "0.99"
+        
+        let subscribeTitle = String(format: "Subscribe for %@/month".localized(), displayPrice)
+        
+        let subscribeButton = RoundedRectangleButton(title: subscribeTitle, titleColor: .white, backgroundColor: .accent)
+        
+        subscribeButton.tapEvent
+            .subscribe(with: self) { (self, _) in
+                AnalyticsManager.shared.logSubscribeButtonClick()
+                
+                ProgressHUD.animate("Loading".localized(), interaction: false)
+                
+                PurchaseManager.shared.purchase { [weak self] error in
+                    guard let self = self else { return }
+                    
+                    DispatchQueue.main.async {
+                        ProgressHUD.dismiss()
+                        
+                        if let error = error {
+                            self.showPurchaseFailedBanner(message: error.localizedDescription)
+                        }
+                        
+                        self.removeSubscriptionBottomSheet()
+                    }
+                }
+            }
+            .disposed(by: subscribeButton.rx.disposeBag)
+        
+        return subscribeButton
     }
 }

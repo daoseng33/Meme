@@ -40,6 +40,7 @@ internal enum Asset {
     internal static let settings = ImageAsset(name: "settings")
   }
   internal static let memeDogeDog = ImageAsset(name: "meme_doge_dog")
+  internal static let memePatrickIHave3Dollars = ImageAsset(name: "meme_patrick_i_have_3_dollars")
   internal static let memeThisIsFineDog = ImageAsset(name: "meme_this_is_fine_dog")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

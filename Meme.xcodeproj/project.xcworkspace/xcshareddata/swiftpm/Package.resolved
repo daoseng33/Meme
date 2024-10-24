@@ -1,5 +1,5 @@
 {
-  "originHash" : "dc283dd231ebbeb476cd655c7db0bdf430eafe48fcdf67d521ba67076b64c126",
+  "originHash" : "652ec845e210e39601188ece310b08862e163bfff6661fae13991b2143a0062f",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -26,6 +26,15 @@
       "state" : {
         "revision" : "87dd288fc792bf9751e522e171a47df5b783b0b8",
         "version" : "11.1.0"
+      }
+    },
+    {
+      "identity" : "daobottomsheet",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/daoseng33/DAOBottomSheet",
+      "state" : {
+        "revision" : "fb2afafb5b7907d3c794854a314b6fbc09a136e7",
+        "version" : "1.3.0"
       }
     },
     {

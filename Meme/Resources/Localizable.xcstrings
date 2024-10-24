@@ -804,6 +804,28 @@
         }
       }
     },
+    "Subscribe for %@/month" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "以%@/月訂閱"
+          }
+        }
+      }
+    },
+    "Subscribe Now" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "立即訂閱"
+          }
+        }
+      }
+    },
     "Subscribed" : {
       "extractionState" : "manual",
       "localizations" : {
