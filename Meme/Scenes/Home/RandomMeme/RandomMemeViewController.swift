@@ -152,24 +152,9 @@ final class RandomMemeViewController: BaseViewController {
             $0.width.equalTo(scrollView.frameLayoutGuide.snp.width)
         }
         
-        let topStackView: UIStackView = {
-            let stackView = UIStackView(arrangedSubviews: [
-                imageView,
-                descriptionTextView
-            ])
-            
-            stackView.axis = .vertical
-            stackView.spacing = Constant.UI.spacing1
-            
-            return stackView
-        }()
-        
-        containerView.addSubview(topStackView)
-        topStackView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        
+        containerView.addSubview(imageView)
         imageView.snp.makeConstraints {
+            $0.top.left.right.equalToSuperview()
             $0.height.equalTo(containerView.snp.width)
         }
         
@@ -178,8 +163,11 @@ final class RandomMemeViewController: BaseViewController {
             $0.edges.equalToSuperview()
         }
         
-        containerView.snp.makeConstraints {
-            $0.height.greaterThanOrEqualTo(topStackView)
+        containerView.addSubview(descriptionTextView)
+        descriptionTextView.snp.makeConstraints {
+            $0.top.equalTo(imageView.snp.bottom).offset(Constant.UI.spacing1)
+            $0.left.right.equalToSuperview().inset(Constant.UI.spacing1)
+            $0.bottom.equalToSuperview()
         }
     }
     
