@@ -19,6 +19,8 @@ import AppTrackingTransparency
 import GoogleMobileAds
 
 final class Launcher {
+    private let keychainHandler = KeychainHandler()
+    
     func launch() {
         setupAPIConfig()
         setupNavigationBar()
@@ -176,7 +178,7 @@ final class Launcher {
     }
     
     private func setupPurchases() {
-        if let isSubscribed = KeychainManager.shared.loadBool(forKey: .isSubscribed) {
+        if let isSubscribed = keychainHandler.loadBool(forKey: .isSubscribed) {
             PurchaseManager.shared.isSubscribedRelay.accept(isSubscribed)
         }
         

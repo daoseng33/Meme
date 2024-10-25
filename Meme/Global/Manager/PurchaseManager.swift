@@ -14,6 +14,7 @@ final class PurchaseManager {
     // MARK: - Properties
     static let shared = PurchaseManager()
     private var transactionListenerTask: Task<Void, Error>?
+    private let keychainHandler = KeychainHandler()
     
     private let monthlySubscriptionId = "com.meme.subscription.month"
     
@@ -153,7 +154,7 @@ final class PurchaseManager {
     private func updateSubscriptionStatus(active: Bool) async {
         print("Subscription status updated: \(active)")
         isSubscribedRelay.accept(active)
-        _ = KeychainManager.shared.saveBool(active, forKey: .isSubscribed)
+        _ = keychainHandler.saveBool(active, forKey: .isSubscribed)
     }
     
     private func checkPurchaseStatus() async {

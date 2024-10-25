@@ -12,6 +12,8 @@ import RxSwift
 
 final class AdFullPageHandler: NSObject {
     // MARK: - Properties
+    private let keychainHandler = KeychainHandler()
+    
     var dismissAdObservable: Observable<Void> {
         return dismissAdRelay.asObservable()
     }
@@ -38,11 +40,11 @@ final class AdFullPageHandler: NSObject {
     
     private var apiRequestCount: Int {
         get {
-            return KeychainManager.shared.loadInt(forKey: .apiRequestCount) ?? 0
+            return keychainHandler.loadInt(forKey: .apiRequestCount) ?? 0
         }
         
         set {
-            let _ = KeychainManager.shared.saveInt(newValue, forKey: .apiRequestCount)
+            let _ = keychainHandler.saveInt(newValue, forKey: .apiRequestCount)
         }
     }
     
