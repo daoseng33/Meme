@@ -122,7 +122,7 @@ final class GIFsViewController: BaseViewController {
                     self.keywordTextField.isUserInteractionEnabled = true
                     self.generateGifsButton.isEnabled = true
                     ProgressHUD.dismiss()
-                    InAppReviewManager.shared.requestReview()
+                    self.viewModel.inAppReviewHandler.requestReview()
                     
                 case .failure(error: let error):
                     self.keywordTextField.isUserInteractionEnabled = true
@@ -160,10 +160,10 @@ final class GIFsViewController: BaseViewController {
                     
                 case .gif(let url):
                     AnalyticsManager.shared.logShareEvent(contentType: .gif, itemID: url.absoluteString)
-                    InAppReviewManager.shared.increasePositiveEngageCount()
+                    self.viewModel.inAppReviewHandler.increasePositiveEngageCount()
                     
                     Utility.showShareSheet(items: [url], parentVC: self) {
-                        InAppReviewManager.shared.requestReview()
+                        self.viewModel.inAppReviewHandler.requestReview()
                     }
                 }
             }

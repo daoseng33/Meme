@@ -20,6 +20,7 @@ class GeneralContentViewController: BaseViewController {
     private let naviItemTitle: String
     private let tabBarType: MemeTabBarItem
     private let refreshControl = UIRefreshControl()
+    private let inAppReviewHandler = InAppReviewHandler()
     
     // MARK: - UI
     private lazy var filterContainerView: FilterContainerView = {
@@ -176,7 +177,7 @@ extension GeneralContentViewController: UITableViewDataSource {
             cellViewModel.shareButtonTappedRelay
                 .asSignal()
                 .emit(with: self) { (self, cellType) in
-                    InAppReviewManager.shared.increasePositiveEngageCount()
+                    self.inAppReviewHandler.increasePositiveEngageCount()
                     
                     switch cellType {
                     case .meme(let meme):
@@ -190,32 +191,32 @@ extension GeneralContentViewController: UITableViewDataSource {
                                 switch result {
                                 case .success(let resource):
                                     Utility.showShareSheet(items: [url, resource.image, memeDsecription], parentVC: self) {
-                                        InAppReviewManager.shared.requestReview()
+                                        self.inAppReviewHandler.requestReview()
                                     }
                                     
                                 case .failure:
                                     Utility.showShareSheet(items: [url, memeDsecription], parentVC: self) {
-                                        InAppReviewManager.shared.requestReview()
+                                        self.inAppReviewHandler.requestReview()
                                     }
                                 }
                             }
                         case .video:
                             Utility.showShareSheet(items: [url, memeDsecription], parentVC: self) {
-                                InAppReviewManager.shared.requestReview()
+                                self.inAppReviewHandler.requestReview()
                             }
                         }
                         
                     case .joke(let joke):
                         AnalyticsManager.shared.logShareEvent(contentType: .joke, itemID: "\(joke.id)")
                         Utility.showShareSheet(items: [joke.joke], parentVC: self) {
-                            InAppReviewManager.shared.requestReview()
+                            self.inAppReviewHandler.requestReview()
                         }
                         
                     case .gif(let imageData):
                         guard let url = imageData.url else { return }
                         AnalyticsManager.shared.logShareEvent(contentType: .gif, itemID: "\(imageData.urlString)")
                         Utility.showShareSheet(items: [url], parentVC: self) {
-                            InAppReviewManager.shared.requestReview()
+                            self.inAppReviewHandler.requestReview()
                         }
                     }
                 }

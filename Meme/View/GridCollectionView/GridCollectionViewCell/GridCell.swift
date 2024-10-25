@@ -15,6 +15,7 @@ import SKPhotoBrowser
 final class GridCell: UICollectionViewCell {
     // MARK: - Properties
     private var viewModel: GridCellViewModelProtocol?
+    private let inAppReviewHandler = InAppReviewHandler()
     
     // MARK: - UI
     private let gridImageView: AnimatedImageView = {
@@ -112,8 +113,8 @@ final class GridCell: UICollectionViewCell {
             .subscribe(onNext: {
                 viewModel.toggleIsFavorite()
                 AnalyticsManager.shared.logFavoriteEvent(isFavorite: viewModel.isFavoriteRelay.value)
-                InAppReviewManager.shared.increasePositiveEngageCount()
-                InAppReviewManager.shared.requestReview()
+                self.inAppReviewHandler.increasePositiveEngageCount()
+                self.inAppReviewHandler.requestReview()
             })
             .disposed(by: rx.disposeBag)
         
