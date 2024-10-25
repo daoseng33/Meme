@@ -331,6 +331,22 @@ extension SettingViewController: DAOBottomSheetDelegate {
     }
     
     func setupDAOBottomSheetContentUI(bottomSheet: DAOBottomSheetViewController) -> UIView? {
+        guard let product = product else {
+            Crashlytics.crashlytics().record(error: NSError(domain: "Product is nil", code: 0, userInfo: nil))
+            
+            let label: UILabel = {
+                let label = UILabel()
+                label.text = "Unable to retrieve product information. Please contact us.".localized()
+                label.textColor = .label
+                label.textAlignment = .center
+                label.numberOfLines = 0
+                
+                return label
+            }()
+            
+            return label
+        }
+        
         let view = UIView()
         
         let imageView: UIImageView = {
@@ -346,6 +362,7 @@ extension SettingViewController: DAOBottomSheetDelegate {
             textView.isScrollEnabled = false
             textView.textColor = .label
             textView.textAlignment = .center
+            textView.backgroundColor = .clear
             
             return textView
         }()
@@ -364,17 +381,20 @@ extension SettingViewController: DAOBottomSheetDelegate {
             $0.bottom.equalToSuperview()
         }
         
-        descriptionTextView.text = product?.description
+        let displayPrice = product.displayPrice
+        let subscribePeroid = String(format: "Subscribe for %@/month".localized(), displayPrice)
+        
+        descriptionTextView.text =
+        """
+        \(product.description)
+        \(subscribePeroid)
+        """
         
         return view
     }
     
     func setupFooterContentView(with bottomSheet: DAOBottomSheetViewController) -> UIView? {
-        let displayPrice = product?.displayPrice ?? "0.99"
-        
-        let subscribeTitle = String(format: "Subscribe for %@/month".localized(), displayPrice)
-        
-        let subscribeButton = RoundedRectangleButton(title: subscribeTitle, titleColor: .white, backgroundColor: .accent)
+        let subscribeButton = RoundedRectangleButton(title: "Subscribe Now".localized(), titleColor: .white, backgroundColor: .accent)
         
         subscribeButton.tapEvent
             .subscribe(with: self) { (self, _) in

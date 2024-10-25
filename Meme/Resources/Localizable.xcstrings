@@ -881,6 +881,17 @@
         }
       }
     },
+    "Unable to retrieve product information. Please contact us." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無法獲取產品資訊，請聯絡我們\n翻譯成英文"
+          }
+        }
+      }
+    },
     "Unsubscribed" : {
       "extractionState" : "manual",
       "localizations" : {
