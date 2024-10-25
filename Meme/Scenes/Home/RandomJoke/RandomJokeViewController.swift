@@ -161,10 +161,10 @@ final class RandomJokeViewController: BaseViewController {
                 self.viewModel.shareButtonTappedRelay.accept(())
                 let joke = self.viewModel.joke
                 
-                InAppReviewManager.shared.increasePositiveEngageCount()
+                self.viewModel.inAppReviewHandler.increasePositiveEngageCount()
                 
                 Utility.showShareSheet(items: [joke], parentVC: self) {
-                    InAppReviewManager.shared.requestReview()
+                    self.viewModel.inAppReviewHandler.requestReview()
                 }
             })
             .disposed(by: rx.disposeBag)
@@ -174,9 +174,9 @@ final class RandomJokeViewController: BaseViewController {
             .subscribe(onNext: { (self, _) in
                 self.viewModel.toggleIsFavorite()
                 AnalyticsManager.shared.logFavoriteEvent(isFavorite: self.viewModel.isFavoriteRelay.value)
-                InAppReviewManager.shared.increasePositiveEngageCount()
+                self.viewModel.inAppReviewHandler.increasePositiveEngageCount()
 
-                InAppReviewManager.shared.requestReview()
+                self.viewModel.inAppReviewHandler.requestReview()
             })
             .disposed(by: rx.disposeBag)
     }
@@ -200,7 +200,7 @@ final class RandomJokeViewController: BaseViewController {
                     self.actionsContainerView.shareButton.isEnabled = true
                     self.actionsContainerView.favoriteButton.isEnabled = true
                     ProgressHUD.dismiss()
-                    InAppReviewManager.shared.requestReview()
+                    self.viewModel.inAppReviewHandler.requestReview()
                     
                 case .failure(let error):
                     self.generateJokeButton.isEnabled = true

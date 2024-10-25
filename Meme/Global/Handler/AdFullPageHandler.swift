@@ -12,12 +12,15 @@ import RxSwift
 
 final class AdFullPageHandler: NSObject {
     // MARK: - Properties
+    private let keychainHandler = KeychainHandler()
+    private let remoteConfigHandler = RemoteConfigHandler()
+    
     var dismissAdObservable: Observable<Void> {
         return dismissAdRelay.asObservable()
     }
     
     var shouldDisplayAd: Bool {
-        let enableAds = RemoteConfigManager.shared.getBool(forKey: .enableAds)
+        let enableAds = remoteConfigHandler.getBool(forKey: .enableAds)
         guard enableAds else {
             return false
         }
@@ -33,16 +36,16 @@ final class AdFullPageHandler: NSObject {
     private var interstitial: GADInterstitialAd?
     private let dismissAdRelay = PublishRelay<Void>()
     private var apiRequestLimit: Int {
-        return Int(truncating: RemoteConfigManager.shared.getNumber(forKey: .apiRequestLimit))
+        return Int(truncating: remoteConfigHandler.getNumber(forKey: .apiRequestLimit))
     }
     
     private var apiRequestCount: Int {
         get {
-            return KeychainManager.shared.loadInt(forKey: .apiRequestCount) ?? 0
+            return keychainHandler.loadInt(forKey: .apiRequestCount) ?? 0
         }
         
         set {
-            let _ = KeychainManager.shared.saveInt(newValue, forKey: .apiRequestCount)
+            let _ = keychainHandler.saveInt(newValue, forKey: .apiRequestCount)
         }
     }
     
