@@ -13,6 +13,7 @@ import RxCocoa
 final class HomePageViewController: BaseViewController {
     // MARK: - UI
     private lazy var adBannerView = AdBannerView(parentVC: self)
+    private let remoteConfigHandler = RemoteConfigHandler()
     
     // MARK: - Properties
     let viewModel = HomePageViewModel()
@@ -36,7 +37,7 @@ final class HomePageViewController: BaseViewController {
     private func setupUI() {
         navigationItem.title = "Memepire".localized()
         homePageCollectionView.delegate = self
-        adBannerView.isHidden = !RemoteConfigManager.shared.getBool(forKey: .enableAds)
+        adBannerView.isHidden = !remoteConfigHandler.getBool(forKey: .enableAds)
 
         let stackView: UIStackView = {
             let stackView = UIStackView(arrangedSubviews: [homePageCollectionView, adBannerView])
