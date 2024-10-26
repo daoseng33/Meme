@@ -360,6 +360,7 @@ extension SettingViewController: DAOBottomSheetDelegate {
             let textView = UITextView()
             textView.font = .systemFont(ofSize: 16, weight: .medium)
             textView.isScrollEnabled = false
+            textView.isEditable = false
             textView.textColor = .label
             textView.textAlignment = .center
             textView.backgroundColor = .clear
