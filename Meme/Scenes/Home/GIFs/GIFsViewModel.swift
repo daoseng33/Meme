@@ -16,6 +16,7 @@ final class GIFsViewModel: GIFsViewModelProtocol {
     private let loadingStateRelay = BehaviorRelay<LoadingState>(value: .initial)
     private let webService: GIFsAPIServiceProtocol
     private let disposeBag = DisposeBag()
+    let inAppReviewHandler = InAppReviewHandler()
     
     let adFullPageHandler: AdFullPageHandler = AdFullPageHandler()
     var imageDatas: [ImageData] = []
@@ -94,7 +95,7 @@ final class GIFsViewModel: GIFsViewModelProtocol {
                         self.gridCollectionViewModel.gridDatasObserver.onNext(gridDatas)
                         self.loadingStateRelay.accept(.success)
                         
-                        InAppReviewManager.shared.increaseGenerateContentCount()
+                        inAppReviewHandler.increaseGenerateContentCount()
                     }
                     
                 case .failure(let error):

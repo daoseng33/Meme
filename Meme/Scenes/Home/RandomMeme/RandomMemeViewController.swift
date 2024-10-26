@@ -200,7 +200,7 @@ final class RandomMemeViewController: BaseViewController {
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
                 guard let mediaURL = self.viewModel.media.mediaURL else { return }
-                InAppReviewManager.shared.increasePositiveEngageCount()
+                self.viewModel.inAppReviewHandler.increasePositiveEngageCount()
                 
                 self.viewModel.shareButtonTappedRelay.accept(())
                 let mediaType = self.viewModel.media.type
@@ -213,18 +213,18 @@ final class RandomMemeViewController: BaseViewController {
                         switch result {
                         case .success(let resource):
                             Utility.showShareSheet(items: [mediaURL, resource.image, description], parentVC: self) {
-                                InAppReviewManager.shared.requestReview()
+                                self.viewModel.inAppReviewHandler.requestReview()
                             }
                             
                         case .failure:
                             Utility.showShareSheet(items: [mediaURL, description], parentVC: self) {
-                                InAppReviewManager.shared.requestReview()
+                                self.viewModel.inAppReviewHandler.requestReview()
                             }
                         }
                     }
                 case .video:
                     Utility.showShareSheet(items: [mediaURL, description], parentVC: self) {
-                        InAppReviewManager.shared.requestReview()
+                        self.viewModel.inAppReviewHandler.requestReview()
                     }
                 }
             })
@@ -239,8 +239,8 @@ final class RandomMemeViewController: BaseViewController {
             .subscribe(onNext: { (self, _) in
                 self.viewModel.toggleIsFavorite()
                 AnalyticsManager.shared.logFavoriteEvent(isFavorite: self.viewModel.isFavoriteRelay.value)
-                InAppReviewManager.shared.increasePositiveEngageCount()
-                InAppReviewManager.shared.requestReview()
+                self.viewModel.inAppReviewHandler.increasePositiveEngageCount()
+                self.viewModel.inAppReviewHandler.requestReview()
             })
             .disposed(by: rx.disposeBag)
     }
@@ -304,7 +304,7 @@ final class RandomMemeViewController: BaseViewController {
                     self.actionsContainerView.favoriteButton.isEnabled = true
                     self.actionsContainerView.shareButton.isEnabled = true
                     ProgressHUD.dismiss()
-                    InAppReviewManager.shared.requestReview()
+                    self.viewModel.inAppReviewHandler.requestReview()
                     
                 case .failure(let error):
                     self.generateMemeButton.isEnabled = true

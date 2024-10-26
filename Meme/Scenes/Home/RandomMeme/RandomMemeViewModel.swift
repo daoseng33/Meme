@@ -14,6 +14,7 @@ import RxSwift
 final class RandomMemeViewModel: RandomMemeViewModelProtocol {
     // MARK: - Properties
     let adFullPageHandler: AdFullPageHandler = AdFullPageHandler()
+    let inAppReviewHandler: InAppReviewHandler = InAppReviewHandler()
     
     var loadingState: LoadingState {
         return loadingStateRelay.value
@@ -98,7 +99,7 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
                     mediaRelay.accept((randomMeme.url, randomMeme.mediaType))
                     descriptionRelay.accept(randomMeme.memeDescription)
                     
-                    InAppReviewManager.shared.increaseGenerateContentCount()
+                    inAppReviewHandler.increaseGenerateContentCount()
                     
                 case .failure(let error):
                     let noResultImageURL = Utility.getImageURL(named: Asset.Global.imageNotFound.name)

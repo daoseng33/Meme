@@ -171,12 +171,16 @@ final class Launcher {
     }
     
     private func setupRemoteConfig() {
-        RemoteConfigManager.shared.setupRemoteConfig()
-        RemoteConfigManager.shared.fetchAndActivate { _ in }
+        let remoteConfigHandler = RemoteConfigHandler()
+        
+        remoteConfigHandler.setupRemoteConfig()
+        remoteConfigHandler.fetchAndActivate { _ in }
     }
     
     private func setupPurchases() {
-        if let isSubscribed = KeychainManager.shared.loadBool(forKey: .isSubscribed) {
+        let keychainHandler = KeychainHandler()
+        
+        if let isSubscribed = keychainHandler.loadBool(forKey: .isSubscribed) {
             PurchaseManager.shared.isSubscribedRelay.accept(isSubscribed)
         }
         

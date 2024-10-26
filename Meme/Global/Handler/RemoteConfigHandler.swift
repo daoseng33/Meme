@@ -1,5 +1,5 @@
 //
-//  RemoteConfigManager.swift
+//  RemoteConfigHandler.swift
 //  Meme
 //
 //  Created by DAO on 2024/10/17.
@@ -9,9 +9,8 @@ import Foundation
 import FirebaseRemoteConfig
 import FirebaseCrashlytics
 
-final class RemoteConfigManager {
+final class RemoteConfigHandler {
     // MARK: - Properties
-    static let shared = RemoteConfigManager()
     private let remoteConfig: RemoteConfig
     
     enum Key: String {
@@ -20,7 +19,7 @@ final class RemoteConfigManager {
     }
     
     // MARK: - Init
-    private init() {
+    init() {
         remoteConfig = RemoteConfig.remoteConfig()
         setupRemoteConfig()
     }
