@@ -387,6 +387,7 @@ extension SettingViewController: DAOBottomSheetDelegate {
         descriptionTextView.text =
         """
         \(product.description)
+        
         \(subscribePeroid)
         """
         
