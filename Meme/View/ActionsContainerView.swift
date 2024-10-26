@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 import SFSafeSymbols
 import SnapKit
 
@@ -35,6 +37,7 @@ final class ActionsContainerView: UIView {
         super.init(frame: .zero)
         
         setupUI()
+        setupActions()
     }
     
     required init?(coder: NSCoder) {
@@ -64,5 +67,14 @@ final class ActionsContainerView: UIView {
         shareButton.snp.makeConstraints {
             $0.width.equalTo(35)
         }
+    }
+    
+    private func setupActions() {
+        Observable.merge([favoriteButton.rx.tap.asObservable(),
+                          shareButton.rx.tap.asObservable()])
+        .subscribe(onNext: { _ in
+            Utility.impactHapticFeedback()
+        })
+        .disposed(by: rx.disposeBag)
     }
 }

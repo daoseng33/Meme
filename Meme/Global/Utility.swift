@@ -49,5 +49,10 @@ struct Utility {
         
         parentVC.present(activityViewController, animated: true, completion: completion)
     }
+    
+    static func impactHapticFeedback() {
+        let feedback = UIImpactFeedbackGenerator(style: .rigid)
+        feedback.impactOccurred()
+    }
 }
 
