@@ -20,7 +20,7 @@
     "_applicationInternalID" : "6737028083",
     "_developerTeamID" : "R33X9HN7ET",
     "_failTransactionsEnabled" : false,
-    "_lastSynchronizedDate" : 751518781.44203198,
+    "_lastSynchronizedDate" : 751788621.45613503,
     "_locale" : "en_US",
     "_storefront" : "USA",
     "_storeKitErrors" : [
@@ -72,48 +72,7 @@
     ]
   },
   "subscriptionGroups" : [
-    {
-      "id" : "21562520",
-      "localizations" : [
 
-      ],
-      "name" : "Monthly Subscription",
-      "subscriptions" : [
-        {
-          "adHocOffers" : [
-
-          ],
-          "codeOffers" : [
-
-          ],
-          "displayPrice" : "0.99",
-          "familyShareable" : false,
-          "groupNumber" : 1,
-          "internalID" : "6737029864",
-          "introductoryOffer" : null,
-          "localizations" : [
-            {
-              "description" : "訂閱以享受無廣告的迷因帝國！",
-              "displayName" : "移除廣告",
-              "locale" : "zh_CN"
-            },
-            {
-              "description" : "Subscribe to enjoy an ad-free Memepire!",
-              "displayName" : "Remove Ads",
-              "locale" : "en_US"
-            }
-          ],
-          "productID" : "com.meme.subscription.month",
-          "recurringSubscriptionPeriod" : "P1M",
-          "referenceName" : "Monthly Subscription",
-          "subscriptionGroupID" : "21562520",
-          "type" : "RecurringSubscription",
-          "winbackOffers" : [
-
-          ]
-        }
-      ]
-    }
   ],
   "version" : {
     "major" : 4,
