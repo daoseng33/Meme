@@ -60,7 +60,7 @@ final class RandomMemeViewController: BaseViewController {
     init(viewModel: RandomMemeViewModelProtocol) {
         self.viewModel = viewModel
         
-        super.init(nibName: nil, bundle: nil)
+        super.init()
     }
     
     required init?(coder: NSCoder) {

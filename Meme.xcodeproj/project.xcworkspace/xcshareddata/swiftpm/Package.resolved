@@ -1,5 +1,5 @@
 {
-  "originHash" : "652ec845e210e39601188ece310b08862e163bfff6661fae13991b2143a0062f",
+  "originHash" : "84ce3eb11ffbf0a2e27232c29cad9650e4804d7eddc8ea6029691481862ba180",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -26,6 +26,15 @@
       "state" : {
         "revision" : "87dd288fc792bf9751e522e171a47df5b783b0b8",
         "version" : "11.1.0"
+      }
+    },
+    {
+      "identity" : "appnavigator",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/daoseng33/AppNavigator.git",
+      "state" : {
+        "revision" : "57fbac0c93b5cd2c5908c123e8b4db7de58837b8",
+        "version" : "2.1.0"
       }
     },
     {
@@ -260,6 +269,15 @@
       "state" : {
         "revision" : "ebc7251dd5b37f627c93698e4374084d98409633",
         "version" : "1.28.2"
+      }
+    },
+    {
+      "identity" : "urlnavigator",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/devxoul/URLNavigator.git",
+      "state" : {
+        "revision" : "b881f23dc3b381986ed6cf76da8e426ce5c8a7ee",
+        "version" : "2.5.1"
       }
     }
   ],

@@ -46,7 +46,7 @@ final class RandomJokeViewController: BaseViewController {
     init(viewModel: RandomJokeViewModelProtocol) {
         self.viewModel = viewModel
         
-        super.init(nibName: nil, bundle: nil)
+        super.init()
     }
     
     required init?(coder: NSCoder) {

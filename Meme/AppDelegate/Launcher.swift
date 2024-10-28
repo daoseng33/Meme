@@ -17,6 +17,7 @@ import FirebaseCore
 import FirebaseAnalytics
 import AppTrackingTransparency
 import GoogleMobileAds
+import AppNavigator
 
 final class Launcher {
     func launch() {
@@ -32,6 +33,7 @@ final class Launcher {
         setupAdMob()
         setupRemoteConfig()
         setupPurchases()
+        setupAppNavigator()
     }
     
     private func handleGlobalError() {
@@ -185,5 +187,27 @@ final class Launcher {
         }
         
         PurchaseManager.shared.startListeningForTransactions()
+    }
+    
+    private func setupAppNavigator() {
+        // Page
+        let pageConfigs: [NavigatorConfig] = [
+            RandomMemePageConfig(),
+            RandomJokePageConfig(),
+            RandomGifPageConfig(),
+            AppearancePageConfig()
+        ]
+        
+        // Behavior
+        let behaviorConfigs: [NavigatorConfig] = [
+            DismissConfigs(),
+            BackToPreviousConfigs(),
+            SelectTabConfigs()
+        ]
+        
+        AppNavigator.shared.setup(
+            scheme: "memepire",
+            pageConfigs: pageConfigs,
+            behaviorConfigs: behaviorConfigs)
     }
 }

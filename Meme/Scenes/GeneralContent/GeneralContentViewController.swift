@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import SKPhotoBrowser
 import Kingfisher
+import AppNavigator
 
 class GeneralContentViewController: BaseViewController {
     // MARK: - Properties
@@ -53,7 +54,7 @@ class GeneralContentViewController: BaseViewController {
         self.naviItemTitle = title
         self.tabBarType = tabBarType
         
-        super.init(nibName: nil, bundle: nil)
+        super.init()
     }
     
     @MainActor required init?(coder: NSCoder) {
@@ -114,7 +115,9 @@ class GeneralContentViewController: BaseViewController {
             .actionButtonRelay
             .asSignal()
             .emit(with: self) { (self, _) in
-                self.tabBarController?.selectedIndex = MemeTabBarItem.home.rawValue
+                AppNavigator.shared.open(with: .behavior,
+                                         name: BehaviorURLPath.selectTab.rawValue,
+                                         queryItems: [URLQueryItem(name: Constant.Parameter.tab, value: "\(MemeTabBarItem.home.rawValue)")])
             }
             .disposed(by: rx.disposeBag)
         

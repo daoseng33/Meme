@@ -44,3 +44,9 @@ enum Constant {
         static let gadFullPageUnitId = "ca-app-pub-3940256099942544/4411468910"
     }
 }
+
+extension Constant {
+    enum Parameter {
+        static let tab = "tab"
+    }
+}

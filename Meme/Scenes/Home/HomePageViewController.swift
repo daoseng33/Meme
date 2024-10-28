@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import GoogleMobileAds
 import RxCocoa
+import AppNavigator
 
 final class HomePageViewController: BaseViewController {
     // MARK: - UI
@@ -71,23 +72,25 @@ final class HomePageViewController: BaseViewController {
 extension HomePageViewController: GridCollectionViewDelegate {
     func gridCollectionView(_ gridCollectionView: GridCollectionView, didSelectItemAt index: Int) {
         let category = Category(rawValue: index)
-        let vc: BaseViewController
         switch category {
         case .meme:
-            vc = RandomMemeViewController(viewModel: viewModel.randomMemeViewModel)
+            AppNavigator.shared.open(with: .page,
+                                     name: PageURLPath.randomMeme.rawValue,
+                                     context: viewModel.randomMemeViewModel)
             
         case .joke:
-            vc = RandomJokeViewController(viewModel: viewModel.randomJokeViewModel)
+            AppNavigator.shared.open(with: .page,
+                                     name: PageURLPath.randomJoke.rawValue,
+                                     context: viewModel.randomJokeViewModel)
             
         case .gifs:
-            vc = GIFsViewController(viewModel: viewModel.gifsViewModel)
+            AppNavigator.shared.open(with: .page,
+                                     name: PageURLPath.randomGif.rawValue,
+                                     context: viewModel.gifsViewModel)
             
         case nil:
             return
         }
-        
-        vc.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

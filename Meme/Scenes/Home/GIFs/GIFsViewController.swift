@@ -35,7 +35,7 @@ final class GIFsViewController: BaseViewController {
     // MARK: - Init
     init(viewModel: GIFsViewModelProtocol) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init()
     }
     
     @MainActor required init?(coder: NSCoder) {

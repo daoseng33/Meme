@@ -18,6 +18,7 @@
 		1C7A0DA42CBE23840083C436 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1C7A0DA32CBE23840083C436 /* FirebaseAnalytics */; };
 		1C7A0DA92CBE280D0083C436 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 1C7A0DA82CBE280D0083C436 /* FirebasePerformance */; };
 		1C7A0DB02CBE451D0083C436 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1C7A0DAF2CBE451D0083C436 /* FirebaseCrashlytics */; };
+		1C84D2122CCF6ED000D57CD1 /* AppNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 1C84D2112CCF6ED000D57CD1 /* AppNavigator */; };
 		1C87C34E2C9961FB00A63581 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C34D2C9961FB00A63581 /* RxCocoa */; };
 		1C87C3502C9961FB00A63581 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C34F2C9961FB00A63581 /* RxRelay */; };
 		1C87C3622C996A5E00A63581 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 1C87C3612C996A5E00A63581 /* RxBlocking */; };
@@ -89,6 +90,7 @@
 				1C2D212F2C9D61DE00589C6A /* SFSafeSymbols in Frameworks */,
 				1C7A0DB02CBE451D0083C436 /* FirebaseCrashlytics in Frameworks */,
 				1C0D0C892CC89BD4004C82F2 /* StoreKit.framework in Frameworks */,
+				1C84D2122CCF6ED000D57CD1 /* AppNavigator in Frameworks */,
 				1C7A0DA42CBE23840083C436 /* FirebaseAnalytics in Frameworks */,
 				1CD9F5172C8316BC009DDABD /* SnapKit in Frameworks */,
 			);
@@ -170,6 +172,7 @@
 				1CE0575E2CBFAD1400873753 /* GoogleMobileAds */,
 				1C0D0A0E2CC0BDFC004C82F2 /* FirebaseRemoteConfig */,
 				1C4BE4FF2CC90B8000CD56A5 /* DAOBottomSheet */,
+				1C84D2112CCF6ED000D57CD1 /* AppNavigator */,
 			);
 			productName = Meme;
 			productReference = 1CDA35302C81AB6C001FF654 /* Meme.app */;
@@ -239,6 +242,7 @@
 				1C7A0DA22CBE23840083C436 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				1CE0575D2CBFAD1400873753 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 				1C4BE4FE2CC90B8000CD56A5 /* XCRemoteSwiftPackageReference "DAOBottomSheet" */,
+				1C84D2102CCF6ED000D57CD1 /* XCRemoteSwiftPackageReference "AppNavigator" */,
 			);
 			preferredProjectObjectVersion = 56;
 			productRefGroup = 1CDA35312C81AB6C001FF654 /* Products */;
@@ -402,8 +406,8 @@
 				INFOPLIST_FILE = Meme/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Memepire;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "${PHOTO_LIBRARY_USAGE_DESCRIPTION}";
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "${TRACKING_USAGE_DESCRIPTION}";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
@@ -585,8 +589,8 @@
 				INFOPLIST_FILE = Meme/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Memepire;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "${PHOTO_LIBRARY_USAGE_DESCRIPTION}";
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "${TRACKING_USAGE_DESCRIPTION}";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
@@ -622,8 +626,8 @@
 				INFOPLIST_FILE = Meme/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Memepire;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "${PHOTO_LIBRARY_USAGE_DESCRIPTION}";
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "${TRACKING_USAGE_DESCRIPTION}";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
@@ -774,6 +778,14 @@
 				minimumVersion = 11.3.0;
 			};
 		};
+		1C84D2102CCF6ED000D57CD1 /* XCRemoteSwiftPackageReference "AppNavigator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/daoseng33/AppNavigator.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.0;
+			};
+		};
 		1C87C34C2C9961FB00A63581 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift";
@@ -858,6 +870,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1C7A0DA22CBE23840083C436 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		1C84D2112CCF6ED000D57CD1 /* AppNavigator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C84D2102CCF6ED000D57CD1 /* XCRemoteSwiftPackageReference "AppNavigator" */;
+			productName = AppNavigator;
 		};
 		1C87C34D2C9961FB00A63581 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -14,6 +14,7 @@ import FirebaseCrashlytics
 import SFSafeSymbols
 import StoreKit
 import DAOBottomSheet
+import AppNavigator
 
 final class SettingViewController: BaseViewController {
     // MARK: - Properties
@@ -36,7 +37,7 @@ final class SettingViewController: BaseViewController {
     // MARK: - Init
     init(viewModel: SettingViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init()
     }
     
     @MainActor required init?(coder: NSCoder) {
@@ -238,18 +239,13 @@ extension SettingViewController: UITableViewDelegate {
         switch rowType {
         case .appearance:
             AnalyticsManager.shared.logSettingAppearanceClick()
-            
-            let appearanceViewController = AppearanceTableViewController(viewModel: viewModel.appearanceTableViewModel)
-            navigationController?.pushViewController(appearanceViewController, animated: true)
+            AppNavigator.shared.open(with: .page, name: PageURLPath.appearance.rawValue, context: viewModel.appearanceTableViewModel)
             
         case .language:
-            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
-                return
-            }
-            
             AnalyticsManager.shared.logSettingLanguageClick()
             
-            UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
+            let settingsUrl = URL(string: UIApplication.openSettingsURLString)
+            AppNavigator.shared.openExternalUrl(with: settingsUrl)
             
         case .removeAds:
             let isSubscribed = PurchaseManager.shared.isSubscribedRelay.value
@@ -300,16 +296,12 @@ extension SettingViewController: UITableViewDelegate {
         case .transparencyPolicy:
             AnalyticsManager.shared.logTransparencyPolicyClick()
             
-            if let url = viewModel.transparencyPolicyURL {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            }
+            AppNavigator.shared.openExternalUrl(with: viewModel.transparencyPolicyURL)
             
         case .termsofUse:
             AnalyticsManager.shared.logTermsOfUseClick()
             
-            if let url = viewModel.termsOfUseURL {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            }
+            AppNavigator.shared.openExternalUrl(with: viewModel.termsOfUseURL)
             
         case .version:
             break
