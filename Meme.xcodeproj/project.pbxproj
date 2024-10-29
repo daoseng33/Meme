@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1C01D4182C904DE9007E93A9 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1C01D4172C904DE9007E93A9 /* Kingfisher */; };
 		1C020EF42C981F450028CAE0 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1C020EF32C981F450028CAE0 /* IQKeyboardManagerSwift */; };
+		1C02418F2CD085CA0026C2BC /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = 1C02418E2CD085CA0026C2BC /* Differentiator */; };
+		1C0241912CD085CA0026C2BC /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 1C0241902CD085CA0026C2BC /* RxDataSources */; };
 		1C0D0A0F2CC0BDFC004C82F2 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 1C0D0A0E2CC0BDFC004C82F2 /* FirebaseRemoteConfig */; };
 		1C0D0C892CC89BD4004C82F2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C0D0C882CC89BD4004C82F2 /* StoreKit.framework */; };
 		1C2D212F2C9D61DE00589C6A /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 1C2D212E2C9D61DE00589C6A /* SFSafeSymbols */; };
@@ -92,6 +94,8 @@
 				1C0D0C892CC89BD4004C82F2 /* StoreKit.framework in Frameworks */,
 				1C84D2122CCF6ED000D57CD1 /* AppNavigator in Frameworks */,
 				1C7A0DA42CBE23840083C436 /* FirebaseAnalytics in Frameworks */,
+				1C02418F2CD085CA0026C2BC /* Differentiator in Frameworks */,
+				1C0241912CD085CA0026C2BC /* RxDataSources in Frameworks */,
 				1CD9F5172C8316BC009DDABD /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -173,6 +177,8 @@
 				1C0D0A0E2CC0BDFC004C82F2 /* FirebaseRemoteConfig */,
 				1C4BE4FF2CC90B8000CD56A5 /* DAOBottomSheet */,
 				1C84D2112CCF6ED000D57CD1 /* AppNavigator */,
+				1C02418E2CD085CA0026C2BC /* Differentiator */,
+				1C0241902CD085CA0026C2BC /* RxDataSources */,
 			);
 			productName = Meme;
 			productReference = 1CDA35302C81AB6C001FF654 /* Meme.app */;
@@ -243,6 +249,7 @@
 				1CE0575D2CBFAD1400873753 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 				1C4BE4FE2CC90B8000CD56A5 /* XCRemoteSwiftPackageReference "DAOBottomSheet" */,
 				1C84D2102CCF6ED000D57CD1 /* XCRemoteSwiftPackageReference "AppNavigator" */,
+				1C02418D2CD085CA0026C2BC /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			preferredProjectObjectVersion = 56;
 			productRefGroup = 1CDA35312C81AB6C001FF654 /* Products */;
@@ -738,6 +745,14 @@
 				minimumVersion = 7.1.1;
 			};
 		};
+		1C02418D2CD085CA0026C2BC /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.2;
+			};
+		};
 		1C2D212D2C9D61DE00589C6A /* XCRemoteSwiftPackageReference "SFSafeSymbols" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SFSafeSymbols/SFSafeSymbols";
@@ -830,6 +845,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1C020EF22C981F450028CAE0 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		1C02418E2CD085CA0026C2BC /* Differentiator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C02418D2CD085CA0026C2BC /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = Differentiator;
+		};
+		1C0241902CD085CA0026C2BC /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C02418D2CD085CA0026C2BC /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
 		};
 		1C0D0A0E2CC0BDFC004C82F2 /* FirebaseRemoteConfig */ = {
 			isa = XCSwiftPackageProductDependency;

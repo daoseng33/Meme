@@ -8,15 +8,16 @@
 import UIKit
 import RxCocoa
 import SnapKit
+import RxDataSources
 
 protocol GridCollectionViewDelegate: AnyObject {
     func gridCollectionView(_ gridCollectionView: GridCollectionView, didSelectItemAt index: Int)
 }
 
-final class GridCollectionView: UIView {
+final class GridCollectionView: UIView, UIScrollViewDelegate {
     // MARK: - Properties
     weak var delegate: GridCollectionViewDelegate?
-    private let viewModel: GridCollectionViewModelProtocol
+    private var viewModel: GridCollectionViewModelProtocol
     
     // MARK: - UI
     private let collectionView: UICollectionView = {
@@ -52,7 +53,6 @@ final class GridCollectionView: UIView {
         super.init(frame: .zero)
         
         setupCollectionView()
-        setupObserver()
     }
     
     required init?(coder: NSCoder) {
@@ -61,53 +61,47 @@ final class GridCollectionView: UIView {
     
     // MARK: - Setup
     private func setupCollectionView() {
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        
         addSubview(collectionView)
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-    }
-    
-    private func setupObserver() {
-        viewModel.shouldReloadData
-            .asDriver(onErrorJustReturn: ())
-            .drive(with: self) { (self, _) in
-                self.collectionView.reloadData()
+        
+        collectionView.rx.setDelegate(self)
+            .disposed(by: rx.disposeBag)
+        
+        let dataSource = RxCollectionViewSectionedAnimatedDataSource<GridSection>(configureCell: { [weak self] dataSource, collectionView, indexPath, gridData in
+            let cell: GridCell = collectionView.dequeueReusableCell(for: indexPath)
+            
+            guard let self = self else { return cell }
+            
+            let cellViewModel = self.viewModel.gridCellViewModel(with: indexPath.item)
+            
+            cellViewModel.favoriteButtonTappedRelay
+                .subscribe(with: self, onNext: { (self, gifInfo) in
+                    self.viewModel.favoriteButtonTappedRelay.accept((gifInfo.gridImageType,
+                                                                     gifInfo.isFavorite,
+                                                                     indexPath.item))
+                })
+                .disposed(by: cell.rx.disposeBag)
+            
+            cellViewModel.shareButtonTappedRelay
+                .bind(to: self.viewModel.shareButtonTappedRelay)
+                .disposed(by: cell.rx.disposeBag)
+            
+            cell.configure(viewModel: cellViewModel)
+            
+            return cell
+        })
+        
+        viewModel.dataSource = dataSource
+        viewModel.sectionsRelay
+            .bind(to: collectionView.rx.items(dataSource: dataSource))
+            .disposed(by: rx.disposeBag)
+        
+        collectionView.rx.itemSelected
+            .subscribe(with: self) { (self, indexPath) in
+                self.delegate?.gridCollectionView(self, didSelectItemAt: indexPath.item)
             }
             .disposed(by: rx.disposeBag)
-    }
-}
-
-// MARK: - UICollectionViewDataSource
-extension GridCollectionView: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.numberOfItems
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: GridCell = collectionView.dequeueReusableCell(for: indexPath)
-        
-        let cellViewModel = viewModel.gridCellViewModel(with: indexPath.item)
-        
-        cellViewModel.favoriteButtonTappedRelay
-            .bind(to: viewModel.favoriteButtonTappedRelay)
-            .disposed(by: cell.rx.disposeBag)
-        
-        cellViewModel.shareButtonTappedRelay
-            .bind(to: viewModel.shareButtonTappedRelay)
-            .disposed(by: cell.rx.disposeBag)
-        
-        cell.configure(viewModel: cellViewModel)
-        
-        return cell
-    }
-}
-
-// MARK: - UICollectionViewDelegate
-extension GridCollectionView: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.gridCollectionView(self, didSelectItemAt: indexPath.item)
     }
 }
