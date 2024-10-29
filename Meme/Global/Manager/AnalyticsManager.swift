@@ -34,7 +34,7 @@ extension AnalyticsManager {
         case settingContactUsClick
         case appearanceModeSelect
         case purchaseStatus
-        case transparencyPolicyClick
+        case privacyPolicyClick
         case termsOfUseClick
         case subscribeButtonClick
         case subscribeBottomSheetShow
@@ -214,9 +214,9 @@ extension AnalyticsManager {
         ])
     }
     
-    func logTransparencyPolicyClick() {
+    func logPrivacyPolicyClick() {
         logSelectConentEvent(parameters: [
-            AnalyticsParameterContent: EventName.transparencyPolicyClick.value
+            AnalyticsParameterContent: EventName.privacyPolicyClick.value
         ])
     }
     

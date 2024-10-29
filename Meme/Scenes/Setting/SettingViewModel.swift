@@ -31,7 +31,7 @@ enum SettingRowType: Int {
     case restorePurchases
     case version
     case contactUs
-    case transparencyPolicy
+    case privacyPolicy
     case termsofUse
     
     var title: String {
@@ -42,7 +42,7 @@ enum SettingRowType: Int {
         case .restorePurchases: return "Restore Purchases".localized()
         case .version: return "App Version".localized()
         case .contactUs: return "Contact Us".localized()
-        case .transparencyPolicy: return "Transparency Policy".localized()
+        case .privacyPolicy: return "Privacy Policy".localized()
         case .termsofUse: return "Terms of Use".localized()
         }
     }
@@ -60,7 +60,7 @@ final class SettingViewModel {
         return [
             .general: [.appearance, .language],
             .sponsor: [.removeAds, .restorePurchases],
-            .term: [.transparencyPolicy, .termsofUse],
+            .term: [.privacyPolicy, .termsofUse],
             .about: [.contactUs, .version]
         ]
     }()

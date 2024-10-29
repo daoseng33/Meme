@@ -23,6 +23,9 @@ enum Constant {
         
         /// 20
         static let spacing5: CGFloat = 20
+        
+        /// 24
+        static let spacing6: CGFloat = 24
     }
     
     enum Ad {

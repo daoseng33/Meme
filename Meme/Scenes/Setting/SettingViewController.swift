@@ -181,7 +181,7 @@ extension SettingViewController: UITableViewDataSource {
                 accessoryType = .disclosureIndicator
                 sfSymobl = .envelope
                 
-            case .transparencyPolicy:
+            case .privacyPolicy:
                 accessoryType = .disclosureIndicator
                 sfSymobl = .eyes
                 
@@ -293,8 +293,8 @@ extension SettingViewController: UITableViewDelegate {
                 print("Device unable to send email")
             }
             
-        case .transparencyPolicy:
-            AnalyticsManager.shared.logTransparencyPolicyClick()
+        case .privacyPolicy:
+            AnalyticsManager.shared.logPrivacyPolicyClick()
             
             AppNavigator.shared.openExternalUrl(with: viewModel.transparencyPolicyURL)
             
@@ -374,15 +374,62 @@ extension SettingViewController: DAOBottomSheetDelegate {
             $0.bottom.equalToSuperview()
         }
         
-        let displayPrice = product.displayPrice
-        let subscribePeroid = String(format: "Subscribe for %@/month".localized(), displayPrice)
-        
         descriptionTextView.text =
         """
-        \(product.description)
+        \("Subscribe for an ad-free Memepire".localized())
+        \("Your support will make Memepire even better!".localized())
         
-        \(subscribePeroid)
+        \(product.description)
         """
+        
+        return view
+    }
+    
+    func setupFooterSlotContent(with bottomSheet: DAOBottomSheetViewController) -> UIView? {
+        let view = UIView()
+        // terms of use button
+        let termsOfUseButton = UIButton()
+        termsOfUseButton.setTitle("Terms of Use".localized(), for: .normal)
+        termsOfUseButton.setTitleColor(.systemGray, for: .normal)
+        termsOfUseButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        
+        termsOfUseButton.rx.tap
+            .subscribe(with: self, onNext: { (self, _) in
+                AnalyticsManager.shared.logTermsOfUseClick()
+                
+                AppNavigator.shared.openExternalUrl(with: self.viewModel.termsOfUseURL)
+            })
+            .disposed(by: bottomSheet.rx.disposeBag)
+        
+        // privacy policy button
+        let privacyPolicyButton = UIButton()
+        privacyPolicyButton.setTitle("Privacy Policy".localized(), for: .normal)
+        privacyPolicyButton.setTitleColor(.systemGray, for: .normal)
+        privacyPolicyButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        
+        privacyPolicyButton.rx.tap
+            .subscribe(with: self, onNext: { (self, _) in
+                AnalyticsManager.shared.logPrivacyPolicyClick()
+                
+                AppNavigator.shared.openExternalUrl(with: self.viewModel.transparencyPolicyURL)
+            })
+            .disposed(by: bottomSheet.rx.disposeBag)
+        
+        view.addSubview(termsOfUseButton)
+        termsOfUseButton.snp.makeConstraints {
+            $0.left.equalToSuperview().offset(Constant.UI.spacing6)
+            $0.centerY.equalToSuperview()
+        }
+        
+        view.addSubview(privacyPolicyButton)
+        privacyPolicyButton.snp.makeConstraints {
+            $0.right.equalToSuperview().offset(-Constant.UI.spacing6)
+            $0.centerY.equalToSuperview()
+        }
+        
+        view.snp.makeConstraints {
+            $0.height.equalTo(44)
+        }
         
         return view
     }
@@ -410,7 +457,7 @@ extension SettingViewController: DAOBottomSheetDelegate {
                     }
                 }
             }
-            .disposed(by: subscribeButton.rx.disposeBag)
+            .disposed(by: bottomSheet.rx.disposeBag)
         
         return subscribeButton
     }
