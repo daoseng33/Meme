@@ -1,5 +1,5 @@
 {
-  "originHash" : "fe5576cb6fed1f06f5a91d6506e35f32cb3ff271ea993abda16c698b5479eded",
+  "originHash" : "467e791d3104a381eef11abb506c150914c3e6959eed61b7192bce905b631ef1",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
-        "revision" : "f455c2975872ccd2d9c81594c658af65716e9b9a",
-        "version" : "5.9.1"
+        "revision" : "e16d3481f5ed35f0472cb93350085853d754913f",
+        "version" : "5.10.1"
       }
     },
     {
@@ -103,7 +103,7 @@
     {
       "identity" : "humorapiservice",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/daoseng33/HumorAPIService",
+      "location" : "git@github.com:daoseng33/HumorAPIService.git",
       "state" : {
         "branch" : "main",
         "revision" : "1c5ac060b0fc3a88d6da28c01c9d12bdfa6ca179"
@@ -195,8 +195,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-core.git",
       "state" : {
-        "revision" : "e474a8d2270a8b12ac63ac9504e4757e39814b99",
-        "version" : "14.13.0"
+        "revision" : "85eeca41654cc9070ad81a21a4b1d153ad467c33",
+        "version" : "14.13.1"
       }
     },
     {
@@ -204,8 +204,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-swift.git",
       "state" : {
-        "revision" : "863498d37a9f0e72caa65963da9641d8cdfc8228",
-        "version" : "10.54.0"
+        "revision" : "5553cfd1c789efdb3d6daf7f0cc0733cfe601846",
+        "version" : "10.54.1"
       }
     },
     {

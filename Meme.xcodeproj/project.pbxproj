@@ -771,7 +771,7 @@
 		};
 		1C770F332CB6598700ECE617 /* XCRemoteSwiftPackageReference "HumorAPIService" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/daoseng33/HumorAPIService";
+			repositoryURL = "git@github.com:daoseng33/HumorAPIService.git";
 			requirement = {
 				branch = main;
 				kind = branch;
