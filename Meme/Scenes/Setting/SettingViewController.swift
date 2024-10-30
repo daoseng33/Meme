@@ -108,8 +108,8 @@ final class SettingViewController: BaseViewController {
             AnalyticsManager.shared.logSubscribeBottomSheetShow()
             
             self.product = try await PurchaseManager.shared.getProduct()
-            
-            bottomSheet = DAOBottomSheet(parentVC: self, title: product?.displayName, type: .flexible)
+            let title = product?.displayName ?? "Remove Ads".localized()
+            bottomSheet = DAOBottomSheet(parentVC: self, title: title, type: .flexible)
             bottomSheet?.delegate = self
             bottomSheet?.backgroundColor = UIColor(dynamicProvider: { traitCollection in
                 return traitCollection.userInterfaceStyle == .dark ? .tertiarySystemGroupedBackground : .secondarySystemGroupedBackground
