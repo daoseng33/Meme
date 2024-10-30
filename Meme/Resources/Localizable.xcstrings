@@ -815,6 +815,17 @@
         }
       }
     },
+    "Subscribe for %@ per month" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "以TWD %@/月的價格訂閱"
+          }
+        }
+      }
+    },
     "Subscribe for an ad-free Memepire" : {
       "extractionState" : "manual",
       "localizations" : {

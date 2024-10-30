@@ -374,12 +374,14 @@ extension SettingViewController: DAOBottomSheetDelegate {
             $0.bottom.equalToSuperview()
         }
         
+        let displayPrice = product.displayPrice.isEmpty ? "$0.99" : product.displayPrice
+        let priceText = String(format: "Subscribe for %@ per month".localized(), displayPrice)
         descriptionTextView.text =
         """
         \("Subscribe for an ad-free Memepire".localized())
         \("Your support will make Memepire even better!".localized())
         
-        \(product.description)
+        \(priceText)
         """
         
         return view
