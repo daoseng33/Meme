@@ -10,7 +10,7 @@ on:
 
 env:
   XCODE_DESTINATION: 'platform=iOS Simulator,name=iPhone 16,OS=latest'
-  DEVELOPER_DIR: /Applications/Xcode-16.0.0.app/Contents/Developer
+  DEVELOPER_DIR: /Applications/Xcode.app/Contents/Developer
 
 jobs:
   build_and_test_meme:
