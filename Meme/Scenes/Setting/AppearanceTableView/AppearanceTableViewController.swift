@@ -13,6 +13,7 @@ import RxDataSources
 final class AppearanceTableViewController: UITableViewController {
     // MARK: - Properties
     private let viewModel: AppearanceTableViewModel
+    private let cellId = "Cell"
     
     // MARK: - Init
     init(viewModel: AppearanceTableViewModel) {
@@ -51,7 +52,7 @@ final class AppearanceTableViewController: UITableViewController {
     private func setupUI() {
         navigationItem.title = "Appearance".localized()
         tableView.backgroundColor = .secondarySystemBackground
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         tableView.allowsSelection = true
         tableView.allowsMultipleSelection = false
     }
@@ -63,8 +64,9 @@ final class AppearanceTableViewController: UITableViewController {
         tableView.rx.setDelegate(self)
             .disposed(by: rx.disposeBag)
         
-        let dataSource = RxTableViewSectionedReloadDataSource<AppearanceSection> { dataSource, tableView, indexPath, item in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let dataSource = RxTableViewSectionedReloadDataSource<AppearanceSection> { [weak self] dataSource, tableView, indexPath, item in
+            guard let self = self else { return UITableViewCell() }
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
             
             let appearanceType = AppearanceStyle.allCases[indexPath.row]
             cell.textLabel?.text = appearanceType.rawValue.localized()

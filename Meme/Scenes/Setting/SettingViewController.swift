@@ -21,11 +21,12 @@ final class SettingViewController: BaseViewController {
     // MARK: - Properties
     private let viewModel: SettingViewModel
     private var product: Product?
+    private let cellId = "Cell"
     
     // MARK: - UI
     private lazy var settingTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         tableView.backgroundColor = .clear
         
         return tableView
@@ -73,10 +74,8 @@ final class SettingViewController: BaseViewController {
             .disposed(by: rx.disposeBag)
         
         let dataSource = RxTableViewSectionedReloadDataSource<SettingSection> { [weak self] dataSource, tableView, indexPath, item in
-            guard let self = self else {
-                return UITableViewCell()
-            }
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            guard let self = self else { return UITableViewCell() }
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
             
             let rowTitle = viewModel.getRowTitle(with: indexPath)
             let secondaryTitle = viewModel.getRowSecondaryTitle(with: indexPath)
