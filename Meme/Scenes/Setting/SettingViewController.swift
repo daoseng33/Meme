@@ -15,6 +15,7 @@ import SFSafeSymbols
 import StoreKit
 import DAOBottomSheet
 import AppNavigator
+import RxDataSources
 
 final class SettingViewController: BaseViewController {
     // MARK: - Properties
@@ -25,8 +26,6 @@ final class SettingViewController: BaseViewController {
     private lazy var settingTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        tableView.dataSource = self
-        tableView.delegate = self
         tableView.backgroundColor = .clear
         
         return tableView
@@ -49,6 +48,7 @@ final class SettingViewController: BaseViewController {
         super.viewDidLoad()
 
         setupUI()
+        setupTableView()
         setupBinding()
     }
     
@@ -66,6 +66,156 @@ final class SettingViewController: BaseViewController {
         settingTableView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
+    }
+    
+    private func setupTableView() {
+        settingTableView.rx.setDelegate(self)
+            .disposed(by: rx.disposeBag)
+        
+        let dataSource = RxTableViewSectionedReloadDataSource<SettingSection> { [weak self] dataSource, tableView, indexPath, item in
+            guard let self = self else {
+                return UITableViewCell()
+            }
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            
+            let rowTitle = viewModel.getRowTitle(with: indexPath)
+            let secondaryTitle = viewModel.getRowSecondaryTitle(with: indexPath)
+            
+            var content = cell.defaultContentConfiguration()
+            content.text = rowTitle
+            content.secondaryText = secondaryTitle
+            let isSubscribed = PurchaseManager.shared.isSubscribedRelay.value
+            
+            let rowType = viewModel.getRowType(with: indexPath)
+            let sfSymobl: SFSymbol
+            let accessoryType: UITableViewCell.AccessoryType
+            let symbolConfig = UIImage.SymbolConfiguration(pointSize: 17)
+            switch rowType {
+            case .appearance:
+                accessoryType = .disclosureIndicator
+                sfSymobl = .sunMax
+                
+            case .language:
+                accessoryType = .disclosureIndicator
+                if #available(iOS 17.4, *) {
+                    sfSymobl = .translate
+                } else {
+                    sfSymobl = .ellipsisBubble
+                }
+                
+            case .removeAds:
+                accessoryType = .disclosureIndicator
+                sfSymobl = .cart
+                
+                if isSubscribed {
+                    content.secondaryTextProperties.color = .accent
+                } else {
+                    content.secondaryTextProperties.color = .secondaryLabel
+                }
+                
+            case .restorePurchases:
+                accessoryType = .disclosureIndicator
+                sfSymobl = .arrowCounterclockwise
+                
+            case .contactUs:
+                accessoryType = .disclosureIndicator
+                sfSymobl = .envelope
+                
+            case .privacyPolicy:
+                accessoryType = .disclosureIndicator
+                sfSymobl = .eyes
+                
+            case .termsofUse:
+                accessoryType = .disclosureIndicator
+                sfSymobl = .docText
+                
+            case .version:
+                accessoryType = .none
+                sfSymobl = .flame
+            }
+            
+            cell.accessoryType = accessoryType
+            content.image = UIImage(systemSymbol: sfSymobl, withConfiguration: symbolConfig).withTintColor(.label, renderingMode: .alwaysOriginal)
+            
+            cell.contentConfiguration = content
+            cell.selectionStyle = .none
+            cell.backgroundColor = UIColor(dynamicProvider: { traitCollection in
+                return traitCollection.userInterfaceStyle == .dark ? .tertiarySystemGroupedBackground : .secondarySystemGroupedBackground
+            })
+            
+            return cell
+        }
+        
+        viewModel.dataSource = dataSource
+        viewModel.sectionsRelay
+            .bind(to: settingTableView.rx.items(dataSource: dataSource))
+            .disposed(by: rx.disposeBag)
+        
+        settingTableView.rx.itemSelected
+            .subscribe(with: self) { (self, indexPath) in
+                let viewModel = self.viewModel
+                let rowType = viewModel.getRowType(with: indexPath)
+                
+                switch rowType {
+                case .appearance:
+                    AnalyticsManager.shared.logSettingAppearanceClick()
+                    AppNavigator.shared.open(with: .page, name: PageURLPath.appearance.rawValue, context: viewModel.appearanceTableViewModel)
+                    
+                case .language:
+                    AnalyticsManager.shared.logSettingLanguageClick()
+                    
+                    let settingsUrl = URL(string: UIApplication.openSettingsURLString)
+                    AppNavigator.shared.openExternalUrl(with: settingsUrl)
+                    
+                case .removeAds:
+                    let isSubscribed = PurchaseManager.shared.isSubscribedRelay.value
+                    guard !isSubscribed else {
+                        ProgressHUD.banner("Subscribed".localized(), "Already subscribed".localized())
+                        return
+                    }
+                    
+                    AnalyticsManager.shared.logSettingRemoveAdsClick()
+                    
+                    self.showSubscriptionBottomSheet()
+                    
+                case .restorePurchases:
+                    let isSubscribed = PurchaseManager.shared.isSubscribedRelay.value
+                    guard !isSubscribed else {
+                        ProgressHUD.banner("Subscribed".localized(), "Already subscribed".localized())
+                        return
+                    }
+                    
+                    AnalyticsManager.shared.logSettingRestorePurchasesClick()
+                    
+                    ProgressHUD.animate("Loading".localized(), interaction: false)
+                    
+                    PurchaseManager.shared.restorePurchases(completion: { [weak self] error in
+                        guard let self = self else { return }
+                        ProgressHUD.dismiss()
+                        
+                        if let error = error {
+                            self.showRestorePurchaseFailedBanner(message: error.localizedDescription)
+                        }
+                    })
+                    
+                case .contactUs:
+                    self.handleContactUs()
+                    
+                case .privacyPolicy:
+                    AnalyticsManager.shared.logPrivacyPolicyClick()
+                    
+                    AppNavigator.shared.openExternalUrl(with: viewModel.transparencyPolicyURL)
+                    
+                case .termsofUse:
+                    AnalyticsManager.shared.logTermsOfUseClick()
+                    
+                    AppNavigator.shared.openExternalUrl(with: viewModel.termsOfUseURL)
+                    
+                case .version:
+                    break
+                }
+            }
+            .disposed(by: rx.disposeBag)
     }
     
     private func setupBinding() {
@@ -123,89 +273,21 @@ final class SettingViewController: BaseViewController {
         AnalyticsManager.shared.logSubscribeBottomSheetDismiss()
         bottomSheet?.dismiss()
     }
-}
-
-// MARK: - UITableViewDataSource
-extension SettingViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        viewModel.getNumberOfSections()
-    }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.getNumberOfRows(in: section)
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+    private func handleContactUs() {
+        AnalyticsManager.shared.logSettingContactUsClick()
         
-        let rowTitle = viewModel.getRowTitle(with: indexPath)
-        let secondaryTitle = viewModel.getRowSecondaryTitle(with: indexPath)
-        
-        var content = cell.defaultContentConfiguration()
-        content.text = rowTitle
-        content.secondaryText = secondaryTitle
-        let isSubscribed = PurchaseManager.shared.isSubscribedRelay.value
-        
-        if let rowType = viewModel.getRowType(with: indexPath) {
-            let sfSymobl: SFSymbol
-            let accessoryType: UITableViewCell.AccessoryType
-            let symbolConfig = UIImage.SymbolConfiguration(pointSize: 17)
-            switch rowType {
-            case .appearance:
-                accessoryType = .disclosureIndicator
-                sfSymobl = .sunMax
-                
-            case .language:
-                accessoryType = .disclosureIndicator
-                if #available(iOS 17.4, *) {
-                    sfSymobl = .translate
-                } else {
-                    sfSymobl = .ellipsisBubble
-                }
-                
-            case .removeAds:
-                accessoryType = .disclosureIndicator
-                sfSymobl = .cart
-                
-                if isSubscribed {
-                    content.secondaryTextProperties.color = .accent
-                } else {
-                    content.secondaryTextProperties.color = .secondaryLabel
-                }
-                
-            case .restorePurchases:
-                accessoryType = .disclosureIndicator
-                sfSymobl = .arrowCounterclockwise
-                
-            case .contactUs:
-                accessoryType = .disclosureIndicator
-                sfSymobl = .envelope
-                
-            case .privacyPolicy:
-                accessoryType = .disclosureIndicator
-                sfSymobl = .eyes
-                
-            case .termsofUse:
-                accessoryType = .disclosureIndicator
-                sfSymobl = .docText
-                
-            case .version:
-                accessoryType = .none
-                sfSymobl = .flame
-            }
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients([viewModel.contactEmail])
+            mail.setSubject("\("Report".localized()): \("Memepire".localized()) App")
             
-            cell.accessoryType = accessoryType
-            content.image = UIImage(systemSymbol: sfSymobl, withConfiguration: symbolConfig).withTintColor(.label, renderingMode: .alwaysOriginal)
+            self.present(mail, animated: true)
+        } else {
+            Crashlytics.crashlytics().record(error: NSError(domain: "Device unable to send email", code: 0, userInfo: nil))
+            print("Device unable to send email")
         }
-        
-        
-        cell.contentConfiguration = content
-        cell.selectionStyle = .none
-        cell.backgroundColor = UIColor(dynamicProvider: { traitCollection in
-            return traitCollection.userInterfaceStyle == .dark ? .tertiarySystemGroupedBackground : .secondarySystemGroupedBackground
-        })
-        
-        return cell
     }
 }
 
@@ -232,81 +314,6 @@ extension SettingViewController: UITableViewDelegate {
         
         return view
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let rowType = viewModel.getRowType(with: indexPath) else { return }
-        
-        switch rowType {
-        case .appearance:
-            AnalyticsManager.shared.logSettingAppearanceClick()
-            AppNavigator.shared.open(with: .page, name: PageURLPath.appearance.rawValue, context: viewModel.appearanceTableViewModel)
-            
-        case .language:
-            AnalyticsManager.shared.logSettingLanguageClick()
-            
-            let settingsUrl = URL(string: UIApplication.openSettingsURLString)
-            AppNavigator.shared.openExternalUrl(with: settingsUrl)
-            
-        case .removeAds:
-            let isSubscribed = PurchaseManager.shared.isSubscribedRelay.value
-            guard !isSubscribed else {
-                ProgressHUD.banner("Subscribed".localized(), "Already subscribed".localized())
-                return
-            }
-            
-            AnalyticsManager.shared.logSettingRemoveAdsClick()
-            
-            showSubscriptionBottomSheet()
-            
-        case .restorePurchases:
-            let isSubscribed = PurchaseManager.shared.isSubscribedRelay.value
-            guard !isSubscribed else {
-                ProgressHUD.banner("Subscribed".localized(), "Already subscribed".localized())
-                return
-            }
-            
-            AnalyticsManager.shared.logSettingRestorePurchasesClick()
-            
-            ProgressHUD.animate("Loading".localized(), interaction: false)
-            
-            PurchaseManager.shared.restorePurchases(completion: { [weak self] error in
-                guard let self = self else { return }
-                ProgressHUD.dismiss()
-                
-                if let error = error {
-                    self.showRestorePurchaseFailedBanner(message: error.localizedDescription)
-                }
-            })
-            
-        case .contactUs:
-            AnalyticsManager.shared.logSettingContactUsClick()
-            
-            if MFMailComposeViewController.canSendMail() {
-                let mail = MFMailComposeViewController()
-                mail.mailComposeDelegate = self
-                mail.setToRecipients([viewModel.contactEmail])
-                mail.setSubject("\("Report".localized()): \("Memepire".localized()) App")
-                
-                present(mail, animated: true)
-            } else {
-                Crashlytics.crashlytics().record(error: NSError(domain: "Device unable to send email", code: 0, userInfo: nil))
-                print("Device unable to send email")
-            }
-            
-        case .privacyPolicy:
-            AnalyticsManager.shared.logPrivacyPolicyClick()
-            
-            AppNavigator.shared.openExternalUrl(with: viewModel.transparencyPolicyURL)
-            
-        case .termsofUse:
-            AnalyticsManager.shared.logTermsOfUseClick()
-            
-            AppNavigator.shared.openExternalUrl(with: viewModel.termsOfUseURL)
-            
-        case .version:
-            break
-        }
-    }
 }
 
 // MARK: - MFMailComposeViewControllerDelegate
@@ -323,22 +330,6 @@ extension SettingViewController: DAOBottomSheetDelegate {
     }
     
     func setupDAOBottomSheetContentUI(bottomSheet: DAOBottomSheetViewController) -> UIView? {
-        guard let product = product else {
-            Crashlytics.crashlytics().record(error: NSError(domain: "Product is nil", code: 0, userInfo: nil))
-            
-            let label: UILabel = {
-                let label = UILabel()
-                label.text = "Unable to retrieve product information. Please contact us.".localized()
-                label.textColor = .label
-                label.textAlignment = .center
-                label.numberOfLines = 0
-                
-                return label
-            }()
-            
-            return label
-        }
-        
         let view = UIView()
         
         let imageView: UIImageView = {
@@ -374,15 +365,20 @@ extension SettingViewController: DAOBottomSheetDelegate {
             $0.bottom.equalToSuperview()
         }
         
-        let displayPrice = product.displayPrice.isEmpty ? "$0.99" : product.displayPrice
-        let priceText = String(format: "Subscribe for %@ per month".localized(), displayPrice)
-        descriptionTextView.text =
-        """
-        \("Subscribe for an ad-free Memepire".localized())
-        \("Your support will make Memepire even better!".localized())
-        
-        \(priceText)
-        """
+        if let product = product {
+            let displayPrice = product.displayPrice.isEmpty ? "$0.99" : product.displayPrice
+            let priceText = String(format: "Subscribe for %@ per month".localized(), displayPrice)
+            descriptionTextView.text =
+            """
+            \("Subscribe for an ad-free Memepire".localized())
+            \("Your support will make Memepire even better!".localized())
+            
+            \(priceText)
+            """
+        } else {
+            Crashlytics.crashlytics().record(error: NSError(domain: "Product is nil", code: 0, userInfo: nil))
+            descriptionTextView.text = "Unable to retrieve product information. Please contact us.".localized()
+        }
         
         return view
     }
@@ -437,26 +433,32 @@ extension SettingViewController: DAOBottomSheetDelegate {
     }
     
     func setupFooterContentView(with bottomSheet: DAOBottomSheetViewController) -> UIView? {
-        let subscribeButton = RoundedRectangleButton(title: "Subscribe Now".localized(), titleColor: .white, backgroundColor: .accent)
+        let isProductAvailable = product != nil
+        let title = isProductAvailable ? "Subscribe Now".localized() : "Contact Us".localized()
+        let subscribeButton = RoundedRectangleButton(title: title, titleColor: .white, backgroundColor: .accent)
         
         subscribeButton.tapEvent
             .subscribe(with: self) { (self, _) in
                 AnalyticsManager.shared.logSubscribeButtonClick()
                 
-                ProgressHUD.animate("Loading".localized(), interaction: false)
-                
-                PurchaseManager.shared.purchase { [weak self] error in
-                    guard let self = self else { return }
+                if isProductAvailable {
+                    ProgressHUD.animate("Loading".localized(), interaction: false)
                     
-                    DispatchQueue.main.async {
-                        ProgressHUD.dismiss()
+                    PurchaseManager.shared.purchase { [weak self] error in
+                        guard let self = self else { return }
                         
-                        if let error = error {
-                            self.showPurchaseFailedBanner(message: error.localizedDescription)
+                        DispatchQueue.main.async {
+                            ProgressHUD.dismiss()
+                            
+                            if let error = error {
+                                self.showPurchaseFailedBanner(message: error.localizedDescription)
+                            }
+                            
+                            self.removeSubscriptionBottomSheet()
                         }
-                        
-                        self.removeSubscriptionBottomSheet()
                     }
+                } else {
+                    self.handleContactUs()
                 }
             }
             .disposed(by: bottomSheet.rx.disposeBag)
