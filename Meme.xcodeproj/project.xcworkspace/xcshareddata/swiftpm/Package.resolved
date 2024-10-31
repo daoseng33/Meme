@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/daoseng33/DAOBottomSheet",
       "state" : {
-        "revision" : "fb2afafb5b7907d3c794854a314b6fbc09a136e7",
-        "version" : "1.3.0"
+        "revision" : "a09dc319b772f00d3d522431bdc7cc33b80d49df",
+        "version" : "1.3.1"
       }
     },
     {
