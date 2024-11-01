@@ -1,5 +1,5 @@
 {
-  "originHash" : "652ec845e210e39601188ece310b08862e163bfff6661fae13991b2143a0062f",
+  "originHash" : "467e791d3104a381eef11abb506c150914c3e6959eed61b7192bce905b631ef1",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
-        "revision" : "f455c2975872ccd2d9c81594c658af65716e9b9a",
-        "version" : "5.9.1"
+        "revision" : "e16d3481f5ed35f0472cb93350085853d754913f",
+        "version" : "5.10.1"
       }
     },
     {
@@ -29,12 +29,21 @@
       }
     },
     {
+      "identity" : "appnavigator",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/daoseng33/AppNavigator.git",
+      "state" : {
+        "revision" : "57fbac0c93b5cd2c5908c123e8b4db7de58837b8",
+        "version" : "2.1.0"
+      }
+    },
+    {
       "identity" : "daobottomsheet",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/daoseng33/DAOBottomSheet",
       "state" : {
-        "revision" : "fb2afafb5b7907d3c794854a314b6fbc09a136e7",
-        "version" : "1.3.0"
+        "revision" : "a09dc319b772f00d3d522431bdc7cc33b80d49df",
+        "version" : "1.3.1"
       }
     },
     {
@@ -94,7 +103,7 @@
     {
       "identity" : "humorapiservice",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/daoseng33/HumorAPIService",
+      "location" : "git@github.com:daoseng33/HumorAPIService.git",
       "state" : {
         "branch" : "main",
         "revision" : "1c5ac060b0fc3a88d6da28c01c9d12bdfa6ca179"
@@ -186,8 +195,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-core.git",
       "state" : {
-        "revision" : "e474a8d2270a8b12ac63ac9504e4757e39814b99",
-        "version" : "14.13.0"
+        "revision" : "85eeca41654cc9070ad81a21a4b1d153ad467c33",
+        "version" : "14.13.1"
       }
     },
     {
@@ -195,8 +204,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-swift.git",
       "state" : {
-        "revision" : "863498d37a9f0e72caa65963da9641d8cdfc8228",
-        "version" : "10.54.0"
+        "revision" : "5553cfd1c789efdb3d6daf7f0cc0733cfe601846",
+        "version" : "10.54.1"
+      }
+    },
+    {
+      "identity" : "rxdatasources",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/RxSwiftCommunity/RxDataSources.git",
+      "state" : {
+        "revision" : "90c29b48b628479097fe775ed1966d75ac374518",
+        "version" : "5.0.2"
       }
     },
     {
@@ -260,6 +278,15 @@
       "state" : {
         "revision" : "ebc7251dd5b37f627c93698e4374084d98409633",
         "version" : "1.28.2"
+      }
+    },
+    {
+      "identity" : "urlnavigator",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/devxoul/URLNavigator.git",
+      "state" : {
+        "revision" : "b881f23dc3b381986ed6cf76da8e426ce5c8a7ee",
+        "version" : "2.5.1"
       }
     }
   ],

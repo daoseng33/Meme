@@ -8,10 +8,12 @@
 import UIKit
 import RxCocoa
 import SFSafeSymbols
+import RxDataSources
 
 final class AppearanceTableViewController: UITableViewController {
     // MARK: - Properties
     private let viewModel: AppearanceTableViewModel
+    private let cellId = "Cell"
     
     // MARK: - Init
     init(viewModel: AppearanceTableViewModel) {
@@ -29,6 +31,7 @@ final class AppearanceTableViewController: UITableViewController {
         super.viewDidLoad()
 
         setupUI()
+        setupTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,79 +52,70 @@ final class AppearanceTableViewController: UITableViewController {
     private func setupUI() {
         navigationItem.title = "Appearance".localized()
         tableView.backgroundColor = .secondarySystemBackground
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         tableView.allowsSelection = true
         tableView.allowsMultipleSelection = false
     }
+    
+    private func setupTableView() {
+        tableView.dataSource = nil
+        tableView.delegate = nil
+        
+        tableView.rx.setDelegate(self)
+            .disposed(by: rx.disposeBag)
+        
+        let dataSource = RxTableViewSectionedReloadDataSource<AppearanceSection> { [weak self] dataSource, tableView, indexPath, item in
+            guard let self = self else { return UITableViewCell() }
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+            
+            let appearanceType = AppearanceStyle.allCases[indexPath.row]
+            cell.textLabel?.text = appearanceType.rawValue.localized()
+            cell.selectionStyle = .none
+            cell.backgroundColor = UIColor(dynamicProvider: { traitCollection in
+                return traitCollection.userInterfaceStyle == .dark ? .tertiarySystemGroupedBackground : .secondarySystemGroupedBackground
+            })
 
-    // MARK: - Table view data source
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return AppearanceStyle.allCases.count
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let appearanceType = AppearanceStyle.allCases[indexPath.row]
-        cell.textLabel?.text = appearanceType.rawValue.localized()
-        cell.selectionStyle = .none
-        cell.backgroundColor = UIColor(dynamicProvider: { traitCollection in
-            return traitCollection.userInterfaceStyle == .dark ? .tertiarySystemGroupedBackground : .secondarySystemGroupedBackground
-        })
-
-        if tableView.indexPathForSelectedRow == indexPath {
-            cell.accessoryType = .checkmark
-        } else {
-            cell.accessoryType = .none
+            if tableView.indexPathForSelectedRow == indexPath {
+                cell.accessoryType = .checkmark
+            } else {
+                cell.accessoryType = .none
+            }
+            
+            return cell
         }
         
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.visibleCells.forEach { $0.accessoryType = .none }
+        viewModel.dataSource = dataSource
         
-        if let cell = tableView.cellForRow(at: indexPath) {
-            cell.accessoryType = .checkmark
-        }
+        viewModel.sectionsRelay
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: rx.disposeBag)
         
-        let appearanceType = AppearanceStyle.allCases[indexPath.row]
-        
-        AnalyticsManager.shared.logAppearanceModeSelect(mode: appearanceType)
-        
-        switch appearanceType {
-            
-        case .system:
-            AppearanceManager.shared.changeAppearance(.system)
-            
-        case .light:
-            AppearanceManager.shared.changeAppearance(.light)
-            
-        case .dark:
-            AppearanceManager.shared.changeAppearance(.dark)
-        }
-        
-        viewModel.appearanceRelay.accept(appearanceType)
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return .leastNormalMagnitude
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = .clear
-        
-        return view
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return .leastNormalMagnitude
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = .clear
-        
-        return view
+        tableView.rx.itemSelected
+            .subscribe(with: self) { (self, indexPath) in
+                self.tableView.visibleCells.forEach { $0.accessoryType = .none }
+                
+                if let cell = self.tableView.cellForRow(at: indexPath) {
+                    cell.accessoryType = .checkmark
+                }
+                
+                let appearanceType = AppearanceStyle.allCases[indexPath.row]
+                
+                AnalyticsManager.shared.logAppearanceModeSelect(mode: appearanceType)
+                
+                switch appearanceType {
+                    
+                case .system:
+                    AppearanceManager.shared.changeAppearance(.system)
+                    
+                case .light:
+                    AppearanceManager.shared.changeAppearance(.light)
+                    
+                case .dark:
+                    AppearanceManager.shared.changeAppearance(.dark)
+                }
+                
+                self.viewModel.appearanceRelay.accept(appearanceType)
+            }
+            .disposed(by: rx.disposeBag)
     }
 }

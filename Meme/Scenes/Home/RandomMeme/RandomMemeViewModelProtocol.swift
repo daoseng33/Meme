@@ -13,6 +13,7 @@ import RxCocoa
 import UIKit
 
 protocol RandomMemeViewModelProtocol: FetchDataProtocol, LoadingStateProtocol, FavoriteStateProtocol, AdHandlerProtocol {
+    var inAppReviewHandler: InAppReviewHandler { get }
     var mediaDriver: Driver<(mediaURL: URL?, type: MemeMediaType)> { get }
     var media: (mediaURL: URL?, type: MemeMediaType) { get }
     var keywordRelay: BehaviorRelay<String?> { get }

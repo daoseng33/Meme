@@ -8,13 +8,13 @@
 import Foundation
 import RxSwift
 import RxRelay
+import RxDataSources
 
 protocol GridCollectionViewModelProtocol {
-    var numberOfItems: Int { get }
-    var gridDatasObserver: AnyObserver<[GridData]> { get }
-    var shouldReloadData: Observable<Void> { get }
-    var favoriteButtonTappedRelay: PublishRelay<(gridImageType: GridImageType, isFavorite: Bool)> { get }
+    var favoriteButtonTappedRelay: PublishRelay<(gridImageType: GridImageType, isFavorite: Bool, index: Int)> { get }
     var shareButtonTappedRelay: PublishRelay<GridImageType> { get }
+    var dataSource: RxCollectionViewSectionedAnimatedDataSource<GridSection>? { get set }
+    var sectionsRelay: BehaviorRelay<[GridSection]> { get }
     init(gridDatas: [GridData])
     func gridCellViewModel(with index: Int) -> GridCellViewModelProtocol
 }

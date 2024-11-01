@@ -573,6 +573,17 @@
         }
       }
     },
+    "Privacy Policy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "隱私權政策"
+          }
+        }
+      }
+    },
     "Purchase Failed" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -804,13 +815,24 @@
         }
       }
     },
-    "Subscribe for %@/month" : {
+    "Subscribe for %@ per month" : {
       "extractionState" : "manual",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以%@/月訂閱"
+            "value" : "以TWD %@/月的價格訂閱"
+          }
+        }
+      }
+    },
+    "Subscribe for an ad-free Memepire" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "訂閱以享受無廣告的迷因帝國"
           }
         }
       }
@@ -870,13 +892,13 @@
         }
       }
     },
-    "Transparency Policy" : {
+    "Unable to retrieve product information. Please contact us." : {
       "extractionState" : "manual",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "隱私權政策"
+            "value" : "無法獲取產品資訊，請聯絡我們"
           }
         }
       }
@@ -932,6 +954,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "你老媽"
+          }
+        }
+      }
+    },
+    "Your support will make Memepire even better!" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你的支持將使得迷因帝國變得更好！"
           }
         }
       }

@@ -21,27 +21,28 @@ struct GIFsTests {
     @available(iOS 16.0, *)
     @Test func testLoadFirstDataIfNeeded() async throws {
         assert(sut.loadingState == .initial)
-        assert(sut.gridCollectionViewModel.numberOfItems == 0)
+        assert(sut.gridCollectionViewModel.sectionsRelay.value.first!.items.count == 0)
         
         sut.refreshData()
         
-        try await Task.sleep(for: .milliseconds(300))
+        try await Task.sleep(for: .milliseconds(500))
         
         assert(sut.loadingState == .success)
-        assert(sut.gridCollectionViewModel.numberOfItems == 10)
+        assert(sut.gridCollectionViewModel.sectionsRelay.value.first!.items.count == 10)
     }
     
     @available(iOS 16.0, *)
     @Test func testFetchGifsData() async throws {
         assert(sut.loadingState == .initial)
-        assert(sut.gridCollectionViewModel.numberOfItems == 0)
+        assert(sut.gridCollectionViewModel.sectionsRelay.value.first!.items.count == 0)
         
         sut.fetchData()
         
-        try await Task.sleep(for: .milliseconds(300))
+        try await Task.sleep(for: .milliseconds(500))
         
         assert(sut.loadingState == .success)
-        assert(sut.gridCollectionViewModel.numberOfItems == 10)
+        print("ray>> \(sut.gridCollectionViewModel.sectionsRelay.value.first!.items)")
+        assert(sut.gridCollectionViewModel.sectionsRelay.value.first!.items.count == 10)
         
         let firstGridViewModel = sut.gridCollectionViewModel.gridCellViewModel(with: 0)
         let imageType = try firstGridViewModel.imageTypeObservable.take(1).toBlocking().single()

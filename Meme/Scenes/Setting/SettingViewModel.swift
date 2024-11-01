@@ -7,6 +7,7 @@
 
 import Foundation
 import RxRelay
+import RxDataSources
 
 enum SettingSectionType: Int, CaseIterable {
     case general
@@ -31,7 +32,7 @@ enum SettingRowType: Int {
     case restorePurchases
     case version
     case contactUs
-    case transparencyPolicy
+    case privacyPolicy
     case termsofUse
     
     var title: String {
@@ -42,28 +43,42 @@ enum SettingRowType: Int {
         case .restorePurchases: return "Restore Purchases".localized()
         case .version: return "App Version".localized()
         case .contactUs: return "Contact Us".localized()
-        case .transparencyPolicy: return "Transparency Policy".localized()
+        case .privacyPolicy: return "Privacy Policy".localized()
         case .termsofUse: return "Terms of Use".localized()
         }
     }
 }
 
+struct SettingSection {
+    var header: SettingSectionType
+    var items: [SettingRowType]
+}
+
+extension SettingSection: SectionModelType {
+    init(original: SettingSection, items: [SettingRowType]) {
+        self = original
+        self.items = items
+    }
+}
+
 final class SettingViewModel {
     // MARK: - Properties
+    let sectionsRelay: BehaviorRelay<[SettingSection]> = {
+        let sections = [
+            SettingSection(header: .general, items: [.appearance, .language]),
+            SettingSection(header: .sponsor, items: [.removeAds, .restorePurchases]),
+            SettingSection(header: .term, items: [.privacyPolicy, .termsofUse]),
+            SettingSection(header: .about, items: [.contactUs, .version])
+        ]
+        
+        return BehaviorRelay(value: sections)
+    }()
+    var dataSource: RxTableViewSectionedReloadDataSource<SettingSection>?
     lazy var appearanceTableViewModel = AppearanceTableViewModel(appearance: appearanceRelay.value)
     let appearanceRelay: BehaviorRelay<AppearanceStyle>
     let contactEmail: String = "contact@likeabossapp.com"
     let transparencyPolicyURL = URL(string: "https://likeabossapp.com/memepire-transparency-policy/")
     let termsOfUseURL = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")
-    
-    private let sectionsInfo: [SettingSectionType: [SettingRowType]] = {
-        return [
-            .general: [.appearance, .language],
-            .sponsor: [.removeAds, .restorePurchases],
-            .term: [.transparencyPolicy, .termsofUse],
-            .about: [.contactUs, .version]
-        ]
-    }()
     
     init() {
         if let appearance = UserDefaults.standard.string(forKey: UserDefaults.Key.appearance.rawValue),
@@ -86,26 +101,10 @@ final class SettingViewModel {
     }
     
     // MARK: - Getter
-    func getNumberOfSections() -> Int {
-        return sectionsInfo.keys.count
-    }
-    
-    func getNumberOfRows(in section: Int) -> Int {
-        guard let sectionType = SettingSectionType(rawValue: section),
-                let rows = sectionsInfo[sectionType] else {
-            return 0
-        }
+    func getRowType(with indexPath: IndexPath) -> SettingRowType {
+        let item = sectionsRelay.value[indexPath.section].items[indexPath.row]
         
-        return rows.count
-    }
-    
-    func getRowType(with indexPath: IndexPath) -> SettingRowType? {
-        guard let sectionType = SettingSectionType(rawValue: indexPath.section),
-                let rows = sectionsInfo[sectionType] else {
-            return nil
-        }
-        
-        return rows[indexPath.row]
+        return item
     }
     
     func getSectionTitle(with section: Int) -> String? {
@@ -117,12 +116,9 @@ final class SettingViewModel {
     }
     
     func getRowTitle(with indexPath: IndexPath) -> String? {
-        guard let sectionType = SettingSectionType(rawValue: indexPath.section),
-                let rows = sectionsInfo[sectionType] else {
-            return nil
-        }
+        let itemTitle = sectionsRelay.value[indexPath.section].items[indexPath.row].title
         
-        return rows[indexPath.row].title
+        return itemTitle
     }
     
     func getRowSecondaryTitle(with indexPath: IndexPath) -> String? {

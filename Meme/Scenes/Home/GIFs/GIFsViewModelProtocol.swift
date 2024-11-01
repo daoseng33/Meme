@@ -11,6 +11,7 @@ import RxRelay
 import HumorAPIService
 
 protocol GIFsViewModelProtocol: FetchDataProtocol, LoadingStateProtocol, AdHandlerProtocol {
+    var inAppReviewHandler: InAppReviewHandler { get }
     var keywordRelay: BehaviorRelay<String?> { get }
     var gridCollectionViewModel: GridCollectionViewModelProtocol { get }
     var imageDatas: [ImageData] { get }

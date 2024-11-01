@@ -17,6 +17,7 @@ import FirebaseCore
 import FirebaseAnalytics
 import AppTrackingTransparency
 import GoogleMobileAds
+import AppNavigator
 
 final class Launcher {
     func launch() {
@@ -32,6 +33,7 @@ final class Launcher {
         setupAdMob()
         setupRemoteConfig()
         setupPurchases()
+        setupAppNavigator()
     }
     
     private func handleGlobalError() {
@@ -171,15 +173,41 @@ final class Launcher {
     }
     
     private func setupRemoteConfig() {
-        RemoteConfigManager.shared.setupRemoteConfig()
-        RemoteConfigManager.shared.fetchAndActivate { _ in }
+        let remoteConfigHandler = RemoteConfigHandler()
+        
+        remoteConfigHandler.setupRemoteConfig()
+        remoteConfigHandler.fetchAndActivate { _ in }
     }
     
     private func setupPurchases() {
-        if let isSubscribed = KeychainManager.shared.loadBool(forKey: .isSubscribed) {
+        let keychainHandler = KeychainHandler()
+        
+        if let isSubscribed = keychainHandler.loadBool(forKey: .isSubscribed) {
             PurchaseManager.shared.isSubscribedRelay.accept(isSubscribed)
         }
         
         PurchaseManager.shared.startListeningForTransactions()
+    }
+    
+    private func setupAppNavigator() {
+        // Page
+        let pageConfigs: [NavigatorConfig] = [
+            RandomMemePageConfig(),
+            RandomJokePageConfig(),
+            RandomGifPageConfig(),
+            AppearancePageConfig()
+        ]
+        
+        // Behavior
+        let behaviorConfigs: [NavigatorConfig] = [
+            DismissConfigs(),
+            BackToPreviousConfigs(),
+            SelectTabConfigs()
+        ]
+        
+        AppNavigator.shared.setup(
+            scheme: "memepire",
+            pageConfigs: pageConfigs,
+            behaviorConfigs: behaviorConfigs)
     }
 }

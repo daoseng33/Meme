@@ -14,6 +14,7 @@ import HumorAPIService
 final class RandomJokeViewModel: RandomJokeViewModelProtocol {
     // MARK: - Porperties
     let adFullPageHandler: AdFullPageHandler = AdFullPageHandler()
+    let inAppReviewHandler = InAppReviewHandler()
     
     var loadingStateDriver: Driver<LoadingState> {
         loadingStateRelay.asDriver()
@@ -98,7 +99,7 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
                     self.isFavoriteRelay.accept(joke.isFavorite)
                     self.jokeRelay.accept(joke.joke)
                     
-                    InAppReviewManager.shared.increaseGenerateContentCount()
+                    inAppReviewHandler.increaseGenerateContentCount()
                     
                 case .failure(let error):
                     self.jokeRelay.accept(error.message)

@@ -16,6 +16,7 @@ final class GIFsViewModel: GIFsViewModelProtocol {
     private let loadingStateRelay = BehaviorRelay<LoadingState>(value: .initial)
     private let webService: GIFsAPIServiceProtocol
     private let disposeBag = DisposeBag()
+    let inAppReviewHandler = InAppReviewHandler()
     
     let adFullPageHandler: AdFullPageHandler = AdFullPageHandler()
     var imageDatas: [ImageData] = []
@@ -51,6 +52,13 @@ final class GIFsViewModel: GIFsViewModelProtocol {
                     case .gif(let url):
                         let imageData = ImageData(urlString: url.absoluteString, isFavorite: favoriteData.isFavorite)
                         DataStorageManager.shared.saveAsync(imageData)
+                        
+                        if var section = self.gridCollectionViewModel.sectionsRelay.value.first {
+                            var gridData = section.items[favoriteData.index]
+                            gridData.isFavorite = favoriteData.isFavorite
+                            section.items[favoriteData.index] = gridData
+                            self.gridCollectionViewModel.sectionsRelay.accept([section])
+                        }
                     }
                 }
             })
@@ -64,7 +72,8 @@ final class GIFsViewModel: GIFsViewModelProtocol {
         } else {
             updateGridDatas(with: imageDatas) { [weak self] gridDatas in
                 guard let self = self else { return }
-                self.gridCollectionViewModel.gridDatasObserver.onNext(gridDatas)
+                let sections = [GridSection(items: gridDatas)]
+                self.gridCollectionViewModel.sectionsRelay.accept(sections)
             }
         }
     }
@@ -91,10 +100,11 @@ final class GIFsViewModel: GIFsViewModelProtocol {
                     self.imageDatas = gif.images
                     self.updateGridDatas(with: gif.images) { [weak self] gridDatas in
                         guard let self = self else { return }
-                        self.gridCollectionViewModel.gridDatasObserver.onNext(gridDatas)
+                        let sections = [GridSection(items: gridDatas)]
+                        self.gridCollectionViewModel.sectionsRelay.accept(sections)
                         self.loadingStateRelay.accept(.success)
                         
-                        InAppReviewManager.shared.increaseGenerateContentCount()
+                        inAppReviewHandler.increaseGenerateContentCount()
                     }
                     
                 case .failure(let error):

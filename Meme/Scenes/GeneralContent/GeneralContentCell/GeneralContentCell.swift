@@ -13,6 +13,7 @@ import RxSwift
 final class GeneralContentCell: UITableViewCell {
     // MARK: - Properties
     private var viewModel: GeneralContentCellViewModelProtocol?
+    private let inAppReviewHandler = InAppReviewHandler()
     
     // MARK: - UI
     private lazy var animatedImageView: AnimatedImageView = {
@@ -159,7 +160,7 @@ final class GeneralContentCell: UITableViewCell {
                 guard let viewModel = self.viewModel else { return }
                 viewModel.toggleIsFavorite()
                 AnalyticsManager.shared.logFavoriteEvent(isFavorite: viewModel.isFavoriteRelay.value)
-                InAppReviewManager.shared.requestReview()
+                self.inAppReviewHandler.requestReview()
             })
             .disposed(by: rx.disposeBag)
         

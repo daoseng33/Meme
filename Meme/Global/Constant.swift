@@ -23,6 +23,9 @@ enum Constant {
         
         /// 20
         static let spacing5: CGFloat = 20
+        
+        /// 24
+        static let spacing6: CGFloat = 24
     }
     
     enum Ad {
@@ -42,5 +45,11 @@ enum Constant {
     enum DEBUG {
         static let gadBannerUnitId = "ca-app-pub-3940256099942544/2435281174"
         static let gadFullPageUnitId = "ca-app-pub-3940256099942544/4411468910"
+    }
+}
+
+extension Constant {
+    enum Parameter {
+        static let tab = "tab"
     }
 }

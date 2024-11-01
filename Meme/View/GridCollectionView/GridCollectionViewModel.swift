@@ -8,35 +8,43 @@
 import UIKit
 import RxRelay
 import RxSwift
+import RxDataSources
+
+struct GridSection {
+    var items: [GridData]
+}
+
+extension GridSection: AnimatableSectionModelType {
+    var identity: String {
+        return ""
+    }
+    
+    typealias Identity = String
+    
+    init(original: GridSection, items: [GridData]) {
+        self = original
+        self.items = items
+    }
+}
 
 final class GridCollectionViewModel: GridCollectionViewModelProtocol {
     // MARK: - Properties
-    private let gridDatasSubject: BehaviorSubject<[GridData]>
-    let favoriteButtonTappedRelay = PublishRelay<(gridImageType: GridImageType, isFavorite: Bool)>()
+    var dataSource: RxCollectionViewSectionedAnimatedDataSource<GridSection>?
+    var sectionsRelay: BehaviorRelay<[GridSection]>
+    var section: GridSection? {
+        sectionsRelay.value.first
+    }
+    let favoriteButtonTappedRelay = PublishRelay<(gridImageType: GridImageType, isFavorite: Bool, index: Int)>()
     let shareButtonTappedRelay = PublishRelay<GridImageType>()
-
-    var gridDatasObserver: AnyObserver<[GridData]> {
-        gridDatasSubject.asObserver()
-    }
-    
-    var numberOfItems: Int {
-        return (try? gridDatasSubject.value().count) ?? 0
-    }
-    
-    var shouldReloadData: Observable<Void> {
-        return gridDatasSubject
-            .map { _ in Void() }
-            .asObservable()
-    }
     
     // MARK: - Init
     init(gridDatas: [GridData]) {
-        gridDatasSubject = BehaviorSubject<[GridData]>(value: gridDatas)
+        sectionsRelay = BehaviorRelay(value: [GridSection(items: gridDatas)])
     }
     
     // MARK: - Configures
     func gridCellViewModel(with index: Int) -> GridCellViewModelProtocol {
-        guard let gridDatas = try? gridDatasSubject.value() else {
+        guard let gridDatas = section?.items, gridDatas.count > index else {
             let noResultGridData = GridData(title: nil, imageType: .static(image: Asset.Global.imageNotFound.image), isFavorite: false)
             return GridCellViewModel(gridData: noResultGridData)
         }

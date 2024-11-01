@@ -35,7 +35,7 @@ final class GIFsViewController: BaseViewController {
     // MARK: - Init
     init(viewModel: GIFsViewModelProtocol) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init()
     }
     
     @MainActor required init?(coder: NSCoder) {
@@ -122,7 +122,7 @@ final class GIFsViewController: BaseViewController {
                     self.keywordTextField.isUserInteractionEnabled = true
                     self.generateGifsButton.isEnabled = true
                     ProgressHUD.dismiss()
-                    InAppReviewManager.shared.requestReview()
+                    self.viewModel.inAppReviewHandler.requestReview()
                     
                 case .failure(error: let error):
                     self.keywordTextField.isUserInteractionEnabled = true
@@ -160,10 +160,10 @@ final class GIFsViewController: BaseViewController {
                     
                 case .gif(let url):
                     AnalyticsManager.shared.logShareEvent(contentType: .gif, itemID: url.absoluteString)
-                    InAppReviewManager.shared.increasePositiveEngageCount()
+                    self.viewModel.inAppReviewHandler.increasePositiveEngageCount()
                     
                     Utility.showShareSheet(items: [url], parentVC: self) {
-                        InAppReviewManager.shared.requestReview()
+                        self.viewModel.inAppReviewHandler.requestReview()
                     }
                 }
             }

@@ -1,5 +1,5 @@
 //
-//  KeychainManager.swift
+//  KeychainHandler.swift
 //  Meme
 //
 //  Created by DAO on 2024/10/17.
@@ -8,10 +8,7 @@
 import Security
 import Foundation
 
-final class KeychainManager {
-    static let shared = KeychainManager()
-    private init() { }
-    
+final class KeychainHandler {
     enum Key: String {
         case apiRequestCount
         case isSubscribed

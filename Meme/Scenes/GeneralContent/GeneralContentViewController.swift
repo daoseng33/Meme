@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import SKPhotoBrowser
 import Kingfisher
+import AppNavigator
 
 class GeneralContentViewController: BaseViewController {
     // MARK: - Properties
@@ -20,6 +21,7 @@ class GeneralContentViewController: BaseViewController {
     private let naviItemTitle: String
     private let tabBarType: MemeTabBarItem
     private let refreshControl = UIRefreshControl()
+    private let inAppReviewHandler = InAppReviewHandler()
     
     // MARK: - UI
     private lazy var filterContainerView: FilterContainerView = {
@@ -52,7 +54,7 @@ class GeneralContentViewController: BaseViewController {
         self.naviItemTitle = title
         self.tabBarType = tabBarType
         
-        super.init(nibName: nil, bundle: nil)
+        super.init()
     }
     
     @MainActor required init?(coder: NSCoder) {
@@ -113,7 +115,9 @@ class GeneralContentViewController: BaseViewController {
             .actionButtonRelay
             .asSignal()
             .emit(with: self) { (self, _) in
-                self.tabBarController?.selectedIndex = MemeTabBarItem.home.rawValue
+                AppNavigator.shared.open(with: .behavior,
+                                         name: BehaviorURLPath.selectTab.rawValue,
+                                         queryItems: [URLQueryItem(name: Constant.Parameter.tab, value: "\(MemeTabBarItem.home.rawValue)")])
             }
             .disposed(by: rx.disposeBag)
         
@@ -176,7 +180,7 @@ extension GeneralContentViewController: UITableViewDataSource {
             cellViewModel.shareButtonTappedRelay
                 .asSignal()
                 .emit(with: self) { (self, cellType) in
-                    InAppReviewManager.shared.increasePositiveEngageCount()
+                    self.inAppReviewHandler.increasePositiveEngageCount()
                     
                     switch cellType {
                     case .meme(let meme):
@@ -190,32 +194,32 @@ extension GeneralContentViewController: UITableViewDataSource {
                                 switch result {
                                 case .success(let resource):
                                     Utility.showShareSheet(items: [url, resource.image, memeDsecription], parentVC: self) {
-                                        InAppReviewManager.shared.requestReview()
+                                        self.inAppReviewHandler.requestReview()
                                     }
                                     
                                 case .failure:
                                     Utility.showShareSheet(items: [url, memeDsecription], parentVC: self) {
-                                        InAppReviewManager.shared.requestReview()
+                                        self.inAppReviewHandler.requestReview()
                                     }
                                 }
                             }
                         case .video:
                             Utility.showShareSheet(items: [url, memeDsecription], parentVC: self) {
-                                InAppReviewManager.shared.requestReview()
+                                self.inAppReviewHandler.requestReview()
                             }
                         }
                         
                     case .joke(let joke):
                         AnalyticsManager.shared.logShareEvent(contentType: .joke, itemID: "\(joke.id)")
                         Utility.showShareSheet(items: [joke.joke], parentVC: self) {
-                            InAppReviewManager.shared.requestReview()
+                            self.inAppReviewHandler.requestReview()
                         }
                         
                     case .gif(let imageData):
                         guard let url = imageData.url else { return }
                         AnalyticsManager.shared.logShareEvent(contentType: .gif, itemID: "\(imageData.urlString)")
                         Utility.showShareSheet(items: [url], parentVC: self) {
-                            InAppReviewManager.shared.requestReview()
+                            self.inAppReviewHandler.requestReview()
                         }
                     }
                 }
