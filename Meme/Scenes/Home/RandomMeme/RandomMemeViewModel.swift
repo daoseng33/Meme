@@ -54,6 +54,7 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
     private let loadingStateRelay = BehaviorRelay<LoadingState>(value: .initial)
     private let disposeBag = DisposeBag()
     private var currentMeme: RandomMeme?
+    private let remoteConfigHandler = RemoteConfigHandler()
     
     // MARK: - Init
     init(webService: MemeAPIServiceProtocol) {
@@ -115,7 +116,7 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
     }
     
     func fetchUpVote() {
-        guard let id = currentMeme?.id else {
+        guard let id = currentMeme?.id, remoteConfigHandler.getBool(forKey: .enableContentVoteApi) else {
             return
         }
         
@@ -123,7 +124,7 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
     }
     
     func fetchDownVote() {
-        guard let id = currentMeme?.id else {
+        guard let id = currentMeme?.id, remoteConfigHandler.getBool(forKey: .enableContentVoteApi) else {
             return
         }
         

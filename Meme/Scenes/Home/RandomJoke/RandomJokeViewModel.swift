@@ -58,6 +58,7 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
     private let loadingStateRelay: BehaviorRelay<LoadingState> = .init(value: .initial)
     private let disposeBag = DisposeBag()
     private var currentJoke: RandomJoke?
+    private let remoteConfigHandler = RemoteConfigHandler()
     
     // MARK: - Init
     init(webService: JokeAPIServiceProtocol) {
@@ -114,7 +115,7 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
     }
     
     func fetchUpVote() {
-        guard let id = currentJoke?.id else {
+        guard let id = currentJoke?.id, remoteConfigHandler.getBool(forKey: .enableContentVoteApi) else {
             return
         }
         
@@ -122,7 +123,7 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
     }
     
     func fetchDownVote() {
-        guard let id = currentJoke?.id else {
+        guard let id = currentJoke?.id, remoteConfigHandler.getBool(forKey: .enableContentVoteApi) else {
             return
         }
         
