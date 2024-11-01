@@ -10,7 +10,7 @@ import RxSwift
 import RxRelay
 import HumorAPIService
 
-protocol RandomJokeViewModelProtocol: FetchDataProtocol, LoadingStateProtocol, FavoriteStateProtocol, AdHandlerProtocol {
+protocol RandomJokeViewModelProtocol: FetchDataProtocol, FetchVoteProtocol, LoadingStateProtocol, FavoriteStateProtocol, AdHandlerProtocol {
     var inAppReviewHandler: InAppReviewHandler { get }
     var jokeObservable: Observable<String> { get }
     var joke: String { get }

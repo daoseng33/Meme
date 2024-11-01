@@ -95,7 +95,6 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
                         DataStorageManager.shared.saveAsync(randomMeme)
                     }
                     
-                    self.isFavoriteRelay.accept(randomMeme.isFavorite)
                     mediaRelay.accept((randomMeme.url, randomMeme.mediaType))
                     descriptionRelay.accept(randomMeme.memeDescription)
                     
@@ -115,15 +114,32 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
             .disposed(by: disposeBag)
     }
     
+    func fetchUpVote() {
+        guard let id = currentMeme?.id else {
+            return
+        }
+        
+        let _ = randomMemeWebAPI.fetchUpVoteMeme(with: id).subscribe()
+    }
+    
+    func fetchDownVote() {
+        guard let id = currentMeme?.id else {
+            return
+        }
+        
+        let _ = randomMemeWebAPI.fetchDownVoteMeme(with: id).subscribe()
+    }
+    
     private func setupObservable() {
         isFavoriteRelay
+            .skip(1)
             .withUnretained(self)
             .subscribe(onNext: { (self, isFavorite) in
+                guard let currentMeme = self.currentMeme else {
+                    return
+                }
+                
                 DispatchQueue.main.async {
-                    guard let currentMeme = self.currentMeme else {
-                        return
-                    }
-                    
                     DataStorageManager.shared.updateAsync(currentMeme, with: [Constant.Key.isFavorite: isFavorite])
                 }
             })

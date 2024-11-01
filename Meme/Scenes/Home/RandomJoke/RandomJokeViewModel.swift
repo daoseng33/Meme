@@ -113,6 +113,22 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
             .disposed(by: disposeBag)
     }
     
+    func fetchUpVote() {
+        guard let id = currentJoke?.id else {
+            return
+        }
+        
+        let _ = webService.fetchUpVoteJoke(with: id).subscribe()
+    }
+    
+    func fetchDownVote() {
+        guard let id = currentJoke?.id else {
+            return
+        }
+        
+        let _ = webService.fetchDownVoteJoke(with: id).subscribe()
+    }
+    
     private func setupObservable() {
         selectedCategorySubject
             .skip(1)
@@ -123,13 +139,14 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
             .disposed(by: disposeBag)
         
         isFavoriteRelay
+            .skip(1)
             .withUnretained(self)
             .subscribe(onNext: { (self, isFavorite) in
+                guard let currentJoke = self.currentJoke else {
+                    return
+                }
+                
                 DispatchQueue.main.async {
-                    guard let currentJoke = self.currentJoke else {
-                        return
-                    }
-                    
                     DataStorageManager.shared.updateAsync(currentJoke, with: [Constant.Key.isFavorite: isFavorite])
                 }
             })

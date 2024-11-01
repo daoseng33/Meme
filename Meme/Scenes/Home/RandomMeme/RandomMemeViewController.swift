@@ -238,7 +238,14 @@ final class RandomMemeViewController: BaseViewController {
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
                 self.viewModel.toggleIsFavorite()
-                AnalyticsManager.shared.logFavoriteEvent(isFavorite: self.viewModel.isFavoriteRelay.value)
+                let isFavorite = self.viewModel.isFavoriteRelay.value
+                if isFavorite {
+                    self.viewModel.fetchUpVote()
+                } else {
+                    self.viewModel.fetchDownVote()
+                }
+                
+                AnalyticsManager.shared.logFavoriteEvent(isFavorite: isFavorite)
                 self.viewModel.inAppReviewHandler.increasePositiveEngageCount()
                 self.viewModel.inAppReviewHandler.requestReview()
             })
