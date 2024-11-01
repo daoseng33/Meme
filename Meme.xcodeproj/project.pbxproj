@@ -53,6 +53,7 @@
 			membershipExceptions = (
 				/Localized/Resources/LaunchScreen.storyboard,
 				Resources/Info.plist,
+				Resources/Secrects.xcconfig,
 			);
 			target = 1CDA352F2C81AB6C001FF654 /* Meme */;
 		};
@@ -216,7 +217,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					1CDA352F2C81AB6C001FF654 = {
 						CreatedOnToolsVersion = 15.4;
