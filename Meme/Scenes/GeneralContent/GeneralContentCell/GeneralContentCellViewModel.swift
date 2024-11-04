@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxRelay
+import HumorAPIService
 
 final class GeneralContentCellViewModel: GeneralContentCellViewModelProtocol {
     // MARK: - Properties
@@ -17,6 +18,9 @@ final class GeneralContentCellViewModel: GeneralContentCellViewModelProtocol {
     var isFavoriteRelay: BehaviorRelay<Bool>
     let createdAt: Date
     private let disposeBag = DisposeBag()
+    private let memeWebService = MemeAPIService()
+    private let jokeWebService = JokeAPIService()
+    private let remoteConfigHandler = RemoteConfigHandler()
     
     // MARK: - Init
     init(content: GeneralContentCellType) {
@@ -40,15 +44,31 @@ final class GeneralContentCellViewModel: GeneralContentCellViewModelProtocol {
     
     private func setupObservable() {
         isFavoriteRelay
+            .skip(1)
             .withUnretained(self)
             .subscribe(onNext: { (self, isFavorite) in
                 DispatchQueue.main.async {
                     switch self.content {
                     case .meme(let meme):
                         DataStorageManager.shared.updateAsync(meme, with: [Constant.Key.isFavorite: isFavorite])
+                        if self.remoteConfigHandler.getBool(forKey: .enableContentVoteApi) {
+                            if isFavorite {
+                                _ = self.memeWebService.fetchUpVoteMeme(with: meme.id).subscribe()
+                            } else {
+                                _ = self.memeWebService.fetchDownVoteMeme(with: meme.id).subscribe()
+                            }
+                        }
+                        
                         
                     case .joke(let joke):
                         DataStorageManager.shared.updateAsync(joke, with: [Constant.Key.isFavorite: isFavorite])
+                        if self.remoteConfigHandler.getBool(forKey: .enableContentVoteApi) {
+                            if isFavorite {
+                                _ = self.jokeWebService.fetchUpVoteJoke(with: joke.id).subscribe()
+                            } else {
+                                _ = self.jokeWebService.fetchDownVoteJoke(with: joke.id).subscribe()
+                            }
+                        }
                         
                     case .gif(let imageData):
                         DataStorageManager.shared.updateAsync(imageData, with: [Constant.Key.isFavorite: isFavorite])

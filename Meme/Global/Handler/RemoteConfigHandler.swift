@@ -16,6 +16,7 @@ final class RemoteConfigHandler {
     enum Key: String {
         case apiRequestLimit = "API_REQUEST_LIMIT"
         case enableAds = "ENABLE_ADS"
+        case enableContentVoteApi = "ENABLE_CONTENT_VOTE_API"
     }
     
     // MARK: - Init

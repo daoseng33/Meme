@@ -38,9 +38,13 @@ struct Utility {
     }
     
     static func showShareSheet(items: [Any], parentVC: UIViewController, completion: (() -> Void)? = nil) {
-        let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        let appStoreLink = "https://apps.apple.com/app/memepire/id6737028083"
         
-        // for iPad
+        var shareItems = Array(items)
+        shareItems.insert("📱 \("Get the Memepire app for more memes".localized()):\n\(appStoreLink)\n\n", at: 0)
+        
+        let activityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
+        
         if let popoverController = activityViewController.popoverPresentationController {
             popoverController.sourceView = parentVC.view
             popoverController.sourceRect = CGRect(x: parentVC.view.bounds.midX, y: parentVC.view.bounds.midY, width: 0, height: 0)

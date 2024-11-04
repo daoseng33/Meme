@@ -287,6 +287,17 @@
         }
       }
     },
+    "Get the Memepire app for more memes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "下載迷因帝國探索更多迷因"
+          }
+        }
+      }
+    },
     "GIFs" : {
       "extractionState" : "manual",
       "localizations" : {

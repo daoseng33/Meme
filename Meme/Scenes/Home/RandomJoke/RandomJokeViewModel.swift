@@ -58,6 +58,7 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
     private let loadingStateRelay: BehaviorRelay<LoadingState> = .init(value: .initial)
     private let disposeBag = DisposeBag()
     private var currentJoke: RandomJoke?
+    private let remoteConfigHandler = RemoteConfigHandler()
     
     // MARK: - Init
     init(webService: JokeAPIServiceProtocol) {
@@ -113,6 +114,22 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
             .disposed(by: disposeBag)
     }
     
+    func fetchUpVote() {
+        guard let id = currentJoke?.id, remoteConfigHandler.getBool(forKey: .enableContentVoteApi) else {
+            return
+        }
+        
+        let _ = webService.fetchUpVoteJoke(with: id).subscribe()
+    }
+    
+    func fetchDownVote() {
+        guard let id = currentJoke?.id, remoteConfigHandler.getBool(forKey: .enableContentVoteApi) else {
+            return
+        }
+        
+        let _ = webService.fetchDownVoteJoke(with: id).subscribe()
+    }
+    
     private func setupObservable() {
         selectedCategorySubject
             .skip(1)
@@ -123,13 +140,14 @@ final class RandomJokeViewModel: RandomJokeViewModelProtocol {
             .disposed(by: disposeBag)
         
         isFavoriteRelay
+            .skip(1)
             .withUnretained(self)
             .subscribe(onNext: { (self, isFavorite) in
+                guard let currentJoke = self.currentJoke else {
+                    return
+                }
+                
                 DispatchQueue.main.async {
-                    guard let currentJoke = self.currentJoke else {
-                        return
-                    }
-                    
                     DataStorageManager.shared.updateAsync(currentJoke, with: [Constant.Key.isFavorite: isFavorite])
                 }
             })
