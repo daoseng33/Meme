@@ -12,6 +12,8 @@ import RxCocoa
 import SKPhotoBrowser
 import Kingfisher
 import AppNavigator
+import Combine
+import SwiftUI
 
 class GeneralContentViewController: BaseViewController {
     // MARK: - Properties
@@ -22,6 +24,7 @@ class GeneralContentViewController: BaseViewController {
     private let tabBarType: MemeTabBarItem
     private let refreshControl = UIRefreshControl()
     private let inAppReviewHandler = InAppReviewHandler()
+    private var cancellables = Set<AnyCancellable>()
     
     // MARK: - UI
     private lazy var filterContainerView: FilterContainerView = {
@@ -46,7 +49,15 @@ class GeneralContentViewController: BaseViewController {
         return tableView
     }()
     
-    private lazy var emptyContentView = EmptyContentView(viewModel: viewModel.emptyContentViewModel)
+    private lazy var emptyContentView: UIView = {
+        let swiftUIView = EmptyContentView(viewModel: viewModel.emptyContentViewModel)
+        let hostingController = UIHostingController(rootView: swiftUIView)
+        addChild(hostingController)
+        
+        hostingController.didMove(toParent: self)
+        
+        return hostingController.view
+    }()
     
     // MARK: - Setup
     init(viewModel: GeneralContentViewModelProtocol, title: String, tabBarType: MemeTabBarItem) {
@@ -111,16 +122,14 @@ class GeneralContentViewController: BaseViewController {
             }
             .disposed(by: rx.disposeBag)
         
-        viewModel.emptyContentViewModel
-            .actionButtonRelay
-            .asSignal()
-            .emit(with: self) { (self, _) in
+        viewModel.emptyContentViewModel.actionButtonSubject
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
                 AppNavigator.shared.open(with: .behavior,
                                          name: BehaviorURLPath.selectTab.rawValue,
                                          queryItems: [URLQueryItem(name: Constant.Parameter.tab, value: "\(MemeTabBarItem.home.rawValue)")])
             }
-            .disposed(by: rx.disposeBag)
-        
+            .store(in: &cancellables)
     }
     
     private func setupActions() {
