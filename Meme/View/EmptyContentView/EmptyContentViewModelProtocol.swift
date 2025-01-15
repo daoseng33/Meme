@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import RxRelay
+import Combine
 
 protocol EmptyContentViewModelProtocol {
-    var actionButtonRelay: PublishRelay<Void> { get }
+    var actionButtonSubject: PassthroughSubject<Void, Never> { get }
 }
