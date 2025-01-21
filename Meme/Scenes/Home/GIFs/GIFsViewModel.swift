@@ -70,8 +70,8 @@ final class GIFsViewModel: GIFsViewModelProtocol {
         if loadingState == .initial {
             fetchData()
         } else {
-            updateGridDatas(with: imageDatas) { [weak self] gridDatas in
-                guard let self = self else { return }
+            Task {
+                let gridDatas = await self.updateGridDatas(with: imageDatas)
                 let sections = [GridSection(items: gridDatas)]
                 self.gridCollectionViewModel.sectionsRelay.accept(sections)
             }
@@ -98,13 +98,13 @@ final class GIFsViewModel: GIFsViewModelProtocol {
                 switch result {
                 case .success(let gif):
                     self.imageDatas = gif.images
-                    self.updateGridDatas(with: gif.images) { [weak self] gridDatas in
-                        guard let self = self else { return }
+                    Task {
+                        let gridDatas = await self.updateGridDatas(with: gif.images)
                         let sections = [GridSection(items: gridDatas)]
                         self.gridCollectionViewModel.sectionsRelay.accept(sections)
                         self.loadingStateRelay.accept(.success)
                         
-                        inAppReviewHandler.increaseGenerateContentCount()
+                        self.inAppReviewHandler.increaseGenerateContentCount()
                     }
                     
                 case .failure(let error):
@@ -118,10 +118,10 @@ final class GIFsViewModel: GIFsViewModelProtocol {
             .disposed(by: disposeBag)
     }
     
-    private func updateGridDatas(with imageDatas: [ImageData], completion: @escaping (([GridData]) -> Void)) {
-        DispatchQueue.main.async {
+    private func updateGridDatas(with imageDatas: [ImageData]) async -> [GridData] {
+        await MainActor.run {
             var gridDatas: [GridData] = []
-            imageDatas.forEach { imageData in
+            for imageData in imageDatas {
                 if let localData = DataStorageManager.shared.fetch(ImageData.self, primaryKey: imageData.urlString),
                     let url = imageData.url {
                     let gridData = GridData(title: nil, imageType: .gif(url: url), isFavorite: localData.isFavorite)
@@ -132,7 +132,7 @@ final class GIFsViewModel: GIFsViewModelProtocol {
                 }
             }
             
-            completion(gridDatas)
+            return gridDatas
         }
     }
     
