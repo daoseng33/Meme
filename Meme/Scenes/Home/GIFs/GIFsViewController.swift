@@ -12,10 +12,14 @@ import RxSwift
 import SKPhotoBrowser
 import ProgressHUD
 import Kingfisher
+import Combine
 
 final class GIFsViewController: BaseViewController {
     // MARK: - Properties
     private let viewModel: GIFsViewModelProtocol
+    private var cancellables = Set<AnyCancellable>()
+    
+    // MARK: - UI
     private lazy var gridCollectionView: GridCollectionView = {
         let collectionView = GridCollectionView(viewModel: viewModel.gridCollectionViewModel)
         collectionView.delegate = self
@@ -102,13 +106,19 @@ final class GIFsViewController: BaseViewController {
     }
     
     private func setupBinding() {
-        viewModel.keywordRelay
-            .bind(to: keywordTextField.textBinder)
-            .disposed(by: rx.disposeBag)
+        viewModel.keywordSubject
+            .receive(on: RunLoop.main)
+            .sink { [weak self] value in
+                self?.keywordTextField.text = value
+            }
+            .store(in: &cancellables)
         
         keywordTextField.textBinder
-            .bind(to: viewModel.keywordRelay)
-            .disposed(by: rx.disposeBag)
+            .compactMap { $0 }
+            .sink { [weak self] value in
+                self?.viewModel.keywordSubject.send(value)
+            }
+            .store(in: &cancellables)
         
         viewModel.loadingStateDriver
             .drive(with: self, onNext: { (self, state) in
@@ -141,7 +151,7 @@ final class GIFsViewController: BaseViewController {
         generateGifsButton.tapEvent
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
-                AnalyticsManager.shared.logGenerateContentClickEvent(type: .gif, keyword: self.viewModel.keywordRelay.value)
+                AnalyticsManager.shared.logGenerateContentClickEvent(type: .gif, keyword: self.viewModel.keywordSubject.value)
                 
                 if self.viewModel.adFullPageHandler.shouldDisplayAd {
                     self.viewModel.adFullPageHandler.presentFullPageAd(parentVC: self)

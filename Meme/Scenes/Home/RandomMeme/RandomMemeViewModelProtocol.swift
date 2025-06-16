@@ -11,13 +11,26 @@ import RxSwift
 import RxRelay
 import RxCocoa
 import UIKit
+import Combine
 
-protocol RandomMemeViewModelProtocol: FetchDataProtocol, FetchVoteProtocol, LoadingStateProtocol, FavoriteStateProtocol, AdHandlerProtocol {
-    var inAppReviewHandler: InAppReviewHandler { get }
-    var mediaDriver: Driver<(mediaURL: URL?, type: MemeMediaType)> { get }
+protocol MemeDisplayProtocol {
+    var mediaPublisher: AnyPublisher<(mediaURL: URL?, type: MemeMediaType), Never> { get }
     var media: (mediaURL: URL?, type: MemeMediaType) { get }
-    var keywordRelay: BehaviorRelay<String?> { get }
-    var descriptionDriver: Driver<String> { get }
+    var descriptionPublisher: AnyPublisher<String, Never> { get }
     var description: String { get }
-    var shareButtonTappedRelay: PublishRelay<Void> { get }
 }
+
+protocol MemeDataFetchingProtocol {
+    func refreshData()
+    func fetchData()
+    func fetchUpVote()
+    func fetchDownVote()
+}
+
+protocol MemeInteractionProtocol {
+    var keywordSubject: CurrentValueSubject<String?, Never> { get }
+    var shareButtonTappedSubject: PassthroughSubject<Void, Never> { get }
+    var inAppReviewHandler: InAppReviewHandler { get }
+}
+
+protocol RandomMemeViewModelProtocol: MemeDisplayProtocol, MemeDataFetchingProtocol, MemeInteractionProtocol, LoadingStateProtocol, AdHandlerProtocol, FavoriteStateProtocol { }

@@ -10,11 +10,16 @@ import HumorAPIService
 import RxRelay
 import RxCocoa
 import RxSwift
+import Combine
 
 final class RandomMemeViewModel: RandomMemeViewModelProtocol {
     // MARK: - Properties
     let adFullPageHandler: AdFullPageHandler = AdFullPageHandler()
     let inAppReviewHandler: InAppReviewHandler = InAppReviewHandler()
+    
+    var descriptionPublisher: AnyPublisher<String, Never> {
+        descriptionSubscribe.eraseToAnyPublisher()
+    }
     
     var loadingState: LoadingState {
         return loadingStateRelay.value
@@ -24,37 +29,34 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
         return loadingStateRelay.asDriver()
     }
     
-    var mediaDriver: Driver<(mediaURL: URL?, type: MemeMediaType)> {
-        mediaRelay.asDriver().filter { $0.mediaURL != nil }
+    var mediaPublisher: AnyPublisher<(mediaURL: URL?, type: MemeMediaType), Never> {
+        mediaSubject.filter { $0.mediaURL != nil }.eraseToAnyPublisher()
     }
     
     var media: (mediaURL: URL?, type: MemeMediaType) {
-        mediaRelay.value
-    }
-    
-    var descriptionDriver: Driver<String> {
-        descriptionRelay.asDriver()
+        mediaSubject.value
     }
     
     var description: String {
-        descriptionRelay.value
+        descriptionSubscribe.value
     }
     
-    let keywordRelay = BehaviorRelay<String?>(value: nil)
+    let keywordSubject = CurrentValueSubject<String?, Never>(nil)
     
     let isFavoriteRelay = BehaviorRelay<Bool>(value: false)
-    let shareButtonTappedRelay = PublishRelay<Void>()
+    let shareButtonTappedSubject = PassthroughSubject<Void, Never>()
     
     private var randomMediaType: MemeMediaType {
         return MemeMediaType.allCases.randomElement() ?? .image
     }
     private let randomMemeWebAPI: MemeAPIServiceProtocol
-    private let mediaRelay = BehaviorRelay<(mediaURL: URL?, type: MemeMediaType)>(value: (nil, .image))
-    private let descriptionRelay = BehaviorRelay<String>(value: "")
+    private let mediaSubject = CurrentValueSubject<(mediaURL: URL?, type: MemeMediaType), Never>((nil, .image))
     private let loadingStateRelay = BehaviorRelay<LoadingState>(value: .initial)
     private let disposeBag = DisposeBag()
     private var currentMeme: RandomMeme?
     private let remoteConfigHandler = RemoteConfigHandler()
+    private let descriptionSubscribe = CurrentValueSubject<String, Never>("")
+    private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Init
     init(webService: MemeAPIServiceProtocol) {
@@ -80,10 +82,8 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
         
         adFullPageHandler.increaseRequestCount()
         
-        var keyword: String = ""
-        if let value: String = keywordRelay.value {
-            keyword = value
-        }
+        let keyword: String = keywordSubject.value ?? ""
+
         randomMemeWebAPI.fetchRandomMeme(with: keyword, mediaType: randomMediaType, minRating: 9)
             .subscribe(onSuccess: { [weak self] result in
                 guard let self = self else { return }
@@ -96,15 +96,15 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
                         DataStorageManager.shared.saveAsync(randomMeme)
                     }
                     
-                    mediaRelay.accept((randomMeme.url, randomMeme.mediaType))
-                    descriptionRelay.accept(randomMeme.memeDescription)
+                    mediaSubject.send((randomMeme.url, randomMeme.mediaType))
+                    descriptionSubscribe.send(randomMeme.memeDescription)
                     
                     inAppReviewHandler.increaseGenerateContentCount()
                     
                 case .failure(let error):
                     let noResultImageURL = Utility.getImageURL(named: Asset.Global.imageNotFound.name)
-                    mediaRelay.accept((noResultImageURL, .image))
-                    descriptionRelay.accept(error.message)
+                    mediaSubject.send((noResultImageURL, .image))
+                    descriptionSubscribe.send(error.message)
                 }
                 
                 self.loadingStateRelay.accept(.success)
@@ -120,7 +120,9 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
             return
         }
         
-        let _ = randomMemeWebAPI.fetchUpVoteMeme(with: id).subscribe()
+        randomMemeWebAPI.fetchUpVoteMeme(with: id)
+            .subscribe()
+            .disposed(by: disposeBag)
     }
     
     func fetchDownVote() {
@@ -128,7 +130,9 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
             return
         }
         
-        let _ = randomMemeWebAPI.fetchDownVoteMeme(with: id).subscribe()
+        randomMemeWebAPI.fetchDownVoteMeme(with: id)
+            .subscribe()
+            .disposed(by: disposeBag)
     }
     
     private func setupObservable() {
@@ -146,15 +150,15 @@ final class RandomMemeViewModel: RandomMemeViewModelProtocol {
             })
             .disposed(by: disposeBag)
         
-        shareButtonTappedRelay
-            .withUnretained(self)
-            .subscribe(onNext: { (self, _) in
-                guard let currentMeme = self.currentMeme else {
+        shareButtonTappedSubject
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] _ in
+                guard let self, let currentMeme = self.currentMeme else {
                     return
                 }
                 
                 AnalyticsManager.shared.logShareEvent(contentType: .meme, itemID: "\(currentMeme.id)")
             })
-            .disposed(by: disposeBag)
+            .store(in: &cancellables)
     }
 }

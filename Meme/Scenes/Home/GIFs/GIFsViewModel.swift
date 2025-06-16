@@ -10,17 +10,19 @@ import RxSwift
 import RxRelay
 import RxCocoa
 import HumorAPIService
+import Combine
 
 final class GIFsViewModel: GIFsViewModelProtocol {
     // MARK: - Properties
     private let loadingStateRelay = BehaviorRelay<LoadingState>(value: .initial)
     private let webService: GIFsAPIServiceProtocol
     private let disposeBag = DisposeBag()
+    private let cancellables = Set<AnyCancellable>()
     let inAppReviewHandler = InAppReviewHandler()
     
     let adFullPageHandler: AdFullPageHandler = AdFullPageHandler()
     var imageDatas: [ImageData] = []
-    let keywordRelay = BehaviorRelay<String?>(value: nil)
+    let keywordSubject = CurrentValueSubject<String, Never>("")
     let gridCollectionViewModel: GridCollectionViewModelProtocol = GridCollectionViewModel(gridDatas: [])
     
     var loadingState: LoadingState {
@@ -85,10 +87,11 @@ final class GIFsViewModel: GIFsViewModelProtocol {
         
         // !query could not be empty string!
         let query: String
-        if let keywordString = keywordRelay.value, !keywordString.isEmpty {
-            query = keywordString
-        } else {
+        let keyword = keywordSubject.value
+        if keyword.isEmpty {
             query = randomWord()
+        } else {
+            query = keyword
         }
         
         webService.fetchGifs(query: query, number: 10)

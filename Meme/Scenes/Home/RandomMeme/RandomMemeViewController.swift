@@ -8,14 +8,15 @@
 import UIKit
 import AVFoundation
 import SnapKit
-import RxCocoa
 import Kingfisher
 import SKPhotoBrowser
 import ProgressHUD
+import Combine
 
 final class RandomMemeViewController: BaseViewController {
     // MARK: - Properties
     private let viewModel: RandomMemeViewModelProtocol
+    private var cancellables = Set<AnyCancellable>()
     
     // MARK: - UI
     private let scrollView: UIScrollView = {
@@ -175,7 +176,7 @@ final class RandomMemeViewController: BaseViewController {
         generateMemeButton.tapEvent
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
-                AnalyticsManager.shared.logGenerateContentClickEvent(type: .meme, keyword: self.viewModel.keywordRelay.value)
+                AnalyticsManager.shared.logGenerateContentClickEvent(type: .meme, keyword: self.viewModel.keywordSubject.value)
                 self.viewModel.isFavoriteRelay.accept(false)
                 self.videoPlayerView.reset()
                 
@@ -202,7 +203,7 @@ final class RandomMemeViewController: BaseViewController {
                 guard let mediaURL = self.viewModel.media.mediaURL else { return }
                 self.viewModel.inAppReviewHandler.increasePositiveEngageCount()
                 
-                self.viewModel.shareButtonTappedRelay.accept(())
+                self.viewModel.shareButtonTappedSubject.send(())
                 let mediaType = self.viewModel.media.type
                 let description = self.viewModel.description
                 
@@ -270,8 +271,10 @@ final class RandomMemeViewController: BaseViewController {
     }
     
     private func setupBinding() {
-        viewModel.mediaDriver
-            .drive(with: self) { (self, mediaData) in
+        viewModel.mediaPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] mediaData in
+                guard let self else { return }
                 switch mediaData.type {
                 case .image:
                     self.videoPlayerView.isHidden = true
@@ -295,7 +298,7 @@ final class RandomMemeViewController: BaseViewController {
                     }
                 }
             }
-            .disposed(by: rx.disposeBag)
+            .store(in: &cancellables)
         
         viewModel.loadingStateDriver
             .drive(with: self, onNext: { (self, state) in
@@ -325,18 +328,33 @@ final class RandomMemeViewController: BaseViewController {
                 }
             })
             .disposed(by: rx.disposeBag)
-            
-        viewModel.descriptionDriver
-            .drive(descriptionTextView.textBinder)
-            .disposed(by: rx.disposeBag)
         
-        viewModel.keywordRelay
-            .bind(to: keywordTextField.textBinder)
-            .disposed(by: rx.disposeBag)
+        viewModel.descriptionPublisher
+            .receive(on: DispatchQueue.main)
+            .removeDuplicates()
+            .sink { [weak self] value in
+                guard let self else { return }
+                self.descriptionTextView.text = value
+            }
+            .store(in: &cancellables)
+        
+        
+        viewModel.keywordSubject
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] value in
+                if self?.keywordTextField.text != value {
+                    self?.keywordTextField.text = value
+                }
+            }
+            .store(in: &cancellables)
         
         keywordTextField.textBinder
-            .bind(to: viewModel.keywordRelay)
-            .disposed(by: rx.disposeBag)
+            .sink { [weak self] value in
+                if self?.viewModel.keywordSubject.value != value {
+                    self?.viewModel.keywordSubject.send(value)
+                }
+            }
+            .store(in: &cancellables)
         
         viewModel.adFullPageHandler.dismissAdObservable
             .withUnretained(self)

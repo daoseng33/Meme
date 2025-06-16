@@ -8,6 +8,7 @@
 import UIKit
 import RxCocoa
 import SnapKit
+import Combine
 
 final class KeywordTextField: UIView {
     // MARK: - UI
@@ -26,8 +27,17 @@ final class KeywordTextField: UIView {
         return textField
     }()
     
-    var textBinder: ControlProperty<String?> {
-        return textField.rx.text
+    var text: String? {
+        get {
+            textField.text
+        }
+        set {
+            textField.text = newValue
+        }
+    }
+    
+    var textBinder: KeyValueObservingPublisher<UITextField, String?> {
+        return textField.publisher(for: \.text)
     }
     
     // MARK: - Init
