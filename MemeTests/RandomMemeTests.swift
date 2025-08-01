@@ -33,14 +33,14 @@ struct RandomMemeTests {
     }
     
     func testFetchRandomMemeWithValidKeyword() throws {
-        sut.keywordRelay.accept("your mom")
+        sut.keywordSubject.send("your mom")
         sut.fetchData()
         
         assert(sut.description == "When you’re walking past the aisles at Walmart and finally see your mom")
     }
     
     func testFetchRandomMemeWithInvalidKeyword() throws {
-        sut.keywordRelay.accept("Boobs")
+        sut.keywordSubject.send("Boobs")
         sut.fetchData()
         
         assert(sut.description == "Could not find a meme with the given keywords.")
