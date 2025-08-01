@@ -49,8 +49,8 @@ bundle exec fastlane beta
 
 ## Contact
 
-For suggestions or bug reports, please contact the developer via the Settings page or email <developer_email>.
+For suggestions or bug reports, please contact the developer via the Settings page or email contact@likeabossapp.com.
 
 ---
 
-© 2024 daoseng33. For learning and demonstration purposes only.
+© 2024 DAO. For learning and demonstration purposes only.
